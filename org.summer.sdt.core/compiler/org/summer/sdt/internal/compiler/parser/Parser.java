@@ -194,8 +194,9 @@ public class Parser implements TerminalTokens {
         return;
       }
     try {
+    	long start = System.currentTimeMillis();
       parser.CompilationUnit();
-      System.out.println("Java Parser Version 1.1:  Java program parsed successfully.");
+      System.out.println("Java Parser Version 1.1:  Java program parsed successfully." + "total time :  " + (System.currentTimeMillis() - start));
     } catch (ParseException e) {
       e.printStackTrace();
       System.out.println(e.getMessage());

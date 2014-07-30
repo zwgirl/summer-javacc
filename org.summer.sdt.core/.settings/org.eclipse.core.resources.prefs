@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
-encoding//src/org/summer/sdt/internal/compiler/lookup/BoundSet.java=UTF-8
-encoding//src/org/summer/sdt/internal/compiler/lookup/ConstraintExpressionFormula.java=UTF-8
-encoding//src/org/summer/sdt/internal/compiler/lookup/InferenceContext18.java=UTF-8
-encoding//src/org/summer/sdt/internal/compiler/lookup/MethodVerifier15.java=UTF-8
+encoding//compiler/org/summer/sdt/internal/compiler/lookup/BoundSet.java=UTF-8
+encoding//compiler/org/summer/sdt/internal/compiler/lookup/ConstraintExpressionFormula.java=UTF-8
+encoding//compiler/org/summer/sdt/internal/compiler/lookup/InferenceContext18.java=UTF-8
+encoding//compiler/org/summer/sdt/internal/compiler/lookup/MethodVerifier15.java=UTF-8
