@@ -3,13 +3,14 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Core
 Bundle-SymbolicName: org.summer.sdt.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.summer.sdt.core.Activator
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.jface.text;bundle-version="3.9.0",
- org.eclipse.core.resources;bundle-version="3.9.0"
+Bundle-Activator: org.summer.sdt.core.JavaCore
+Require-Bundle: org.eclipse.core.resources;bundle-version="[3.3.0,4.0.0)",
+ org.eclipse.core.runtime;bundle-version="[3.3.0,4.0.0)",
+ org.eclipse.core.filesystem;bundle-version="[1.0.0,2.0.0)",
+ org.eclipse.text;bundle-version="[3.1.0,4.0.0)",
+ org.eclipse.team.core;bundle-version="[3.1.0,4.0.0)";resolution:=optional
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.summer.sdt.core,
  org.summer.sdt.core.compiler,
  org.summer.sdt.core.compiler.batch,
@@ -21,6 +22,10 @@ Export-Package: org.summer.sdt.core,
  org.summer.sdt.core.jdom,
  org.summer.sdt.core.search,
  org.summer.sdt.core.util,
+ org.summer.sdt.internal.codeassist,
+ org.summer.sdt.internal.codeassist.complete,
+ org.summer.sdt.internal.codeassist.impl,
+ org.summer.sdt.internal.codeassist.select,
  org.summer.sdt.internal.compiler,
  org.summer.sdt.internal.compiler.ast,
  org.summer.sdt.internal.compiler.batch,
@@ -31,6 +36,7 @@ Export-Package: org.summer.sdt.core,
  org.summer.sdt.internal.compiler.impl,
  org.summer.sdt.internal.compiler.lookup,
  org.summer.sdt.internal.compiler.parser,
+ org.summer.sdt.internal.compiler.parser.diagnose,
  org.summer.sdt.internal.compiler.problem,
  org.summer.sdt.internal.compiler.util,
  org.summer.sdt.internal.compiler.xaml,
@@ -47,6 +53,7 @@ Export-Package: org.summer.sdt.core,
  org.summer.sdt.internal.core.search.matching,
  org.summer.sdt.internal.core.search.processing,
  org.summer.sdt.internal.core.util,
+ org.summer.sdt.internal.eval,
  org.summer.sdt.internal.formatter,
  org.summer.sdt.internal.formatter.align,
  org.summer.sdt.internal.formatter.comment,

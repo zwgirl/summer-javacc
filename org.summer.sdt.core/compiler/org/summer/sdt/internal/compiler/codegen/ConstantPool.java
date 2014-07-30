@@ -1052,7 +1052,7 @@ public class ConstantPool implements ClassFileConstants, TypeIds {
 	 * This method is used to clean the receiver in case of a clinit header is generated, but the
 	 * clinit has no code.
 	 * This implementation assumes that the clinit is the first method to be generated.
-	 * @see org.eclipse.jdt.internal.compiler.ast.TypeDeclaration#addClinit()
+	 * @see org.summer.sdt.internal.compiler.ast.TypeDeclaration#addClinit()
 	 */
 	public void resetForClinit(int constantPoolIndex, int constantPoolOffset) {
 		this.currentIndex = constantPoolIndex;

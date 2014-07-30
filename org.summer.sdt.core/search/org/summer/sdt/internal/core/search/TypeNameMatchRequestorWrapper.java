@@ -84,7 +84,7 @@ public TypeNameMatchRequestorWrapper(TypeNameMatchRequestor requestor, IJavaSear
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor#acceptType(int, char[], char[], char[][], java.lang.String, org.eclipse.jdt.internal.compiler.env.AccessRestriction)
+ * @see org.summer.sdt.internal.core.search.IRestrictedAccessTypeRequestor#acceptType(int, char[], char[], char[][], java.lang.String, org.summer.sdt.internal.compiler.env.AccessRestriction)
  */
 public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames, String path, AccessRestriction access) {
 
@@ -220,7 +220,7 @@ private IType createTypeFromPath(String resourcePath, String simpleTypeName, cha
 		this.packageHandles.put(pkgName, pkgFragment);
 	}
 	String simpleName= simpleNames[length];
-	if (org.summer.sdt.util.Util.isJavaLikeFileName(simpleName)) {
+	if (org.summer.sdt.internal.core.util.Util.isJavaLikeFileName(simpleName)) {
 		ICompilationUnit unit= pkgFragment.getCompilationUnit(simpleName);
 		int etnLength = enclosingTypeNames == null ? 0 : enclosingTypeNames.length;
 		IType type = (etnLength == 0) ? unit.getType(simpleTypeName) : unit.getType(new String(enclosingTypeNames[0]));

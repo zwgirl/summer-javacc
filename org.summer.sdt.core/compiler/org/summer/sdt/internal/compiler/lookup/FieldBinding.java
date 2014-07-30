@@ -264,7 +264,7 @@ public class FieldBinding extends VariableBinding {
 	/**
 	 * Compute the tagbits for standard annotations. For source types, these could require
 	 * lazily resolving corresponding annotation nodes, in case of forward references.
-	 * @see org.eclipse.jdt.internal.compiler.lookup.Binding#getAnnotationTagBits()
+	 * @see org.summer.sdt.internal.compiler.lookup.Binding#getAnnotationTagBits()
 	 */
 	public long getAnnotationTagBits() {
 		FieldBinding originalField = original();

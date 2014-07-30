@@ -820,7 +820,7 @@ protected void updateTasksFor(SourceFile sourceFile, CompilationResult result) t
 }
 
 /**
- * @see org.summer.sdt.internal.core.builder.AbstractImageBuilder#writeClassFileContents(org.eclipse.jdt.internal.compiler.ClassFile, org.eclipse.core.resources.IFile, java.lang.String, boolean, org.summer.sdt.internal.core.builder.SourceFile)
+ * @see org.summer.sdt.internal.core.builder.AbstractImageBuilder#writeClassFileContents(org.summer.sdt.internal.compiler.ClassFile, org.eclipse.core.resources.IFile, java.lang.String, boolean, org.summer.sdt.internal.core.builder.SourceFile)
  */
 protected void writeClassFileContents(ClassFile classfile, IFile file, String qualifiedFileName, boolean isTopLevelType, SourceFile compilationUnit) throws CoreException {
 	// Before writing out the class file, compare it to the previous file

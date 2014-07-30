@@ -27,14 +27,14 @@ public class ResolvedSourceField extends SourceField {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.core.SourceField#getKey()
+	 * @see org.summer.sdt.internal.core.SourceField#getKey()
 	 */
 	public String getKey() {
 		return this.uniqueKey;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.IField#isResolved()
+	 * @see org.summer.sdt.core.IField#isResolved()
 	 */
 	public boolean isResolved() {
 		return true;

@@ -952,7 +952,7 @@ abstract public class ReferenceBinding extends TypeBinding {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.Binding#getAnnotationTagBits()
+	 * @see org.summer.sdt.internal.compiler.lookup.Binding#getAnnotationTagBits()
 	 */
 	public long getAnnotationTagBits() {
 		return this.tagBits;
@@ -977,7 +977,7 @@ abstract public class ReferenceBinding extends TypeBinding {
 		return null;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.env.IDependent#getFileName()
+	 * @see org.summer.sdt.internal.compiler.env.IDependent#getFileName()
 	 */
 	public char[] getFileName() {
 		return this.fileName;
@@ -1488,7 +1488,7 @@ abstract public class ReferenceBinding extends TypeBinding {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#isThrowable()
+	 * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#isThrowable()
 	 */
 	public boolean isThrowable() {
 		ReferenceBinding current = this;
@@ -1510,7 +1510,7 @@ abstract public class ReferenceBinding extends TypeBinding {
 	 * but rather check in type IDs so as to avoid some eager class loading for JCL writers.
 	 * When 'includeSupertype' is true, answers true if the given type can be a supertype of some unchecked exception
 	 * type (i.e. Throwable or Exception).
-	 * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#isUncheckedException(boolean)
+	 * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#isUncheckedException(boolean)
 	 */
 	public boolean isUncheckedException(boolean includeSupertype) {
 		switch (this.id) {
@@ -1641,7 +1641,7 @@ abstract public class ReferenceBinding extends TypeBinding {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#nullAnnotatedReadableName(CompilerOptions,boolean)
+	 * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#nullAnnotatedReadableName(CompilerOptions,boolean)
 	 */
 	public char[] nullAnnotatedReadableName(CompilerOptions options, boolean shortNames) {
 		if (shortNames)

@@ -55,7 +55,7 @@ public boolean parse(int start, int end) {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.JavadocParser#createArgumentReference(char[], int, boolean, java.lang.Object, long[], long)
+ * @see org.summer.sdt.internal.compiler.parser.JavadocParser#createArgumentReference(char[], int, boolean, java.lang.Object, long[], long)
  */
 protected Object createArgumentReference(char[] name, int dim, boolean isVarargs, Object ref, long[] dimPositions, long argNamePos) throws InvalidInputException {
 	FormatJavadocReference typeRef = (FormatJavadocReference) ref;
@@ -67,7 +67,7 @@ protected Object createArgumentReference(char[] name, int dim, boolean isVarargs
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#createFakeReference(int)
+ * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#createFakeReference(int)
  */
 protected boolean createFakeReference(int start) {
 	// synch scanner and parser positions
@@ -79,7 +79,7 @@ protected boolean createFakeReference(int start) {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.JavadocParser#createFieldReference(java.lang.Object)
+ * @see org.summer.sdt.internal.compiler.parser.JavadocParser#createFieldReference(java.lang.Object)
  */
 protected Object createFieldReference(Object receiver) throws InvalidInputException {
 	int start = receiver == null ? this.memberStart : ((FormatJavadocReference)receiver).sourceStart;
@@ -88,7 +88,7 @@ protected Object createFieldReference(Object receiver) throws InvalidInputExcept
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.JavadocParser#createMethodReference(java.lang.Object, java.util.List)
+ * @see org.summer.sdt.internal.compiler.parser.JavadocParser#createMethodReference(java.lang.Object, java.util.List)
  */
 protected Object createMethodReference(Object receiver, List arguments) throws InvalidInputException {
 	int start = receiver == null ? this.memberStart : ((FormatJavadocReference) receiver).sourceStart;
@@ -97,7 +97,7 @@ protected Object createMethodReference(Object receiver, List arguments) throws I
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.JavadocParser#createTag()
+ * @see org.summer.sdt.internal.compiler.parser.JavadocParser#createTag()
  */
 protected void createTag() {
 	int lineStart = this.scanner.getLineNumber(this.tagSourceStart);
@@ -118,7 +118,7 @@ protected void createTag() {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.JavadocParser#createTypeReference(int)
+ * @see org.summer.sdt.internal.compiler.parser.JavadocParser#createTypeReference(int)
  */
 protected Object createTypeReference(int primitiveToken) {
 	int size = this.identifierLengthStack[this.identifierLengthPtr];
@@ -347,7 +347,7 @@ protected boolean parseHtmlTag(int previousPosition, int endTextPosition) throws
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#parseIdentifierTag(boolean)
+ * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#parseIdentifierTag(boolean)
  */
 protected boolean parseIdentifierTag(boolean report) {
 	if (super.parseIdentifierTag(report)) {
@@ -361,7 +361,7 @@ protected boolean parseIdentifierTag(boolean report) {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.JavadocParser#parseParam()
+ * @see org.summer.sdt.internal.compiler.parser.JavadocParser#parseParam()
  */
 protected boolean parseParam() throws InvalidInputException {
 	boolean valid = super.parseParam();
@@ -389,7 +389,7 @@ protected boolean parseParam() throws InvalidInputException {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#parseReference()
+ * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#parseReference()
  */
 protected boolean parseReference() throws InvalidInputException {
 	boolean valid = super.parseReference();
@@ -410,7 +410,7 @@ protected boolean parseReturn() {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.JavadocParser#parseTag(int)
+ * @see org.summer.sdt.internal.compiler.parser.JavadocParser#parseTag(int)
  */
 protected boolean parseTag(int previousPosition) throws InvalidInputException {
 
@@ -614,7 +614,7 @@ protected boolean parseTag(int previousPosition) throws InvalidInputException {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.JavadocParser#parseThrows()
+ * @see org.summer.sdt.internal.compiler.parser.JavadocParser#parseThrows()
  */
 protected boolean parseThrows() {
 	boolean valid = super.parseThrows();
@@ -628,7 +628,7 @@ protected boolean parseThrows() {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.JavadocParser#pushParamName(boolean)
+ * @see org.summer.sdt.internal.compiler.parser.JavadocParser#pushParamName(boolean)
  */
 protected boolean pushParamName(boolean isTypeParam) {
 	int lineTagStart = this.scanner.getLineNumber(this.tagSourceStart);
@@ -644,7 +644,7 @@ protected boolean pushParamName(boolean isTypeParam) {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.JavadocParser#pushSeeRef(java.lang.Object)
+ * @see org.summer.sdt.internal.compiler.parser.JavadocParser#pushSeeRef(java.lang.Object)
  */
 protected boolean pushSeeRef(Object statement) {
 	FormatJavadocReference reference = (FormatJavadocReference) statement;
@@ -673,7 +673,7 @@ protected boolean pushSeeRef(Object statement) {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#pushText(int, int)
+ * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#pushText(int, int)
  */
 protected void pushText(int start, int end) {
 	pushText(start, end, -1, this.htmlTagsPtr == -1 ? 0 : this.htmlTagsPtr);
@@ -723,7 +723,7 @@ private void pushText(int start, int end, int htmlIndex, int htmlDepth) {
 /*
  * (non-Javadoc)
  *
- * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#pushThrowName(java.lang.Object)
+ * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#pushThrowName(java.lang.Object)
  */
 protected boolean pushThrowName(Object typeRef) {
 	int lineStart = this.scanner.getLineNumber(this.tagSourceStart);
@@ -737,7 +737,7 @@ protected boolean pushThrowName(Object typeRef) {
 /*
  * (non-Javadoc)
  * Will update the inline tag position (end position) once tag was fully parsed.
- * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#refreshInlineTagPosition(int)
+ * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#refreshInlineTagPosition(int)
  */
 protected void refreshInlineTagPosition(int previousPosition) {
 	if (this.astPtr != -1) {
@@ -818,7 +818,7 @@ protected void updateDocComment() {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#verifyEndLine(int)
+ * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#verifyEndLine(int)
  */
 protected boolean verifyEndLine(int textPosition) {
 	// do not verify anything at end of line while formatting

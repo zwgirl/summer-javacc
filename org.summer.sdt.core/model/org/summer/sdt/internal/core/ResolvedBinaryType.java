@@ -33,14 +33,14 @@ public class ResolvedBinaryType extends BinaryType {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.core.BinaryType#getKey()
+	 * @see org.summer.sdt.internal.core.BinaryType#getKey()
 	 */
 	public String getKey() {
 		return this.uniqueKey;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.core.BinaryType#isResolved()
+	 * @see org.summer.sdt.internal.core.BinaryType#isResolved()
 	 */
 	public boolean isResolved() {
 		return true;

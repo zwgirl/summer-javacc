@@ -228,19 +228,19 @@ public class ExtendedAnnotation extends ClassFileStruct implements IExtendedAnno
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotation#getTypeIndex()
+	 * @see org.summer.sdt.core.util.IAnnotation#getTypeIndex()
 	 */
 	public int getTypeIndex() {
 		return this.typeIndex;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotation#getComponentsNumber()
+	 * @see org.summer.sdt.core.util.IAnnotation#getComponentsNumber()
 	 */
 	public int getComponentsNumber() {
 		return this.componentsNumber;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotation#getComponents()
+	 * @see org.summer.sdt.core.util.IAnnotation#getComponents()
 	 */
 	public IAnnotationComponent[] getComponents() {
 		return this.components;
@@ -250,7 +250,7 @@ public class ExtendedAnnotation extends ClassFileStruct implements IExtendedAnno
 		return this.readOffset;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotation#getTypeName()
+	 * @see org.summer.sdt.core.util.IAnnotation#getTypeName()
 	 */
 	public char[] getTypeName() {
 		return this.typeName;

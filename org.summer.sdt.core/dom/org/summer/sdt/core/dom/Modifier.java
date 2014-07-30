@@ -37,7 +37,7 @@ import java.util.Map;
  * The numeric values of these flags match the ones for class
  * files as described in the Java Virtual Machine Specification
  * (except for {@link #DEFAULT}). Note that the Java model class
- * {@link org.eclipse.jdt.core.Flags} also provides the same
+ * {@link org.summer.sdt.core.Flags} also provides the same
  * constants as this class.
  * </p>
  *

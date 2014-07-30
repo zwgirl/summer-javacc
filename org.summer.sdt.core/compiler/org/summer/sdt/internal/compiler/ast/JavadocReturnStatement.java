@@ -26,7 +26,7 @@ public class JavadocReturnStatement extends ReturnStatement {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ast.Statement#resolve(org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ast.Statement#resolve(org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public void resolve(BlockScope scope) {
 		MethodScope methodScope = scope.methodScope();
@@ -45,7 +45,7 @@ public class JavadocReturnStatement extends ReturnStatement {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ast.Statement#printStatement(int, java.lang.StringBuffer)
+	 * @see org.summer.sdt.internal.compiler.ast.Statement#printStatement(int, java.lang.StringBuffer)
 	 */
 	public StringBuffer printStatement(int tab, StringBuffer output) {
 		printIndent(tab, output).append("return"); //$NON-NLS-1$
@@ -56,7 +56,7 @@ public class JavadocReturnStatement extends ReturnStatement {
 
 	/* (non-Javadoc)
 	 * Redefine to capture javadoc specific signatures
-	 * @see org.eclipse.jdt.internal.compiler.ast.ASTNode#traverse(org.eclipse.jdt.internal.compiler.ASTVisitor, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ast.ASTNode#traverse(org.summer.sdt.internal.compiler.ASTVisitor, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public void traverse(ASTVisitor visitor, BlockScope scope) {
 		visitor.visit(this, scope);
@@ -64,7 +64,7 @@ public class JavadocReturnStatement extends ReturnStatement {
 	}
 	/* (non-Javadoc)
 	 * Redefine to capture javadoc specific signatures
-	 * @see org.eclipse.jdt.internal.compiler.ast.ASTNode#traverse(org.eclipse.jdt.internal.compiler.ASTVisitor, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ast.ASTNode#traverse(org.summer.sdt.internal.compiler.ASTVisitor, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public void traverse(ASTVisitor visitor, ClassScope scope) {
 		visitor.visit(this, scope);

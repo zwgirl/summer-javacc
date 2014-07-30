@@ -454,7 +454,7 @@ public abstract class JavaElement extends PlatformObject implements IJavaElement
 		return ((JavaElement)getParent()).getSourceMapper();
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.IJavaElement#getSchedulingRule()
+	 * @see org.summer.sdt.core.IJavaElement#getSchedulingRule()
 	 */
 	public ISchedulingRule getSchedulingRule() {
 		IResource resource = resource();
@@ -852,7 +852,7 @@ public abstract class JavaElement extends PlatformObject implements IJavaElement
 				return null;
 			}
 			String encoding = connection.getContentEncoding();
-			byte[] contents = org.summer.sdt.util.Util.getInputStreamAsByteArray(stream, connection.getContentLength());
+			byte[] contents = org.summer.sdt.internal.compiler.util.Util.getInputStreamAsByteArray(stream, connection.getContentLength());
 			if (encoding == null) {
 				int index = getIndexOf(contents, META_START, 0, -1);
 				if (index != -1) {
@@ -869,7 +869,7 @@ public abstract class JavaElement extends PlatformObject implements IJavaElement
 						}
 						if (charsetIndex != -1) {
 							end = getIndexOf(contents, CLOSING_DOUBLE_QUOTE, charsetIndex, end);
-							encoding = new String(contents, charsetIndex, end - charsetIndex, org.summer.sdt.util.Util.UTF_8);
+							encoding = new String(contents, charsetIndex, end - charsetIndex, org.summer.sdt.internal.compiler.util.Util.UTF_8);
 						}
 					}
 				}

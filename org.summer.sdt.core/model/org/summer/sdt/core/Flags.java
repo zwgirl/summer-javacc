@@ -28,7 +28,7 @@ import org.summer.sdt.internal.compiler.lookup.ExtraCompilerModifiers;
  * <p>
  * The AST class <code>Modifier</code> provides
  * similar functionality as this class, only in the
- * <code>org.eclipse.jdt.core.dom</code> package.
+ * <code>org.summer.sdt.core.dom</code> package.
  * </p>
  *
  * @see IMember#getFlags()

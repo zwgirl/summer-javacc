@@ -160,8 +160,8 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * INTERNAL USE-ONLY
 	 * Request the creation of a ClassFile compatible representation of a problematic type
 	 *
-	 * @param typeDeclaration org.eclipse.jdt.internal.compiler.ast.TypeDeclaration
-	 * @param unitResult org.eclipse.jdt.internal.compiler.CompilationUnitResult
+	 * @param typeDeclaration org.summer.sdt.internal.compiler.ast.TypeDeclaration
+	 * @param unitResult org.summer.sdt.internal.compiler.CompilationUnitResult
 	 */
 	public static void createProblemType(TypeDeclaration typeDeclaration, CompilationResult unitResult) {
 		SourceTypeBinding typeBinding = typeDeclaration.binding;
@@ -293,8 +293,8 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * INTERNAL USE-ONLY
 	 * Generate the byte for a problem method info that correspond to a bogus method.
 	 *
-	 * @param method org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.nameloopkup.MethodBinding
+	 * @param method org.summer.sdt.internal.compiler.ast.AbstractMethodDeclaration
+	 * @param methodBinding org.summer.sdt.internal.compiler.nameloopkup.MethodBinding
 	 */
 	public void addAbstractMethod(
 			AbstractMethodDeclaration method,
@@ -619,7 +619,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * INTERNAL USE-ONLY
 	 * Generate the byte for a problem clinit method info that correspond to a boggus method.
 	 *
-	 * @param problems org.eclipse.jdt.internal.compiler.problem.Problem[]
+	 * @param problems org.summer.sdt.internal.compiler.problem.Problem[]
 	 */
 	public void addProblemClinit(CategorizedProblem[] problems) {
 		generateMethodInfoHeaderForClinit();
@@ -674,9 +674,9 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * INTERNAL USE-ONLY
 	 * Generate the byte for a problem method info that correspond to a boggus constructor.
 	 *
-	 * @param method org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.nameloopkup.MethodBinding
-	 * @param problems org.eclipse.jdt.internal.compiler.problem.Problem[]
+	 * @param method org.summer.sdt.internal.compiler.ast.AbstractMethodDeclaration
+	 * @param methodBinding org.summer.sdt.internal.compiler.nameloopkup.MethodBinding
+	 * @param problems org.summer.sdt.internal.compiler.problem.Problem[]
 	 */
 	public void addProblemConstructor(
 		AbstractMethodDeclaration method,
@@ -740,9 +740,9 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * Generate the byte for a problem method info that correspond to a boggus constructor.
 	 * Reset the position inside the contents byte array to the savedOffset.
 	 *
-	 * @param method org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.nameloopkup.MethodBinding
-	 * @param problems org.eclipse.jdt.internal.compiler.problem.Problem[]
+	 * @param method org.summer.sdt.internal.compiler.ast.AbstractMethodDeclaration
+	 * @param methodBinding org.summer.sdt.internal.compiler.nameloopkup.MethodBinding
+	 * @param problems org.summer.sdt.internal.compiler.problem.Problem[]
 	 * @param savedOffset <CODE>int</CODE>
 	 */
 	public void addProblemConstructor(
@@ -759,9 +759,9 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * INTERNAL USE-ONLY
 	 * Generate the byte for a problem method info that correspond to a boggus method.
 	 *
-	 * @param method org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.nameloopkup.MethodBinding
-	 * @param problems org.eclipse.jdt.internal.compiler.problem.Problem[]
+	 * @param method org.summer.sdt.internal.compiler.ast.AbstractMethodDeclaration
+	 * @param methodBinding org.summer.sdt.internal.compiler.nameloopkup.MethodBinding
+	 * @param problems org.summer.sdt.internal.compiler.problem.Problem[]
 	 */
 	public void addProblemMethod(
 		AbstractMethodDeclaration method,
@@ -829,9 +829,9 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * Generate the byte for a problem method info that correspond to a boggus method.
 	 * Reset the position inside the contents byte array to the savedOffset.
 	 *
-	 * @param method org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.nameloopkup.MethodBinding
-	 * @param problems org.eclipse.jdt.internal.compiler.problem.Problem[]
+	 * @param method org.summer.sdt.internal.compiler.ast.AbstractMethodDeclaration
+	 * @param methodBinding org.summer.sdt.internal.compiler.nameloopkup.MethodBinding
+	 * @param problems org.summer.sdt.internal.compiler.problem.Problem[]
 	 * @param savedOffset <CODE>int</CODE>
 	 */
 	public void addProblemMethod(
@@ -1014,7 +1014,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * INTERNAL USE-ONLY
 	 * Generate the bytes for a synthetic method that provides an access to a private constructor.
 	 *
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.nameloopkup.SyntheticAccessMethodBinding
+	 * @param methodBinding org.summer.sdt.internal.compiler.nameloopkup.SyntheticAccessMethodBinding
 	 */
 	public void addSyntheticConstructorAccessMethod(SyntheticMethodBinding methodBinding) {
 		generateMethodInfoHeader(methodBinding);
@@ -1044,7 +1044,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * INTERNAL USE-ONLY
 	 *  Generate the bytes for a synthetic method that implements Enum#valueOf(String) for a given enum type
 	 *
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.nameloopkup.SyntheticAccessMethodBinding
+	 * @param methodBinding org.summer.sdt.internal.compiler.nameloopkup.SyntheticAccessMethodBinding
 	 */
 	public void addSyntheticEnumValueOfMethod(SyntheticMethodBinding methodBinding) {
 		generateMethodInfoHeader(methodBinding);
@@ -1077,7 +1077,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * INTERNAL USE-ONLY
 	 *  Generate the bytes for a synthetic method that implements Enum#values() for a given enum type
 	 *
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.nameloopkup.SyntheticAccessMethodBinding
+	 * @param methodBinding org.summer.sdt.internal.compiler.nameloopkup.SyntheticAccessMethodBinding
 	 */
 	public void addSyntheticEnumValuesMethod(SyntheticMethodBinding methodBinding) {
 		generateMethodInfoHeader(methodBinding);
@@ -1131,7 +1131,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * Generate the byte for a problem method info that correspond to a synthetic method that
 	 * generate an read access to a private field.
 	 *
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.nameloopkup.SyntheticAccessMethodBinding
+	 * @param methodBinding org.summer.sdt.internal.compiler.nameloopkup.SyntheticAccessMethodBinding
 	 */
 	public void addSyntheticFieldReadAccessMethod(SyntheticMethodBinding methodBinding) {
 		generateMethodInfoHeader(methodBinding);
@@ -1162,7 +1162,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * Generate the byte for a problem method info that correspond to a synthetic method that
 	 * generate an write access to a private field.
 	 *
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.nameloopkup.SyntheticAccessMethodBinding
+	 * @param methodBinding org.summer.sdt.internal.compiler.nameloopkup.SyntheticAccessMethodBinding
 	 */
 	public void addSyntheticFieldWriteAccessMethod(SyntheticMethodBinding methodBinding) {
 		generateMethodInfoHeader(methodBinding);
@@ -1192,7 +1192,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * INTERNAL USE-ONLY
 	 * Generate the bytes for a synthetic method that provides access to a private method.
 	 *
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.nameloopkup.SyntheticAccessMethodBinding
+	 * @param methodBinding org.summer.sdt.internal.compiler.nameloopkup.SyntheticAccessMethodBinding
 	 */
 	public void addSyntheticMethodAccessMethod(SyntheticMethodBinding methodBinding) {
 		generateMethodInfoHeader(methodBinding);
@@ -1902,7 +1902,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * - exception table
 	 * - and debug attributes if necessary.
 	 *
-	 * @param binding org.eclipse.jdt.internal.compiler.lookup.SyntheticAccessMethodBinding
+	 * @param binding org.summer.sdt.internal.compiler.lookup.SyntheticAccessMethodBinding
 	 * @param codeAttributeOffset <CODE>int</CODE>
 	 */
 	public void completeCodeAttributeForSyntheticMethod(
@@ -2060,7 +2060,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * - exception table
 	 * - and debug attributes if necessary.
 	 *
-	 * @param binding org.eclipse.jdt.internal.compiler.lookup.SyntheticAccessMethodBinding
+	 * @param binding org.summer.sdt.internal.compiler.lookup.SyntheticAccessMethodBinding
 	 * @param codeAttributeOffset <CODE>int</CODE>
 	 */
 	public void completeCodeAttributeForSyntheticMethod(
@@ -3279,7 +3279,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 *
 	 * It returns the number of attributes created for the code attribute.
 	 *
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.lookup.MethodBinding
+	 * @param methodBinding org.summer.sdt.internal.compiler.lookup.MethodBinding
 	 * @return <CODE>int</CODE>
 	 */
 	public int generateMethodInfoAttributes(MethodBinding methodBinding) {
@@ -3380,7 +3380,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * - the name index of the method name inside the constant pool
 	 * - the descriptor index of the signature of the method inside the constant pool.
 	 *
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.lookup.MethodBinding
+	 * @param methodBinding org.summer.sdt.internal.compiler.lookup.MethodBinding
 	 */
 	public void generateMethodInfoHeader(MethodBinding methodBinding) {
 		generateMethodInfoHeader(methodBinding, methodBinding.modifiers);
@@ -3394,7 +3394,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * - the name index of the method name inside the constant pool
 	 * - the descriptor index of the signature of the method inside the constant pool.
 	 *
-	 * @param methodBinding org.eclipse.jdt.internal.compiler.lookup.MethodBinding
+	 * @param methodBinding org.summer.sdt.internal.compiler.lookup.MethodBinding
 	 * @param accessFlags the access flags
 	 */
 	public void generateMethodInfoHeader(MethodBinding methodBinding, int accessFlags) {
@@ -5138,7 +5138,7 @@ public class ClassFile implements TypeConstants, TypeIds {
 	 * INTERNAL USE-ONLY
 	 * Returns the most enclosing classfile of the receiver. This is used know to store the constant pool name
 	 * for all inner types of the receiver.
-	 * @return org.eclipse.jdt.internal.compiler.codegen.ClassFile
+	 * @return org.summer.sdt.internal.compiler.codegen.ClassFile
 	 */
 	public ClassFile outerMostEnclosingClassFile() {
 		ClassFile current = this;

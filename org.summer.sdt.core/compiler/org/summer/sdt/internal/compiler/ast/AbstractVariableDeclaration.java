@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *     Stephan Herrmann - Contribution for
  *								Bug 400874 - [1.8][compiler] Inference infrastructure should evolve to meet JLS8 18.x (Part G of JSR335 spec)
- *								Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *								Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *******************************************************************************/
 package org.summer.sdt.internal.compiler.ast;
 
@@ -54,7 +54,7 @@ public abstract class AbstractVariableDeclaration extends Statement implements I
 
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#genericTypeArguments()
+	 * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#genericTypeArguments()
 	 */
 	public TypeBinding[] genericTypeArguments() {
 		return null;
@@ -70,14 +70,14 @@ public abstract class AbstractVariableDeclaration extends Statement implements I
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#isSuperAccess()
+	 * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#isSuperAccess()
 	 */
 	public boolean isSuperAccess() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#isTypeAccess()
+	 * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#isTypeAccess()
 	 */
 	public boolean isTypeAccess() {
 		return false;
@@ -125,14 +125,14 @@ public abstract class AbstractVariableDeclaration extends Statement implements I
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#setActualReceiverType(org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding)
+	 * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#setActualReceiverType(org.summer.sdt.internal.compiler.lookup.ReferenceBinding)
 	 */
 	public void setActualReceiverType(ReferenceBinding receiverType) {
 		// do nothing by default
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#setDepth(int)
+	 * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#setDepth(int)
 	 */
 	public void setDepth(int depth) {
 
@@ -140,7 +140,7 @@ public abstract class AbstractVariableDeclaration extends Statement implements I
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#setFieldIndex(int)
+	 * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#setFieldIndex(int)
 	 */
 	public void setFieldIndex(int depth) {
 		// do nothing by default

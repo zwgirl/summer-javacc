@@ -209,7 +209,7 @@ public final class AST {
 	 *     or <code>null</code> if none
 	 * @param isResolved whether the given compilation unit declaration is resolved
 	 * @return the compilation unit node
-	 * @deprecated Use org.eclipse.jdt.core.dom.AST.convertCompilationUnit(int, CompilationUnitDeclaration, Map, boolean, CompilationUnit, int, IProgressMonitor) instead
+	 * @deprecated Use org.summer.sdt.core.dom.AST.convertCompilationUnit(int, CompilationUnitDeclaration, Map, boolean, CompilationUnit, int, IProgressMonitor) instead
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public static CompilationUnit convertCompilationUnit(
@@ -724,7 +724,7 @@ public final class AST {
 	 * <p>
 	 * Following option keys are significant:
 	 * <ul>
-	 * <li><code>"org.eclipse.jdt.core.compiler.source"</code> -
+	 * <li><code>"org.summer.sdt.core.compiler.source"</code> -
 	 *    indicates source compatibility mode (as per <code>JavaCore</code>);
 	 *    <code>"1.3"</code> means the source code is as per JDK 1.3;
 	 *    <code>"1.4"</code> means the source code is as per JDK 1.4

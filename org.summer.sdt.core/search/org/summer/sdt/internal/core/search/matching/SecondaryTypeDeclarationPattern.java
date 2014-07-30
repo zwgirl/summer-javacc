@@ -38,7 +38,7 @@ protected StringBuffer print(StringBuffer output) {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.core.search.matching.TypeDeclarationPattern#queryIn(org.eclipse.jdt.internal.core.index.Index)
+ * @see org.summer.sdt.internal.core.search.matching.TypeDeclarationPattern#queryIn(org.summer.sdt.internal.core.index.Index)
  */
 public EntryResult[] queryIn(Index index) throws IOException {
 	return index.query(CATEGORIES, SECONDARY_PATTERN_KEY, R_PATTERN_MATCH | R_CASE_SENSITIVE);

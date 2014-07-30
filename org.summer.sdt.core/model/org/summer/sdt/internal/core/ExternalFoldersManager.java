@@ -47,7 +47,7 @@ import org.summer.sdt.internal.core.util.Util;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class ExternalFoldersManager {
-	private static final String EXTERNAL_PROJECT_NAME = ".org.eclipse.jdt.core.external.folders"; //$NON-NLS-1$
+	private static final String EXTERNAL_PROJECT_NAME = ".org.summer.sdt.core.external.folders"; //$NON-NLS-1$
 	private static final String LINKED_FOLDER_NAME = ".link"; //$NON-NLS-1$
 	private Map folders;
 	private Set pendingFolders; // subset of keys of 'folders', for which linked folders haven't been created yet.

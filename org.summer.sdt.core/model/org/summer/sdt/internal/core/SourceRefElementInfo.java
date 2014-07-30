@@ -19,17 +19,17 @@ import org.summer.sdt.core.SourceRange;
 /* package */ class SourceRefElementInfo extends JavaElementInfo {
 	protected int sourceRangeStart, sourceRangeEnd;
 /**
- * @see org.eclipse.jdt.internal.compiler.env.ISourceType#getDeclarationSourceEnd()
- * @see org.eclipse.jdt.internal.compiler.env.ISourceMethod#getDeclarationSourceEnd()
- * @see org.eclipse.jdt.internal.compiler.env.ISourceField#getDeclarationSourceEnd()
+ * @see org.summer.sdt.internal.compiler.env.ISourceType#getDeclarationSourceEnd()
+ * @see org.summer.sdt.internal.compiler.env.ISourceMethod#getDeclarationSourceEnd()
+ * @see org.summer.sdt.internal.compiler.env.ISourceField#getDeclarationSourceEnd()
  */
 public int getDeclarationSourceEnd() {
 	return this.sourceRangeEnd;
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.env.ISourceType#getDeclarationSourceStart()
- * @see org.eclipse.jdt.internal.compiler.env.ISourceMethod#getDeclarationSourceStart()
- * @see org.eclipse.jdt.internal.compiler.env.ISourceField#getDeclarationSourceStart()
+ * @see org.summer.sdt.internal.compiler.env.ISourceType#getDeclarationSourceStart()
+ * @see org.summer.sdt.internal.compiler.env.ISourceMethod#getDeclarationSourceStart()
+ * @see org.summer.sdt.internal.compiler.env.ISourceField#getDeclarationSourceStart()
  */
 public int getDeclarationSourceStart() {
 	return this.sourceRangeStart;

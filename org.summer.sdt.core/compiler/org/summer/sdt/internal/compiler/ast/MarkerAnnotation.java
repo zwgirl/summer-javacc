@@ -29,7 +29,7 @@ public class MarkerAnnotation extends Annotation {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.Annotation#memberValuePairs()
+	 * @see org.summer.sdt.internal.compiler.ast.Annotation#memberValuePairs()
 	 */
 	public MemberValuePair[] memberValuePairs() {
 		return NoValuePairs;

@@ -649,7 +649,7 @@ class DefaultBindingResolver extends BindingResolver {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.BindingResolver#resolveConstructor(org.eclipse.jdt.core.dom.EnumConstantDeclaration)
+	 * @see org.summer.sdt.core.dom.BindingResolver#resolveConstructor(org.summer.sdt.core.dom.EnumConstantDeclaration)
 	 */
 	IMethodBinding resolveConstructor(EnumConstantDeclaration enumConstantDeclaration) {
 		org.summer.sdt.internal.compiler.ast.ASTNode node = (org.summer.sdt.internal.compiler.ast.ASTNode) this.newAstToOldAst.get(enumConstantDeclaration);
@@ -855,7 +855,7 @@ class DefaultBindingResolver extends BindingResolver {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.BindingResolver#resolveMember(org.eclipse.jdt.core.dom.AnnotationTypeMemberDeclaration)
+	 * @see org.summer.sdt.core.dom.BindingResolver#resolveMember(org.summer.sdt.core.dom.AnnotationTypeMemberDeclaration)
 	 */
 	IMethodBinding resolveMember(AnnotationTypeMemberDeclaration declaration) {
 		Object oldNode = this.newAstToOldAst.get(declaration);
@@ -1522,7 +1522,7 @@ class DefaultBindingResolver extends BindingResolver {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.BindingResolver#resolveType(org.eclipse.jdt.core.dom.AnnotationTypeDeclaration)
+	 * @see org.summer.sdt.core.dom.BindingResolver#resolveType(org.summer.sdt.core.dom.AnnotationTypeDeclaration)
 	 */
 	ITypeBinding resolveType(AnnotationTypeDeclaration type) {
 		final Object node = this.newAstToOldAst.get(type);
@@ -1563,7 +1563,7 @@ class DefaultBindingResolver extends BindingResolver {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.BindingResolver#resolveType(org.eclipse.jdt.core.dom.EnumDeclaration)
+	 * @see org.summer.sdt.core.dom.BindingResolver#resolveType(org.summer.sdt.core.dom.EnumDeclaration)
 	 */
 	ITypeBinding resolveType(EnumDeclaration type) {
 		final Object node = this.newAstToOldAst.get(type);
@@ -1742,7 +1742,7 @@ class DefaultBindingResolver extends BindingResolver {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.BindingResolver#resolveVariable(org.eclipse.jdt.core.dom.EnumConstantDeclaration)
+	 * @see org.summer.sdt.core.dom.BindingResolver#resolveVariable(org.summer.sdt.core.dom.EnumConstantDeclaration)
 	 */
 	synchronized IVariableBinding resolveVariable(EnumConstantDeclaration enumConstant) {
 		final Object node = this.newAstToOldAst.get(enumConstant);

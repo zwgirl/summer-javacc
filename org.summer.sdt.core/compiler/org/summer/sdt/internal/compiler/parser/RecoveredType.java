@@ -735,11 +735,11 @@ public RecoveredElement updateOnOpeningBrace(int braceStart, int braceEnd){
 		Parser parser = parser();
 		switch(parser.lastIgnoredToken){
 			case -1 :
-			case EXTENDS :
-			case IMPLEMENTS :
-			case GREATER :
-			case RIGHT_SHIFT :
-			case UNSIGNED_RIGHT_SHIFT :
+			case TokenNameextends :
+			case TokenNameimplements :
+			case TokenNameGREATER :
+			case TokenNameRIGHT_SHIFT :
+			case TokenNameUNSIGNED_RIGHT_SHIFT :
 				if (parser.recoveredStaticInitializerStart == 0) break;
 			//$FALL-THROUGH$
 			default:

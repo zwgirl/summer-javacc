@@ -22,7 +22,7 @@
  *								Bug 426366 - [1.8][compiler] Type inference doesn't handle multiple candidate target types in outer overload context
  *								Bug 426290 - [1.8][compiler] Inference + overloading => wrong method resolution ?
  *								Bug 427483 - [Java 8] Variables in lambdas sometimes can't be resolved
- *								Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *								Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *								Bug 428352 - [1.8][compiler] Resolution errors don't always surface
  *        Andy Clement (GoPivotal, Inc) aclement@gopivotal.com - Contributions for
  *                          Bug 409245 - [1.8][compiler] Type annotations dropped when call is routed through a synthetic bridge method
@@ -141,8 +141,8 @@ public class ExplicitConstructorCall extends Statement implements Invocation {
 	/**
 	 * Constructor call code generation
 	 *
-	 * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 */
 	public void generateCode(BlockScope currentScope, CodeStream codeStream) {
 		if ((this.bits & ASTNode.IsReachable) == 0) {
@@ -200,7 +200,7 @@ public class ExplicitConstructorCall extends Statement implements Invocation {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#genericTypeArguments()
+	 * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#genericTypeArguments()
 	 */
 	public TypeBinding[] genericTypeArguments() {
 		return this.genericTypeArguments;

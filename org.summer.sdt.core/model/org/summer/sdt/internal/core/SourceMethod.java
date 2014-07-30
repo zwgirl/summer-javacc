@@ -95,7 +95,7 @@ protected char getHandleMementoDelimiter() {
 	return JavaElement.JEM_METHOD;
 }
 /* (non-Javadoc)
- * @see org.eclipse.jdt.core.IMethod#getKey()
+ * @see org.summer.sdt.core.IMethod#getKey()
  */
 public String getKey() {
 	try {
@@ -229,7 +229,7 @@ public boolean isLambdaMethod() {
 	return false;
 }
 /* (non-Javadoc)
- * @see org.eclipse.jdt.core.IMethod#isResolved()
+ * @see org.summer.sdt.core.IMethod#isResolved()
  */
 public boolean isResolved() {
 	return false;

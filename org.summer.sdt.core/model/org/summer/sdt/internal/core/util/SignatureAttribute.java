@@ -35,13 +35,13 @@ public class SignatureAttribute extends ClassFileAttribute implements ISignature
 		this.signature = constantPoolEntry.getUtf8Value();
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.ISignatureAttribute#getSignatureIndex()
+	 * @see org.summer.sdt.core.util.ISignatureAttribute#getSignatureIndex()
 	 */
 	public int getSignatureIndex() {
 		return this.signatureIndex;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.ISignatureAttribute#getSignature()
+	 * @see org.summer.sdt.core.util.ISignatureAttribute#getSignature()
 	 */
 	public char[] getSignature() {
 		return this.signature;

@@ -55,13 +55,13 @@ public class RuntimeInvisibleAnnotationsAttribute
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IRuntimeInvisibleAnnotations#getAnnotations()
+	 * @see org.summer.sdt.core.util.IRuntimeInvisibleAnnotations#getAnnotations()
 	 */
 	public IAnnotation[] getAnnotations() {
 		return this.annotations;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IRuntimeInvisibleAnnotations#getAnnotationsNumber()
+	 * @see org.summer.sdt.core.util.IRuntimeInvisibleAnnotations#getAnnotationsNumber()
 	 */
 	public int getAnnotationsNumber() {
 		return this.annotationsNumber;

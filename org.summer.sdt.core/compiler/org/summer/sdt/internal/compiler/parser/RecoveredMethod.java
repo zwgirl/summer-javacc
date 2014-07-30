@@ -442,7 +442,7 @@ public void updateFromParserState(){
 				}
 			} else {
 				/* has not consumed arguments yet, listed elements must be arguments */
-				if (parser.currentToken == LPAREN || parser.currentToken == SEMICOLON){
+				if (parser.currentToken == TokenNameLPAREN || parser.currentToken == TokenNameSEMICOLON){
 					/* if currentToken is parenthesis this last argument is a method/field signature */
 					parser.astLengthStack[parser.astLengthPtr] --;
 					parser.astPtr --;
@@ -564,7 +564,7 @@ public RecoveredElement updateOnOpeningBrace(int braceStart, int braceEnd){
 		 */
 		switch(parser().lastIgnoredToken){
 			case -1 :
-			case THROWS :
+			case TokenNamethrows :
 				break;
 			default:
 				this.foundOpeningBrace = true;

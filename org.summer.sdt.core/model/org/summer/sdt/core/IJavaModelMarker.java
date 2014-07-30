@@ -23,7 +23,7 @@ public interface IJavaModelMarker {
 
 	/**
 	 * Java model problem marker type (value
-	 * <code>"org.eclipse.jdt.core.problem"</code>). This can be used to
+	 * <code>"org.summer.sdt.core.problem"</code>). This can be used to
 	 * recognize those markers in the workspace that flag problems detected by
 	 * the Java tooling during compilation.
 	 */
@@ -31,7 +31,7 @@ public interface IJavaModelMarker {
 
 	/**
 	 * Java model transient problem marker type (value
-	 * <code>"org.eclipse.jdt.core.transient_problem"</code>). This can be
+	 * <code>"org.summer.sdt.core.transient_problem"</code>). This can be
 	 * used to recognize those markers in the workspace that flag transient
 	 * problems detected by the Java tooling (such as a problem detected by the
 	 * outliner, or a problem detected during a code completion). Since 1.0,
@@ -39,7 +39,7 @@ public interface IJavaModelMarker {
 	 * various API. Only the evaluation API is still producing markers for
 	 * transient problems.
 	 *
-	 * @see org.eclipse.jdt.core.compiler.IProblem
+	 * @see org.summer.sdt.core.compiler.IProblem
 	 * @see org.summer.sdt.core.eval.ICodeSnippetRequestor#acceptProblem(org.eclipse.core.resources.IMarker,String,
 	 *      int)
 	 */
@@ -47,12 +47,12 @@ public interface IJavaModelMarker {
 
 	/**
 	 * Java model task marker type (value
-	 * <code>"org.eclipse.jdt.core.task"</code>). This can be used to
+	 * <code>"org.summer.sdt.core.task"</code>). This can be used to
 	 * recognize task markers in the workspace that correspond to tasks
 	 * specified in Java source comments and detected during compilation (for
 	 * example, 'TO-DO: ...'). Tasks are identified by a task tag, which can be
 	 * customized through <code>JavaCore</code> option
-	 * <code>"org.eclipse.jdt.core.compiler.taskTag"</code>.
+	 * <code>"org.summer.sdt.core.compiler.taskTag"</code>.
 	 *
 	 * @since 2.1
 	 */
@@ -99,7 +99,7 @@ public interface IJavaModelMarker {
 
 	/**
 	 * Build path problem marker type (value
-	 * <code>"org.eclipse.jdt.core.buildpath_problem"</code>). This can be
+	 * <code>"org.summer.sdt.core.buildpath_problem"</code>). This can be
 	 * used to recognize those markers in the workspace that flag problems
 	 * detected by the Java tooling during classpath setting.
 	 */

@@ -162,7 +162,7 @@ public class JavadocParser extends AbstractCommentParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#createArgumentReference(char[], java.lang.Object, int)
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#createArgumentReference(char[], java.lang.Object, int)
 	 */
 	protected Object createArgumentReference(char[] name, int dim, boolean isVarargs, Object typeRef, long[] dimPositions, long argNamePos) throws InvalidInputException {
 		try {
@@ -192,7 +192,7 @@ public class JavadocParser extends AbstractCommentParser {
 		}
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#createFieldReference()
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#createFieldReference()
 	 */
 	protected Object createFieldReference(Object receiver) throws InvalidInputException {
 		try {
@@ -215,7 +215,7 @@ public class JavadocParser extends AbstractCommentParser {
 		}
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#createMethodReference(java.lang.Object[])
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#createMethodReference(java.lang.Object[])
 	 */
 	protected Object createMethodReference(Object receiver, List arguments) throws InvalidInputException {
 		try {
@@ -311,7 +311,7 @@ public class JavadocParser extends AbstractCommentParser {
 		}
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#createReturnStatement()
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#createReturnStatement()
 	 */
 	protected Object createReturnStatement() {
 		return new JavadocReturnStatement(this.scanner.getCurrentTokenStartPosition(),
@@ -319,14 +319,14 @@ public class JavadocParser extends AbstractCommentParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#parseTagName()
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#parseTagName()
 	 */
 	protected void createTag() {
 		this.tagValue = TAG_OTHERS_VALUE;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#createTypeReference()
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#createTypeReference()
 	 */
 	protected Object createTypeReference(int primitiveToken) {
 		TypeReference typeRef = null;
@@ -819,7 +819,7 @@ public class JavadocParser extends AbstractCommentParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#pushText(int, int)
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#pushText(int, int)
 	 */
 	protected void pushText(int start, int end) {
 		// The tag gets its description => clear the flag
@@ -856,7 +856,7 @@ public class JavadocParser extends AbstractCommentParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#refreshInlineTagPosition(int)
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#refreshInlineTagPosition(int)
 	 */
 	protected void refreshInlineTagPosition(int previousPosition) {
 

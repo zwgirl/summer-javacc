@@ -27,7 +27,7 @@ IBinaryTypeAnnotation[] getTypeAnnotations();
 
 /**
  *
- * @return org.eclipse.jdt.internal.compiler.Constant
+ * @return org.summer.sdt.internal.compiler.Constant
  */
 Constant getConstant();
 

@@ -395,7 +395,7 @@ public class SourceType extends NamedMember implements IType {
 		return array;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.IType#getKey()
+	 * @see org.summer.sdt.core.IType#getKey()
 	 */
 	public String getKey() {
 		try {
@@ -641,7 +641,7 @@ public class SourceType extends NamedMember implements IType {
 		return getDeclaringType() != null;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.IType#isResolved()
+	 * @see org.summer.sdt.core.IType#isResolved()
 	 */
 	public boolean isResolved() {
 		return false;

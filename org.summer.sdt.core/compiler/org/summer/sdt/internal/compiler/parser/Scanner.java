@@ -12,12 +12,6 @@
  *******************************************************************************/
 package org.summer.sdt.internal.compiler.parser;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream.GetField;
-
 import org.summer.sdt.core.compiler.CharOperation;
 import org.summer.sdt.core.compiler.InvalidInputException;
 import org.summer.sdt.internal.compiler.CompilationResult;
@@ -27,7 +21,7 @@ import org.summer.sdt.internal.compiler.util.Util;
 
 /**
  * IMPORTANT NOTE: Internal Scanner implementation. It is mirrored in
- * org.eclipse.jdt.core.compiler public package where it is API.
+ * org.summer.sdt.core.compiler public package where it is API.
  * The mirror implementation is using the backward compatible ITerminalSymbols constant
  * definitions (stable with 2.0), whereas the internal implementation uses TerminalTokens
  * which constant values reflect the latest parser generation state.
@@ -44,26 +38,6 @@ public class Scanner implements TerminalTokens {
 	 - sourceStart gives the position into the stream
 	 - currentPosition-1 gives the sourceEnd position into the stream
 	*/
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner();
-		Token token;
-		try {
-			FileInputStream is = new FileInputStream(new File("Test.java"));
-			scanner.setSource(Util.getInputStreamAsCharArray(is, is.available(), "UTF8"));
-			token = scanner.getNextToken();
-			while(token.kind != EOF){
-				token = scanner.getNextToken();
-//				System.out.println("Token :" + token.image);
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
 	public long sourceLevel;
 	public long complianceLevel;
 
@@ -202,7 +176,7 @@ public class Scanner implements TerminalTokens {
 	protected int lastPosition;
 
 	// generic support
-	public boolean returnOnlyGreater = true;
+	public boolean returnOnlyGreater = false;
 
 	/*static*/ {
 		for (int i = 0; i < 6; i++) {
@@ -221,9 +195,9 @@ public class Scanner implements TerminalTokens {
 	public boolean insideRecovery = false;
 	int lookBack[] = new int[2]; // fall back to spring forward.
 	private int nextToken = TokenNameNotAToken; // allows for one token push back, only the most recent token can be reliably ungotten.
-//	private VanguardScanner vanguardScanner;
-//	private VanguardParser vanguardParser;
-//	private ConflictedParser activeParser = null;
+	private VanguardScanner vanguardScanner;
+	private VanguardParser vanguardParser;
+	private ConflictedParser activeParser = null;
 	private boolean consumingEllipsisAnnotations = false;
 	
 	public static final int RoundBracket = 0;
@@ -238,7 +212,7 @@ public class Scanner implements TerminalTokens {
 	public static final int LOW_SURROGATE_MAX_VALUE = 0xDFFF;
 
 	public Scanner() {
-		this(false /*comment*/, false /*whitespace*/, false /*nls*/, ClassFileConstants.JDK1_8 /*sourceLevel*/, null/*taskTag*/, null/*taskPriorities*/, true /*taskCaseSensitive*/);
+		this(false /*comment*/, false /*whitespace*/, false /*nls*/, ClassFileConstants.JDK1_3 /*sourceLevel*/, null/*taskTag*/, null/*taskPriorities*/, true /*taskCaseSensitive*/);
 	}
 	
 	public Scanner(
@@ -1085,7 +1059,7 @@ public class Scanner implements TerminalTokens {
 					this.startPosition = whiteStart;
 					return TokenNameWHITESPACE;
 				} else {
-					return EOF;
+					return TokenNameEOF;
 				}
 				if (checkIfUnicode) {
 					isWhiteSpace = jumpOverUnicodeWhiteSpace();
@@ -1132,7 +1106,7 @@ public class Scanner implements TerminalTokens {
 				if ((ScannerHelper.OBVIOUS_IDENT_CHAR_NATURES[c] & ScannerHelper.C_IDENT_START) != 0) {
 					return scanIdentifierOrKeywordWithBoundCheck();
 				}
-				return ERROR;
+				return TokenNameERROR;
 			}
 			boolean isJavaIdStart;
 			if (c >= HIGH_SURROGATE_MIN_VALUE && c <= HIGH_SURROGATE_MAX_VALUE) {
@@ -1157,7 +1131,7 @@ public class Scanner implements TerminalTokens {
 			}
 			if (isJavaIdStart)
 				return scanIdentifierOrKeywordWithBoundCheck();
-			return ERROR;
+			return TokenNameERROR;
 		}
 	}
 	public void ungetToken(int unambiguousToken) {
@@ -1167,7 +1141,7 @@ public class Scanner implements TerminalTokens {
 		this.nextToken = unambiguousToken;
 	}
 	
-	public int getNextToken1() throws InvalidInputException {
+	public int getNextToken() throws InvalidInputException {
 		
 		int token;
 		if (this.nextToken != TokenNameNotAToken) {
@@ -1176,79 +1150,24 @@ public class Scanner implements TerminalTokens {
 			return token; // presumed to be unambiguous.
 		}
 		token = getNextToken0();
-//		if (this.activeParser == null) { // anybody interested in the grammatical structure of the program should have registered.
+		if (this.activeParser == null) { // anybody interested in the grammatical structure of the program should have registered.
 			return token;
-//		}
-//		if (token == LPAREN || token == LESS || token == AT) {
-//			token = disambiguatedToken(token);
-//		} else if (token == TokenNameELLIPSIS) {
-//			this.consumingEllipsisAnnotations = false;
-//		}
-//		this.lookBack[0] = this.lookBack[1];
-//		this.lookBack[1] = token;
-//		return token;
-	}
-	public Token getNextToken()  {
-
-		int kind = 0;
-		Token token, special = null;
-//		for(;;){
-//			try {
-//				kind = getNextToken0();
-//				System.out.println("Token :" + getCurrentTokenString());
-//				token = new Token(kind);
-//				token.sourceStart = startPosition;
-//				token.sourceEnd = currentPosition;
-//				token.image = getCurrentTokenString();
-////				if(isSpecial(kind)){
-////					if(special != null){
-////						special.next = token;
-////						token.specialToken = special;
-////					}
-////					special = token;
-////					continue;
-////				}else{
-////					currentToken.next = token;
-//					if(special != null){
-//						token.specialToken = special;
-//					}
-////					currentToken = token;
-//					return token;
-////				}
-//			} catch (InvalidInputException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//		}
-		
-		try {
-			kind = getNextToken0();
-		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-//		System.out.println("Token :" + getCurrentTokenString());
-		token = new MyToken(kind, kind == EOF ? "" : getCurrentTokenString());
-//		token.image = getCurrentTokenString();
-		token.sourceStart = startPosition;
-		token.sourceEnd = currentPosition;
+		if (token == TokenNameLPAREN || token == TokenNameLESS || token == TokenNameAT) {
+			token = disambiguatedToken(token);
+		} else if (token == TokenNameELLIPSIS) {
+			this.consumingEllipsisAnnotations = false;
+		}
+		this.lookBack[0] = this.lookBack[1];
+		this.lookBack[1] = token;
 		return token;
 	}
-	
-	private boolean isSpecial(int kind) {
-		if(kind == TokenNameCOMMENT_LINE || kind == TokenNameCOMMENT_BLOCK  || kind == TokenNameCOMMENT_JAVADOC){
-			return true;
-		}
-		return false;
-	}
-	
 	protected int getNextToken0() throws InvalidInputException {
 		this.wasAcr = false;
 		if (this.diet) {
 			jumpOverMethodBody();
 			this.diet = false;
-			return this.currentPosition > this.eofPosition ? EOF : RBRACE;
+			return this.currentPosition > this.eofPosition ? TokenNameEOF : TokenNameRBRACE;
 		}
 		int whiteStart = 0;
 		try {
@@ -1277,7 +1196,7 @@ public class Scanner implements TerminalTokens {
 							return TokenNameWHITESPACE;
 						}
 						if (this.currentPosition > this.eofPosition)
-							return EOF;
+							return TokenNameEOF;
 					}
 					if (this.currentPosition > this.eofPosition) {
 						if (this.tokenizeWhiteSpace && (whiteStart != this.currentPosition - 1)) {
@@ -1286,7 +1205,7 @@ public class Scanner implements TerminalTokens {
 							this.startPosition = whiteStart;
 							return TokenNameWHITESPACE;
 						}
-						return EOF;
+						return TokenNameEOF;
 					}
 					if (checkIfUnicode) {
 						isWhiteSpace = jumpOverUnicodeWhiteSpace();
@@ -1341,23 +1260,23 @@ public class Scanner implements TerminalTokens {
 						} else {
 							return TokenNameERROR;
 						}*/
-						return AT;
+						return TokenNameAT;
 					case '(' :
-						return LPAREN;
+						return TokenNameLPAREN;
 					case ')' :
-						return RPAREN;
+						return TokenNameRPAREN;
 					case '{' :
-						return LBRACE;
+						return TokenNameLBRACE;
 					case '}' :
-						return RBRACE;
+						return TokenNameRBRACE;
 					case '[' :
-						return LBRACKET;
+						return TokenNameLBRACKET;
 					case ']' :
-						return RBRACKET;
+						return TokenNameRBRACKET;
 					case ';' :
-						return SEMICOLON;
+						return TokenNameSEMICOLON;
 					case ',' :
-						return COMMA;
+						return TokenNameCOMMA;
 					case '.' :
 						if (getNextCharAsDigit()) {
 							return scanNumber(true);
@@ -1365,113 +1284,113 @@ public class Scanner implements TerminalTokens {
 						int temp = this.currentPosition;
 						if (getNextChar('.')) {
 							if (getNextChar('.')) {
-								return ELLIPSIS;
+								return TokenNameELLIPSIS;
 							} else {
 								this.currentPosition = temp;
-								return DOT;
+								return TokenNameDOT;
 							}
 						} else {
 							this.currentPosition = temp;
-							return DOT;
+							return TokenNameDOT;
 						}
 					case '+' :
 						{
 							int test;
 							if ((test = getNextChar('+', '=')) == 0)
-								return PLUS_PLUS;
+								return TokenNamePLUS_PLUS;
 							if (test > 0)
-								return PLUS_EQUAL;
-							return PLUS;
+								return TokenNamePLUS_EQUAL;
+							return TokenNamePLUS;
 						}
 					case '-' :
 						{
 							int test;
 							if ((test = getNextChar('-', '=')) == 0)
-								return MINUS_MINUS;
+								return TokenNameMINUS_MINUS;
 							if (test > 0)
-								return MINUS_EQUAL;
+								return TokenNameMINUS_EQUAL;
 							if (getNextChar('>'))
-								return ARROW;
-							return MINUS;
+								return TokenNameARROW;
+							return TokenNameMINUS;
 						}
 					case '~' :
-						return TWIDDLE;
+						return TokenNameTWIDDLE;
 					case '!' :
 						if (getNextChar('='))
-							return NOT_EQUAL;
-						return NOT;
+							return TokenNameNOT_EQUAL;
+						return TokenNameNOT;
 					case '*' :
 						if (getNextChar('='))
-							return MULTIPLY_EQUAL;
-						return MULTIPLY;
+							return TokenNameMULTIPLY_EQUAL;
+						return TokenNameMULTIPLY;
 					case '%' :
 						if (getNextChar('='))
-							return REMAINDER_EQUAL;
-						return REMAINDER;
+							return TokenNameREMAINDER_EQUAL;
+						return TokenNameREMAINDER;
 					case '<' :
 						{
 							int test;
 							if ((test = getNextChar('=', '<')) == 0)
-								return LESS_EQUAL;
+								return TokenNameLESS_EQUAL;
 							if (test > 0) {
 								if (getNextChar('='))
-									return LEFT_SHIFT_EQUAL;
-								return LEFT_SHIFT;
+									return TokenNameLEFT_SHIFT_EQUAL;
+								return TokenNameLEFT_SHIFT;
 							}
-							return LESS;
+							return TokenNameLESS;
 						}
 					case '>' :
 						{
 							int test;
 							if (this.returnOnlyGreater) {
-								return GREATER;
+								return TokenNameGREATER;
 							}
 							if ((test = getNextChar('=', '>')) == 0)
-								return GREATER_EQUAL;
+								return TokenNameGREATER_EQUAL;
 							if (test > 0) {
 								if ((test = getNextChar('=', '>')) == 0)
-									return RIGHT_SHIFT_EQUAL;
+									return TokenNameRIGHT_SHIFT_EQUAL;
 								if (test > 0) {
 									if (getNextChar('='))
-										return UNSIGNED_RIGHT_SHIFT_EQUAL;
-									return UNSIGNED_RIGHT_SHIFT;
+										return TokenNameUNSIGNED_RIGHT_SHIFT_EQUAL;
+									return TokenNameUNSIGNED_RIGHT_SHIFT;
 								}
-								return RIGHT_SHIFT;
+								return TokenNameRIGHT_SHIFT;
 							}
-							return GREATER;
+							return TokenNameGREATER;
 						}
 					case '=' :
 						if (getNextChar('='))
-							return EQUAL_EQUAL;
-						return EQUAL;
+							return TokenNameEQUAL_EQUAL;
+						return TokenNameEQUAL;
 					case '&' :
 						{
 							int test;
 							if ((test = getNextChar('&', '=')) == 0)
-								return AND_AND;
+								return TokenNameAND_AND;
 							if (test > 0)
-								return AND_EQUAL;
-							return AND;
+								return TokenNameAND_EQUAL;
+							return TokenNameAND;
 						}
 					case '|' :
 						{
 							int test;
 							if ((test = getNextChar('|', '=')) == 0)
-								return OR_OR;
+								return TokenNameOR_OR;
 							if (test > 0)
-								return OR_EQUAL;
-							return OR;
+								return TokenNameOR_EQUAL;
+							return TokenNameOR;
 						}
 					case '^' :
 						if (getNextChar('='))
-							return XOR_EQUAL;
-						return XOR;
+							return TokenNameXOR_EQUAL;
+						return TokenNameXOR;
 					case '?' :
-						return QUESTION;
+						return TokenNameQUESTION;
 					case ':' :
 						if (getNextChar(':'))
-							return COLON_COLON;
-						return COLON;
+							return TokenNameCOLON_COLON;
+						return TokenNameCOLON;
 					case '\'' :
 						{
 							int test;
@@ -1541,7 +1460,7 @@ public class Scanner implements TerminalTokens {
 							}
 						}
 						if (getNextChar('\''))
-							return CHARACTER_LITERAL;
+							return TokenNameCharacterLiteral;
 						// relocate if finding another quote fairly close: thus unicode '/u000D' will be fully consumed
 						for (int lookAhead = 0; lookAhead < 20; lookAhead++) {
 							if (this.currentPosition + lookAhead == this.eofPosition)
@@ -1661,7 +1580,7 @@ public class Scanner implements TerminalTokens {
 							}
 							throw e; // rethrow
 						}
-						return STRING_LITERAL;
+						return TokenNameStringLiteral;
 					case '/' :
 						if (!this.skipComments) {
 							int test = getNextChar('/', '*');
@@ -1861,11 +1780,11 @@ public class Scanner implements TerminalTokens {
 							}
 						}
 						if (getNextChar('='))
-							return DIVIDE_EQUAL;
-						return DIVIDE;
+							return TokenNameDIVIDE_EQUAL;
+						return TokenNameDIVIDE;
 					case '\u001a' :
 						if (atEnd())
-							return EOF;
+							return TokenNameEOF;
 						//the atEnd may not be <currentPosition == source.length> if source is only some part of a real (external) stream
 						throw new InvalidInputException("Ctrl-Z"); //$NON-NLS-1$
 					default :
@@ -1876,7 +1795,7 @@ public class Scanner implements TerminalTokens {
 							} else if ((ScannerHelper.OBVIOUS_IDENT_CHAR_NATURES[c] & ScannerHelper.C_DIGIT) != 0) {
 									return scanNumber(false);
 							} else {
-								return ERROR;
+								return TokenNameERROR;
 							}
 						}
 						boolean isJavaIdStart;
@@ -1906,7 +1825,7 @@ public class Scanner implements TerminalTokens {
 						if (ScannerHelper.isDigit(this.currentCharacter)) {
 							return scanNumber(false);
 						}
-						return ERROR;
+						return TokenNameERROR;
 				}
 			}
 		} //-----------------end switch while try--------------------
@@ -1918,7 +1837,7 @@ public class Scanner implements TerminalTokens {
 				return TokenNameWHITESPACE;
 			}
 		}
-		return EOF;
+		return TokenNameEOF;
 	}
 	public void getNextUnicodeChar()
 		throws InvalidInputException {
@@ -2957,13 +2876,13 @@ public class Scanner implements TerminalTokens {
 			//have a length which is <= 12...but there are lots of identifier with
 			//only one char....
 			if ((length = this.currentPosition - this.startPosition) == 1) {
-				return IDENTIFIER;
+				return TokenNameIdentifier;
 			}
 			data = this.source;
 			index = this.startPosition;
 		} else {
 			if ((length = this.withoutUnicodePtr) == 1)
-				return IDENTIFIER;
+				return TokenNameIdentifier;
 			data = this.withoutUnicodeBuffer;
 			index = 1;
 		}
@@ -3019,13 +2938,13 @@ public class Scanner implements TerminalTokens {
 			//have a length which is <= 12...but there are lots of identifier with
 			//only one char....
 			if ((length = this.currentPosition - this.startPosition) == 1) {
-				return IDENTIFIER;
+				return TokenNameIdentifier;
 			}
 			data = this.source;
 			index = this.startPosition;
 		} else {
 			if ((length = this.withoutUnicodePtr) == 1)
-				return IDENTIFIER;
+				return TokenNameIdentifier;
 			data = this.withoutUnicodeBuffer;
 			index = 1;
 		}
@@ -3044,17 +2963,10 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 'a')
 							&& (data[++index] == 'c')
 							&& (data[++index] == 't')) {
-								return ABSTRACT;
+								return TokenNameabstract;
 							} else {
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 							}
-					case 3: //add
-						if ((data[++index] == 'd')
-								&& (data[++index] == 'd')) {
-									return ADD;
-								} else {
-									return IDENTIFIER;
-								}
 					case 6: // assert
 						if ((data[++index] == 's')
 							&& (data[++index] == 's')
@@ -3063,32 +2975,32 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 't')) {
 								if (this.sourceLevel >= ClassFileConstants.JDK1_4) {
 									this.containsAssertKeyword = true;
-									return ASSERT;
+									return TokenNameassert;
 								} else {
 									this.useAssertAsAnIndentifier = true;
-									return IDENTIFIER;
+									return TokenNameIdentifier;
 								}
 							} else {
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 							}
 					default:
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
 			case 'b' : //boolean break byte
 				switch (length) {
 					case 4 :
 						if ((data[++index] == 'y') && (data[++index] == 't') && (data[++index] == 'e'))
-							return BYTE;
+							return TokenNamebyte;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 5 :
 						if ((data[++index] == 'r')
 							&& (data[++index] == 'e')
 							&& (data[++index] == 'a')
 							&& (data[++index] == 'k'))
-							return BREAK;
+							return TokenNamebreak;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 7 :
 						if ((data[++index] == 'o')
 							&& (data[++index] == 'o')
@@ -3096,11 +3008,11 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 'e')
 							&& (data[++index] == 'a')
 							&& (data[++index] == 'n'))
-							return BOOLEAN;
+							return TokenNameboolean;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					default :
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
 	
 			case 'c' : //case char catch const class continue
@@ -3108,35 +3020,35 @@ public class Scanner implements TerminalTokens {
 					case 4 :
 						if (data[++index] == 'a')
 							if ((data[++index] == 's') && (data[++index] == 'e'))
-								return CASE;
+								return TokenNamecase;
 							else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 						else
 							if ((data[index] == 'h') && (data[++index] == 'a') && (data[++index] == 'r'))
-								return CHAR;
+								return TokenNamechar;
 							else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 					case 5 :
 						if (data[++index] == 'a')
 							if ((data[++index] == 't') && (data[++index] == 'c') && (data[++index] == 'h'))
-								return CATCH;
+								return TokenNamecatch;
 							else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 						else
 							if (data[index] == 'l')
 								if ((data[++index] == 'a')
 									&& (data[++index] == 's')
 									&& (data[++index] == 's'))
-									return CLASS;
+									return TokenNameclass;
 								else
-									return IDENTIFIER;
+									return TokenNameIdentifier;
 							else if ((data[index] == 'o')
 								&& (data[++index] == 'n')
 								&& (data[++index] == 's')
 								&& (data[++index] == 't'))
-								return CONST; //const is not used in java ???????
+								return TokenNameconst; //const is not used in java ???????
 							else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 					case 8 :
 						if ((data[++index] == 'o')
 							&& (data[++index] == 'n')
@@ -3145,29 +3057,29 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 'n')
 							&& (data[++index] == 'u')
 							&& (data[++index] == 'e'))
-							return CONTINUE;
+							return TokenNamecontinue;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					default :
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
 	
 			case 'd' : //default do double
 				switch (length) {
 					case 2 :
 						if ((data[++index] == 'o'))
-							return DO;
+							return TokenNamedo;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 6 :
 						if ((data[++index] == 'o')
 							&& (data[++index] == 'u')
 							&& (data[++index] == 'b')
 							&& (data[++index] == 'l')
 							&& (data[++index] == 'e'))
-							return DOUBLE;
+							return TokenNamedouble;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 7 :
 						if ((data[++index] == 'e')
 							&& (data[++index] == 'f')
@@ -3175,49 +3087,32 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 'u')
 							&& (data[++index] == 'l')
 							&& (data[++index] == 't'))
-							return DEFAULT_;
+							return TokenNamedefault;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					default :
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
 			case 'e' : //else extends
 				switch (length) {
 					case 4 :
 						if (data[++index] == 'l') {
 							if ((data[++index] == 's') && (data[++index] == 'e')) {
-								return ELSE;
+								return TokenNameelse;
 							} else {
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 							}
 						} else if ((data[index] == 'n')
 								&& (data[++index] == 'u')
 								&& (data[++index] == 'm')) {
 							if (this.sourceLevel >= ClassFileConstants.JDK1_5) {
-								return ENUM;
+								return TokenNameenum;
 							} else {
 								this.useEnumAsAnIndentifier = true;
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 							}
 						}
-						return IDENTIFIER;
-					case 5 :
-						if ((data[++index] == 'v')
-								&& (data[++index] == 'e')
-								&& (data[++index] == 'n')
-								&& (data[++index] == 't'))
-								return EVENT;
-							else
-								return IDENTIFIER;
-					case 6 :
-						if ((data[++index] == 'x')
-							&& (data[++index] == 'p')
-							&& (data[++index] == 'o')
-							&& (data[++index] == 'r')
-							&& (data[++index] == 't'))
-							return EXPORT;
-						else
-							return IDENTIFIER;
+						return TokenNameIdentifier;
 					case 7 :
 						if ((data[++index] == 'x')
 							&& (data[++index] == 't')
@@ -3225,45 +3120,44 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 'n')
 							&& (data[++index] == 'd')
 							&& (data[++index] == 's'))
-							return EXTENDS;
+							return TokenNameextends;
 						else
-							return IDENTIFIER;
-
+							return TokenNameIdentifier;
 					default :
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
 	
 			case 'f' : //final finally float for false
 				switch (length) {
 					case 3 :
 						if ((data[++index] == 'o') && (data[++index] == 'r'))
-							return FOR;
+							return TokenNamefor;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 5 :
 						if (data[++index] == 'i')
 							if ((data[++index] == 'n')
 								&& (data[++index] == 'a')
 								&& (data[++index] == 'l')) {
-								return FINAL;
+								return TokenNamefinal;
 							} else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 						else
 							if (data[index] == 'l')
 								if ((data[++index] == 'o')
 									&& (data[++index] == 'a')
 									&& (data[++index] == 't'))
-									return FLOAT;
+									return TokenNamefloat;
 								else
-									return IDENTIFIER;
+									return TokenNameIdentifier;
 							else
 								if ((data[index] == 'a')
 									&& (data[++index] == 'l')
 									&& (data[++index] == 's')
 									&& (data[++index] == 'e'))
-									return FALSE;
+									return TokenNamefalse;
 								else
-									return IDENTIFIER;
+									return TokenNameIdentifier;
 					case 7 :
 						if ((data[++index] == 'i')
 							&& (data[++index] == 'n')
@@ -3271,65 +3165,44 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 'l')
 							&& (data[++index] == 'l')
 							&& (data[++index] == 'y'))
-							return FINALLY;
+							return TokenNamefinally;
 						else
-							return IDENTIFIER;
-						
-					case 8 :
-						if ((data[++index] == 'u')
-							&& (data[++index] == 'n')
-							&& (data[++index] == 'c')
-							&& (data[++index] == 't')
-							&& (data[++index] == 'i')
-							&& (data[++index] == 'o')
-							&& (data[++index] == 'n'))
-							return FUNCTION;
-						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 	
 					default :
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
 			case 'g' : //goto
-				switch (length) {
-				case 4:
+				if (length == 4) {
 					if ((data[++index] == 'o')
 						&& (data[++index] == 't')
 						&& (data[++index] == 'o')) {
-						return GOTO;
-					} else{
-						return IDENTIFIER;
+						return TokenNamegoto;
 					}
-				case 3:
-					if ((data[++index] == 'e')
-							&& (data[++index] == 't')) 
-						return GOTO;
-					else
-						return IDENTIFIER;
 				} //no goto in java are allowed, so why java removes this keyword ???
-				return IDENTIFIER;
+				return TokenNameIdentifier;
 	
 			case 'i' : //if implements import instanceof int interface
 				switch (length) {
 					case 2 :
 						if (data[++index] == 'f')
-							return IF;
+							return TokenNameif;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 3 :
 						if ((data[++index] == 'n') && (data[++index] == 't'))
-							return INT;
+							return TokenNameint;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 6 :
 						if ((data[++index] == 'm')
 							&& (data[++index] == 'p')
 							&& (data[++index] == 'o')
 							&& (data[++index] == 'r')
 							&& (data[++index] == 't'))
-							return IMPORT;
+							return TokenNameimport;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 9 :
 						if ((data[++index] == 'n')
 							&& (data[++index] == 't')
@@ -3339,9 +3212,9 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 'a')
 							&& (data[++index] == 'c')
 							&& (data[++index] == 'e'))
-							return INTERFACE;
+							return TokenNameinterface;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 10 :
 						if (data[++index] == 'm')
 							if ((data[++index] == 'p')
@@ -3352,9 +3225,9 @@ public class Scanner implements TerminalTokens {
 								&& (data[++index] == 'n')
 								&& (data[++index] == 't')
 								&& (data[++index] == 's'))
-								return IMPLEMENTS;
+								return TokenNameimplements;
 							else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 						else
 							if ((data[index] == 'n')
 								&& (data[++index] == 's')
@@ -3365,12 +3238,12 @@ public class Scanner implements TerminalTokens {
 								&& (data[++index] == 'e')
 								&& (data[++index] == 'o')
 								&& (data[++index] == 'f'))
-								return INSTANCEOF;
+								return TokenNameinstanceof;
 							else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 	
 					default :
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
 	
 			case 'l' : //long
@@ -3378,56 +3251,35 @@ public class Scanner implements TerminalTokens {
 					if ((data[++index] == 'o')
 						&& (data[++index] == 'n')
 						&& (data[++index] == 'g')) {
-						return LONG;
+						return TokenNamelong;
 					}
 				}
-				return IDENTIFIER;
-				
-			case 'm' : //module
-				if (length == 6) {
-					if ((data[++index] == 'o')
-						&& (data[++index] == 'd')
-						&& (data[++index] == 'u')
-						&& (data[++index] == 'l')
-						&& (data[++index] == 'e')) {
-						return MODULE;
-					}
-				}
-				return IDENTIFIER;
+				return TokenNameIdentifier;
 	
 			case 'n' : //native new null
 				switch (length) {
 					case 3 :
 						if ((data[++index] == 'e') && (data[++index] == 'w'))
-							return NEW;
+							return TokenNamenew;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 4 :
 						if ((data[++index] == 'u') && (data[++index] == 'l') && (data[++index] == 'l'))
-							return NULL;
+							return TokenNamenull;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 6 :
 						if ((data[++index] == 'a')
 							&& (data[++index] == 't')
 							&& (data[++index] == 'i')
 							&& (data[++index] == 'v')
 							&& (data[++index] == 'e')) {
-							return NATIVE;
+							return TokenNamenative;
 						} else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					default :
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
-				
-			case 'o' : //out
-				if (length == 3) {
-					if ((data[++index] == 'u')
-						&& (data[++index] == 't')) {
-						return OUT;
-					}
-				}
-				return IDENTIFIER;
 	
 			case 'p' : //package private protected public
 				switch (length) {
@@ -3437,9 +3289,9 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 'l')
 							&& (data[++index] == 'i')
 							&& (data[++index] == 'c')) {
-							return PUBLIC;
+							return TokenNamepublic;
 						} else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 7 :
 						if (data[++index] == 'a')
 							if ((data[++index] == 'c')
@@ -3447,9 +3299,9 @@ public class Scanner implements TerminalTokens {
 								&& (data[++index] == 'a')
 								&& (data[++index] == 'g')
 								&& (data[++index] == 'e'))
-								return PACKAGE;
+								return TokenNamepackage;
 							else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 						else
 							if ((data[index] == 'r')
 								&& (data[++index] == 'i')
@@ -3457,9 +3309,9 @@ public class Scanner implements TerminalTokens {
 								&& (data[++index] == 'a')
 								&& (data[++index] == 't')
 								&& (data[++index] == 'e')) {
-								return PRIVATE;
+								return TokenNameprivate;
 							} else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 					case 9 :
 						if ((data[++index] == 'r')
 							&& (data[++index] == 'o')
@@ -3469,65 +3321,42 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 't')
 							&& (data[++index] == 'e')
 							&& (data[++index] == 'd')) {
-							return PROTECTED;
+							return TokenNameprotected;
 						} else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 	
 					default :
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
 	
 			case 'r' : //return
-				switch(length){
-					case 3:
-						if ((data[++index] == 'e')
-								&& (data[++index] == 'f')) {
-								return REF;
-							} else
-								return IDENTIFIER;
-					case 6: 
-						char e = data[++index];
-						if(e == 'e'){
-							e = data[++index];
-							if((e == 't')  //return
-									&& (data[++index] == 'u')
-									&& (data[++index] == 'r')
-									&& (data[++index] == 'n')) {
-								return RETURN;
-							} else if ((e == 'm')  //remove
-									&& (data[++index] == 'o')
-									&& (data[++index] == 'v')
-									&& (data[++index] == 'e'))
-								return IDENTIFIER;
-							else
-								return IDENTIFIER;
-						}
-					default:
-						return IDENTIFIER;
+				if (length == 6) {
+					if ((data[++index] == 'e')
+						&& (data[++index] == 't')
+						&& (data[++index] == 'u')
+						&& (data[++index] == 'r')
+						&& (data[++index] == 'n')) {
+						return TokenNamereturn;
+					}
 				}
+				return TokenNameIdentifier;
 	
 			case 's' : //short static super switch synchronized strictfp
 				switch (length) {
-					case 3 :
-						if ((data[++index] == 'e')
-							&& (data[++index] == 't'))
-							return SET;
-						else
-							return IDENTIFIER;
 					case 5 :
 						if (data[++index] == 'h')
 							if ((data[++index] == 'o') && (data[++index] == 'r') && (data[++index] == 't'))
-								return SHORT;
+								return TokenNameshort;
 							else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 						else
 							if ((data[index] == 'u')
 								&& (data[++index] == 'p')
 								&& (data[++index] == 'e')
 								&& (data[++index] == 'r'))
-								return SUPER;
+								return TokenNamesuper;
 							else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 	
 					case 6 :
 						if (data[++index] == 't')
@@ -3535,18 +3364,18 @@ public class Scanner implements TerminalTokens {
 								&& (data[++index] == 't')
 								&& (data[++index] == 'i')
 								&& (data[++index] == 'c')) {
-								return STATIC;
+								return TokenNamestatic;
 							} else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 						else
 							if ((data[index] == 'w')
 								&& (data[++index] == 'i')
 								&& (data[++index] == 't')
 								&& (data[++index] == 'c')
 								&& (data[++index] == 'h'))
-								return SWITCH;
+								return TokenNameswitch;
 							else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 					case 8 :
 						if ((data[++index] == 't')
 							&& (data[++index] == 'r')
@@ -3555,9 +3384,9 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 't')
 							&& (data[++index] == 'f')
 							&& (data[++index] == 'p'))
-							return STRICTFP;
+							return TokenNamestrictfp;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 12 :
 						if ((data[++index] == 'y')
 							&& (data[++index] == 'n')
@@ -3570,48 +3399,48 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 'z')
 							&& (data[++index] == 'e')
 							&& (data[++index] == 'd')) {
-							return SYNCHRONIZED;
+							return TokenNamesynchronized;
 						} else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					default :
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
 	
 			case 't' : //try throw throws transient this true
 				switch (length) {
 					case 3 :
 						if ((data[++index] == 'r') && (data[++index] == 'y'))
-							return TRY;
+							return TokenNametry;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 4 :
 						if (data[++index] == 'h')
 							if ((data[++index] == 'i') && (data[++index] == 's'))
-								return THIS;
+								return TokenNamethis;
 							else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 						else
 							if ((data[index] == 'r') && (data[++index] == 'u') && (data[++index] == 'e'))
-								return TRUE;
+								return TokenNametrue;
 							else
-								return IDENTIFIER;
+								return TokenNameIdentifier;
 					case 5 :
 						if ((data[++index] == 'h')
 							&& (data[++index] == 'r')
 							&& (data[++index] == 'o')
 							&& (data[++index] == 'w'))
-							return THROW;
+							return TokenNamethrow;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 6 :
 						if ((data[++index] == 'h')
 							&& (data[++index] == 'r')
 							&& (data[++index] == 'o')
 							&& (data[++index] == 'w')
 							&& (data[++index] == 's'))
-							return THROWS;
+							return TokenNamethrows;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 9 :
 						if ((data[++index] == 'r')
 							&& (data[++index] == 'a')
@@ -3621,21 +3450,21 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 'e')
 							&& (data[++index] == 'n')
 							&& (data[++index] == 't')) {
-							return TRANSIENT;
+							return TokenNametransient;
 						} else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 	
 					default :
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
 	
 			case 'v' : //void volatile
 				switch (length) {
 					case 4 :
 						if ((data[++index] == 'o') && (data[++index] == 'i') && (data[++index] == 'd'))
-							return VOID;
+							return TokenNamevoid;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 					case 8 :
 						if ((data[++index] == 'o')
 							&& (data[++index] == 'l')
@@ -3644,12 +3473,12 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 'i')
 							&& (data[++index] == 'l')
 							&& (data[++index] == 'e')) {
-							return VOLATILE;
+							return TokenNamevolatile;
 						} else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 	
 					default :
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
 	
 			case 'w' : //while widefp
@@ -3659,19 +3488,19 @@ public class Scanner implements TerminalTokens {
 							&& (data[++index] == 'i')
 							&& (data[++index] == 'l')
 							&& (data[++index] == 'e'))
-							return WHILE;
+							return TokenNamewhile;
 						else
-							return IDENTIFIER;
+							return TokenNameIdentifier;
 						//case 6:if ( (data[++index] =='i') && (data[++index]=='d') && (data[++index]=='e') && (data[++index]=='f')&& (data[++index]=='p'))
 						//return TokenNamewidefp ;
 						//else
 						//return TokenNameIdentifier;
 					default :
-						return IDENTIFIER;
+						return TokenNameIdentifier;
 				}
 	
 			default :
-				return IDENTIFIER;
+				return TokenNameIdentifier;
 		}
 	}
 	
@@ -3692,7 +3521,7 @@ public class Scanner implements TerminalTokens {
 					if (end == start) {
 						throw new InvalidInputException(INVALID_HEXA);
 					}
-					return LONG_LITERAL;
+					return TokenNameLongLiteral;
 				} else if (getNextChar('.')) {
 					// hexadecimal floating point literal
 					// read decimal part
@@ -3746,13 +3575,13 @@ public class Scanner implements TerminalTokens {
 							if (this.sourceLevel < ClassFileConstants.JDK1_5) {
 								throw new InvalidInputException(ILLEGAL_HEXA_LITERAL);
 							}
-							return FLOAT_LITERAL;
+							return TokenNameFloatingPointLiteral;
 						}
 						if (getNextChar('d', 'D') >= 0) {
 							if (this.sourceLevel < ClassFileConstants.JDK1_5) {
 								throw new InvalidInputException(ILLEGAL_HEXA_LITERAL);
 							}
-							return DOUBLE_LITERAL;
+							return TokenNameDoubleLiteral;
 						}
 						if (getNextChar('l', 'L') >= 0) {
 							if (this.sourceLevel < ClassFileConstants.JDK1_5) {
@@ -3763,7 +3592,7 @@ public class Scanner implements TerminalTokens {
 						if (this.sourceLevel < ClassFileConstants.JDK1_5) {
 							throw new InvalidInputException(ILLEGAL_HEXA_LITERAL);
 						}
-						return DOUBLE_LITERAL;
+						return TokenNameDoubleLiteral;
 					} else {
 						if (this.sourceLevel < ClassFileConstants.JDK1_5) {
 							throw new InvalidInputException(ILLEGAL_HEXA_LITERAL);
@@ -3809,13 +3638,13 @@ public class Scanner implements TerminalTokens {
 						if (this.sourceLevel < ClassFileConstants.JDK1_5) {
 							throw new InvalidInputException(ILLEGAL_HEXA_LITERAL);
 						}
-						return FLOAT_LITERAL;
+						return TokenNameFloatingPointLiteral;
 					}
 					if (getNextChar('d', 'D') >= 0) {
 						if (this.sourceLevel < ClassFileConstants.JDK1_5) {
 							throw new InvalidInputException(ILLEGAL_HEXA_LITERAL);
 						}
-						return DOUBLE_LITERAL;
+						return TokenNameDoubleLiteral;
 					}
 					if (getNextChar('l', 'L') >= 0) {
 						if (this.sourceLevel < ClassFileConstants.JDK1_5) {
@@ -3826,11 +3655,11 @@ public class Scanner implements TerminalTokens {
 					if (this.sourceLevel < ClassFileConstants.JDK1_5) {
 						throw new InvalidInputException(ILLEGAL_HEXA_LITERAL);
 					}
-					return DOUBLE_LITERAL;
+					return TokenNameDoubleLiteral;
 				} else {
 					if (end == start)
 						throw new InvalidInputException(INVALID_HEXA);
-					return INTEGER_LITERAL;
+					return TokenNameIntegerLiteral;
 				}
 			} else if (getNextChar('b', 'B') >= 0) { //----------binary-----------------
 				int start = this.currentPosition;
@@ -3846,12 +3675,12 @@ public class Scanner implements TerminalTokens {
 					if (this.sourceLevel < ClassFileConstants.JDK1_7) {
 						throw new InvalidInputException(BINARY_LITERAL_NOT_BELOW_17);
 					}
-					return LONG_LITERAL;
+					return TokenNameLongLiteral;
 				}
 				if (this.sourceLevel < ClassFileConstants.JDK1_7) {
 					throw new InvalidInputException(BINARY_LITERAL_NOT_BELOW_17);
 				}
-				return INTEGER_LITERAL;
+				return TokenNameIntegerLiteral;
 			}
 	
 			//there is no x or X nor b or B in the number
@@ -3860,15 +3689,15 @@ public class Scanner implements TerminalTokens {
 				consumeDigits(10);
 	
 				if (getNextChar('l', 'L') >= 0) {
-					return LONG_LITERAL;
+					return TokenNameLongLiteral;
 				}
 	
 				if (getNextChar('f', 'F') >= 0) {
-					return FLOAT_LITERAL;
+					return TokenNameFloatingPointLiteral;
 				}
 	
 				if (getNextChar('d', 'D') >= 0) {
-					return DOUBLE_LITERAL;
+					return TokenNameDoubleLiteral;
 				} else { //make the distinction between octal and float ....
 					boolean isInteger = true;
 					if (getNextChar('.')) {
@@ -3910,10 +3739,10 @@ public class Scanner implements TerminalTokens {
 						consumeDigits(10);
 					}
 					if (getNextChar('f', 'F') >= 0)
-						return FLOAT_LITERAL;
+						return TokenNameFloatingPointLiteral;
 					if (getNextChar('d', 'D') >= 0 || !isInteger)
-						return DOUBLE_LITERAL;
-					return INTEGER_LITERAL;
+						return TokenNameDoubleLiteral;
+					return TokenNameIntegerLiteral;
 				}
 			} else {
 				/* carry on */
@@ -3923,7 +3752,7 @@ public class Scanner implements TerminalTokens {
 		consumeDigits(10);
 	
 		if ((!dotPrefix) && (getNextChar('l', 'L') >= 0))
-			return LONG_LITERAL;
+			return TokenNameLongLiteral;
 	
 		if ((!dotPrefix) && (getNextChar('.'))) { //decimal part that can be empty
 			consumeDigits(10, true);
@@ -3970,13 +3799,13 @@ public class Scanner implements TerminalTokens {
 		}
 	
 		if (getNextChar('d', 'D') >= 0)
-			return DOUBLE_LITERAL;
+			return TokenNameDoubleLiteral;
 		if (getNextChar('f', 'F') >= 0)
-			return FLOAT_LITERAL;
+			return TokenNameFloatingPointLiteral;
 	
 		//the long flag has been tested before
 	
-		return floating ? DOUBLE_LITERAL : INTEGER_LITERAL;
+		return floating ? TokenNameDoubleLiteral : TokenNameIntegerLiteral;
 	}
 	
 	/**
@@ -4063,215 +3892,215 @@ public class Scanner implements TerminalTokens {
 	}
 	public String toStringAction(int act) {
 		switch (act) {
-			case IDENTIFIER :
+			case TokenNameIdentifier :
 				return "Identifier(" + new String(getCurrentTokenSource()) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
-			case ABSTRACT :
+			case TokenNameabstract :
 				return "abstract"; //$NON-NLS-1$
-			case BOOLEAN :
+			case TokenNameboolean :
 				return "boolean"; //$NON-NLS-1$
-			case BREAK :
+			case TokenNamebreak :
 				return "break"; //$NON-NLS-1$
-			case BYTE :
+			case TokenNamebyte :
 				return "byte"; //$NON-NLS-1$
-			case CASE :
+			case TokenNamecase :
 				return "case"; //$NON-NLS-1$
-			case CATCH :
+			case TokenNamecatch :
 				return "catch"; //$NON-NLS-1$
-			case CHAR :
+			case TokenNamechar :
 				return "char"; //$NON-NLS-1$
-			case CLASS :
+			case TokenNameclass :
 				return "class"; //$NON-NLS-1$
-			case CONTINUE :
+			case TokenNamecontinue :
 				return "continue"; //$NON-NLS-1$
-			case DEFAULT_ :
+			case TokenNamedefault :
 				return "default"; //$NON-NLS-1$
-			case DO :
+			case TokenNamedo :
 				return "do"; //$NON-NLS-1$
-			case DOUBLE :
+			case TokenNamedouble :
 				return "double"; //$NON-NLS-1$
-			case ELSE :
+			case TokenNameelse :
 				return "else"; //$NON-NLS-1$
-			case EXTENDS :
+			case TokenNameextends :
 				return "extends"; //$NON-NLS-1$
-			case FALSE :
+			case TokenNamefalse :
 				return "false"; //$NON-NLS-1$
-			case FINAL :
+			case TokenNamefinal :
 				return "final"; //$NON-NLS-1$
-			case FINALLY :
+			case TokenNamefinally :
 				return "finally"; //$NON-NLS-1$
-			case FLOAT :
+			case TokenNamefloat :
 				return "float"; //$NON-NLS-1$
-			case FOR :
+			case TokenNamefor :
 				return "for"; //$NON-NLS-1$
-			case IF :
+			case TokenNameif :
 				return "if"; //$NON-NLS-1$
-			case IMPLEMENTS :
+			case TokenNameimplements :
 				return "implements"; //$NON-NLS-1$
-			case IMPORT :
+			case TokenNameimport :
 				return "import"; //$NON-NLS-1$
-			case INSTANCEOF :
+			case TokenNameinstanceof :
 				return "instanceof"; //$NON-NLS-1$
-			case INT :
+			case TokenNameint :
 				return "int"; //$NON-NLS-1$
-			case INTERFACE :
+			case TokenNameinterface :
 				return "interface"; //$NON-NLS-1$
-			case LONG :
+			case TokenNamelong :
 				return "long"; //$NON-NLS-1$
-			case NATIVE :
+			case TokenNamenative :
 				return "native"; //$NON-NLS-1$
-			case NEW :
+			case TokenNamenew :
 				return "new"; //$NON-NLS-1$
-			case NULL :
+			case TokenNamenull :
 				return "null"; //$NON-NLS-1$
-			case PACKAGE :
+			case TokenNamepackage :
 				return "package"; //$NON-NLS-1$
-			case PRIVATE :
+			case TokenNameprivate :
 				return "private"; //$NON-NLS-1$
-			case PROTECTED :
+			case TokenNameprotected :
 				return "protected"; //$NON-NLS-1$
-			case PUBLIC :
+			case TokenNamepublic :
 				return "public"; //$NON-NLS-1$
-			case RETURN :
+			case TokenNamereturn :
 				return "return"; //$NON-NLS-1$
-			case SHORT :
+			case TokenNameshort :
 				return "short"; //$NON-NLS-1$
-			case STATIC :
+			case TokenNamestatic :
 				return "static"; //$NON-NLS-1$
-			case SUPER :
+			case TokenNamesuper :
 				return "super"; //$NON-NLS-1$
-			case SWITCH :
+			case TokenNameswitch :
 				return "switch"; //$NON-NLS-1$
-			case SYNCHRONIZED :
+			case TokenNamesynchronized :
 				return "synchronized"; //$NON-NLS-1$
-			case THIS :
+			case TokenNamethis :
 				return "this"; //$NON-NLS-1$
-			case THROW :
+			case TokenNamethrow :
 				return "throw"; //$NON-NLS-1$
-			case THROWS :
+			case TokenNamethrows :
 				return "throws"; //$NON-NLS-1$
-			case TRANSIENT :
+			case TokenNametransient :
 				return "transient"; //$NON-NLS-1$
-			case TRUE :
+			case TokenNametrue :
 				return "true"; //$NON-NLS-1$
-			case TRY :
+			case TokenNametry :
 				return "try"; //$NON-NLS-1$
-			case VOID :
+			case TokenNamevoid :
 				return "void"; //$NON-NLS-1$
-			case VOLATILE :
+			case TokenNamevolatile :
 				return "volatile"; //$NON-NLS-1$
-			case WHILE :
+			case TokenNamewhile :
 				return "while"; //$NON-NLS-1$
 	
-			case INTEGER_LITERAL :
+			case TokenNameIntegerLiteral :
 				return "Integer(" + new String(getCurrentTokenSource()) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
-			case LONG_LITERAL :
+			case TokenNameLongLiteral :
 				return "Long(" + new String(getCurrentTokenSource()) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
-			case FLOAT_LITERAL :
+			case TokenNameFloatingPointLiteral :
 				return "Float(" + new String(getCurrentTokenSource()) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
-			case DOUBLE_LITERAL :
+			case TokenNameDoubleLiteral :
 				return "Double(" + new String(getCurrentTokenSource()) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
-			case CHARACTER_LITERAL :
+			case TokenNameCharacterLiteral :
 				return "Char(" + new String(getCurrentTokenSource()) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
-			case STRING_LITERAL :
+			case TokenNameStringLiteral :
 				return "String(" + new String(getCurrentTokenSource()) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 	
-			case PLUS_PLUS :
+			case TokenNamePLUS_PLUS :
 				return "++"; //$NON-NLS-1$
-			case MINUS_MINUS :
+			case TokenNameMINUS_MINUS :
 				return "--"; //$NON-NLS-1$
-			case EQUAL_EQUAL :
+			case TokenNameEQUAL_EQUAL :
 				return "=="; //$NON-NLS-1$
-			case LESS_EQUAL :
+			case TokenNameLESS_EQUAL :
 				return "<="; //$NON-NLS-1$
-			case GREATER_EQUAL :
+			case TokenNameGREATER_EQUAL :
 				return ">="; //$NON-NLS-1$
-			case NOT_EQUAL :
+			case TokenNameNOT_EQUAL :
 				return "!="; //$NON-NLS-1$
-			case LEFT_SHIFT :
+			case TokenNameLEFT_SHIFT :
 				return "<<"; //$NON-NLS-1$
-			case RIGHT_SHIFT :
+			case TokenNameRIGHT_SHIFT :
 				return ">>"; //$NON-NLS-1$
-			case UNSIGNED_RIGHT_SHIFT :
+			case TokenNameUNSIGNED_RIGHT_SHIFT :
 				return ">>>"; //$NON-NLS-1$
-			case PLUS_EQUAL :
+			case TokenNamePLUS_EQUAL :
 				return "+="; //$NON-NLS-1$
-			case MINUS_EQUAL :
+			case TokenNameMINUS_EQUAL :
 				return "-="; //$NON-NLS-1$
-			case ARROW :
+			case TokenNameARROW :
 				return "->"; //$NON-NLS-1$
-			case MULTIPLY_EQUAL :
+			case TokenNameMULTIPLY_EQUAL :
 				return "*="; //$NON-NLS-1$
-			case DIVIDE_EQUAL :
+			case TokenNameDIVIDE_EQUAL :
 				return "/="; //$NON-NLS-1$
-			case AND_EQUAL :
+			case TokenNameAND_EQUAL :
 				return "&="; //$NON-NLS-1$
-			case OR_EQUAL :
+			case TokenNameOR_EQUAL :
 				return "|="; //$NON-NLS-1$
-			case XOR_EQUAL :
+			case TokenNameXOR_EQUAL :
 				return "^="; //$NON-NLS-1$
-			case REMAINDER_EQUAL :
+			case TokenNameREMAINDER_EQUAL :
 				return "%="; //$NON-NLS-1$
-			case LEFT_SHIFT_EQUAL :
+			case TokenNameLEFT_SHIFT_EQUAL :
 				return "<<="; //$NON-NLS-1$
-			case RIGHT_SHIFT_EQUAL :
+			case TokenNameRIGHT_SHIFT_EQUAL :
 				return ">>="; //$NON-NLS-1$
-			case UNSIGNED_RIGHT_SHIFT_EQUAL :
+			case TokenNameUNSIGNED_RIGHT_SHIFT_EQUAL :
 				return ">>>="; //$NON-NLS-1$
-			case OR_OR :
+			case TokenNameOR_OR :
 				return "||"; //$NON-NLS-1$
-			case AND_AND :
+			case TokenNameAND_AND :
 				return "&&"; //$NON-NLS-1$
-			case PLUS :
+			case TokenNamePLUS :
 				return "+"; //$NON-NLS-1$
-			case MINUS :
+			case TokenNameMINUS :
 				return "-"; //$NON-NLS-1$
-			case NOT :
+			case TokenNameNOT :
 				return "!"; //$NON-NLS-1$
-			case REMAINDER :
+			case TokenNameREMAINDER :
 				return "%"; //$NON-NLS-1$
-			case XOR :
+			case TokenNameXOR :
 				return "^"; //$NON-NLS-1$
-			case AND :
+			case TokenNameAND :
 				return "&"; //$NON-NLS-1$
-			case MULTIPLY :
+			case TokenNameMULTIPLY :
 				return "*"; //$NON-NLS-1$
-			case OR :
+			case TokenNameOR :
 				return "|"; //$NON-NLS-1$
-			case TWIDDLE :
+			case TokenNameTWIDDLE :
 				return "~"; //$NON-NLS-1$
-			case DIVIDE :
+			case TokenNameDIVIDE :
 				return "/"; //$NON-NLS-1$
-			case GREATER :
+			case TokenNameGREATER :
 				return ">"; //$NON-NLS-1$
-			case LESS :
+			case TokenNameLESS :
 				return "<"; //$NON-NLS-1$
-			case LPAREN :
+			case TokenNameLPAREN :
 				return "("; //$NON-NLS-1$
-			case RPAREN :
+			case TokenNameRPAREN :
 				return ")"; //$NON-NLS-1$
-			case LBRACE :
+			case TokenNameLBRACE :
 				return "{"; //$NON-NLS-1$
-			case RBRACE :
+			case TokenNameRBRACE :
 				return "}"; //$NON-NLS-1$
-			case LBRACKET :
+			case TokenNameLBRACKET :
 				return "["; //$NON-NLS-1$
-			case RBRACKET :
+			case TokenNameRBRACKET :
 				return "]"; //$NON-NLS-1$
-			case SEMICOLON :
+			case TokenNameSEMICOLON :
 				return ";"; //$NON-NLS-1$
-			case QUESTION :
+			case TokenNameQUESTION :
 				return "?"; //$NON-NLS-1$
-			case COLON :
+			case TokenNameCOLON :
 				return ":"; //$NON-NLS-1$
-			case COLON_COLON :
+			case TokenNameCOLON_COLON :
 				return "::"; //$NON-NLS-1$
-			case COMMA :
+			case TokenNameCOMMA :
 				return ","; //$NON-NLS-1$
-			case DOT :
+			case TokenNameDOT :
 				return "."; //$NON-NLS-1$
-			case EQUAL :
+			case TokenNameEQUAL :
 				return "="; //$NON-NLS-1$
-			case EOF :
+			case TokenNameEOF :
 				return "EOF"; //$NON-NLS-1$
 			case TokenNameWHITESPACE :
 				return "white_space(" + new String(getCurrentTokenSource()) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
@@ -4308,17 +4137,17 @@ public class Scanner implements TerminalTokens {
 	}
 	
 	public static boolean isIdentifier(int token) {
-		return token == TerminalTokens.IDENTIFIER;
+		return token == TerminalTokens.TokenNameIdentifier;
 	}
 	
 	public static boolean isLiteral(int token) {
 		switch(token) {
-			case TerminalTokens.INTEGER_LITERAL:
-			case TerminalTokens.LONG_LITERAL:
-			case TerminalTokens.FLOAT_LITERAL:
-			case TerminalTokens.DOUBLE_LITERAL:
-			case TerminalTokens.STRING_LITERAL:
-			case TerminalTokens.CHARACTER_LITERAL:
+			case TerminalTokens.TokenNameIntegerLiteral:
+			case TerminalTokens.TokenNameLongLiteral:
+			case TerminalTokens.TokenNameFloatingPointLiteral:
+			case TerminalTokens.TokenNameDoubleLiteral:
+			case TerminalTokens.TokenNameStringLiteral:
+			case TerminalTokens.TokenNameCharacterLiteral:
 				return true;
 			default:
 				return false;
@@ -4327,442 +4156,442 @@ public class Scanner implements TerminalTokens {
 	
 	public static boolean isKeyword(int token) {
 		switch(token) {
-			case TerminalTokens.ABSTRACT:
-			case TerminalTokens.ASSERT:
-			case TerminalTokens.BYTE:
-			case TerminalTokens.BREAK:
-			case TerminalTokens.BOOLEAN:
-			case TerminalTokens.CASE:
-			case TerminalTokens.CHAR:
-			case TerminalTokens.CATCH:
-			case TerminalTokens.CLASS:
-			case TerminalTokens.CONTINUE:
-			case TerminalTokens.DO:
-			case TerminalTokens.DOUBLE:
-			case TerminalTokens.DEFAULT_:
-			case TerminalTokens.ELSE:
-			case TerminalTokens.EXTENDS:
-			case TerminalTokens.FOR:
-			case TerminalTokens.FINAL:
-			case TerminalTokens.FLOAT:
-			case TerminalTokens.FALSE:
-			case TerminalTokens.FINALLY:
-			case TerminalTokens.IF:
-			case TerminalTokens.INT:
-			case TerminalTokens.IMPORT:
-			case TerminalTokens.INTERFACE:
-			case TerminalTokens.IMPLEMENTS:
-			case TerminalTokens.INSTANCEOF:
-			case TerminalTokens.LONG:
-			case TerminalTokens.NEW:
-			case TerminalTokens.NULL:
-			case TerminalTokens.NATIVE:
-			case TerminalTokens.PUBLIC:
-			case TerminalTokens.PACKAGE:
-			case TerminalTokens.PRIVATE:
-			case TerminalTokens.PROTECTED:
-			case TerminalTokens.RETURN:
-			case TerminalTokens.SHORT:
-			case TerminalTokens.SUPER:
-			case TerminalTokens.STATIC:
-			case TerminalTokens.SWITCH:
-			case TerminalTokens.STRICTFP:
-			case TerminalTokens.SYNCHRONIZED:
-			case TerminalTokens.TRY:
-			case TerminalTokens.THIS:
-			case TerminalTokens.TRUE:
-			case TerminalTokens.THROW:
-			case TerminalTokens.THROWS:
-			case TerminalTokens.TRANSIENT:
-			case TerminalTokens.VOID:
-			case TerminalTokens.VOLATILE:
-			case TerminalTokens.WHILE:
+			case TerminalTokens.TokenNameabstract:
+			case TerminalTokens.TokenNameassert:
+			case TerminalTokens.TokenNamebyte:
+			case TerminalTokens.TokenNamebreak:
+			case TerminalTokens.TokenNameboolean:
+			case TerminalTokens.TokenNamecase:
+			case TerminalTokens.TokenNamechar:
+			case TerminalTokens.TokenNamecatch:
+			case TerminalTokens.TokenNameclass:
+			case TerminalTokens.TokenNamecontinue:
+			case TerminalTokens.TokenNamedo:
+			case TerminalTokens.TokenNamedouble:
+			case TerminalTokens.TokenNamedefault:
+			case TerminalTokens.TokenNameelse:
+			case TerminalTokens.TokenNameextends:
+			case TerminalTokens.TokenNamefor:
+			case TerminalTokens.TokenNamefinal:
+			case TerminalTokens.TokenNamefloat:
+			case TerminalTokens.TokenNamefalse:
+			case TerminalTokens.TokenNamefinally:
+			case TerminalTokens.TokenNameif:
+			case TerminalTokens.TokenNameint:
+			case TerminalTokens.TokenNameimport:
+			case TerminalTokens.TokenNameinterface:
+			case TerminalTokens.TokenNameimplements:
+			case TerminalTokens.TokenNameinstanceof:
+			case TerminalTokens.TokenNamelong:
+			case TerminalTokens.TokenNamenew:
+			case TerminalTokens.TokenNamenull:
+			case TerminalTokens.TokenNamenative:
+			case TerminalTokens.TokenNamepublic:
+			case TerminalTokens.TokenNamepackage:
+			case TerminalTokens.TokenNameprivate:
+			case TerminalTokens.TokenNameprotected:
+			case TerminalTokens.TokenNamereturn:
+			case TerminalTokens.TokenNameshort:
+			case TerminalTokens.TokenNamesuper:
+			case TerminalTokens.TokenNamestatic:
+			case TerminalTokens.TokenNameswitch:
+			case TerminalTokens.TokenNamestrictfp:
+			case TerminalTokens.TokenNamesynchronized:
+			case TerminalTokens.TokenNametry:
+			case TerminalTokens.TokenNamethis:
+			case TerminalTokens.TokenNametrue:
+			case TerminalTokens.TokenNamethrow:
+			case TerminalTokens.TokenNamethrows:
+			case TerminalTokens.TokenNametransient:
+			case TerminalTokens.TokenNamevoid:
+			case TerminalTokens.TokenNamevolatile:
+			case TerminalTokens.TokenNamewhile:
 				return true;
 			default:
 				return false;
 		}
 	}
 	
-//	// Vanguard Scanner - A Private utility helper class for the scanner.
-//	private static final class VanguardScanner extends Scanner {
-//		
-//		public VanguardScanner(long sourceLevel, long complianceLevel) {
-//			super (false /*comment*/, false /*whitespace*/, false /*nls*/, sourceLevel, complianceLevel, null/*taskTag*/, null/*taskPriorities*/, false /*taskCaseSensitive*/);
-//		}
-//		
-//		public int getNextToken() throws InvalidInputException {
-//			int token = getNextToken0();
-//			if (token == TokenNameAT && atTypeAnnotation()) {
-//				token = TokenNameAT308;
-//			}
-//			return token == TokenNameEOF ? TokenNameNotAToken : token; 
-//		}
-//	}
-//	
-//	private static final class Goal {
-//		
-//		int first;      // steer the parser towards a single minded pursuit.
-//		int [] follow;  // the definite terminal symbols that signal the successful reduction to goal.
-//		int rule;
-//	
-//		static int LambdaParameterListRule = 0;
-//		static int IntersectionCastRule = 0;
-//		static int ReferenceExpressionRule = 0;
-//		static int VarargTypeAnnotationsRule  = 0;
-//		static int BlockStatementoptRule = 0;
-//		
-//		static Goal LambdaParameterListGoal;
-//		static Goal IntersectionCastGoal;
-//		static Goal VarargTypeAnnotationGoal;
-//		static Goal ReferenceExpressionGoal;
-//		static Goal BlockStatementoptGoal;
-//		
-//		static {
-//			
-//			for (int i = 1; i <= ParserBasicInformation.NUM_RULES; i++) {  // 0 == $acc
-//				if ("ParenthesizedLambdaParameterList".equals(Parser.name[Parser.non_terminal_index[Parser.lhs[i]]])) //$NON-NLS-1$
-//					LambdaParameterListRule = i;
-//				else 
-//				if ("ParenthesizedCastNameAndBounds".equals(Parser.name[Parser.non_terminal_index[Parser.lhs[i]]])) //$NON-NLS-1$
-//					IntersectionCastRule = i;
-//				else 
-//				if ("ReferenceExpressionTypeArgumentsAndTrunk".equals(Parser.name[Parser.non_terminal_index[Parser.lhs[i]]])) //$NON-NLS-1$
-//					ReferenceExpressionRule = i;
-//				else 
-//				if ("TypeAnnotations".equals(Parser.name[Parser.non_terminal_index[Parser.lhs[i]]])) //$NON-NLS-1$
-//					VarargTypeAnnotationsRule = i;
-//				else
-//				if ("BlockStatementopt".equals(Parser.name[Parser.non_terminal_index[Parser.lhs[i]]])) //$NON-NLS-1$
-//					BlockStatementoptRule = i;
-//						
-//			}
-//			
-//			LambdaParameterListGoal =  new Goal(TokenNameARROW, new int[] { TokenNameARROW }, LambdaParameterListRule);
-//			IntersectionCastGoal =     new Goal(TokenNameLPAREN, followSetOfCast(), IntersectionCastRule);
-//			VarargTypeAnnotationGoal = new Goal(TokenNameAT, new int[] { TokenNameELLIPSIS }, VarargTypeAnnotationsRule);
-//			ReferenceExpressionGoal =  new Goal(TokenNameLESS, new int[] { TokenNameCOLON_COLON }, ReferenceExpressionRule);
-//			BlockStatementoptGoal =    new Goal(TokenNameLBRACE, new int [0], BlockStatementoptRule);
-//		}
-//	
-//	
-//		Goal(int first, int [] follow, int rule) {
-//			this.first = first;
-//			this.follow = follow;
-//			this.rule = rule;
-//		}
-//		
-//		boolean hasBeenReached(int act, int token) {
-//			/*
-//			System.out.println("[Goal = " + Parser.name[Parser.non_terminal_index[Parser.lhs[this.rule]]] + "]  " + "Saw: " + Parser.name[Parser.non_terminal_index[Parser.lhs[act]]] + "::" +  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-//						Parser.name[Parser.terminal_index[token]]);
-//			*/
-//			if (act == this.rule) {
-//				final int length = this.follow.length;
-//				if (length == 0)
-//					return true;
-//				for (int i = 0; i < length; i++)
-//					if (this.follow[i] == token)
-//						return true;
-//			}
-//			return false;
-//		}
-//		
-//		private static int [] followSetOfCast() {
-//			return new int [] { TokenNameIdentifier, TokenNamenew, TokenNamesuper, TokenNamethis,
-//					TokenNamefalse, TokenNametrue, TokenNamenull, 
-//					TokenNameIntegerLiteral, TokenNameLongLiteral, TokenNameFloatingPointLiteral, TokenNameDoubleLiteral, TokenNameCharacterLiteral, TokenNameStringLiteral, 
-//					TokenNameNOT, TokenNameTWIDDLE, TokenNameLPAREN
-//			};
-//		}
-//	}
-//	// Vanguard Parser - A Private utility helper class for the scanner.
-//	private static final class VanguardParser extends Parser {
-//		
-//		public static final boolean SUCCESS = true;
-//		public static final boolean FAILURE = false;
-//		
-//		public VanguardParser(VanguardScanner scanner) {
-//			this.scanner = scanner;
-//		}
-//		
-//		// Canonical LALR pushdown automaton identical to Parser.parse() minus side effects of any kind, returns the rule reduced.
-//		protected boolean parse(Goal goal) {
-//			try {
-//				int act = START_STATE;
-//				this.stateStackTop = -1;
-//				this.currentToken = goal.first; 
-//				ProcessTerminals : for (;;) {
-//					int stackLength = this.stack.length;
-//					if (++this.stateStackTop >= stackLength) {
-//						System.arraycopy(
-//							this.stack, 0,
-//							this.stack = new int[stackLength + StackIncrement], 0,
-//							stackLength);
-//					}
-//					this.stack[this.stateStackTop] = act;
-//	
-//					act = Parser.tAction(act, this.currentToken);
-//					if (act == ERROR_ACTION) {
-//						return FAILURE;
-//					}
-//					if (act <= NUM_RULES) {
-//						this.stateStackTop--;
-//					} else if (act > ERROR_ACTION) { /* shift-reduce */
-//						this.unstackedAct = act;
-//						try {
-//						this.currentToken = this.scanner.getNextToken();
-//						} finally {
-//							this.unstackedAct = ERROR_ACTION;
-//						}
-//						act -= ERROR_ACTION;
-//					} else {
-//					    if (act < ACCEPT_ACTION) { /* shift */
-//					    	this.unstackedAct = act;
-//							try {
-//					    	this.currentToken = this.scanner.getNextToken();
-//							} finally {
-//								this.unstackedAct = ERROR_ACTION;
-//							}
-//							continue ProcessTerminals;
-//						}
-//					    return FAILURE; // accept - we should never reach this state, we accept at reduce with a right member of follow set below.
-//					}
-//	
-//					// ProcessNonTerminals :
-//					do { /* reduce */
-//						if (goal.hasBeenReached(act, this.currentToken))
-//							return SUCCESS;
-//						this.stateStackTop -= (Parser.rhs[act] - 1);
-//						act = Parser.ntAction(this.stack[this.stateStackTop], Parser.lhs[act]);
-//					} while (act <= NUM_RULES);
-//				}
-//			} catch (Exception e) {
-//				return FAILURE;
-//			}
-//		}
-//		public String toString() {
-//			return "\n\n\n----------------Scanner--------------\n" + this.scanner.toString(); //$NON-NLS-1$;
-//		}
-//	}
-//	
-//	private VanguardParser getVanguardParser() {
-//		if (this.vanguardParser == null) {
-//			this.vanguardScanner = new VanguardScanner(this.sourceLevel, this.complianceLevel);
-//			this.vanguardParser = new VanguardParser(this.vanguardScanner);
-//			this.vanguardScanner.setActiveParser(this.vanguardParser);
-//		}
-//		this.vanguardScanner.setSource(this.source);
-//		this.vanguardScanner.resetTo(this.startPosition, this.eofPosition - 1);
-//		return this.vanguardParser;
-//	}
-//	
-//	protected final boolean maybeAtLambdaOrCast() { // Could the '(' we saw just now herald a lambda parameter list or a cast expression ? (the possible locations for both are identical.)
-//	
-//		switch (this.lookBack[1]) {
-//			case TokenNameIdentifier:
-//			case TokenNamecatch:
-//			case TokenNamethis:
-//			case TokenNamesuper:
-//			case TokenNameif:
-//			case TokenNameswitch:
-//			case TokenNamewhile:
-//			case TokenNamefor:
-//			case TokenNamesynchronized:
-//			case TokenNametry:
-//				return false; // not a viable prefix for cast or lambda.
-//			default:
-//				return this.activeParser.atConflictScenario(TokenNameLPAREN);
-//		}
-//	}
-//			
-//	
-//	protected final boolean maybeAtReferenceExpression() { // Did the '<' we saw just now herald a reference expression's type arguments and trunk ?
-//		switch (this.lookBack[1]) {
-//			case TokenNameIdentifier:
-//				switch (this.lookBack[0]) {
-//					case TokenNameSEMICOLON:  // for (int i = 0; i < 10; i++);
-//					case TokenNameRBRACE:     // class X { void foo() {} X<String> x = null; }
-//					case TokenNameclass:      // class X<T> {}
-//					case TokenNameinterface:  // interface I<T> {}
-//					case TokenNameenum:       // enum E<T> {}
-//					case TokenNamefinal:      // final Collection<String>
-//					case TokenNameLESS:       // Collection<IScalarData<AbstractData>>
-//					case TokenNameGREATER:    // public <T> List<T> foo() { /* */ }
-//					case TokenNameRIGHT_SHIFT:// static <T extends SelfType<T>> List<T> makeSingletonList(T t) { /* */ }
-//					case TokenNamenew:        // new ArrayList<String>();
-//					case TokenNamepublic:     // public List<String> foo() {}
-//					case TokenNameabstract:   // abstract List<String> foo() {}
-//					case TokenNameprivate:    // private List<String> foo() {}
-//					case TokenNameprotected:  // protected List<String> foo() {}
-//					case TokenNamestatic:     // public static List<String> foo() {}
-//					case TokenNameextends:    // <T extends Y<Z>>
-//					case TokenNamesuper:      // ? super Context<N>
-//					case TokenNameAND:        // T extends Object & Comparable<? super T>
-//					case TokenNameimplements: // class A implements I<Z>
-//					case TokenNamethrows:     // throws Y<Z>
-//					case TokenNameAT:         // @Deprecated <T> void foo() {} 
-//					case TokenNameinstanceof: // if (o instanceof List<E>[])  
-//						return false;
-//					default:
-//						break;
-//				}
-//				break;
-//			case TokenNameNotAToken: // Not kosher, don't touch.
-//				break;
-//			default:
-//				return false;
-//		}
-//		return this.activeParser.atConflictScenario(TokenNameLESS);
-//	}
+	// Vanguard Scanner - A Private utility helper class for the scanner.
+	private static final class VanguardScanner extends Scanner {
+		
+		public VanguardScanner(long sourceLevel, long complianceLevel) {
+			super (false /*comment*/, false /*whitespace*/, false /*nls*/, sourceLevel, complianceLevel, null/*taskTag*/, null/*taskPriorities*/, false /*taskCaseSensitive*/);
+		}
+		
+		public int getNextToken() throws InvalidInputException {
+			int token = getNextToken0();
+			if (token == TokenNameAT && atTypeAnnotation()) {
+				token = TokenNameAT308;
+			}
+			return token == TokenNameEOF ? TokenNameNotAToken : token; 
+		}
+	}
+	
+	private static final class Goal {
+		
+		int first;      // steer the parser towards a single minded pursuit.
+		int [] follow;  // the definite terminal symbols that signal the successful reduction to goal.
+		int rule;
+	
+		static int LambdaParameterListRule = 0;
+		static int IntersectionCastRule = 0;
+		static int ReferenceExpressionRule = 0;
+		static int VarargTypeAnnotationsRule  = 0;
+		static int BlockStatementoptRule = 0;
+		
+		static Goal LambdaParameterListGoal;
+		static Goal IntersectionCastGoal;
+		static Goal VarargTypeAnnotationGoal;
+		static Goal ReferenceExpressionGoal;
+		static Goal BlockStatementoptGoal;
+		
+		static {
+			
+			for (int i = 1; i <= ParserBasicInformation.NUM_RULES; i++) {  // 0 == $acc
+				if ("ParenthesizedLambdaParameterList".equals(Parser.name[Parser.non_terminal_index[Parser.lhs[i]]])) //$NON-NLS-1$
+					LambdaParameterListRule = i;
+				else 
+				if ("ParenthesizedCastNameAndBounds".equals(Parser.name[Parser.non_terminal_index[Parser.lhs[i]]])) //$NON-NLS-1$
+					IntersectionCastRule = i;
+				else 
+				if ("ReferenceExpressionTypeArgumentsAndTrunk".equals(Parser.name[Parser.non_terminal_index[Parser.lhs[i]]])) //$NON-NLS-1$
+					ReferenceExpressionRule = i;
+				else 
+				if ("TypeAnnotations".equals(Parser.name[Parser.non_terminal_index[Parser.lhs[i]]])) //$NON-NLS-1$
+					VarargTypeAnnotationsRule = i;
+				else
+				if ("BlockStatementopt".equals(Parser.name[Parser.non_terminal_index[Parser.lhs[i]]])) //$NON-NLS-1$
+					BlockStatementoptRule = i;
+						
+			}
+			
+			LambdaParameterListGoal =  new Goal(TokenNameARROW, new int[] { TokenNameARROW }, LambdaParameterListRule);
+			IntersectionCastGoal =     new Goal(TokenNameLPAREN, followSetOfCast(), IntersectionCastRule);
+			VarargTypeAnnotationGoal = new Goal(TokenNameAT, new int[] { TokenNameELLIPSIS }, VarargTypeAnnotationsRule);
+			ReferenceExpressionGoal =  new Goal(TokenNameLESS, new int[] { TokenNameCOLON_COLON }, ReferenceExpressionRule);
+			BlockStatementoptGoal =    new Goal(TokenNameLBRACE, new int [0], BlockStatementoptRule);
+		}
+	
+	
+		Goal(int first, int [] follow, int rule) {
+			this.first = first;
+			this.follow = follow;
+			this.rule = rule;
+		}
+		
+		boolean hasBeenReached(int act, int token) {
+			/*
+			System.out.println("[Goal = " + Parser.name[Parser.non_terminal_index[Parser.lhs[this.rule]]] + "]  " + "Saw: " + Parser.name[Parser.non_terminal_index[Parser.lhs[act]]] + "::" +  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+						Parser.name[Parser.terminal_index[token]]);
+			*/
+			if (act == this.rule) {
+				final int length = this.follow.length;
+				if (length == 0)
+					return true;
+				for (int i = 0; i < length; i++)
+					if (this.follow[i] == token)
+						return true;
+			}
+			return false;
+		}
+		
+		private static int [] followSetOfCast() {
+			return new int [] { TokenNameIdentifier, TokenNamenew, TokenNamesuper, TokenNamethis,
+					TokenNamefalse, TokenNametrue, TokenNamenull, 
+					TokenNameIntegerLiteral, TokenNameLongLiteral, TokenNameFloatingPointLiteral, TokenNameDoubleLiteral, TokenNameCharacterLiteral, TokenNameStringLiteral, 
+					TokenNameNOT, TokenNameTWIDDLE, TokenNameLPAREN
+			};
+		}
+	}
+	// Vanguard Parser - A Private utility helper class for the scanner.
+	private static final class VanguardParser extends Parser {
+		
+		public static final boolean SUCCESS = true;
+		public static final boolean FAILURE = false;
+		
+		public VanguardParser(VanguardScanner scanner) {
+			this.scanner = scanner;
+		}
+		
+		// Canonical LALR pushdown automaton identical to Parser.parse() minus side effects of any kind, returns the rule reduced.
+		protected boolean parse(Goal goal) {
+			try {
+				int act = START_STATE;
+				this.stateStackTop = -1;
+				this.currentToken = goal.first; 
+				ProcessTerminals : for (;;) {
+					int stackLength = this.stack.length;
+					if (++this.stateStackTop >= stackLength) {
+						System.arraycopy(
+							this.stack, 0,
+							this.stack = new int[stackLength + StackIncrement], 0,
+							stackLength);
+					}
+					this.stack[this.stateStackTop] = act;
+	
+					act = Parser.tAction(act, this.currentToken);
+					if (act == ERROR_ACTION) {
+						return FAILURE;
+					}
+					if (act <= NUM_RULES) {
+						this.stateStackTop--;
+					} else if (act > ERROR_ACTION) { /* shift-reduce */
+						this.unstackedAct = act;
+						try {
+						this.currentToken = this.scanner.getNextToken();
+						} finally {
+							this.unstackedAct = ERROR_ACTION;
+						}
+						act -= ERROR_ACTION;
+					} else {
+					    if (act < ACCEPT_ACTION) { /* shift */
+					    	this.unstackedAct = act;
+							try {
+					    	this.currentToken = this.scanner.getNextToken();
+							} finally {
+								this.unstackedAct = ERROR_ACTION;
+							}
+							continue ProcessTerminals;
+						}
+					    return FAILURE; // accept - we should never reach this state, we accept at reduce with a right member of follow set below.
+					}
+	
+					// ProcessNonTerminals :
+					do { /* reduce */
+						if (goal.hasBeenReached(act, this.currentToken))
+							return SUCCESS;
+						this.stateStackTop -= (Parser.rhs[act] - 1);
+						act = Parser.ntAction(this.stack[this.stateStackTop], Parser.lhs[act]);
+					} while (act <= NUM_RULES);
+				}
+			} catch (Exception e) {
+				return FAILURE;
+			}
+		}
+		public String toString() {
+			return "\n\n\n----------------Scanner--------------\n" + this.scanner.toString(); //$NON-NLS-1$;
+		}
+	}
+	
+	private VanguardParser getVanguardParser() {
+		if (this.vanguardParser == null) {
+			this.vanguardScanner = new VanguardScanner(this.sourceLevel, this.complianceLevel);
+			this.vanguardParser = new VanguardParser(this.vanguardScanner);
+			this.vanguardScanner.setActiveParser(this.vanguardParser);
+		}
+		this.vanguardScanner.setSource(this.source);
+		this.vanguardScanner.resetTo(this.startPosition, this.eofPosition - 1);
+		return this.vanguardParser;
+	}
+	
+	protected final boolean maybeAtLambdaOrCast() { // Could the '(' we saw just now herald a lambda parameter list or a cast expression ? (the possible locations for both are identical.)
+	
+		switch (this.lookBack[1]) {
+			case TokenNameIdentifier:
+			case TokenNamecatch:
+			case TokenNamethis:
+			case TokenNamesuper:
+			case TokenNameif:
+			case TokenNameswitch:
+			case TokenNamewhile:
+			case TokenNamefor:
+			case TokenNamesynchronized:
+			case TokenNametry:
+				return false; // not a viable prefix for cast or lambda.
+			default:
+				return this.activeParser.atConflictScenario(TokenNameLPAREN);
+		}
+	}
+			
+	
+	protected final boolean maybeAtReferenceExpression() { // Did the '<' we saw just now herald a reference expression's type arguments and trunk ?
+		switch (this.lookBack[1]) {
+			case TokenNameIdentifier:
+				switch (this.lookBack[0]) {
+					case TokenNameSEMICOLON:  // for (int i = 0; i < 10; i++);
+					case TokenNameRBRACE:     // class X { void foo() {} X<String> x = null; }
+					case TokenNameclass:      // class X<T> {}
+					case TokenNameinterface:  // interface I<T> {}
+					case TokenNameenum:       // enum E<T> {}
+					case TokenNamefinal:      // final Collection<String>
+					case TokenNameLESS:       // Collection<IScalarData<AbstractData>>
+					case TokenNameGREATER:    // public <T> List<T> foo() { /* */ }
+					case TokenNameRIGHT_SHIFT:// static <T extends SelfType<T>> List<T> makeSingletonList(T t) { /* */ }
+					case TokenNamenew:        // new ArrayList<String>();
+					case TokenNamepublic:     // public List<String> foo() {}
+					case TokenNameabstract:   // abstract List<String> foo() {}
+					case TokenNameprivate:    // private List<String> foo() {}
+					case TokenNameprotected:  // protected List<String> foo() {}
+					case TokenNamestatic:     // public static List<String> foo() {}
+					case TokenNameextends:    // <T extends Y<Z>>
+					case TokenNamesuper:      // ? super Context<N>
+					case TokenNameAND:        // T extends Object & Comparable<? super T>
+					case TokenNameimplements: // class A implements I<Z>
+					case TokenNamethrows:     // throws Y<Z>
+					case TokenNameAT:         // @Deprecated <T> void foo() {} 
+					case TokenNameinstanceof: // if (o instanceof List<E>[])  
+						return false;
+					default:
+						break;
+				}
+				break;
+			case TokenNameNotAToken: // Not kosher, don't touch.
+				break;
+			default:
+				return false;
+		}
+		return this.activeParser.atConflictScenario(TokenNameLESS);
+	}
 	private final boolean maybeAtEllipsisAnnotationsStart() { // Did the '@' we saw just now herald a type annotation on a ... ? Presumed to be at type annotation already.
 		if (this.consumingEllipsisAnnotations)
 			return false;
 		switch (this.lookBack[1]) {
-			case NEW:
-			case COMMA:
-			case EXTENDS:
-			case SUPER:
-			case IMPLEMENTS:
-			case DOT:
-			case LBRACE:
-			case INSTANCEOF:
-			case LESS:
-			case AND:
-			case THROWS:
+			case TokenNamenew:
+			case TokenNameCOMMA:
+			case TokenNameextends:
+			case TokenNamesuper:
+			case TokenNameimplements:
+			case TokenNameDOT:
+			case TokenNameLBRACE:
+			case TokenNameinstanceof:
+			case TokenNameLESS:
+			case TokenNameAND:
+			case TokenNamethrows:
 				return false;
 			default:
 				return true;
 		}
 	}
-//	protected final boolean atTypeAnnotation() { // Did the '@' we saw just now herald a type annotation ? We should not ask the parser whether it would shift @308 !
-//		return !this.activeParser.atConflictScenario(TokenNameAT);
-//	}
-//	
-//	public void setActiveParser(ConflictedParser parser) {
-//		this.activeParser  = parser;
-//		this.lookBack[0] = this.lookBack[1] = TokenNameNotAToken;  // no hand me downs please.
-//	}
-//	private int disambiguatedToken(int token) {
-//		final VanguardParser parser = getVanguardParser();
-//		if (token == TokenNameLPAREN  && maybeAtLambdaOrCast()) {
-//			if (parser.parse(Goal.LambdaParameterListGoal) == VanguardParser.SUCCESS) {
-//				this.nextToken = TokenNameLPAREN;
-//				return TokenNameBeginLambda;
-//			}
-//			this.vanguardScanner.resetTo(this.startPosition, this.eofPosition - 1);
-//			if (parser.parse(Goal.IntersectionCastGoal) == VanguardParser.SUCCESS) {
-//				this.nextToken = TokenNameLPAREN;
-//				return TokenNameBeginIntersectionCast;
-//			}
-//		} else if (token == TokenNameLESS && maybeAtReferenceExpression()) {
-//			if (parser.parse(Goal.ReferenceExpressionGoal) == VanguardParser.SUCCESS) {
-//				this.nextToken = TokenNameLESS;
-//				return TokenNameBeginTypeArguments;
-//			}
-//		} else if (token == TokenNameAT && atTypeAnnotation()) {
-//			token = TokenNameAT308;
-//			if (maybeAtEllipsisAnnotationsStart()) {
-//				if (parser.parse(Goal.VarargTypeAnnotationGoal) == VanguardParser.SUCCESS) {
-//					this.consumingEllipsisAnnotations = true;
-//					this.nextToken = TokenNameAT308;
-//					return TokenNameAT308DOTDOTDOT;
-//				}
-//			}
-//		}
-//		return token;
-//	}
+	protected final boolean atTypeAnnotation() { // Did the '@' we saw just now herald a type annotation ? We should not ask the parser whether it would shift @308 !
+		return !this.activeParser.atConflictScenario(TokenNameAT);
+	}
+	
+	public void setActiveParser(ConflictedParser parser) {
+		this.activeParser  = parser;
+		this.lookBack[0] = this.lookBack[1] = TokenNameNotAToken;  // no hand me downs please.
+	}
+	private int disambiguatedToken(int token) {
+		final VanguardParser parser = getVanguardParser();
+		if (token == TokenNameLPAREN  && maybeAtLambdaOrCast()) {
+			if (parser.parse(Goal.LambdaParameterListGoal) == VanguardParser.SUCCESS) {
+				this.nextToken = TokenNameLPAREN;
+				return TokenNameBeginLambda;
+			}
+			this.vanguardScanner.resetTo(this.startPosition, this.eofPosition - 1);
+			if (parser.parse(Goal.IntersectionCastGoal) == VanguardParser.SUCCESS) {
+				this.nextToken = TokenNameLPAREN;
+				return TokenNameBeginIntersectionCast;
+			}
+		} else if (token == TokenNameLESS && maybeAtReferenceExpression()) {
+			if (parser.parse(Goal.ReferenceExpressionGoal) == VanguardParser.SUCCESS) {
+				this.nextToken = TokenNameLESS;
+				return TokenNameBeginTypeArguments;
+			}
+		} else if (token == TokenNameAT && atTypeAnnotation()) {
+			token = TokenNameAT308;
+			if (maybeAtEllipsisAnnotationsStart()) {
+				if (parser.parse(Goal.VarargTypeAnnotationGoal) == VanguardParser.SUCCESS) {
+					this.consumingEllipsisAnnotations = true;
+					this.nextToken = TokenNameAT308;
+					return TokenNameAT308DOTDOTDOT;
+				}
+			}
+		}
+		return token;
+	}
 	
 	protected boolean isAtAssistIdentifier() {
 		return false;
 	}
 	
-//	// Position the scanner at the next block statement and return the start token. We recognize empty statements.
-//	public int fastForward(Statement unused) {
-//		
-//		int token;
-//	
-//		while (true) {
-//			try {
-//				token = getNextToken();
-//			} catch (InvalidInputException e) {
-//				return TokenNameEOF;
-//			}
-//			/* FOLLOW map of BlockStatement, since the non-terminal is recursive is a super set of its own FIRST set. 
-//		   	   We use FOLLOW rather than FIRST since we want to recognize empty statements. i.e if (x > 10) {  x = 0 }
-//			*/
-//			switch(token) {
-//				case TokenNameIdentifier:
-//					if (isAtAssistIdentifier()) // do not fast forward past the assist identifier ! We don't handle collections as of now.
-//						return token;
-//					//$FALL-THROUGH$
-//				case TokenNameabstract:
-//				case TokenNameassert:
-//				case TokenNameboolean:
-//				case TokenNamebreak:
-//				case TokenNamebyte:
-//				case TokenNamecase:
-//				case TokenNamechar:
-//				case TokenNameclass:
-//				case TokenNamecontinue:
-//				case TokenNamedefault:
-//				case TokenNamedo:
-//				case TokenNamedouble:
-//				case TokenNameenum:
-//				case TokenNamefalse:
-//				case TokenNamefinal:
-//				case TokenNamefloat:
-//				case TokenNamefor:
-//				case TokenNameif:
-//				case TokenNameint:
-//				case TokenNameinterface:
-//				case TokenNamelong:
-//				case TokenNamenative:
-//				case TokenNamenew:
-//				case TokenNamenull:
-//				case TokenNameprivate:
-//				case TokenNameprotected:
-//				case TokenNamepublic:
-//				case TokenNamereturn:
-//				case TokenNameshort:
-//				case TokenNamestatic:
-//				case TokenNamestrictfp:
-//				case TokenNamesuper:
-//				case TokenNameswitch:
-//				case TokenNamesynchronized:
-//				case TokenNamethis:
-//				case TokenNamethrow:
-//				case TokenNametransient:
-//				case TokenNametrue:
-//				case TokenNametry:
-//				case TokenNamevoid:
-//				case TokenNamevolatile:
-//				case TokenNamewhile:
-//				case TokenNameIntegerLiteral: // ??!
-//				case TokenNameLongLiteral:
-//				case TokenNameFloatingPointLiteral:
-//				case TokenNameDoubleLiteral:
-//				case TokenNameCharacterLiteral:
-//				case TokenNameStringLiteral:
-//				case TokenNamePLUS_PLUS:
-//				case TokenNameMINUS_MINUS:
-//				case TokenNameLESS:
-//				case TokenNameLPAREN:
-//				case TokenNameLBRACE:
-//				case TokenNameAT:
-//				case TokenNameBeginLambda:
-//				case TokenNameAT308:
-//					if(getVanguardParser().parse(Goal.BlockStatementoptGoal) == VanguardParser.SUCCESS)
-//						return token;
-//					break;
-//				case TokenNameSEMICOLON:
-//				case TokenNameEOF:
-//					return token;
-//				case TokenNameRBRACE: // simulate empty statement.
-//					ungetToken(token);
-//					return TokenNameSEMICOLON;
-//				default:
-//					break;
-//			}
-//		}
-//	}
+	// Position the scanner at the next block statement and return the start token. We recognize empty statements.
+	public int fastForward(Statement unused) {
+		
+		int token;
+	
+		while (true) {
+			try {
+				token = getNextToken();
+			} catch (InvalidInputException e) {
+				return TokenNameEOF;
+			}
+			/* FOLLOW map of BlockStatement, since the non-terminal is recursive is a super set of its own FIRST set. 
+		   	   We use FOLLOW rather than FIRST since we want to recognize empty statements. i.e if (x > 10) {  x = 0 }
+			*/
+			switch(token) {
+				case TokenNameIdentifier:
+					if (isAtAssistIdentifier()) // do not fast forward past the assist identifier ! We don't handle collections as of now.
+						return token;
+					//$FALL-THROUGH$
+				case TokenNameabstract:
+				case TokenNameassert:
+				case TokenNameboolean:
+				case TokenNamebreak:
+				case TokenNamebyte:
+				case TokenNamecase:
+				case TokenNamechar:
+				case TokenNameclass:
+				case TokenNamecontinue:
+				case TokenNamedefault:
+				case TokenNamedo:
+				case TokenNamedouble:
+				case TokenNameenum:
+				case TokenNamefalse:
+				case TokenNamefinal:
+				case TokenNamefloat:
+				case TokenNamefor:
+				case TokenNameif:
+				case TokenNameint:
+				case TokenNameinterface:
+				case TokenNamelong:
+				case TokenNamenative:
+				case TokenNamenew:
+				case TokenNamenull:
+				case TokenNameprivate:
+				case TokenNameprotected:
+				case TokenNamepublic:
+				case TokenNamereturn:
+				case TokenNameshort:
+				case TokenNamestatic:
+				case TokenNamestrictfp:
+				case TokenNamesuper:
+				case TokenNameswitch:
+				case TokenNamesynchronized:
+				case TokenNamethis:
+				case TokenNamethrow:
+				case TokenNametransient:
+				case TokenNametrue:
+				case TokenNametry:
+				case TokenNamevoid:
+				case TokenNamevolatile:
+				case TokenNamewhile:
+				case TokenNameIntegerLiteral: // ??!
+				case TokenNameLongLiteral:
+				case TokenNameFloatingPointLiteral:
+				case TokenNameDoubleLiteral:
+				case TokenNameCharacterLiteral:
+				case TokenNameStringLiteral:
+				case TokenNamePLUS_PLUS:
+				case TokenNameMINUS_MINUS:
+				case TokenNameLESS:
+				case TokenNameLPAREN:
+				case TokenNameLBRACE:
+				case TokenNameAT:
+				case TokenNameBeginLambda:
+				case TokenNameAT308:
+					if(getVanguardParser().parse(Goal.BlockStatementoptGoal) == VanguardParser.SUCCESS)
+						return token;
+					break;
+				case TokenNameSEMICOLON:
+				case TokenNameEOF:
+					return token;
+				case TokenNameRBRACE: // simulate empty statement.
+					ungetToken(token);
+					return TokenNameSEMICOLON;
+				default:
+					break;
+			}
+		}
+	}
 }

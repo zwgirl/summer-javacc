@@ -444,7 +444,7 @@ public void acceptLocalMethodTypeParameter(TypeVariableBinding typeVariableBindi
 		}
 	}
 }
-public void acceptLocalVariable(LocalVariableBinding binding, org.eclipse.jdt.internal.compiler.env.ICompilationUnit unit) {
+public void acceptLocalVariable(LocalVariableBinding binding, org.summer.sdt.internal.compiler.env.ICompilationUnit unit) {
 	LocalDeclaration local = binding.declaration;
 	IJavaElement parent = null;
 	if (binding.declaringScope.isLambdaSubscope() && unit instanceof ICompilationUnit) {

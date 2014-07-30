@@ -107,7 +107,7 @@ public MethodBinding getMethodBinding() {
 
 /**
  * Return {@link TypeBinding} for member value of type {@link java.lang.Class}
- * Return {@link org.eclipse.jdt.internal.compiler.impl.Constant} for member of primitive type or String
+ * Return {@link org.summer.sdt.internal.compiler.impl.Constant} for member of primitive type or String
  * Return {@link FieldBinding} for enum constant
  * Return {@link AnnotationBinding} for annotation instance
  * Return <code>Object[]</code> for member value of array type.

@@ -49,13 +49,13 @@ public HierarchyBinaryType(int modifiers, char[] qualification, char[] sourceNam
 	CharOperation.replace(this.name, '.', '/');
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.env.IBinaryType
+ * @see org.summer.sdt.internal.compiler.env.IBinaryType
  */
 public IBinaryAnnotation[] getAnnotations() {
 	return null;
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.env.IBinaryType
+ * @see org.summer.sdt.internal.compiler.env.IBinaryType
  */
 public IBinaryTypeAnnotation[] getTypeAnnotations() {
 	return null;
@@ -80,7 +80,7 @@ public IBinaryField[] getFields() {
 	return null;
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.env.IDependent#getFileName()
+ * @see org.summer.sdt.internal.compiler.env.IDependent#getFileName()
  */
 public char[] getFileName() {
 	return null;
@@ -132,7 +132,7 @@ public IBinaryMethod[] getMethods() {
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.env.IBinaryType#getMissingTypeNames()
+ * @see org.summer.sdt.internal.compiler.env.IBinaryType#getMissingTypeNames()
  */
 public char[][][] getMissingTypeNames() {
 	return null;
@@ -225,7 +225,7 @@ public void recordSuperType(char[] superTypeName, char[] superQualification, cha
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.env.IBinaryType
+ * @see org.summer.sdt.internal.compiler.env.IBinaryType
  */
 public char[] sourceFileName() {
 	return null;

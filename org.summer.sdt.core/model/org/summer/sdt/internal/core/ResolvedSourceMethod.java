@@ -27,13 +27,13 @@ public class ResolvedSourceMethod extends SourceMethod {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.core.SourceMethod#getKey()
+	 * @see org.summer.sdt.internal.core.SourceMethod#getKey()
 	 */
 	public String getKey() {
 		return this.uniqueKey;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.IMethod#isResolved()
+	 * @see org.summer.sdt.core.IMethod#isResolved()
 	 */
 	public boolean isResolved() {
 		return true;

@@ -131,7 +131,7 @@ public SourceField[] getFieldHandles() {
 	return fields;
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.env.IDependent#getFileName()
+ * @see org.summer.sdt.internal.compiler.env.IDependent#getFileName()
  */
 public char[] getFileName() {
 	return this.handle.getPath().toString().toCharArray();
@@ -242,7 +242,7 @@ public SourceMethod[] getMethodHandles() {
 	return methods;
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.env.ISourceType#getName()
+ * @see org.summer.sdt.internal.compiler.env.ISourceType#getName()
  */
 public char[] getName() {
 	return this.handle.getElementName().toCharArray();

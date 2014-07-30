@@ -174,7 +174,7 @@ protected int matchLevel(ImportReference importRef) {
 	return IMPOSSIBLE_MATCH;
 }
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.core.search.matching.PatternLocator#matchLevelAndReportImportRef(org.eclipse.jdt.internal.compiler.ast.ImportReference, org.eclipse.jdt.internal.compiler.lookup.Binding, org.eclipse.jdt.internal.core.search.matching.MatchLocator)
+ * @see org.summer.sdt.internal.core.search.matching.PatternLocator#matchLevelAndReportImportRef(org.summer.sdt.internal.compiler.ast.ImportReference, org.summer.sdt.internal.compiler.lookup.Binding, org.summer.sdt.internal.core.search.matching.MatchLocator)
  */
 protected void matchLevelAndReportImportRef(ImportReference importRef, Binding binding, MatchLocator locator) throws CoreException {
 	Binding refBinding = binding;
@@ -581,7 +581,7 @@ protected void reportDeclaration(ReferenceBinding typeBinding, int maxType, Matc
 	if (isBinary) {
 		if (resource == null)
 			resource = type.getJavaProject().getProject();
-		info = locator.getBinaryInfo((org.eclipse.jdt.internal.core.ClassFile) type.getClassFile(), resource);
+		info = locator.getBinaryInfo((org.summer.sdt.internal.core.ClassFile) type.getClassFile(), resource);
 	}
 	while (maxType >= 0 && type != null) {
 		if (!knownTypes.includes(type)) {

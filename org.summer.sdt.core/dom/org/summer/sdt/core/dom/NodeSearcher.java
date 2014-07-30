@@ -21,7 +21,7 @@ import org.summer.sdt.internal.compiler.lookup.CompilationUnitScope;
 import org.summer.sdt.internal.compiler.lookup.MethodScope;
 
 class NodeSearcher extends ASTVisitor {
-	public org.eclipse.jdt.internal.compiler.ast.ASTNode found;
+	public org.summer.sdt.internal.compiler.ast.ASTNode found;
 	public TypeDeclaration enclosingType;
 	public int position;
 

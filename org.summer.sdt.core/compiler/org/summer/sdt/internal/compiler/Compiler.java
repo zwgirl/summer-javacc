@@ -85,7 +85,7 @@ public class Compiler implements ITypeRequestor, ProblemSeverities {
 	 * The environment and options will be in effect for the lifetime of the compiler.
 	 * When the compiler is run, compilation results are sent to the given requestor.
 	 *
-	 *  @param environment org.eclipse.jdt.internal.compiler.api.env.INameEnvironment
+	 *  @param environment org.summer.sdt.internal.compiler.api.env.INameEnvironment
 	 *      Environment used by the compiler in order to resolve type and package
 	 *      names. The name environment implements the actual connection of the compiler
 	 *      to the outside world (e.g. in batch mode the name environment is performing
@@ -93,23 +93,23 @@ public class Compiler implements ITypeRequestor, ProblemSeverities {
 	 *      Note: the name environment is responsible for implementing the actual classpath
 	 *            rules.
 	 *
-	 *  @param policy org.eclipse.jdt.internal.compiler.api.problem.IErrorHandlingPolicy
+	 *  @param policy org.summer.sdt.internal.compiler.api.problem.IErrorHandlingPolicy
 	 *      Configurable part for problem handling, allowing the compiler client to
 	 *      specify the rules for handling problems (stop on first error or accumulate
 	 *      them all) and at the same time perform some actions such as opening a dialog
 	 *      in UI when compiling interactively.
-	 *      @see org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
+	 *      @see org.summer.sdt.internal.compiler.DefaultErrorHandlingPolicies
 	 *
 	 *  @param settings java.util.Map
 	 *      The settings that control the compiler behavior.
 	 *
-	 *  @param requestor org.eclipse.jdt.internal.compiler.api.ICompilerRequestor
+	 *  @param requestor org.summer.sdt.internal.compiler.api.ICompilerRequestor
 	 *      Component which will receive and persist all compilation results and is intended
 	 *      to consume them as they are produced. Typically, in a batch compiler, it is
 	 *      responsible for writing out the actual .class files to the file system.
-	 *      @see org.eclipse.jdt.internal.compiler.CompilationResult
+	 *      @see org.summer.sdt.internal.compiler.CompilationResult
 	 *
-	 *  @param problemFactory org.eclipse.jdt.internal.compiler.api.problem.IProblemFactory
+	 *  @param problemFactory org.summer.sdt.internal.compiler.api.problem.IProblemFactory
 	 *      Factory used inside the compiler to create problem descriptors. It allows the
 	 *      compiler client to supply its own representation of compilation problems in
 	 *      order to avoid object conversions. Note that the factory is not supposed
@@ -132,7 +132,7 @@ public class Compiler implements ITypeRequestor, ProblemSeverities {
 	 * The environment and options will be in effect for the lifetime of the compiler.
 	 * When the compiler is run, compilation results are sent to the given requestor.
 	 *
-	 *  @param environment org.eclipse.jdt.internal.compiler.api.env.INameEnvironment
+	 *  @param environment org.summer.sdt.internal.compiler.api.env.INameEnvironment
 	 *      Environment used by the compiler in order to resolve type and package
 	 *      names. The name environment implements the actual connection of the compiler
 	 *      to the outside world (e.g. in batch mode the name environment is performing
@@ -140,23 +140,23 @@ public class Compiler implements ITypeRequestor, ProblemSeverities {
 	 *      Note: the name environment is responsible for implementing the actual classpath
 	 *            rules.
 	 *
-	 *  @param policy org.eclipse.jdt.internal.compiler.api.problem.IErrorHandlingPolicy
+	 *  @param policy org.summer.sdt.internal.compiler.api.problem.IErrorHandlingPolicy
 	 *      Configurable part for problem handling, allowing the compiler client to
 	 *      specify the rules for handling problems (stop on first error or accumulate
 	 *      them all) and at the same time perform some actions such as opening a dialog
 	 *      in UI when compiling interactively.
-	 *      @see org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
+	 *      @see org.summer.sdt.internal.compiler.DefaultErrorHandlingPolicies
 	 *
 	 *  @param settings java.util.Map
 	 *      The settings that control the compiler behavior.
 	 *
-	 *  @param requestor org.eclipse.jdt.internal.compiler.api.ICompilerRequestor
+	 *  @param requestor org.summer.sdt.internal.compiler.api.ICompilerRequestor
 	 *      Component which will receive and persist all compilation results and is intended
 	 *      to consume them as they are produced. Typically, in a batch compiler, it is
 	 *      responsible for writing out the actual .class files to the file system.
-	 *      @see org.eclipse.jdt.internal.compiler.CompilationResult
+	 *      @see org.summer.sdt.internal.compiler.CompilationResult
 	 *
-	 *  @param problemFactory org.eclipse.jdt.internal.compiler.api.problem.IProblemFactory
+	 *  @param problemFactory org.summer.sdt.internal.compiler.api.problem.IProblemFactory
 	 *      Factory used inside the compiler to create problem descriptors. It allows the
 	 *      compiler client to supply its own representation of compilation problems in
 	 *      order to avoid object conversions. Note that the factory is not supposed
@@ -184,7 +184,7 @@ public class Compiler implements ITypeRequestor, ProblemSeverities {
 	 * The environment and options will be in effect for the lifetime of the compiler.
 	 * When the compiler is run, compilation results are sent to the given requestor.
 	 *
-	 *  @param environment org.eclipse.jdt.internal.compiler.api.env.INameEnvironment
+	 *  @param environment org.summer.sdt.internal.compiler.api.env.INameEnvironment
 	 *      Environment used by the compiler in order to resolve type and package
 	 *      names. The name environment implements the actual connection of the compiler
 	 *      to the outside world (e.g. in batch mode the name environment is performing
@@ -192,23 +192,23 @@ public class Compiler implements ITypeRequestor, ProblemSeverities {
 	 *      Note: the name environment is responsible for implementing the actual classpath
 	 *            rules.
 	 *
-	 *  @param policy org.eclipse.jdt.internal.compiler.api.problem.IErrorHandlingPolicy
+	 *  @param policy org.summer.sdt.internal.compiler.api.problem.IErrorHandlingPolicy
 	 *      Configurable part for problem handling, allowing the compiler client to
 	 *      specify the rules for handling problems (stop on first error or accumulate
 	 *      them all) and at the same time perform some actions such as opening a dialog
 	 *      in UI when compiling interactively.
-	 *      @see org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
+	 *      @see org.summer.sdt.internal.compiler.DefaultErrorHandlingPolicies
 	 *
-	 *  @param options org.eclipse.jdt.internal.compiler.impl.CompilerOptions
+	 *  @param options org.summer.sdt.internal.compiler.impl.CompilerOptions
 	 *      The options that control the compiler behavior.
 	 *
-	 *  @param requestor org.eclipse.jdt.internal.compiler.api.ICompilerRequestor
+	 *  @param requestor org.summer.sdt.internal.compiler.api.ICompilerRequestor
 	 *      Component which will receive and persist all compilation results and is intended
 	 *      to consume them as they are produced. Typically, in a batch compiler, it is
 	 *      responsible for writing out the actual .class files to the file system.
-	 *      @see org.eclipse.jdt.internal.compiler.CompilationResult
+	 *      @see org.summer.sdt.internal.compiler.CompilationResult
 	 *
-	 *  @param problemFactory org.eclipse.jdt.internal.compiler.api.problem.IProblemFactory
+	 *  @param problemFactory org.summer.sdt.internal.compiler.api.problem.IProblemFactory
 	 *      Factory used inside the compiler to create problem descriptors. It allows the
 	 *      compiler client to supply its own representation of compilation problems in
 	 *      order to avoid object conversions. Note that the factory is not supposed
@@ -229,7 +229,7 @@ public class Compiler implements ITypeRequestor, ProblemSeverities {
 	 * The environment and options will be in effect for the lifetime of the compiler.
 	 * When the compiler is run, compilation results are sent to the given requestor.
 	 *
-	 *  @param environment org.eclipse.jdt.internal.compiler.api.env.INameEnvironment
+	 *  @param environment org.summer.sdt.internal.compiler.api.env.INameEnvironment
 	 *      Environment used by the compiler in order to resolve type and package
 	 *      names. The name environment implements the actual connection of the compiler
 	 *      to the outside world (e.g. in batch mode the name environment is performing
@@ -237,23 +237,23 @@ public class Compiler implements ITypeRequestor, ProblemSeverities {
 	 *      Note: the name environment is responsible for implementing the actual classpath
 	 *            rules.
 	 *
-	 *  @param policy org.eclipse.jdt.internal.compiler.api.problem.IErrorHandlingPolicy
+	 *  @param policy org.summer.sdt.internal.compiler.api.problem.IErrorHandlingPolicy
 	 *      Configurable part for problem handling, allowing the compiler client to
 	 *      specify the rules for handling problems (stop on first error or accumulate
 	 *      them all) and at the same time perform some actions such as opening a dialog
 	 *      in UI when compiling interactively.
-	 *      @see org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
+	 *      @see org.summer.sdt.internal.compiler.DefaultErrorHandlingPolicies
 	 *
-	 *  @param options org.eclipse.jdt.internal.compiler.impl.CompilerOptions
+	 *  @param options org.summer.sdt.internal.compiler.impl.CompilerOptions
 	 *      The options that control the compiler behavior.
 	 *
-	 *  @param requestor org.eclipse.jdt.internal.compiler.api.ICompilerRequestor
+	 *  @param requestor org.summer.sdt.internal.compiler.api.ICompilerRequestor
 	 *      Component which will receive and persist all compilation results and is intended
 	 *      to consume them as they are produced. Typically, in a batch compiler, it is
 	 *      responsible for writing out the actual .class files to the file system.
-	 *      @see org.eclipse.jdt.internal.compiler.CompilationResult
+	 *      @see org.summer.sdt.internal.compiler.CompilationResult
 	 *
-	 *  @param problemFactory org.eclipse.jdt.internal.compiler.api.problem.IProblemFactory
+	 *  @param problemFactory org.summer.sdt.internal.compiler.api.problem.IProblemFactory
 	 *      Factory used inside the compiler to create problem descriptors. It allows the
 	 *      compiler client to supply its own representation of compilation problems in
 	 *      order to avoid object conversions. Note that the factory is not supposed
@@ -892,7 +892,7 @@ public class Compiler implements ITypeRequestor, ProblemSeverities {
 
 	public void reset() {
 		this.lookupEnvironment.reset();
-//		this.parser.scanner.source = null;
+		this.parser.scanner.source = null;
 		this.unitsToProcess = null;
 		if (DebugRequestor != null) DebugRequestor.reset();
 		this.problemReporter.reset();

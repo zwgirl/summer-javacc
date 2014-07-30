@@ -410,7 +410,7 @@ class VariableBinding implements IVariableBinding {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.IBinding#isRecovered()
+	 * @see org.summer.sdt.core.dom.IBinding#isRecovered()
 	 */
 	public boolean isRecovered() {
 		return false;
@@ -418,7 +418,7 @@ class VariableBinding implements IVariableBinding {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.IVariableBinding.isEffectivelyFinal()
+	 * @see org.summer.sdt.core.dom.IVariableBinding.isEffectivelyFinal()
 	 */
 	public boolean isEffectivelyFinal() {
 		return (!this.binding.isFinal() && this.binding.isEffectivelyFinal());

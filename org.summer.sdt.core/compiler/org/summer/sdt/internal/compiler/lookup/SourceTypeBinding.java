@@ -905,7 +905,7 @@ public class SourceTypeBinding extends ReferenceBinding {
 		return this.fields;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#genericTypeSignature()
+	 * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#genericTypeSignature()
 	 */
 	public char[] genericTypeSignature() {
 		if (!isPrototype())
@@ -954,7 +954,7 @@ public class SourceTypeBinding extends ReferenceBinding {
 	 * lazily resolving corresponding annotation nodes, in case of forward references.
 	 * For type use bindings, this method still returns the tagbits corresponding to the type 
 	 * declaration binding.
-	 * @see org.eclipse.jdt.internal.compiler.lookup.Binding#getAnnotationTagBits()
+	 * @see org.summer.sdt.internal.compiler.lookup.Binding#getAnnotationTagBits()
 	 */
 	public long getAnnotationTagBits() {
 		if (!isPrototype())
@@ -1282,7 +1282,7 @@ public class SourceTypeBinding extends ReferenceBinding {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.Binding#initializeDeprecatedAnnotationTagBits()
+	 * @see org.summer.sdt.internal.compiler.lookup.Binding#initializeDeprecatedAnnotationTagBits()
 	 */
 	public void initializeDeprecatedAnnotationTagBits() {
 		if (!isPrototype()) {

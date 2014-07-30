@@ -27,7 +27,7 @@ package org.summer.sdt.core.search;
  * <p>
  * While {@link TypeNameRequestor} only reports type names information (e.g. package, enclosing types, simple name, modifiers, etc.),
  * this class reports {@link TypeNameMatch} objects instead, which store this information and can return
- * an {@link org.eclipse.jdt.core.IType} handle.
+ * an {@link org.summer.sdt.core.IType} handle.
  * </p>
  * <p>
  * This class may be subclassed by clients.

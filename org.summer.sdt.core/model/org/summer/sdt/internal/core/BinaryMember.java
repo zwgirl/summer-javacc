@@ -115,7 +115,7 @@ public String getKey() {
 	}
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.Binding#computeUniqueKey()
+ * @see org.summer.sdt.internal.compiler.lookup.Binding#computeUniqueKey()
  */
 public abstract String getKey(boolean forceOpen) throws JavaModelException;
 /*

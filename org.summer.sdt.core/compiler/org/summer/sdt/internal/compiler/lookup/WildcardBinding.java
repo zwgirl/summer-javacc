@@ -119,7 +119,7 @@ public class WildcardBinding extends ReferenceBinding {
 	    }
     }
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding#canBeInstantiated()
+	 * @see org.summer.sdt.internal.compiler.lookup.ReferenceBinding#canBeInstantiated()
 	 */
 	public boolean canBeInstantiated() {
 		// cannot be asked per construction
@@ -127,7 +127,7 @@ public class WildcardBinding extends ReferenceBinding {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#collectMissingTypes(java.util.List)
+	 * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#collectMissingTypes(java.util.List)
 	 */
 	public List collectMissingTypes(List missingTypes) {
 		if ((this.tagBits & TagBits.HasMissingType) != 0) {
@@ -406,7 +406,7 @@ public class WildcardBinding extends ReferenceBinding {
 
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#constantPoolName()
+	 * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#constantPoolName()
 	 */
 	public char[] constantPoolName() {
 		return erasure().constantPoolName();
@@ -439,14 +439,14 @@ public class WildcardBinding extends ReferenceBinding {
         }
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#debugName()
+	 * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#debugName()
 	 */
 	public String debugName() {
 	    return toString();
 	}
 
     /* (non-Javadoc)
-     * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#erasure()
+     * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#erasure()
      */
     public TypeBinding erasure() {
     	if (this.otherBounds == null) {
@@ -464,7 +464,7 @@ public class WildcardBinding extends ReferenceBinding {
     }
 
     /* (non-Javadoc)
-     * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#signature()
+     * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#signature()
      */
     public char[] genericTypeSignature() {
         if (this.genericSignature == null) {
@@ -520,7 +520,7 @@ public class WildcardBinding extends ReferenceBinding {
 	}
 
 	/**
-     * @see org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding#isSuperclassOf(org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding)
+     * @see org.summer.sdt.internal.compiler.lookup.ReferenceBinding#isSuperclassOf(org.summer.sdt.internal.compiler.lookup.ReferenceBinding)
      */
     public boolean isSuperclassOf(ReferenceBinding otherType) {
         if (this.boundKind == Wildcard.SUPER) {
@@ -645,7 +645,7 @@ public class WildcardBinding extends ReferenceBinding {
 	}
 	
     /* (non-Javadoc)
-     * @see org.eclipse.jdt.internal.compiler.lookup.Binding#readableName()
+     * @see org.summer.sdt.internal.compiler.lookup.Binding#readableName()
      */
     public char[] readableName() {
         switch (this.boundKind) {
@@ -723,7 +723,7 @@ public class WildcardBinding extends ReferenceBinding {
 	}
 
     /* (non-Javadoc)
-     * @see org.eclipse.jdt.internal.compiler.lookup.Binding#shortReadableName()
+     * @see org.summer.sdt.internal.compiler.lookup.Binding#shortReadableName()
      */
     public char[] shortReadableName() {
         switch (this.boundKind) {
@@ -747,7 +747,7 @@ public class WildcardBinding extends ReferenceBinding {
     }
 
     /**
-     * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#signature()
+     * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#signature()
      */
     public char[] signature() {
      	// should not be called directly on a wildcard; signature should only be asked on
@@ -764,7 +764,7 @@ public class WildcardBinding extends ReferenceBinding {
     }
 
     /* (non-Javadoc)
-     * @see org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding#sourceName()
+     * @see org.summer.sdt.internal.compiler.lookup.ReferenceBinding#sourceName()
      */
     public char[] sourceName() {
         switch (this.boundKind) {
@@ -778,7 +778,7 @@ public class WildcardBinding extends ReferenceBinding {
     }
 
     /* (non-Javadoc)
-     * @see org.eclipse.jdt.internal.compiler.lookup.TypeVariableBinding#superclass()
+     * @see org.summer.sdt.internal.compiler.lookup.TypeVariableBinding#superclass()
      */
     public ReferenceBinding superclass() {
 		if (this.superclass == null) {
@@ -798,7 +798,7 @@ public class WildcardBinding extends ReferenceBinding {
     }
 
     /* (non-Javadoc)
-     * @see org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding#superInterfaces()
+     * @see org.summer.sdt.internal.compiler.lookup.ReferenceBinding#superInterfaces()
      */
     public ReferenceBinding[] superInterfaces() {
         if (this.superInterfaces == null) {

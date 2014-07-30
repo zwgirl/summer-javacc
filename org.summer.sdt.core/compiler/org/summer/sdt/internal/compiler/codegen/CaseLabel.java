@@ -16,7 +16,7 @@ public class CaseLabel extends BranchLabel {
 
 /**
  * CaseLabel constructor comment.
- * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+ * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
  */
 public CaseLabel(CodeStream codeStream) {
 	super(codeStream);

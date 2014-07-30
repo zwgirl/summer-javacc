@@ -352,7 +352,7 @@ public interface TypeConstants {
 	char[] SYNTHETIC_ENUM_CONSTANT_INITIALIZATION_METHOD_PREFIX =  " enum constant initialization$".toCharArray(); //$NON-NLS-1$
 	char[] SYNTHETIC_STATIC_FACTORY =  "<factory>".toCharArray(); //$NON-NLS-1$
 
-	// constants in enum org.eclipse.jdt.annotation.DefaultLocation:
+	// constants in enum org.summer.sdt.annotation.DefaultLocation:
 	char[] DEFAULT_LOCATION__PARAMETER = "PARAMETER".toCharArray(); //$NON-NLS-1$
 	char[] DEFAULT_LOCATION__RETURN_TYPE = "RETURN_TYPE".toCharArray(); //$NON-NLS-1$
 	char[] DEFAULT_LOCATION__FIELD = "FIELD".toCharArray(); //$NON-NLS-1$

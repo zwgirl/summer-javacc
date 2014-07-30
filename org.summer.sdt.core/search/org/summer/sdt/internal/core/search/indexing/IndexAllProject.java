@@ -141,7 +141,7 @@ public class IndexAllProject extends IndexRequest {
 									if (IndexAllProject.this.isCancelled) return false;
 									switch(proxy.getType()) {
 										case IResource.FILE :
-											if (org.summer.sdt.util.Util.isJavaLikeFileName(proxy.getName())) {
+											if (org.summer.sdt.internal.core.util.Util.isJavaLikeFileName(proxy.getName())) {
 												IFile file = (IFile) proxy.requestResource();
 												if (exclusionPatterns != null || inclusionPatterns != null)
 													if (Util.isExcluded(file, inclusionPatterns, exclusionPatterns))
@@ -170,7 +170,7 @@ public class IndexAllProject extends IndexRequest {
 									if (IndexAllProject.this.isCancelled) return false;
 									switch(proxy.getType()) {
 										case IResource.FILE :
-											if (org.summer.sdt.util.Util.isJavaLikeFileName(proxy.getName())) {
+											if (org.summer.sdt.internal.core.util.Util.isJavaLikeFileName(proxy.getName())) {
 												IFile file = (IFile) proxy.requestResource();
 												URI location = file.getLocationURI();
 												if (location == null) return false;

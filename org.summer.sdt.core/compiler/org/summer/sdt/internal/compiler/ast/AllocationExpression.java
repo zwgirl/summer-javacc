@@ -31,7 +31,7 @@
  *							Bug 426764 - [1.8] Presence of conditional expression as method argument confuses compiler
  *							Bug 424930 - [1.8][compiler] Regression: "Cannot infer type arguments" error from compiler.
  *							Bug 427483 - [Java 8] Variables in lambdas sometimes can't be resolved
- *							Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *							Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *							Bug 426996 - [1.8][inference] try to avoid method Expression.unresolve()? 
  *							Bug 428352 - [1.8][compiler] Resolution errors don't always surface
  *							Bug 429203 - [1.8][compiler] NPE in AllocationExpression.binding
@@ -278,7 +278,7 @@ public class AllocationExpression extends Expression implements Invocation {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#genericTypeArguments()
+	 * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#genericTypeArguments()
 	 */
 	public TypeBinding[] genericTypeArguments() {
 		return this.genericTypeArguments;
@@ -697,7 +697,7 @@ public class AllocationExpression extends Expression implements Invocation {
 		visitor.endVisit(this, scope);
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.Expression#setExpectedType(org.eclipse.jdt.internal.compiler.lookup.TypeBinding)
+	 * @see org.summer.sdt.internal.compiler.ast.Expression#setExpectedType(org.summer.sdt.internal.compiler.lookup.TypeBinding)
 	 */
 	public void setExpectedType(TypeBinding expectedType) {
 		this.typeExpected = expectedType;
@@ -716,7 +716,7 @@ public class AllocationExpression extends Expression implements Invocation {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#invocationTargetType()
+	 * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#invocationTargetType()
 	 */
 	public TypeBinding invocationTargetType() {
 		return this.typeExpected;

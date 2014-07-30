@@ -15,7 +15,7 @@ import org.summer.sdt.core.IJavaElement;
 
 public class BinaryLambdaExpression extends LambdaExpression {
 
-	BinaryLambdaExpression(JavaElement parent, org.eclipse.jdt.internal.compiler.ast.LambdaExpression lambdaExpression) {
+	BinaryLambdaExpression(JavaElement parent, org.summer.sdt.internal.compiler.ast.LambdaExpression lambdaExpression) {
 		super(parent, lambdaExpression);
 	}
 

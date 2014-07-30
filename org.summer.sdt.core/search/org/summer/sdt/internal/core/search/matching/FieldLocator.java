@@ -120,7 +120,7 @@ public class FieldLocator extends VariableLocator {
 		return declaringLevel > typeLevel ? typeLevel : declaringLevel; // return the weaker match
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.core.search.matching.PatternLocator#matchLevelAndReportImportRef(org.eclipse.jdt.internal.compiler.ast.ImportReference, org.eclipse.jdt.internal.compiler.lookup.Binding, org.eclipse.jdt.internal.core.search.matching.MatchLocator)
+	 * @see org.summer.sdt.internal.core.search.matching.PatternLocator#matchLevelAndReportImportRef(org.summer.sdt.internal.compiler.ast.ImportReference, org.summer.sdt.internal.compiler.lookup.Binding, org.summer.sdt.internal.core.search.matching.MatchLocator)
 	 * Accept to report match of static field on static import
 	 */
 	protected void matchLevelAndReportImportRef(ImportReference importRef, Binding binding, MatchLocator locator) throws CoreException {
@@ -238,7 +238,7 @@ public class FieldLocator extends VariableLocator {
 	}
 	/* (non-Javadoc)
 	 * Overridden to reject unexact matches.
-	 * @see org.eclipse.jdt.internal.core.search.matching.PatternLocator#updateMatch(org.eclipse.jdt.internal.compiler.lookup.ParameterizedTypeBinding, char[][][], org.eclipse.jdt.internal.core.search.matching.MatchLocator)
+	 * @see org.summer.sdt.internal.core.search.matching.PatternLocator#updateMatch(org.summer.sdt.internal.compiler.lookup.ParameterizedTypeBinding, char[][][], org.summer.sdt.internal.core.search.matching.MatchLocator)
 	 *
 	 */
 	protected void updateMatch(ParameterizedTypeBinding parameterizedBinding, char[][][] patternTypeArguments, MatchLocator locator) {
@@ -268,7 +268,7 @@ public class FieldLocator extends VariableLocator {
 		if (isBinary) {
 			if (resource == null)
 				resource = type.getJavaProject().getProject();
-			info = locator.getBinaryInfo((org.eclipse.jdt.internal.core.ClassFile) type.getClassFile(), resource);
+			info = locator.getBinaryInfo((org.summer.sdt.internal.core.ClassFile) type.getClassFile(), resource);
 			locator.reportBinaryMemberDeclaration(resource, field, fieldBinding, info, SearchMatch.A_ACCURATE);
 		} else {
 			if (declaringClass instanceof ParameterizedTypeBinding)

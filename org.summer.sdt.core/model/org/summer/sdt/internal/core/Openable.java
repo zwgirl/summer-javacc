@@ -98,8 +98,8 @@ public abstract class Openable extends JavaElement implements IOpenable, IBuffer
 		closeBuffer();
 	}
 	protected void codeComplete(
-			org.eclipse.jdt.internal.compiler.env.ICompilationUnit cu,
-			org.eclipse.jdt.internal.compiler.env.ICompilationUnit unitToSkip,
+			org.summer.sdt.internal.compiler.env.ICompilationUnit cu,
+			org.summer.sdt.internal.compiler.env.ICompilationUnit unitToSkip,
 			int position, CompletionRequestor requestor,
 			WorkingCopyOwner owner,
 			ITypeRoot typeRoot,
@@ -137,7 +137,7 @@ public abstract class Openable extends JavaElement implements IOpenable, IBuffer
 			System.out.println(Thread.currentThread() + " TIME SPENT in NameLoopkup#seekTypesInBinaryPackage: " + environment.nameLookup.timeSpentInSeekTypesInBinaryPackage + "ms");  //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
-	protected IJavaElement[] codeSelect(org.eclipse.jdt.internal.compiler.env.ICompilationUnit cu, int offset, int length, WorkingCopyOwner owner) throws JavaModelException {
+	protected IJavaElement[] codeSelect(org.summer.sdt.internal.compiler.env.ICompilationUnit cu, int offset, int length, WorkingCopyOwner owner) throws JavaModelException {
 		PerformanceStats performanceStats = SelectionEngine.PERF
 			? PerformanceStats.getStats(JavaModelManager.SELECTION_PERF, this)
 			: null;

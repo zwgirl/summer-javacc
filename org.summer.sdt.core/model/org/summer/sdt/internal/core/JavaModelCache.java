@@ -29,8 +29,8 @@ public class JavaModelCache {
 	public static final int DEFAULT_PKG_SIZE = 500; // average 1782 bytes per pkg -> maximum size : 178200*BASE_VALUE bytes
 	public static final int DEFAULT_OPENABLE_SIZE = 250; // average 6629 bytes per openable (includes children) -> maximum size : 662900*BASE_VALUE bytes
 	public static final int DEFAULT_CHILDREN_SIZE = 250*20; // average 20 children per openable
-	public static final String RATIO_PROPERTY = "org.eclipse.jdt.core.javamodelcache.ratio"; //$NON-NLS-1$
-	public static final String JAR_TYPE_RATIO_PROPERTY = "org.eclipse.jdt.core.javamodelcache.jartyperatio"; //$NON-NLS-1$
+	public static final String RATIO_PROPERTY = "org.summer.sdt.core.javamodelcache.ratio"; //$NON-NLS-1$
+	public static final String JAR_TYPE_RATIO_PROPERTY = "org.summer.sdt.core.javamodelcache.jartyperatio"; //$NON-NLS-1$
 	
 	public static final Object NON_EXISTING_JAR_TYPE_INFO = new Object();
 

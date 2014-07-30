@@ -216,7 +216,7 @@ public final class JavaConventions {
 	public static IStatus validateClassFileName(String name, String sourceLevel, String complianceLevel) {
 		if (name == null) {
 			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_classFile_nullName, null);		}
-		if (!org.summer.sdt.util.Util.isClassFileName(name)) {
+		if (!org.summer.sdt.internal.compiler.util.Util.isClassFileName(name)) {
 			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_classFile_notClassFileName, null);
 		}
 		String identifier;

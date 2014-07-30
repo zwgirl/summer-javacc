@@ -29,7 +29,7 @@ public class UserLibraryClasspathContainer implements IClasspathContainer {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.IClasspathContainer#getClasspathEntries()
+	 * @see org.summer.sdt.core.IClasspathContainer#getClasspathEntries()
 	 */
 	public IClasspathEntry[] getClasspathEntries() {
 		UserLibrary library= getUserLibrary();
@@ -40,14 +40,14 @@ public class UserLibraryClasspathContainer implements IClasspathContainer {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.IClasspathContainer#getDescription()
+	 * @see org.summer.sdt.core.IClasspathContainer#getDescription()
 	 */
 	public String getDescription() {
 		return this.name;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.IClasspathContainer#getKind()
+	 * @see org.summer.sdt.core.IClasspathContainer#getKind()
 	 */
 	public int getKind() {
 		UserLibrary library= getUserLibrary();
@@ -58,7 +58,7 @@ public class UserLibraryClasspathContainer implements IClasspathContainer {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.IClasspathContainer#getPath()
+	 * @see org.summer.sdt.core.IClasspathContainer#getPath()
 	 */
 	public IPath getPath() {
 		return new Path(JavaCore.USER_LIBRARY_CONTAINER_ID).append(this.name);

@@ -720,7 +720,7 @@ public class BasicSearchEngine {
 						}
 					} else {
 						Parser basicParser = getParser();
-						org.eclipse.jdt.internal.compiler.env.ICompilationUnit unit = (org.eclipse.jdt.internal.compiler.env.ICompilationUnit) workingCopy;
+						org.summer.sdt.internal.compiler.env.ICompilationUnit unit = (org.summer.sdt.internal.compiler.env.ICompilationUnit) workingCopy;
 						CompilationResult compilationUnitResult = new CompilationResult(unit, 0, 0, this.compilerOptions.maxProblemsPerUnit);
 						CompilationUnitDeclaration parsedUnit = basicParser.dietParse(unit, compilationUnitResult);
 						if (parsedUnit != null) {
@@ -1186,7 +1186,7 @@ public class BasicSearchEngine {
 						}
 					} else {
 						Parser basicParser = getParser();
-						org.eclipse.jdt.internal.compiler.env.ICompilationUnit unit = (org.eclipse.jdt.internal.compiler.env.ICompilationUnit) workingCopy;
+						org.summer.sdt.internal.compiler.env.ICompilationUnit unit = (org.summer.sdt.internal.compiler.env.ICompilationUnit) workingCopy;
 						CompilationResult compilationUnitResult = new CompilationResult(unit, 0, 0, this.compilerOptions.maxProblemsPerUnit);
 						CompilationUnitDeclaration parsedUnit = basicParser.dietParse(unit, compilationUnitResult);
 						if (parsedUnit != null) {
@@ -1427,7 +1427,7 @@ public class BasicSearchEngine {
 						}
 					} else {
 						Parser basicParser = getParser();
-						org.eclipse.jdt.internal.compiler.env.ICompilationUnit unit = (org.eclipse.jdt.internal.compiler.env.ICompilationUnit) workingCopy;
+						org.summer.sdt.internal.compiler.env.ICompilationUnit unit = (org.summer.sdt.internal.compiler.env.ICompilationUnit) workingCopy;
 						CompilationResult compilationUnitResult = new CompilationResult(unit, 0, 0, this.compilerOptions.maxProblemsPerUnit);
 						CompilationUnitDeclaration parsedUnit = basicParser.dietParse(unit, compilationUnitResult);
 						if (parsedUnit != null) {

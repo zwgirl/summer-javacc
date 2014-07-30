@@ -35,7 +35,7 @@ public class TypeParameter extends AbstractVariableDeclaration {
 	public TypeReference[] bounds;
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.AbstractVariableDeclaration#getKind()
+	 * @see org.summer.sdt.internal.compiler.ast.AbstractVariableDeclaration#getKind()
 	 */
 	public int getKind() {
 		return TYPE_PARAMETER;
@@ -126,7 +126,7 @@ public class TypeParameter extends AbstractVariableDeclaration {
 		}	
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ast.AstNode#print(int, java.lang.StringBuffer)
+	 * @see org.summer.sdt.internal.compiler.ast.AstNode#print(int, java.lang.StringBuffer)
 	 */
 	public StringBuffer printStatement(int indent, StringBuffer output) {
 		if (this.annotations != null) {

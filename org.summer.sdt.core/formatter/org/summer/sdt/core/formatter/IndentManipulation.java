@@ -400,7 +400,7 @@ public final class IndentManipulation {
 
 	/**
 	 * Returns the tab width as configured in the given map.
-	 * <p>Use {@link org.eclipse.jdt.core.IJavaProject#getOptions(boolean)} to get the most current project options.</p>
+	 * <p>Use {@link org.summer.sdt.core.IJavaProject#getOptions(boolean)} to get the most current project options.</p>
 	 *
 	 * @param options the map to get the formatter settings from.
 	 *
@@ -416,7 +416,7 @@ public final class IndentManipulation {
 
 	/**
 	 * Returns the tab width as configured in the given map.
-	 * <p>Use {@link org.eclipse.jdt.core.IJavaProject#getOptions(boolean)} to get the most current project options.</p>
+	 * <p>Use {@link org.summer.sdt.core.IJavaProject#getOptions(boolean)} to get the most current project options.</p>
 	 *
 	 * @param options the map to get the formatter settings from
 	 *

@@ -80,7 +80,7 @@ public int get(Object key) {
 /**
  * Return the hashcode for the key parameter
  *
- * @param key org.eclipse.jdt.internal.compiler.lookup.MethodBinding
+ * @param key org.summer.sdt.internal.compiler.lookup.MethodBinding
  * @return int
  */
 public int hashCode(Object key) {

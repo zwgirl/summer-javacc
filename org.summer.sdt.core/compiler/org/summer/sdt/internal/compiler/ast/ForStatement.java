@@ -243,8 +243,8 @@ public class ForStatement extends Statement {
 	/**
 	 * For statement code generation
 	 *
-	 * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 */
 	public void generateCode(BlockScope currentScope, CodeStream codeStream) {
 

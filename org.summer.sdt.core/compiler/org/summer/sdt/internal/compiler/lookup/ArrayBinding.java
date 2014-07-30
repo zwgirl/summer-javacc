@@ -76,7 +76,7 @@ public TypeBinding closestMatch() {
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#collectMissingTypes(java.util.List)
+ * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#collectMissingTypes(java.util.List)
  */
 public List collectMissingTypes(List missingTypes) {
 	if ((this.tagBits & TagBits.HasMissingType) != 0) {
@@ -209,7 +209,7 @@ public TypeBinding elementsType() {
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#erasure()
+ * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#erasure()
  */
 public TypeBinding erasure() {
     TypeBinding erasedType = this.leafComponentType.erasure();

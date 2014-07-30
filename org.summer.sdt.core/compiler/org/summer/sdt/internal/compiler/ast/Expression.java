@@ -21,7 +21,7 @@
  *								Bug 400874 - [1.8][compiler] Inference infrastructure should evolve to meet JLS8 18.x (Part G of JSR335 spec)
  *								Bug 426792 - [1.8][inference][impl] generify new type inference engine
  *								Bug 423505 - [1.8] Implement "18.5.4 More Specific Method Inference"
- *								Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *								Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *								Bug 426996 - [1.8][inference] try to avoid method Expression.unresolve()?
  *								Bug 428274 - [1.8] [compiler] Cannot cast from Number to double
  *								Bug 428352 - [1.8][compiler] Resolution errors don't always surface
@@ -695,8 +695,8 @@ public abstract class Expression extends Statement {
 	 * Expression statements are plain expressions, however they generate like
 	 * normal expressions with no value required.
 	 *
-	 * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 */
 	public void generateCode(BlockScope currentScope, CodeStream codeStream) {
 		if ((this.bits & ASTNode.IsReachable) == 0) {
@@ -708,8 +708,8 @@ public abstract class Expression extends Statement {
 	/**
 	 * Every expression is responsible for generating its implicit conversion when necessary.
 	 *
-	 * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 * @param valueRequired boolean
 	 */
 	public void generateCode(BlockScope currentScope, CodeStream codeStream, boolean valueRequired) {

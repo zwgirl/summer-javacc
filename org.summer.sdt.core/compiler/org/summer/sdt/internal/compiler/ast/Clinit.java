@@ -100,8 +100,8 @@ public class Clinit extends AbstractMethodDeclaration {
 	/**
 	 * Bytecode generation for a <clinit> method
 	 *
-	 * @param classScope org.eclipse.jdt.internal.compiler.lookup.ClassScope
-	 * @param classFile org.eclipse.jdt.internal.compiler.codegen.ClassFile
+	 * @param classScope org.summer.sdt.internal.compiler.lookup.ClassScope
+	 * @param classFile org.summer.sdt.internal.compiler.codegen.ClassFile
 	 */
 	public void generateCode(ClassScope classScope, ClassFile classFile) {
 
@@ -150,8 +150,8 @@ public class Clinit extends AbstractMethodDeclaration {
 	/**
 	 * Bytecode generation for a <clinit> method
 	 *
-	 * @param classScope org.eclipse.jdt.internal.compiler.lookup.ClassScope
-	 * @param classFile org.eclipse.jdt.internal.compiler.codegen.ClassFile
+	 * @param classScope org.summer.sdt.internal.compiler.lookup.ClassScope
+	 * @param classFile org.summer.sdt.internal.compiler.codegen.ClassFile
 	 */
 	private void generateCode(
 		ClassScope classScope,

@@ -57,7 +57,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to align type members of a type declaration on column
-	 *     - option id:         "org.eclipse.jdt.core.formatter.formatter.align_type_members_on_columns"
+	 *     - option id:         "org.summer.sdt.core.formatter.formatter.align_type_members_on_columns"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -70,7 +70,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of arguments in allocation expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_arguments_in_allocation_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_arguments_in_allocation_expression"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -81,7 +81,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of arguments in enum constant
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_arguments_in_enum_constant"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_arguments_in_enum_constant"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -92,7 +92,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of arguments in annotation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_arguments_in_annotation"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_arguments_in_annotation"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_NO_SPLIT, INDENT_DEFAULT)
 	 * </pre>
@@ -103,7 +103,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of arguments in explicit constructor call
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_arguments_in_explicit_constructor_call"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_arguments_in_explicit_constructor_call"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -114,7 +114,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of arguments in method invocation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_arguments_in_method_invocation"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_arguments_in_method_invocation"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -125,7 +125,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of arguments in qualified allocation expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_arguments_in_qualified_allocation_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_arguments_in_qualified_allocation_expression"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -136,7 +136,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of assignment
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_assignment"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_assignment"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_NO_SPLIT, INDENT_DEFAULT)
 	 * </pre>
@@ -147,7 +147,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of binary expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_binary_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_binary_expression"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -158,7 +158,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of compact if
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_compact_if"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_compact_if"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_ONE_PER_LINE, INDENT_BY_ONE)
 	 * </pre>
@@ -169,7 +169,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of conditional expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_conditional_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_conditional_expression"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_ONE_PER_LINE, INDENT_DEFAULT)
 	 * </pre>
@@ -180,7 +180,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of enum constants
-	 *     - option id:        "org.eclipse.jdt.core.formatter.alignment_for_enum_constants"
+	 *     - option id:        "org.summer.sdt.core.formatter.alignment_for_enum_constants"
 	 *     - possible values:  values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:          createAlignmentValue(false, WRAP_NO_SPLIT, INDENT_DEFAULT)
 	 * </pre>
@@ -191,7 +191,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of expressions in array initializer
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_expressions_in_array_initializer"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_expressions_in_array_initializer"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -202,7 +202,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_method_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_method_declaration"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_NO_SPLIT, INDENT_DEFAULT)
 	 * </pre>
@@ -213,7 +213,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of multiple fields
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_multiple_fields"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_multiple_fields"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -224,7 +224,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of parameters in constructor declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_parameters_in_constructor_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_parameters_in_constructor_declaration"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -235,7 +235,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of parameters in method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_parameters_in_method_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_parameters_in_method_declaration"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -246,7 +246,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of resources in a try with resources statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_resources_in_try"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_resources_in_try"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_NEXT_PER_LINE, INDENT_DEFAULT)
 	 * </pre>
@@ -257,7 +257,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of selector in method invocation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_selector_in_method_invocation"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_selector_in_method_invocation"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -268,7 +268,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of superclass in type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_superclass_in_type_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_superclass_in_type_declaration"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_NEXT_SHIFTED, INDENT_DEFAULT)
 	 * </pre>
@@ -279,7 +279,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of superinterfaces in enum declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_superinterfaces_in_enum_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_superinterfaces_in_enum_declaration"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -290,7 +290,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of superinterfaces in type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_superinterfaces_in_type_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_superinterfaces_in_type_declaration"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -301,7 +301,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of throws clause in constructor declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_throws_clause_in_constructor_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_throws_clause_in_constructor_declaration"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -312,7 +312,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of throws clause in method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_throws_clause_in_method_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_throws_clause_in_method_declaration"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -323,7 +323,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option for alignment of exceptions declared in a Union Type in the argument of a multicatch statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.alignment_for_union_type_in_multicatch"
+	 *     - option id:         "org.summer.sdt.core.formatter.alignment_for_union_type_in_multicatch"
 	 *     - possible values:   values returned by <code>createAlignmentValue(boolean, int, int)</code> call
 	 *     - default:           createAlignmentValue(false, WRAP_COMPACT, INDENT_DEFAULT)
 	 * </pre>
@@ -334,7 +334,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to add blank lines after the imports declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.blank_lines_after_imports"
+	 *     - option id:         "org.summer.sdt.core.formatter.blank_lines_after_imports"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "0"
 	 * </pre>
@@ -344,7 +344,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to add blank lines after the package declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.blank_lines_after_package"
+	 *     - option id:         "org.summer.sdt.core.formatter.blank_lines_after_package"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "0"
 	 * </pre>
@@ -354,7 +354,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to add blank lines at the beginning of the method body
-	 *     - option id:         "org.eclipse.jdt.core.formatter.number_of_blank_lines_at_beginning_of_method_body"
+	 *     - option id:         "org.summer.sdt.core.formatter.number_of_blank_lines_at_beginning_of_method_body"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "0"
 	 * </pre>
@@ -364,7 +364,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to add blank lines before a field declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.blank_lines_before_field"
+	 *     - option id:         "org.summer.sdt.core.formatter.blank_lines_before_field"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "0"
 	 * </pre>
@@ -374,7 +374,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to add blank lines before the first class body declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.blank_lines_before_first_class_body_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.blank_lines_before_first_class_body_declaration"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "0"
 	 * </pre>
@@ -384,7 +384,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to add blank lines before the imports declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.blank_lines_before_imports"
+	 *     - option id:         "org.summer.sdt.core.formatter.blank_lines_before_imports"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "0"
 	 * </pre>
@@ -394,7 +394,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to add blank lines before a member type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.blank_lines_before_member_type"
+	 *     - option id:         "org.summer.sdt.core.formatter.blank_lines_before_member_type"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "0"
 	 * </pre>
@@ -404,7 +404,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to add blank lines before a method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.blank_lines_before_method"
+	 *     - option id:         "org.summer.sdt.core.formatter.blank_lines_before_method"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "0"
 	 * </pre>
@@ -414,7 +414,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to add blank lines before a new chunk
-	 *     - option id:         "org.eclipse.jdt.core.formatter.blank_lines_before_new_chunk"
+	 *     - option id:         "org.summer.sdt.core.formatter.blank_lines_before_new_chunk"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "0"
 	 * </pre>
@@ -424,7 +424,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to add blank lines before the package declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.blank_lines_before_package"
+	 *     - option id:         "org.summer.sdt.core.formatter.blank_lines_before_package"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "0"
 	 * </pre>
@@ -434,7 +434,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to add blank lines between import groups
-	 *     - option id:         "org.eclipse.jdt.core.formatter.blank_lines_between_import_groups"
+	 *     - option id:         "org.summer.sdt.core.formatter.blank_lines_between_import_groups"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "1"
 	 * </pre>
@@ -447,7 +447,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to add blank lines between type declarations
-	 *     - option id:         "org.eclipse.jdt.core.formatter.blank_lines_between_type_declarations"
+	 *     - option id:         "org.summer.sdt.core.formatter.blank_lines_between_type_declarations"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "0"
 	 * </pre>
@@ -457,7 +457,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to position the braces of an annotation type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.brace_position_for_annotation_type_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.brace_position_for_annotation_type_declaration"
 	 *     - possible values:   { END_OF_LINE, NEXT_LINE, NEXT_LINE_SHIFTED, NEXT_LINE_ON_WRAP }
 	 *     - default:           END_OF_LINE
 	 * </pre>
@@ -471,7 +471,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to position the braces of an anonymous type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.brace_position_for_anonymous_type_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.brace_position_for_anonymous_type_declaration"
 	 *     - possible values:   { END_OF_LINE, NEXT_LINE, NEXT_LINE_SHIFTED, NEXT_LINE_ON_WRAP }
 	 *     - default:           END_OF_LINE
 	 * </pre>
@@ -485,7 +485,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to position the braces of an array initializer
-	 *     - option id:         "org.eclipse.jdt.core.formatter.brace_position_for_array_initializer"
+	 *     - option id:         "org.summer.sdt.core.formatter.brace_position_for_array_initializer"
 	 *     - possible values:   { END_OF_LINE, NEXT_LINE, NEXT_LINE_SHIFTED, NEXT_LINE_ON_WRAP }
 	 *     - default:           END_OF_LINE
 	 * </pre>
@@ -499,7 +499,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to position the braces of a block
-	 *     - option id:         "org.eclipse.jdt.core.formatter.brace_position_for_block"
+	 *     - option id:         "org.summer.sdt.core.formatter.brace_position_for_block"
 	 *     - possible values:   { END_OF_LINE, NEXT_LINE, NEXT_LINE_SHIFTED, NEXT_LINE_ON_WRAP }
 	 *     - default:           END_OF_LINE
 	 * </pre>
@@ -514,7 +514,7 @@ public class DefaultCodeFormatterConstants {
 	 * <pre>
 	 * FORMATTER / Option to position the braces of a block in a case statement when the block is the first statement following
 	 *             the case
-	 *     - option id:         "org.eclipse.jdt.core.formatter.brace_position_for_block_in_case"
+	 *     - option id:         "org.summer.sdt.core.formatter.brace_position_for_block_in_case"
 	 *     - possible values:   { END_OF_LINE, NEXT_LINE, NEXT_LINE_SHIFTED, NEXT_LINE_ON_WRAP }
 	 *     - default:           END_OF_LINE
 	 * </pre>
@@ -528,7 +528,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to position the braces of a constructor declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.brace_position_for_constructor_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.brace_position_for_constructor_declaration"
 	 *     - possible values:   { END_OF_LINE, NEXT_LINE, NEXT_LINE_SHIFTED, NEXT_LINE_ON_WRAP }
 	 *     - default:           END_OF_LINE
 	 * </pre>
@@ -542,7 +542,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to position the braces of an enum constant
-	 *     - option id:         "org.eclipse.jdt.core.formatter.brace_position_for_enum_constant"
+	 *     - option id:         "org.summer.sdt.core.formatter.brace_position_for_enum_constant"
 	 *     - possible values:   { END_OF_LINE, NEXT_LINE, NEXT_LINE_SHIFTED, NEXT_LINE_ON_WRAP }
 	 *     - default:           END_OF_LINE
 	 * </pre>
@@ -556,7 +556,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to position the braces of an enum declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.brace_position_for_enum_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.brace_position_for_enum_declaration"
 	 *     - possible values:   { END_OF_LINE, NEXT_LINE, NEXT_LINE_SHIFTED, NEXT_LINE_ON_WRAP }
 	 *     - default:           END_OF_LINE
 	 * </pre>
@@ -570,7 +570,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to position the braces of a method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.brace_position_for_method_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.brace_position_for_method_declaration"
 	 *     - possible values:   { END_OF_LINE, NEXT_LINE, NEXT_LINE_SHIFTED, NEXT_LINE_ON_WRAP }
 	 *     - default:           END_OF_LINE
 	 * </pre>
@@ -584,7 +584,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to position the braces of a switch statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.brace_position_for_switch"
+	 *     - option id:         "org.summer.sdt.core.formatter.brace_position_for_switch"
 	 *     - possible values:   { END_OF_LINE, NEXT_LINE, NEXT_LINE_SHIFTED, NEXT_LINE_ON_WRAP }
 	 *     - default:           END_OF_LINE
 	 * </pre>
@@ -598,7 +598,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to position the braces of a type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.brace_position_for_type_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.brace_position_for_type_declaration"
 	 *     - possible values:   { END_OF_LINE, NEXT_LINE, NEXT_LINE_SHIFTED, NEXT_LINE_ON_WRAP }
 	 *     - default:           END_OF_LINE
 	 * </pre>
@@ -613,7 +613,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to position the braces of a lambda block
-	 *     - option id:         "org.eclipse.jdt.core.formatter.brace_position_for_lambda_body"
+	 *     - option id:         "org.summer.sdt.core.formatter.brace_position_for_lambda_body"
 	 *     - possible values:   { END_OF_LINE, NEXT_LINE, NEXT_LINE_SHIFTED, NEXT_LINE_ON_WRAP }
 	 *     - default:           END_OF_LINE
 	 * </pre>
@@ -628,7 +628,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether blank lines are cleared inside comments
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.clear_blank_lines"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.clear_blank_lines"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -637,12 +637,12 @@ public class DefaultCodeFormatterConstants {
 	 * @since 3.1
 	 * @deprecated Use {@link #FORMATTER_COMMENT_CLEAR_BLANK_LINES_IN_BLOCK_COMMENT} and {@link #FORMATTER_COMMENT_CLEAR_BLANK_LINES_IN_JAVADOC_COMMENT}
 	 */
-	public final static String FORMATTER_COMMENT_CLEAR_BLANK_LINES = "org.eclipse.jdt.core.formatter.comment.clear_blank_lines"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_CLEAR_BLANK_LINES = "org.summer.sdt.core.formatter.comment.clear_blank_lines"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether blank lines are cleared inside javadoc comments
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.clear_blank_lines_in_javadoc_comment"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.clear_blank_lines_in_javadoc_comment"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -650,12 +650,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.3
 	 */
-	public final static String FORMATTER_COMMENT_CLEAR_BLANK_LINES_IN_JAVADOC_COMMENT = "org.eclipse.jdt.core.formatter.comment.clear_blank_lines_in_javadoc_comment"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_CLEAR_BLANK_LINES_IN_JAVADOC_COMMENT = "org.summer.sdt.core.formatter.comment.clear_blank_lines_in_javadoc_comment"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether blank lines are cleared inside block comments
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.clear_blank_lines_in_block_comment"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.clear_blank_lines_in_block_comment"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -663,12 +663,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.3
 	 */
-	public final static String FORMATTER_COMMENT_CLEAR_BLANK_LINES_IN_BLOCK_COMMENT = "org.eclipse.jdt.core.formatter.comment.clear_blank_lines_in_block_comment"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_CLEAR_BLANK_LINES_IN_BLOCK_COMMENT = "org.summer.sdt.core.formatter.comment.clear_blank_lines_in_block_comment"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether comments are formatted
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.format_comments"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.format_comments"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -678,12 +678,12 @@ public class DefaultCodeFormatterConstants {
 	 * @deprecated Use multiple settings for each kind of comments. See {@link #FORMATTER_COMMENT_FORMAT_BLOCK_COMMENT},
 	 * {@link #FORMATTER_COMMENT_FORMAT_JAVADOC_COMMENT} and {@link #FORMATTER_COMMENT_FORMAT_LINE_COMMENT}.
 	 */
-	public final static String FORMATTER_COMMENT_FORMAT = "org.eclipse.jdt.core.formatter.comment.format_comments"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_FORMAT = "org.summer.sdt.core.formatter.comment.format_comments"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether single line comments are formatted
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.format_line_comments"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.format_line_comments"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -691,11 +691,11 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.3
 	 */
-	public final static String FORMATTER_COMMENT_FORMAT_LINE_COMMENT = "org.eclipse.jdt.core.formatter.comment.format_line_comments"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_FORMAT_LINE_COMMENT = "org.summer.sdt.core.formatter.comment.format_line_comments"; //$NON-NLS-1$
 	/**
 	 * <pre>
 	 * FORMATTER / Option to format line comments that start on the first column
-	 *     - option id:         "org.eclipse.jdt.core.formatter.format_line_comment_starting_on_first_column"
+	 *     - option id:         "org.summer.sdt.core.formatter.format_line_comment_starting_on_first_column"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -714,7 +714,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether the white space between code and line comments should be preserved or replaced with a single space
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.preserve_white_space_between_code_and_line_comments"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.preserve_white_space_between_code_and_line_comments"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -722,12 +722,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.7
 	 */
-	public final static String FORMATTER_COMMENT_PRESERVE_WHITE_SPACE_BETWEEN_CODE_AND_LINE_COMMENT = "org.eclipse.jdt.core.formatter.comment.preserve_white_space_between_code_and_line_comments"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_PRESERVE_WHITE_SPACE_BETWEEN_CODE_AND_LINE_COMMENT = "org.summer.sdt.core.formatter.comment.preserve_white_space_between_code_and_line_comments"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether multiple lines comments are formatted
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.format_block_comments"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.format_block_comments"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -735,12 +735,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.3
 	 */
-	public final static String FORMATTER_COMMENT_FORMAT_BLOCK_COMMENT = "org.eclipse.jdt.core.formatter.comment.format_block_comments"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_FORMAT_BLOCK_COMMENT = "org.summer.sdt.core.formatter.comment.format_block_comments"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether javadoc comments are formatted
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.format_javadoc_comments"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.format_javadoc_comments"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -748,12 +748,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.3
 	 */
-	public final static String FORMATTER_COMMENT_FORMAT_JAVADOC_COMMENT = "org.eclipse.jdt.core.formatter.comment.format_javadoc_comments"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_FORMAT_JAVADOC_COMMENT = "org.summer.sdt.core.formatter.comment.format_javadoc_comments"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether the header comment of a Java source file is formatted
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.format_header"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.format_header"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -761,12 +761,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.1
 	 */
-	public final static String FORMATTER_COMMENT_FORMAT_HEADER = "org.eclipse.jdt.core.formatter.comment.format_header"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_FORMAT_HEADER = "org.summer.sdt.core.formatter.comment.format_header"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether HTML tags are formatted.
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.format_html"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.format_html"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -774,12 +774,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.1
 	 */
-	public final static String FORMATTER_COMMENT_FORMAT_HTML = "org.eclipse.jdt.core.formatter.comment.format_html"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_FORMAT_HTML = "org.summer.sdt.core.formatter.comment.format_html"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether code snippets are formatted in comments
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.format_source_code"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.format_source_code"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -787,12 +787,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.1
 	 */
-	public final static String FORMATTER_COMMENT_FORMAT_SOURCE = "org.eclipse.jdt.core.formatter.comment.format_source_code"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_FORMAT_SOURCE = "org.summer.sdt.core.formatter.comment.format_source_code"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether description of Javadoc parameters are indented
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.indent_parameter_description"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.indent_parameter_description"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -800,12 +800,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.1
 	 */
-	public final static String FORMATTER_COMMENT_INDENT_PARAMETER_DESCRIPTION = "org.eclipse.jdt.core.formatter.comment.indent_parameter_description"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_INDENT_PARAMETER_DESCRIPTION = "org.summer.sdt.core.formatter.comment.indent_parameter_description"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether Javadoc root tags are indented.
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.indent_root_tags"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.indent_root_tags"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -813,12 +813,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.1
 	 */
-	public final static String FORMATTER_COMMENT_INDENT_ROOT_TAGS = "org.eclipse.jdt.core.formatter.comment.indent_root_tags"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_INDENT_ROOT_TAGS = "org.summer.sdt.core.formatter.comment.indent_root_tags"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert an empty line before the Javadoc root tag block
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.insert_new_line_before_root_tags"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.insert_new_line_before_root_tags"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -826,12 +826,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see JavaCore#DO_NOT_INSERT
 	 * @since 3.1
 	 */
-	public final static String FORMATTER_COMMENT_INSERT_EMPTY_LINE_BEFORE_ROOT_TAGS = "org.eclipse.jdt.core.formatter.comment.insert_new_line_before_root_tags"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_INSERT_EMPTY_LINE_BEFORE_ROOT_TAGS = "org.summer.sdt.core.formatter.comment.insert_new_line_before_root_tags"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after Javadoc root tag parameters
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.insert_new_line_for_parameter"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.insert_new_line_for_parameter"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -839,23 +839,23 @@ public class DefaultCodeFormatterConstants {
 	 * @see JavaCore#DO_NOT_INSERT
 	 * @since 3.1
 	 */
-	public final static String FORMATTER_COMMENT_INSERT_NEW_LINE_FOR_PARAMETER = "org.eclipse.jdt.core.formatter.comment.insert_new_line_for_parameter"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_INSERT_NEW_LINE_FOR_PARAMETER = "org.summer.sdt.core.formatter.comment.insert_new_line_for_parameter"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to specify the line length for comments.
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.line_length"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.line_length"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "80"
 	 * </pre>
 	 * @since 3.1
 	 */
-	public final static String FORMATTER_COMMENT_LINE_LENGTH = "org.eclipse.jdt.core.formatter.comment.line_length"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_LINE_LENGTH = "org.summer.sdt.core.formatter.comment.line_length"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether block comments will have new lines at boundaries
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.new_lines_at_block_boundaries"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.new_lines_at_block_boundaries"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -863,12 +863,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.6
 	 */
-	public final static String FORMATTER_COMMENT_NEW_LINES_AT_BLOCK_BOUNDARIES = "org.eclipse.jdt.core.formatter.comment.new_lines_at_block_boundaries"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_NEW_LINES_AT_BLOCK_BOUNDARIES = "org.summer.sdt.core.formatter.comment.new_lines_at_block_boundaries"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to control whether javadoc comments will have new lines at boundaries
-	 *     - option id:         "org.eclipse.jdt.core.formatter.comment.new_lines_at_javadoc_boundaries"
+	 *     - option id:         "org.summer.sdt.core.formatter.comment.new_lines_at_javadoc_boundaries"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -876,12 +876,12 @@ public class DefaultCodeFormatterConstants {
 	 * @see #FALSE
 	 * @since 3.6
 	 */
-	public final static String FORMATTER_COMMENT_NEW_LINES_AT_JAVADOC_BOUNDARIES = "org.eclipse.jdt.core.formatter.comment.new_lines_at_javadoc_boundaries"; //$NON-NLS-1$
+	public final static String FORMATTER_COMMENT_NEW_LINES_AT_JAVADOC_BOUNDARIES = "org.summer.sdt.core.formatter.comment.new_lines_at_javadoc_boundaries"; //$NON-NLS-1$
 
 	/**
 	 * <pre>
 	 * FORMATTER / Option to compact else/if
-	 *     - option id:         "org.eclipse.jdt.core.formatter.compact_else_if"
+	 *     - option id:         "org.summer.sdt.core.formatter.compact_else_if"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -894,7 +894,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to set the continuation indentation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.continuation_indentation"
+	 *     - option id:         "org.summer.sdt.core.formatter.continuation_indentation"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "2"
 	 * </pre>
@@ -904,7 +904,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to set the continuation indentation inside array initializer
-	 *     - option id:         "org.eclipse.jdt.core.formatter.continuation_indentation_for_array_initializer"
+	 *     - option id:         "org.summer.sdt.core.formatter.continuation_indentation_for_array_initializer"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "2"
 	 * </pre>
@@ -914,7 +914,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to use the disabling and enabling tags defined respectively by the {@link #FORMATTER_DISABLING_TAG} and the {@link #FORMATTER_ENABLING_TAG} options.
-	 *     - option id:         "org.eclipse.jdt.core.formatter.use_on_off_tags"
+	 *     - option id:         "org.summer.sdt.core.formatter.use_on_off_tags"
 	 *     - possible values:   TRUE / FALSE
 	 *     - default:           FALSE
 	 * </pre>
@@ -924,7 +924,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to define the tag to put in a comment to disable the formatting.
-	 *     - option id:         "org.eclipse.jdt.core.formatter.disabling_tag"
+	 *     - option id:         "org.summer.sdt.core.formatter.disabling_tag"
 	 *     - possible values:   String, with constraints mentioned below
 	 *     - default:           "@formatter:off"
 	 * 
@@ -1051,7 +1051,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to define the tag to put in a comment to re-enable the formatting after it has been disabled (see {@link #FORMATTER_DISABLING_TAG})
-	 *     - option id:         "org.eclipse.jdt.core.formatter.enabling_tag"
+	 *     - option id:         "org.summer.sdt.core.formatter.enabling_tag"
 	 *     - possible values:   String, with constraints mentioned below
 	 *     - default:           "@formatter:on"
 	 * </pre>
@@ -1181,7 +1181,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to indent body declarations compare to its enclosing annotation declaration header
-	 *     - option id:         "org.eclipse.jdt.core.formatter.indent_body_declarations_compare_to_annotation_declaration_header"
+	 *     - option id:         "org.summer.sdt.core.formatter.indent_body_declarations_compare_to_annotation_declaration_header"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -1193,7 +1193,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to indent body declarations compare to its enclosing enum constant header
-	 *     - option id:         "org.eclipse.jdt.core.formatter.indent_body_declarations_compare_to_enum_constant_header"
+	 *     - option id:         "org.summer.sdt.core.formatter.indent_body_declarations_compare_to_enum_constant_header"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -1205,7 +1205,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to indent body declarations compare to its enclosing enum declaration header
-	 *     - option id:         "org.eclipse.jdt.core.formatter.indent_body_declarations_compare_to_enum_declaration_header"
+	 *     - option id:         "org.summer.sdt.core.formatter.indent_body_declarations_compare_to_enum_declaration_header"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -1217,7 +1217,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to indent body declarations compare to its enclosing type header
-	 *     - option id:         "org.eclipse.jdt.core.formatter.indent_body_declarations_compare_to_type_header"
+	 *     - option id:         "org.summer.sdt.core.formatter.indent_body_declarations_compare_to_type_header"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -1229,7 +1229,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to indent breaks compare to cases
-	 *     - option id:         "org.eclipse.jdt.core.formatter.indent_breaks_compare_to_cases"
+	 *     - option id:         "org.summer.sdt.core.formatter.indent_breaks_compare_to_cases"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -1241,7 +1241,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to indent empty lines
-	 *     - option id:         "org.eclipse.jdt.core.formatter.indent_empty_lines"
+	 *     - option id:         "org.summer.sdt.core.formatter.indent_empty_lines"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -1253,7 +1253,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to indent statements inside a block
-	 *     - option id:         "org.eclipse.jdt.core.formatter.indent_statements_compare_to_block"
+	 *     - option id:         "org.summer.sdt.core.formatter.indent_statements_compare_to_block"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -1265,7 +1265,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to indent statements inside the body of a method or a constructor
-	 *     - option id:         "org.eclipse.jdt.core.formatter.indent_statements_compare_to_body"
+	 *     - option id:         "org.summer.sdt.core.formatter.indent_statements_compare_to_body"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -1277,7 +1277,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to indent switch statements compare to cases
-	 *     - option id:         "org.eclipse.jdt.core.formatter.indent_switchstatements_compare_to_cases"
+	 *     - option id:         "org.summer.sdt.core.formatter.indent_switchstatements_compare_to_cases"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -1289,7 +1289,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to indent switch statements compare to switch
-	 *     - option id:         "org.eclipse.jdt.core.formatter.indent_switchstatements_compare_to_switch"
+	 *     - option id:         "org.summer.sdt.core.formatter.indent_switchstatements_compare_to_switch"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -1302,7 +1302,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to specify the equivalent number of spaces that represents one indentation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.indentation.size"
+	 *     - option id:         "org.summer.sdt.core.formatter.indentation.size"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "4"
 	 * </pre>
@@ -1316,7 +1316,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after an annotation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_after_annotation"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_after_annotation"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1334,7 +1334,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after an annotation on a member (package, class, method, field declaration)
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_member"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_after_annotation_on_member"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1353,7 +1353,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after an annotation on a field declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_field"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_after_annotation_on_field"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1366,7 +1366,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after an annotation on a method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_method"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_after_annotation_on_method"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1379,7 +1379,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after an annotation on a package declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_package"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_after_annotation_on_package"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1392,7 +1392,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after an annotation on a type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_type"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_after_annotation_on_type"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1405,7 +1405,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after a type annotation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_after_type_annotation"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_after_type_annotation"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -1417,7 +1417,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after an annotation on a parameter
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_parameter"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_after_annotation_on_parameter"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -1430,7 +1430,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after an annotation on a local variable
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_local_variable"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_after_annotation_on_local_variable"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1443,7 +1443,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after a label
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_after_label"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_after_label"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -1456,7 +1456,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after the opening brace in an array initializer
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_after_opening_brace_in_array_initializer"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_after_opening_brace_in_array_initializer"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -1469,7 +1469,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line at the end of the current file if missing
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_at_end_of_file_if_missing"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_at_end_of_file_if_missing"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -1481,7 +1481,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line before the catch keyword in try statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_before_catch_in_try_statement"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_before_catch_in_try_statement"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -1493,7 +1493,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line before the closing brace in an array initializer
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_before_closing_brace_in_array_initializer"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_before_closing_brace_in_array_initializer"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -1505,7 +1505,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line before the else keyword in if statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_before_else_in_if_statement"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_before_else_in_if_statement"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -1517,7 +1517,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line before the finally keyword in try statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_before_finally_in_try_statement"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_before_finally_in_try_statement"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -1529,7 +1529,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line before while in do statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_before_while_in_do_statement"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_before_while_in_do_statement"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -1541,7 +1541,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line in an empty annotation declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_in_empty_annotation_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_in_empty_annotation_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1553,7 +1553,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line in an empty anonymous type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_in_empty_anonymous_type_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_in_empty_anonymous_type_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1565,7 +1565,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line in an empty block
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_in_empty_block"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_in_empty_block"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1577,7 +1577,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line in an empty enum constant
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_in_empty_enum_constant"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_in_empty_enum_constant"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1589,7 +1589,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line in an empty enum declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_in_empty_enum_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_in_empty_enum_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1601,7 +1601,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line in an empty method body
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_in_empty_method_body"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_in_empty_method_body"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1613,7 +1613,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line in an empty type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_new_line_in_empty_type_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_new_line_in_empty_type_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1625,7 +1625,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after and in wilcard
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_and_in_type_parameter"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_and_in_type_parameter"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1637,7 +1637,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after an assignment operator
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_assignment_operator"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_assignment_operator"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1649,7 +1649,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after at in annotation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_at_in_annotation"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_at_in_annotation"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1661,7 +1661,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after at in annotation type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_at_in_annotation_type_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_at_in_annotation_type_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -1673,7 +1673,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after a binary operator
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_binary_operator"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_binary_operator"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1685,7 +1685,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the closing angle bracket in type arguments
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_closing_angle_bracket_in_type_arguments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_closing_angle_bracket_in_type_arguments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1697,7 +1697,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the closing angle bracket in type parameters
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_closing_angle_bracket_in_type_parameters"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_closing_angle_bracket_in_type_parameters"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1709,7 +1709,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the closing brace of a block
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_closing_brace_in_block"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_closing_brace_in_block"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1721,7 +1721,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the closing parenthesis of a cast expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_closing_paren_in_cast"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_closing_paren_in_cast"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1733,7 +1733,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the colon in an assert statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_colon_in_assert"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_colon_in_assert"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1745,7 +1745,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after colon in a case statement when a opening brace follows the colon
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_colon_in_case"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_colon_in_case"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1757,7 +1757,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the colon in a conditional expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_colon_in_conditional"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_colon_in_conditional"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1769,7 +1769,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after colon in a for statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_colon_in_for"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_colon_in_for"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1781,7 +1781,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the colon in a labeled statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_colon_in_labeled_statement"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_colon_in_labeled_statement"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1793,7 +1793,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in an allocation expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_allocation_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_allocation_expression"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1805,7 +1805,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in annotation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_annotation"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_annotation"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1817,7 +1817,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in an array initializer
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_array_initializer"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_array_initializer"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1829,7 +1829,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in the parameters of a constructor declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_constructor_declaration_parameters"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_constructor_declaration_parameters"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1841,7 +1841,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in the exception names in a throws clause of a constructor declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_constructor_declaration_throws"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_constructor_declaration_throws"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1853,7 +1853,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in the arguments of an enum constant
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_enum_constant_arguments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_enum_constant_arguments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1865,7 +1865,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in enum declarations
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_enum_declarations"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_enum_declarations"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1877,7 +1877,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in the arguments of an explicit constructor call
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_explicitconstructorcall_arguments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_explicitconstructorcall_arguments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1889,7 +1889,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in the increments of a for statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_for_increments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_for_increments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1901,7 +1901,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in the initializations of a for statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_for_inits"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_for_inits"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1913,7 +1913,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in the parameters of a method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_method_declaration_parameters"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_method_declaration_parameters"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1925,7 +1925,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in the exception names in a throws clause of a method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_method_declaration_throws"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_method_declaration_throws"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1937,7 +1937,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in the arguments of a method invocation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_method_invocation_arguments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_method_invocation_arguments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1949,7 +1949,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in multiple field declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_multiple_field_declarations"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_multiple_field_declarations"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1961,7 +1961,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in multiple local declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_multiple_local_declarations"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_multiple_local_declarations"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1973,7 +1973,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in parameterized type reference
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_parameterized_type_reference"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_parameterized_type_reference"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1985,7 +1985,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in superinterfaces names of a type header
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_superinterfaces"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_superinterfaces"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -1997,7 +1997,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in type arguments
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_type_arguments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_type_arguments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2009,7 +2009,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the comma in type parameters
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_comma_in_type_parameters"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_comma_in_type_parameters"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2021,7 +2021,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after ellipsis
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_ellipsis"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_ellipsis"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2033,7 +2033,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the -> in lambda expressions
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_lambda_arrow"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_lambda_arrow"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2045,7 +2045,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening angle bracket in parameterized type reference
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_angle_bracket_in_parameterized_type_reference"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_angle_bracket_in_parameterized_type_reference"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2057,7 +2057,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening angle bracket in type arguments
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_angle_bracket_in_type_arguments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_angle_bracket_in_type_arguments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2069,7 +2069,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening angle bracket in type parameters
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_angle_bracket_in_type_parameters"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_angle_bracket_in_type_parameters"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2081,7 +2081,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening brace in an array initializer
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_brace_in_array_initializer"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_brace_in_array_initializer"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2093,7 +2093,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening bracket inside an array allocation expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_bracket_in_array_allocation_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_bracket_in_array_allocation_expression"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2105,7 +2105,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening bracket inside an array reference
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_bracket_in_array_reference"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_bracket_in_array_reference"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2117,7 +2117,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in annotation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_annotation"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_annotation"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2129,7 +2129,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in a cast expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_cast"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_cast"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2141,7 +2141,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in a catch
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_catch"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_catch"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2153,7 +2153,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in a constructor declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_constructor_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_constructor_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2165,7 +2165,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in enum constant
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_enum_constant"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_enum_constant"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2177,7 +2177,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in a for statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_for"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_for"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2189,7 +2189,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in an if statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_if"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_if"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2201,7 +2201,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in a method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_method_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_method_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2213,7 +2213,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in a method invocation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_method_invocation"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_method_invocation"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2225,7 +2225,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in a parenthesized expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_parenthesized_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_parenthesized_expression"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2237,7 +2237,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in a switch statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_switch"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_switch"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2249,7 +2249,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in a synchronized statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_synchronized"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_synchronized"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2261,7 +2261,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in a try with resources statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_try"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_try"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2273,7 +2273,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after the opening parenthesis in a while statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_while"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_opening_paren_in_while"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2285,7 +2285,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after a postfix operator
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_postfix_operator"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_postfix_operator"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2297,7 +2297,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after a prefix operator
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_prefix_operator"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_prefix_operator"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2309,7 +2309,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after question mark in a conditional expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_question_in_conditional"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_question_in_conditional"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2321,7 +2321,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after question mark in a wildcard
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_question_in_wildcard"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_question_in_wildcard"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2333,7 +2333,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after semicolon in a for statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_semicolon_in_for"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_semicolon_in_for"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2346,7 +2346,7 @@ public class DefaultCodeFormatterConstants {
 	 * <pre>
 	 * FORMATTER / Option to insert a space after semicolons following each resource declaration in a try with 
 	 * resources statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_semicolon_in_try_resources"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_semicolon_in_try_resources"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2358,7 +2358,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space after an unary operator
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_after_unary_operator"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_after_unary_operator"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2370,7 +2370,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before and in wildcard
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_and_in_type_parameter"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_and_in_type_parameter"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2382,7 +2382,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before an assignment operator
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_assignment_operator"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_assignment_operator"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2394,7 +2394,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before at in annotation type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_at_in_annotation_type_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_at_in_annotation_type_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2406,7 +2406,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before an binary operator
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_binary_operator"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_binary_operator"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2418,7 +2418,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing angle bracket in parameterized type reference
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_angle_bracket_in_parameterized_type_reference"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_angle_bracket_in_parameterized_type_reference"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2430,7 +2430,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing angle bracket in type arguments
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_angle_bracket_in_type_arguments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_angle_bracket_in_type_arguments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2442,7 +2442,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing angle bracket in type parameters
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_angle_bracket_in_type_parameters"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_angle_bracket_in_type_parameters"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2454,7 +2454,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing brace in an array initializer
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_brace_in_array_initializer"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_brace_in_array_initializer"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2466,7 +2466,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing bracket in an array allocation expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_bracket_in_array_allocation_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_bracket_in_array_allocation_expression"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2478,7 +2478,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing bracket in an array reference
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_bracket_in_array_reference"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_bracket_in_array_reference"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2490,7 +2490,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in annotation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_annotation"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_annotation"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2502,7 +2502,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in a cast expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_cast"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_cast"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2514,7 +2514,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in a catch
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_catch"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_catch"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2526,7 +2526,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in a constructor declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_constructor_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_constructor_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2538,7 +2538,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in enum constant
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_enum_constant"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_enum_constant"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2550,7 +2550,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in a for statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_for"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_for"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2562,7 +2562,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in an if statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_if"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_if"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2574,7 +2574,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in a method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_method_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_method_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2586,7 +2586,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in a method invocation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_method_invocation"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_method_invocation"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2598,7 +2598,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in a parenthesized expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_parenthesized_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_parenthesized_expression"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2610,7 +2610,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in a switch statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_switch"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_switch"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2622,7 +2622,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in a synchronized statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_synchronized"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_synchronized"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2634,7 +2634,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in a try with resources statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_try"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_try"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2646,7 +2646,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the closing parenthesis in a while statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_while"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_closing_paren_in_while"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2658,7 +2658,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before colon in an assert statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_colon_in_assert"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_colon_in_assert"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2670,7 +2670,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before colon in a case statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_colon_in_case"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_colon_in_case"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2682,7 +2682,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before colon in a conditional expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_colon_in_conditional"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_colon_in_conditional"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2694,7 +2694,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before colon in a default statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_colon_in_default"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_colon_in_default"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2706,7 +2706,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before colon in a for statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_colon_in_for"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_colon_in_for"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2718,7 +2718,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before colon in a labeled statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_colon_in_labeled_statement"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_colon_in_labeled_statement"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2730,7 +2730,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in an allocation expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_allocation_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_allocation_expression"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2742,7 +2742,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in annotation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_annotation"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_annotation"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2754,7 +2754,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in an array initializer
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_array_initializer"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_array_initializer"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2766,7 +2766,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in the parameters of a constructor declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_constructor_declaration_parameters"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_constructor_declaration_parameters"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2778,7 +2778,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in the exception names of the throws clause of a constructor declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_constructor_declaration_throws"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_constructor_declaration_throws"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2790,7 +2790,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in the arguments of enum constant
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_enum_constant_arguments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_enum_constant_arguments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2802,7 +2802,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in enum declarations
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_enum_declarations"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_enum_declarations"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2814,7 +2814,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in the arguments of an explicit constructor call
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_explicitconstructorcall_arguments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_explicitconstructorcall_arguments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2826,7 +2826,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in the increments of a for statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_for_increments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_for_increments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2838,7 +2838,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in the initializations of a for statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_for_inits"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_for_inits"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2850,7 +2850,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in the parameters of a method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_method_declaration_parameters"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_method_declaration_parameters"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2862,7 +2862,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in the exception names of the throws clause of a method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_method_declaration_throws"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_method_declaration_throws"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2874,7 +2874,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in the arguments of a method invocation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_method_invocation_arguments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_method_invocation_arguments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2886,7 +2886,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in a multiple field declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_multiple_field_declarations"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_multiple_field_declarations"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2898,7 +2898,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in a multiple local declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_multiple_local_declarations"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_multiple_local_declarations"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2910,7 +2910,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in parameterized type reference
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_parameterized_type_reference"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_parameterized_type_reference"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2922,7 +2922,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in the superinterfaces names in a type header
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_superinterfaces"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_superinterfaces"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2934,7 +2934,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in type arguments
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_type_arguments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_type_arguments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2946,7 +2946,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before comma in type parameters
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_comma_in_type_parameters"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_comma_in_type_parameters"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2958,7 +2958,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before ellipsis
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_ellipsis"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_ellipsis"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2970,7 +2970,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before lambda ->
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_lambda_arrow"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_lambda_arrow"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -2982,7 +2982,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening angle bracket in parameterized type reference
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_angle_bracket_in_parameterized_type_reference"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_angle_bracket_in_parameterized_type_reference"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -2994,7 +2994,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening angle bracket in type arguments
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_angle_bracket_in_type_arguments"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_angle_bracket_in_type_arguments"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3006,7 +3006,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening angle bracket in type parameters
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_angle_bracket_in_type_parameters"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_angle_bracket_in_type_parameters"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3018,7 +3018,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening brace in an annotation type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_annotation_type_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_brace_in_annotation_type_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3030,7 +3030,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening brace in an anonymous type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_anonymous_type_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_brace_in_anonymous_type_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3042,7 +3042,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening brace in an array initializer
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_array_initializer"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_brace_in_array_initializer"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3054,7 +3054,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening brace in a block
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_block"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_brace_in_block"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3066,7 +3066,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening brace in a constructor declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_constructor_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_brace_in_constructor_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3078,7 +3078,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening brace in an enum constant
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_enum_constant"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_brace_in_enum_constant"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3090,7 +3090,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening brace in an enum declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_enum_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_brace_in_enum_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3102,7 +3102,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening brace in a method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_method_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_brace_in_method_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3114,7 +3114,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening brace in a switch statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_switch"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_brace_in_switch"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3126,7 +3126,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening brace in a type declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_type_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_brace_in_type_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3138,7 +3138,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening bracket in an array allocation expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_bracket_in_array_allocation_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_bracket_in_array_allocation_expression"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3150,7 +3150,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening bracket in an array reference
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_bracket_in_array_reference"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_bracket_in_array_reference"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3162,7 +3162,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening bracket in an array type reference
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_bracket_in_array_type_reference"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_bracket_in_array_type_reference"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3174,7 +3174,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in annotation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_annotation"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_annotation"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3186,7 +3186,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in annotation type member declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_annotation_type_member_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_annotation_type_member_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3198,7 +3198,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in a catch
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_catch"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_catch"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3210,7 +3210,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in a constructor declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_constructor_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_constructor_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3222,7 +3222,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in enum constant
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_enum_constant"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_enum_constant"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3234,7 +3234,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in a for statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_for"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_for"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3246,7 +3246,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in an if statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_if"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_if"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3258,7 +3258,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in a method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_method_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_method_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3270,7 +3270,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in a method invocation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_method_invocation"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_method_invocation"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3282,7 +3282,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in a parenthesized expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_parenthesized_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_parenthesized_expression"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3294,7 +3294,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in a switch statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_switch"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_switch"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3306,7 +3306,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in a synchronized statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_synchronized"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_synchronized"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3318,7 +3318,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in a try with resources statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_try"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_try"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3330,7 +3330,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before the opening parenthesis in a while statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_while"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_opening_paren_in_while"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3342,7 +3342,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before parenthesized expression in return statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_parenthesized_expression_in_return"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_parenthesized_expression_in_return"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3355,7 +3355,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before parenthesized expression in throw statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_parenthesized_expression_in_throw"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_parenthesized_expression_in_throw"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3368,7 +3368,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before a postfix operator
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_postfix_operator"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_postfix_operator"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3380,7 +3380,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before a prefix operator
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_prefix_operator"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_prefix_operator"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3392,7 +3392,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before question mark in a conditional expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_question_in_conditional"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_question_in_conditional"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           INSERT
 	 * </pre>
@@ -3404,7 +3404,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before question mark in a wildcard
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_question_in_wildcard"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_question_in_wildcard"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3416,7 +3416,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before semicolon
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_semicolon"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_semicolon"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3428,7 +3428,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before semicolon in for statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_semicolon_in_for"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_semicolon_in_for"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3441,7 +3441,7 @@ public class DefaultCodeFormatterConstants {
 	 * <pre>
 	 * FORMATTER / Option to insert a space before semicolons following each resource declaration in a try with
 	 * resources statement
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_semicolon_in_try_resources"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_semicolon_in_try_resources"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3453,7 +3453,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space before unary operator
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_before_unary_operator"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_before_unary_operator"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3466,7 +3466,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space between brackets in an array type reference
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_between_brackets_in_array_type_reference"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_between_brackets_in_array_type_reference"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3478,7 +3478,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space between empty braces in an array initializer
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_between_empty_braces_in_array_initializer"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_between_empty_braces_in_array_initializer"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3490,7 +3490,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space between empty brackets in an array allocation expression
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_between_empty_brackets_in_array_allocation_expression"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_between_empty_brackets_in_array_allocation_expression"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3502,7 +3502,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space between empty parenthesis in an annotation type member declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_annotation_type_member_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_between_empty_parens_in_annotation_type_member_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3514,7 +3514,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space between empty parenthesis in a constructor declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_constructor_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_between_empty_parens_in_constructor_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3526,7 +3526,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space between empty parenthesis in enum constant
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_enum_constant"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_between_empty_parens_in_enum_constant"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3538,7 +3538,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space between empty parenthesis in a method declaration
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_method_declaration"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_between_empty_parens_in_method_declaration"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3550,7 +3550,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a space between empty parenthesis in a method invocation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_method_invocation"
+	 *     - option id:         "org.summer.sdt.core.formatter.insert_space_between_empty_parens_in_method_invocation"
 	 *     - possible values:   { INSERT, DO_NOT_INSERT }
 	 *     - default:           DO_NOT_INSERT
 	 * </pre>
@@ -3562,7 +3562,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to keep else statement on the same line
-	 *     - option id:         "org.eclipse.jdt.core.formatter.keep_else_statement_on_same_line"
+	 *     - option id:         "org.summer.sdt.core.formatter.keep_else_statement_on_same_line"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -3574,7 +3574,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to keep empty array initializer one one line
-	 *     - option id:         "org.eclipse.jdt.core.formatter.keep_empty_array_initializer_on_one_line"
+	 *     - option id:         "org.summer.sdt.core.formatter.keep_empty_array_initializer_on_one_line"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -3586,7 +3586,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to keep guardian clause on one line
-	 *     - option id:         "org.eclipse.jdt.core.formatter.format_guardian_clause_on_one_line"
+	 *     - option id:         "org.summer.sdt.core.formatter.format_guardian_clause_on_one_line"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -3598,7 +3598,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to keep simple if statement on the one line
-	 *     - option id:         "org.eclipse.jdt.core.formatter.keep_imple_if_on_one_line"
+	 *     - option id:         "org.summer.sdt.core.formatter.keep_imple_if_on_one_line"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -3610,7 +3610,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to keep then statement on the same line
-	 *     - option id:         "org.eclipse.jdt.core.formatter.keep_then_statement_on_same_line"
+	 *     - option id:         "org.summer.sdt.core.formatter.keep_then_statement_on_same_line"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -3623,7 +3623,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to specify the length of the page. Beyond this length, the formatter will try to split the code
-	 *     - option id:         "org.eclipse.jdt.core.formatter.lineSplit"
+	 *     - option id:         "org.summer.sdt.core.formatter.lineSplit"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "80"
 	 * </pre>
@@ -3633,7 +3633,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to indent block comments that start on the first column
-	 *     - option id:         "org.eclipse.jdt.core.formatter.formatter.never_indent_block_comments_on_first_column"
+	 *     - option id:         "org.summer.sdt.core.formatter.formatter.never_indent_block_comments_on_first_column"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -3647,7 +3647,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to indent line comments that start on the first column
-	 *     - option id:         "org.eclipse.jdt.core.formatter.formatter.never_indent_line_comments_on_first_column"
+	 *     - option id:         "org.summer.sdt.core.formatter.formatter.never_indent_line_comments_on_first_column"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -3666,7 +3666,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to specify the number of empty lines to preserve
-	 *     - option id:         "org.eclipse.jdt.core.formatter.number_of_empty_lines_to_preserve"
+	 *     - option id:         "org.summer.sdt.core.formatter.number_of_empty_lines_to_preserve"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "0"
 	 * </pre>
@@ -3697,7 +3697,7 @@ public class DefaultCodeFormatterConstants {
 	 * 			    }
 	 * 			}
 	 *
-	 *     - option id:         "org.eclipse.jdt.core.formatter.join_wrapped_lines"
+	 *     - option id:         "org.summer.sdt.core.formatter.join_wrapped_lines"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -3719,7 +3719,7 @@ public class DefaultCodeFormatterConstants {
 	 * 		will be unchanged by the formatter when this new preference is used,
 	 * 		even if the maximum line width would give it enough space to join the lines.
 	 *
-	 *     - option id:         "org.eclipse.jdt.core.formatter.join_lines_in_comments"
+	 *     - option id:         "org.summer.sdt.core.formatter.join_lines_in_comments"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -3729,7 +3729,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to specify whether or not empty statement should be on a new line
-	 *     - option id:         "org.eclipse.jdt.core.formatter.put_empty_statement_on_new_line"
+	 *     - option id:         "org.summer.sdt.core.formatter.put_empty_statement_on_new_line"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -3741,7 +3741,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to specify the tabulation size
-	 *     - option id:         "org.eclipse.jdt.core.formatter.tabulation.char"
+	 *     - option id:         "org.summer.sdt.core.formatter.tabulation.char"
 	 *     - possible values:   { TAB, SPACE, MIXED }
 	 *     - default:           TAB
 	 * </pre>
@@ -3756,7 +3756,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to specify the equivalent number of spaces that represents one tabulation
-	 *     - option id:         "org.eclipse.jdt.core.formatter.tabulation.size"
+	 *     - option id:         "org.summer.sdt.core.formatter.tabulation.size"
 	 *     - possible values:   "&lt;n&gt;", where n is zero or a positive integer
 	 *     - default:           "4"
 	 * </pre>
@@ -3767,7 +3767,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to use tabulations for indentation and spaces for line wrapping
-	 *     - option id:         "org.eclipse.jdt.core.formatter.use_tabs_only_for_leading_indentations"
+	 *     - option id:         "org.summer.sdt.core.formatter.use_tabs_only_for_leading_indentations"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           FALSE
 	 * </pre>
@@ -3779,7 +3779,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to wrap before the binary operator
-	 *     - option id:         "org.eclipse.jdt.core.formatter.wrap_before_binary_operator"
+	 *     - option id:         "org.summer.sdt.core.formatter.wrap_before_binary_operator"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -3792,7 +3792,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to wrap before the '|' operator in multi-catch statements
-	 *     - option id:         "org.eclipse.jdt.core.formatter.wrap_before_or_operator_multicatch"
+	 *     - option id:         "org.summer.sdt.core.formatter.wrap_before_or_operator_multicatch"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>
@@ -3805,7 +3805,7 @@ public class DefaultCodeFormatterConstants {
 	/**
 	 * <pre>
 	 * FORMATTER / Option to wrap outer expressions in nested expressions
-	 *     - option id:         "org.eclipse.jdt.core.formatter.wrap_outer_expressions_when_nested"
+	 *     - option id:         "org.summer.sdt.core.formatter.wrap_outer_expressions_when_nested"
 	 *     - possible values:   { TRUE, FALSE }
 	 *     - default:           TRUE
 	 * </pre>

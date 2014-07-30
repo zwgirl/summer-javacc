@@ -109,7 +109,7 @@ public class JavadocArgumentExpression extends Expression {
 
 	/* (non-Javadoc)
 	 * Redefine to capture javadoc specific signatures
-	 * @see org.eclipse.jdt.internal.compiler.ast.ASTNode#traverse(org.eclipse.jdt.internal.compiler.ASTVisitor, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ast.ASTNode#traverse(org.summer.sdt.internal.compiler.ASTVisitor, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public void traverse(ASTVisitor visitor, BlockScope blockScope) {
 		if (visitor.visit(this, blockScope)) {

@@ -39,7 +39,7 @@ public boolean checkDeprecation(int commentPtr) {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#parseIdentifierTag()
+ * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#parseIdentifierTag()
  */
 protected boolean parseIdentifierTag(boolean report) {
 	int end = this.lineEnd+1;
@@ -80,7 +80,7 @@ protected boolean parseIdentifierTag(boolean report) {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.compiler.parser.JavadocParser#parseSimpleTag()
+ * @see org.summer.sdt.internal.compiler.parser.JavadocParser#parseSimpleTag()
  */
 protected void parseSimpleTag() {
 

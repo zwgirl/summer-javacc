@@ -162,7 +162,7 @@ public class CorrectionEngine {
 	 * of the given compilation unit.
 	 * Correction results are answered through a requestor.
 	 *
-	 *  @param unit org.eclipse.jdt.internal.core.ICompilationUnit
+	 *  @param unit org.summer.sdt.internal.core.ICompilationUnit
 	 *      the compilation unit.
 	 *
 	 * 	@param id int

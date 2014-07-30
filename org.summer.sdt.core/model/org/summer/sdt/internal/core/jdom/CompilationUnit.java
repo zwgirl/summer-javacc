@@ -40,7 +40,7 @@ public char[] getContents() {
 	return this.fContents;
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.env.IDependent#getFileName()
+ * @see org.summer.sdt.internal.compiler.env.IDependent#getFileName()
  */
 public char[] getFileName() {
 	return this.fFileName;

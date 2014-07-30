@@ -54,13 +54,13 @@ public class RuntimeInvisibleParameterAnnotationsAttribute
 		}
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IRuntimeInvisibleParameterAnnotations#getAnnotations()
+	 * @see org.summer.sdt.core.util.IRuntimeInvisibleParameterAnnotations#getAnnotations()
 	 */
 	public IParameterAnnotation[] getParameterAnnotations() {
 		return this.parameterAnnotations;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IRuntimeInvisibleParameterAnnotations#getParametersNumber()
+	 * @see org.summer.sdt.core.util.IRuntimeInvisibleParameterAnnotations#getParametersNumber()
 	 */
 	public int getParametersNumber() {
 		return this.parametersNumber;

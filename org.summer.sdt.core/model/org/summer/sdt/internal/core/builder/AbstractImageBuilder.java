@@ -476,7 +476,7 @@ protected IContainer createFolder(IPath packagePath, IContainer outputFolder) th
 
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.core.builder.ICompilationUnitLocator#fromIFile(org.eclipse.core.resources.IFile)
+ * @see org.summer.sdt.internal.core.builder.ICompilationUnitLocator#fromIFile(org.eclipse.core.resources.IFile)
  */
 public ICompilationUnit fromIFile(IFile file) {
 	return findSourceFile(file, true);

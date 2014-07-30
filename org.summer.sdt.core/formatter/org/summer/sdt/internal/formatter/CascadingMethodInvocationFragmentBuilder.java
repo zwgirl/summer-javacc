@@ -37,7 +37,7 @@ class CascadingMethodInvocationFragmentBuilder
 		return this.fragmentsList.size();
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.MessageSend, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.MessageSend, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(MessageSend messageSend, BlockScope scope) {
 		if ((messageSend.receiver.bits & ASTNode.ParenthesizedMASK) >> ASTNode.ParenthesizedSHIFT == 0) {

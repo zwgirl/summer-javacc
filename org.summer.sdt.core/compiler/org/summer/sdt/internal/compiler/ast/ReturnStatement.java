@@ -28,7 +28,7 @@
  *								Bug 415043 - [1.8][null] Follow-up re null type annotations after bug 392099
  *								Bug 416307 - [1.8][compiler][null] subclass with type parameter substitution confuses null checking
  *								Bug 417758 - [1.8][null] Null safety compromise during array creation.
- *								Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *								Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *								Bug 430150 - [1.8][null] stricter checking against type variables
  *     Jesper S Moller - Contributions for
  *								bug 382701 - [1.8][compiler] Implement semantic analysis of Lambda expressions & Reference expression
@@ -207,8 +207,8 @@ void checkAgainstNullAnnotation(BlockScope scope, FlowContext flowContext, FlowI
  *
  *   generate the finallyInvocationSequence.
  *
- * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
- * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+ * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+ * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
  */
 public void generateCode(BlockScope currentScope, CodeStream codeStream) {
 	if ((this.bits & ASTNode.IsReachable) == 0) {

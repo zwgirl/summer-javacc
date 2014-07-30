@@ -282,7 +282,7 @@ public int resolveLevel(Binding binding) {
 	return level;
 }
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.core.search.matching.PatternLocator#setFlavors(int)
+ * @see org.summer.sdt.internal.core.search.matching.PatternLocator#setFlavors(int)
  */
 void setFlavors(int flavors) {
 	for (int i = 0, length = this.patternLocators.length; i < length; i++) {

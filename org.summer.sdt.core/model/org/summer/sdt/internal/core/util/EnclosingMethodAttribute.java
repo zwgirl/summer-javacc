@@ -61,43 +61,43 @@ public class EnclosingMethodAttribute extends ClassFileAttribute implements IEnc
 		}
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IEnclosingMethodAttribute#getEnclosingClass()
+	 * @see org.summer.sdt.core.util.IEnclosingMethodAttribute#getEnclosingClass()
 	 */
 	public char[] getEnclosingClass() {
 		return this.enclosingClassName;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IEnclosingMethodAttribute#getMethodDeclaringClassDescriptorIndex()
+	 * @see org.summer.sdt.core.util.IEnclosingMethodAttribute#getMethodDeclaringClassDescriptorIndex()
 	 */
 	public int getEnclosingClassIndex() {
 		return this.enclosingClassIndex;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IEnclosingMethodAttribute#getMethodDescriptor()
+	 * @see org.summer.sdt.core.util.IEnclosingMethodAttribute#getMethodDescriptor()
 	 */
 	public char[] getMethodDescriptor() {
 		return this.methodDescriptor;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IEnclosingMethodAttribute#getMethodDescriptorIndex()
+	 * @see org.summer.sdt.core.util.IEnclosingMethodAttribute#getMethodDescriptorIndex()
 	 */
 	public int getMethodDescriptorIndex() {
 		return this.methodDescriptorIndex;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IEnclosingMethodAttribute#getMethodName()
+	 * @see org.summer.sdt.core.util.IEnclosingMethodAttribute#getMethodName()
 	 */
 	public char[] getMethodName() {
 		return this.methodName;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IEnclosingMethodAttribute#getMethodNameIndex()
+	 * @see org.summer.sdt.core.util.IEnclosingMethodAttribute#getMethodNameIndex()
 	 */
 	public int getMethodNameIndex() {
 		return this.methodNameIndex;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IEnclosingMethodAttribute#getMethodNameAndTypeIndex()
+	 * @see org.summer.sdt.core.util.IEnclosingMethodAttribute#getMethodNameAndTypeIndex()
 	 */
 	public int getMethodNameAndTypeIndex() {
 		return this.methodNameAndTypeIndex;

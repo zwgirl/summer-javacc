@@ -14,7 +14,7 @@ package org.summer.sdt.core.search;
  * A search pattern defines how search results are found. Use <code>SearchEngine.createSearchPattern</code>
  * to create a search pattern.
  *
- * @see SearchEngine#createSearchPattern(org.eclipse.jdt.core.IJavaElement, int)
+ * @see SearchEngine#createSearchPattern(org.summer.sdt.core.IJavaElement, int)
  * @see SearchEngine#createSearchPattern(String, int, int, boolean)
  * @deprecated Since 3.0, the class
  * {@link org.summer.sdt.core.search.SearchPattern} replaces this interface.

@@ -32,7 +32,7 @@ public class BufferFactoryWrapper extends WorkingCopyOwner {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.WorkingCopyOwner#createBuffer(org.eclipse.jdt.core.ICompilationUnit)
+	 * @see org.summer.sdt.core.WorkingCopyOwner#createBuffer(org.summer.sdt.core.ICompilationUnit)
 	 */
 	public IBuffer createBuffer(ICompilationUnit workingCopy) {
 		if (this.factory == null) return super.createBuffer(workingCopy);

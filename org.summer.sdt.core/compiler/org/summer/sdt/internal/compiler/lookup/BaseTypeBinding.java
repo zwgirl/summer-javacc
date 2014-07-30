@@ -198,14 +198,14 @@ public class BaseTypeBinding extends TypeBinding {
 	}
 	/**
 	 * T_null is acting as an unchecked exception
-	 * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#isUncheckedException(boolean)
+	 * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#isUncheckedException(boolean)
 	 */
 	public boolean isUncheckedException(boolean includeSupertype) {
 		return this == TypeBinding.NULL;
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.Binding#kind()
+	 * @see org.summer.sdt.internal.compiler.lookup.Binding#kind()
 	 */
 	public int kind() {
 		return Binding.BASE_TYPE;

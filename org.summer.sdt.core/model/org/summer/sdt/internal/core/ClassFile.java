@@ -118,25 +118,25 @@ public class ClassFile extends Openable implements IClassFile, SuffixConstants {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.ICodeAssist#codeComplete(int, org.eclipse.jdt.core.CompletionRequestor)
+	 * @see org.summer.sdt.core.ICodeAssist#codeComplete(int, org.summer.sdt.core.CompletionRequestor)
 	 */
 	public void codeComplete(int offset, CompletionRequestor requestor) throws JavaModelException {
 		codeComplete(offset, requestor, DefaultWorkingCopyOwner.PRIMARY);
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.ICodeAssist#codeComplete(int, org.eclipse.jdt.core.CompletionRequestor, org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.summer.sdt.core.ICodeAssist#codeComplete(int, org.summer.sdt.core.CompletionRequestor, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void codeComplete(int offset, CompletionRequestor requestor, IProgressMonitor monitor) throws JavaModelException {
 		codeComplete(offset, requestor, DefaultWorkingCopyOwner.PRIMARY, monitor);
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.ICodeAssist#codeComplete(int, org.eclipse.jdt.core.CompletionRequestor, org.eclipse.jdt.core.WorkingCopyOwner)
+	 * @see org.summer.sdt.core.ICodeAssist#codeComplete(int, org.summer.sdt.core.CompletionRequestor, org.summer.sdt.core.WorkingCopyOwner)
 	 */
 	public void codeComplete(int offset, CompletionRequestor requestor, WorkingCopyOwner owner) throws JavaModelException {
 		codeComplete(offset, requestor, owner, null);
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.ICodeAssist#codeComplete(int, org.eclipse.jdt.core.CompletionRequestor, org.eclipse.jdt.core.WorkingCopyOwner, org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.summer.sdt.core.ICodeAssist#codeComplete(int, org.summer.sdt.core.CompletionRequestor, org.summer.sdt.core.WorkingCopyOwner, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void codeComplete(int offset, CompletionRequestor requestor, WorkingCopyOwner owner, IProgressMonitor monitor) throws JavaModelException {
 		String source = getSource();
@@ -318,7 +318,7 @@ public class ClassFile extends Openable implements IClassFile, SuffixConstants {
 				String entryName = Util.concatWith(((PackageFragment) pkg).names, getElementName(), '/');
 				ZipEntry ze = zip.getEntry(entryName);
 				if (ze != null) {
-					return org.summer.sdt.util.Util.getZipEntryByteContent(ze, zip);
+					return org.summer.sdt.internal.compiler.util.Util.getZipEntryByteContent(ze, zip);
 				}
 				throw new JavaModelException(new JavaModelStatus(IJavaModelStatusConstants.ELEMENT_DOES_NOT_EXIST, this));
 			} catch (IOException ioe) {
@@ -345,7 +345,7 @@ public class ClassFile extends Openable implements IClassFile, SuffixConstants {
 			String entryName = Util.concatWith(pkg.names, getElementName(), '/');
 			ZipEntry ze = zip.getEntry(entryName);
 			if (ze != null) {
-				byte contents[] = org.summer.sdt.util.Util.getZipEntryByteContent(ze, zip);
+				byte contents[] = org.summer.sdt.internal.compiler.util.Util.getZipEntryByteContent(ze, zip);
 				String fileName = root.getHandleIdentifier() + IDependent.JAR_FILE_ENTRY_SEPARATOR + entryName;
 				return new ClassFileReader(contents, fileName.toCharArray(), fullyInitialize);
 			}

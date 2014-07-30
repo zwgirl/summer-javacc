@@ -130,7 +130,7 @@ public abstract class Binding {
 	 * lazily resolving corresponding annotation nodes, in case of forward references.
 	 * For type use bindings, this method still returns the tagbits corresponding to the type 
 	 * declaration binding.
-	 * @see org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding#getAnnotationTagBits()
+	 * @see org.summer.sdt.internal.compiler.lookup.SourceTypeBinding#getAnnotationTagBits()
 	 */
 	public long getAnnotationTagBits() {
 		return 0;
@@ -139,7 +139,7 @@ public abstract class Binding {
 	/**
 	 * Compute the tag bits for @Deprecated annotations, avoiding resolving
 	 * entire annotation if not necessary.
-	 * @see org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding#initializeDeprecatedAnnotationTagBits()
+	 * @see org.summer.sdt.internal.compiler.lookup.SourceTypeBinding#initializeDeprecatedAnnotationTagBits()
 	 */
 	public void initializeDeprecatedAnnotationTagBits() {
 		// empty block

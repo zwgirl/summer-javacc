@@ -15,7 +15,7 @@ import org.summer.sdt.core.IJavaElement;
 
 /**
  * A Java search match that represents a type parameter declaration or reference.
- * The element is an {@link org.eclipse.jdt.core.ITypeParameter}.
+ * The element is an {@link org.summer.sdt.core.ITypeParameter}.
  * <p>
  * This class is intended to be instantiated and subclassed by clients.
  * </p>

@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.jdt.internal.compiler.parser;
+package org.summer.sdt.internal.compiler.parser;
 
 public class RecoveryScannerData {
 	public int insertedTokensPtr = -1;

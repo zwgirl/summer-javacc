@@ -71,7 +71,7 @@ public class ListRewriteEvent extends RewriteEvent {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.corext.dom.ASTRewriteChange#getChangeKind()
+	 * @see org.summer.sdt.internal.corext.dom.ASTRewriteChange#getChangeKind()
 	 */
 	public int getChangeKind() {
 		if (this.listEntries != null) {
@@ -86,14 +86,14 @@ public class ListRewriteEvent extends RewriteEvent {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.corext.dom.ASTRewriteChange#isListChange()
+	 * @see org.summer.sdt.internal.corext.dom.ASTRewriteChange#isListChange()
 	 */
 	public boolean isListRewrite() {
 		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.corext.dom.RewriteEvent#getChildren()
+	 * @see org.summer.sdt.internal.corext.dom.RewriteEvent#getChildren()
 	 */
 	public RewriteEvent[] getChildren() {
 		List entries= getEntries();
@@ -101,14 +101,14 @@ public class ListRewriteEvent extends RewriteEvent {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.corext.dom.RewriteEvent#getOriginalNode()
+	 * @see org.summer.sdt.internal.corext.dom.RewriteEvent#getOriginalNode()
 	 */
 	public Object getOriginalValue() {
 		return this.originalNodes;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.corext.dom.RewriteEvent#getNewValue()
+	 * @see org.summer.sdt.internal.corext.dom.RewriteEvent#getNewValue()
 	 */
 	public Object getNewValue() {
 		List entries= getEntries();

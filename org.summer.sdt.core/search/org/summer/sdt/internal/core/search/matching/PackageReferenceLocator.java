@@ -37,7 +37,7 @@ public static boolean isDeclaringPackageFragment(IPackageFragment packageFragmen
 		try {
 			switch (packageFragment.getKind()) {
 				case IPackageFragmentRoot.K_SOURCE :
-					if (!org.summer.sdt.util.Util.isJavaLikeFileName(fileName) || !packageFragment.getCompilationUnit(new String(fileName)).exists()) {
+					if (!org.summer.sdt.internal.core.util.Util.isJavaLikeFileName(fileName) || !packageFragment.getCompilationUnit(new String(fileName)).exists()) {
 						return false; // unit doesn't live in selected package
 					}
 					break;
@@ -139,7 +139,7 @@ protected int matchLevelForTokens(char[][] tokens) {
 	return IMPOSSIBLE_MATCH;
 }
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.core.search.matching.PatternLocator#matchLevelAndReportImportRef(org.eclipse.jdt.internal.compiler.ast.ImportReference, org.eclipse.jdt.internal.compiler.lookup.Binding, org.eclipse.jdt.internal.core.search.matching.MatchLocator)
+ * @see org.summer.sdt.internal.core.search.matching.PatternLocator#matchLevelAndReportImportRef(org.summer.sdt.internal.compiler.ast.ImportReference, org.summer.sdt.internal.compiler.lookup.Binding, org.summer.sdt.internal.core.search.matching.MatchLocator)
  */
 protected void matchLevelAndReportImportRef(ImportReference importRef, Binding binding, MatchLocator locator) throws CoreException {
 	Binding refBinding = binding;

@@ -161,6 +161,6 @@ public class CodeFormatter implements TerminalTokens, org.summer.sdt.core.ICodeF
 				}
 			}
 		}
-		return org.summer.sdt.core.util.Util.editedString(string, textEdit);
+		return org.summer.sdt.internal.core.util.Util.editedString(string, textEdit);
 	}
 }

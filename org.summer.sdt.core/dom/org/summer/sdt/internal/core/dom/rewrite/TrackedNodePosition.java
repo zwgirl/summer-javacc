@@ -30,7 +30,7 @@ public class TrackedNodePosition implements ITrackedNodePosition {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.corext.dom.ITrackedNodePosition#getStartPosition()
+	 * @see org.summer.sdt.internal.corext.dom.ITrackedNodePosition#getStartPosition()
 	 */
 	public int getStartPosition() {
 		if (this.group.isEmpty()) {
@@ -44,7 +44,7 @@ public class TrackedNodePosition implements ITrackedNodePosition {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.corext.dom.ITrackedNodePosition#getLength()
+	 * @see org.summer.sdt.internal.corext.dom.ITrackedNodePosition#getLength()
 	 */
 	public int getLength() {
 		if (this.group.isEmpty()) {

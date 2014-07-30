@@ -43,7 +43,7 @@
  *								Bug 426366 - [1.8][compiler] Type inference doesn't handle multiple candidate target types in outer overload context
  *								Bug 426290 - [1.8][compiler] Inference + overloading => wrong method resolution ?
  *								Bug 427483 - [Java 8] Variables in lambdas sometimes can't be resolved
- *								Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *								Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *								Bug 426996 - [1.8][inference] try to avoid method Expression.unresolve()? 
  *								Bug 428352 - [1.8][compiler] Resolution errors don't always surface
  *								Bug 429430 - [1.8] Lambdas and method reference infer wrong exception type with generics (RuntimeException instead of IOException)
@@ -362,7 +362,7 @@ public boolean checkNPE(BlockScope scope, FlowContext flowContext, FlowInfo flow
 	return true; // done all possible checking
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.ast.Expression#computeConversion(org.eclipse.jdt.internal.compiler.lookup.Scope, org.eclipse.jdt.internal.compiler.lookup.TypeBinding, org.eclipse.jdt.internal.compiler.lookup.TypeBinding)
+ * @see org.summer.sdt.internal.compiler.ast.Expression#computeConversion(org.summer.sdt.internal.compiler.lookup.Scope, org.summer.sdt.internal.compiler.lookup.TypeBinding, org.summer.sdt.internal.compiler.lookup.TypeBinding)
  */
 public void computeConversion(Scope scope, TypeBinding runtimeTimeType, TypeBinding compileTimeType) {
 	if (runtimeTimeType == null || compileTimeType == null)
@@ -400,8 +400,8 @@ public void computeConversion(Scope scope, TypeBinding runtimeTimeType, TypeBind
 /**
  * MessageSend code generation
  *
- * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
- * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+ * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+ * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
  * @param valueRequired boolean
  */
 public void generateCode(BlockScope currentScope, CodeStream codeStream, boolean valueRequired) {
@@ -464,7 +464,7 @@ public void generateCode(BlockScope currentScope, CodeStream codeStream, boolean
 	codeStream.recordPositionsFrom(pc, (int)(this.nameSourcePosition >>> 32)); // highlight selector
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#genericTypeArguments()
+ * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#genericTypeArguments()
  */
 public TypeBinding[] genericTypeArguments() {
 	return this.genericTypeArguments;
@@ -525,7 +525,7 @@ public int nullStatus(FlowInfo flowInfo, FlowContext flowContext) {
 	return FlowInfo.UNKNOWN;
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.ast.Expression#postConversionType(Scope)
+ * @see org.summer.sdt.internal.compiler.ast.Expression#postConversionType(Scope)
  */
 public TypeBinding postConversionType(Scope scope) {
 	TypeBinding convertedType = this.resolvedType;
@@ -942,7 +942,7 @@ public void setDepth(int depth) {
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.ast.Expression#setExpectedType(org.eclipse.jdt.internal.compiler.lookup.TypeBinding)
+ * @see org.summer.sdt.internal.compiler.ast.Expression#setExpectedType(org.summer.sdt.internal.compiler.lookup.TypeBinding)
  */
 public void setExpectedType(TypeBinding expectedType) {
     this.expectedType = expectedType;

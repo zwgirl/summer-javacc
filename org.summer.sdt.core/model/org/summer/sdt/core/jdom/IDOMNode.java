@@ -54,7 +54,7 @@ import org.summer.sdt.core.IJavaElement;
  *
  * @deprecated The JDOM was made obsolete by the addition in 2.0 of the more
  * powerful, fine-grained DOM/AST API found in the
- * org.eclipse.jdt.core.dom package.
+ * org.summer.sdt.core.dom package.
  * @noimplement This interface is not intended to be implemented by clients.
  */
 @SuppressWarnings("rawtypes")

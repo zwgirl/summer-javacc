@@ -138,11 +138,11 @@ import org.summer.sdt.internal.formatter.align.AlignmentException;
  */
 /*
    <extension
-         id="org.eclipse.jdt.core.newformatter.codeformatter"
-         name="org.eclipse.jdt.core.newformatter.codeformatter"
-         point="org.eclipse.jdt.core.codeFormatter">
+         id="org.summer.sdt.core.newformatter.codeformatter"
+         name="org.summer.sdt.core.newformatter.codeformatter"
+         point="org.summer.sdt.core.codeFormatter">
       <codeFormatter
-            class="org.eclipse.jdt.internal.formatter.CodeFormatterVisitor">
+            class="org.summer.sdt.internal.formatter.CodeFormatterVisitor">
       </codeFormatter>
    </extension>
 */
@@ -210,7 +210,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#acceptProblem(org.eclipse.jdt.core.compiler.IProblem)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#acceptProblem(org.summer.sdt.core.compiler.IProblem)
 	 */
 	public void acceptProblem(IProblem problem) {
 		super.acceptProblem(problem);
@@ -2621,7 +2621,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
     }
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.AllocationExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.AllocationExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		AllocationExpression allocationExpression,
@@ -2706,7 +2706,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.AND_AND_Expression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		AND_AND_Expression and_and_Expression,
@@ -2768,7 +2768,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.Argument, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.Argument, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(Argument argument, BlockScope scope) {
 
@@ -2830,7 +2830,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ArrayAllocationExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		ArrayAllocationExpression arrayAllocationExpression,
@@ -2876,7 +2876,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ArrayInitializer, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ArrayInitializer, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(ArrayInitializer arrayInitializer, BlockScope scope) {
 		final int numberOfParens = (arrayInitializer.bits & ASTNode.ParenthesizedMASK) >> ASTNode.ParenthesizedSHIFT;
@@ -3045,7 +3045,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ArrayQualifiedTypeReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ArrayQualifiedTypeReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		ArrayQualifiedTypeReference arrayQualifiedTypeReference,
@@ -3056,7 +3056,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ArrayQualifiedTypeReference, org.eclipse.jdt.internal.compiler.lookup.ClassScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ArrayQualifiedTypeReference, org.summer.sdt.internal.compiler.lookup.ClassScope)
 	 */
 	public boolean visit(
 		ArrayQualifiedTypeReference arrayQualifiedTypeReference,
@@ -3068,7 +3068,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ArrayReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ArrayReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(ArrayReference arrayReference, BlockScope scope) {
 
@@ -3091,7 +3091,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ArrayTypeReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ArrayTypeReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		ArrayTypeReference arrayTypeReference,
@@ -3117,7 +3117,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ArrayTypeReference, org.eclipse.jdt.internal.compiler.lookup.ClassScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ArrayTypeReference, org.summer.sdt.internal.compiler.lookup.ClassScope)
 	 */
 	public boolean visit(
 		ArrayTypeReference arrayTypeReference,
@@ -3142,7 +3142,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.AssertStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.AssertStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(AssertStatement assertStatement, BlockScope scope) {
 
@@ -3163,7 +3163,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.Assignment, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.Assignment, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(Assignment assignment, BlockScope scope) {
 
@@ -3203,7 +3203,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.BinaryExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.BinaryExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(BinaryExpression binaryExpression, BlockScope scope) {
 
@@ -3244,7 +3244,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.Block, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.Block, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(Block block, BlockScope scope) {
 		formatBlock(block, scope, this.preferences.brace_position_for_block, this.preferences.insert_space_before_opening_brace_in_block);
@@ -3252,7 +3252,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.BreakStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.BreakStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(BreakStatement breakStatement, BlockScope scope) {
 
@@ -3266,7 +3266,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.CaseStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.CaseStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(CaseStatement caseStatement, BlockScope scope) {
 		if (caseStatement.constantExpression == null) {
@@ -3284,7 +3284,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.CastExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.CastExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(CastExpression castExpression, BlockScope scope) {
 
@@ -3311,7 +3311,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.CharLiteral, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.CharLiteral, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(CharLiteral charLiteral, BlockScope scope) {
 
@@ -3329,7 +3329,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ClassLiteralAccess, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ClassLiteralAccess, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(ClassLiteralAccess classLiteral, BlockScope scope) {
 
@@ -3348,7 +3348,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.Clinit, org.eclipse.jdt.internal.compiler.lookup.ClassScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.Clinit, org.summer.sdt.internal.compiler.lookup.ClassScope)
 	 */
 	public boolean visit(Clinit clinit, ClassScope scope) {
 
@@ -3356,7 +3356,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration, org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.CompilationUnitDeclaration, org.summer.sdt.internal.compiler.lookup.CompilationUnitScope)
 	 */
 	public boolean visit(
 		CompilationUnitDeclaration compilationUnitDeclaration,
@@ -3452,7 +3452,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.CompoundAssignment, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.CompoundAssignment, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		CompoundAssignment compoundAssignment,
@@ -3533,7 +3533,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-     * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ConditionalExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+     * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ConditionalExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
      */
     public boolean visit(
     	ConditionalExpression conditionalExpression,
@@ -3586,7 +3586,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ConstructorDeclaration, org.eclipse.jdt.internal.compiler.lookup.ClassScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ConstructorDeclaration, org.summer.sdt.internal.compiler.lookup.ClassScope)
 	 */
 	public boolean visit(
 		ConstructorDeclaration constructorDeclaration,
@@ -3728,7 +3728,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ContinueStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ContinueStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(ContinueStatement continueStatement, BlockScope scope) {
 
@@ -3742,7 +3742,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.DoStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.DoStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(DoStatement doStatement, BlockScope scope) {
 
@@ -3796,7 +3796,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.DoubleLiteral, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.DoubleLiteral, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(DoubleLiteral doubleLiteral, BlockScope scope) {
 
@@ -3816,7 +3816,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.EmptyStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.EmptyStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(EmptyStatement statement, BlockScope scope) {
 		if (this.preferences.put_empty_statement_on_new_line) {
@@ -3887,7 +3887,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 		return false;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.EqualExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.EqualExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(EqualExpression equalExpression, BlockScope scope) {
 
@@ -3899,7 +3899,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ExplicitConstructorCall, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ExplicitConstructorCall, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		ExplicitConstructorCall explicitConstructor,
@@ -3985,7 +3985,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 		return false;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.FalseLiteral, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.FalseLiteral, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(FalseLiteral falseLiteral, BlockScope scope) {
 
@@ -4001,7 +4001,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 		return false;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.FieldReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.FieldReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(FieldReference fieldReference, BlockScope scope) {
 
@@ -4020,7 +4020,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.FloatLiteral, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.FloatLiteral, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(FloatLiteral floatLiteral, BlockScope scope) {
 
@@ -4086,7 +4086,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ForStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ForStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(ForStatement forStatement, BlockScope scope) {
 
@@ -4173,7 +4173,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.IfStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.IfStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(IfStatement ifStatement, BlockScope scope) {
 
@@ -4299,7 +4299,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.IntersectionCastTypeReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.IntersectionCastTypeReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(IntersectionCastTypeReference intersectionCastTypeReference, BlockScope scope) {
 		int length = intersectionCastTypeReference.typeReferences == null ? 0 : intersectionCastTypeReference.typeReferences.length;
@@ -4317,7 +4317,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.Initializer, org.eclipse.jdt.internal.compiler.lookup.MethodScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.Initializer, org.summer.sdt.internal.compiler.lookup.MethodScope)
 	 */
 	public boolean visit(Initializer initializer, MethodScope scope) {
 
@@ -4329,7 +4329,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.InstanceOfExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		InstanceOfExpression instanceOfExpression,
@@ -4351,7 +4351,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.IntLiteral, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.IntLiteral, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(IntLiteral intLiteral, BlockScope scope) {
 
@@ -4371,7 +4371,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.LabeledStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.LabeledStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(LabeledStatement labeledStatement, BlockScope scope) {
 
@@ -4393,7 +4393,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.LambdaExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.LambdaExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(LambdaExpression lambdaExpression, BlockScope scope) {
 		
@@ -4435,7 +4435,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.LocalDeclaration, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.LocalDeclaration, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(LocalDeclaration localDeclaration, BlockScope scope) {
 		formatLocalDeclaration(localDeclaration, scope, this.preferences.insert_space_before_comma_in_multiple_local_declarations, this.preferences.insert_space_after_comma_in_multiple_local_declarations);
@@ -4443,7 +4443,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.LongLiteral, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.LongLiteral, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(LongLiteral longLiteral, BlockScope scope) {
 
@@ -4488,7 +4488,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.MessageSend, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.MessageSend, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(MessageSend messageSend, BlockScope scope) {
 
@@ -4538,7 +4538,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.MethodDeclaration, org.eclipse.jdt.internal.compiler.lookup.ClassScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.MethodDeclaration, org.summer.sdt.internal.compiler.lookup.ClassScope)
 	 */
 	public boolean visit(
 		MethodDeclaration methodDeclaration,
@@ -4754,7 +4754,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 		return false;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.NullLiteral, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.NullLiteral, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(NullLiteral nullLiteral, BlockScope scope) {
 
@@ -4772,7 +4772,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.OR_OR_Expression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.OR_OR_Expression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(OR_OR_Expression or_or_Expression, BlockScope scope) {
 		return dumpBinaryExpression(or_or_Expression, TerminalTokens.TokenNameOR_OR, scope);
@@ -4956,7 +4956,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.PostfixExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.PostfixExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		PostfixExpression postfixExpression,
@@ -4980,7 +4980,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.PrefixExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.PrefixExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(PrefixExpression prefixExpression, BlockScope scope) {
 
@@ -5002,7 +5002,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.QualifiedAllocationExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.QualifiedAllocationExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		QualifiedAllocationExpression qualifiedAllocationExpression,
@@ -5098,7 +5098,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.QualifiedNameReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.QualifiedNameReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		QualifiedNameReference qualifiedNameReference,
@@ -5117,7 +5117,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.QualifiedSuperReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.QualifiedSuperReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		QualifiedSuperReference qualifiedSuperReference,
@@ -5138,7 +5138,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.QualifiedThisReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.QualifiedThisReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		QualifiedThisReference qualifiedThisReference,
@@ -5159,7 +5159,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.QualifiedTypeReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.QualifiedTypeReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		QualifiedTypeReference qualifiedTypeReference,
@@ -5189,7 +5189,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.QualifiedTypeReference, org.eclipse.jdt.internal.compiler.lookup.ClassScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.QualifiedTypeReference, org.summer.sdt.internal.compiler.lookup.ClassScope)
 	 */
 	public boolean visit(
 		QualifiedTypeReference qualifiedTypeReference,
@@ -5208,9 +5208,9 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ReferenceExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ReferenceExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
-	public boolean visit(org.eclipse.jdt.internal.compiler.ast.ReferenceExpression referenceExpression, BlockScope blockScope) {
+	public boolean visit(org.summer.sdt.internal.compiler.ast.ReferenceExpression referenceExpression, BlockScope blockScope) {
 		referenceExpression.lhs.traverse(this, blockScope);
 		this.scribe.printNextToken(TerminalTokens.TokenNameCOLON_COLON);
 		
@@ -5242,7 +5242,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ReturnStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ReturnStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(ReturnStatement returnStatement, BlockScope scope) {
 
@@ -5278,7 +5278,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 		return false;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.SingleNameReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.SingleNameReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(SingleNameReference singleNameReference, BlockScope scope) {
 
@@ -5295,7 +5295,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.SingleTypeReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.SingleTypeReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		SingleTypeReference singleTypeReference,
@@ -5336,7 +5336,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.SingleTypeReference, org.eclipse.jdt.internal.compiler.lookup.ClassScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.SingleTypeReference, org.summer.sdt.internal.compiler.lookup.ClassScope)
 	 */
 	public boolean visit(
 		SingleTypeReference singleTypeReference,
@@ -5358,7 +5358,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.StringLiteral, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.StringLiteral, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(StringLiteral stringLiteral, BlockScope scope) {
 		final int numberOfParens = (stringLiteral.bits & ASTNode.ParenthesizedMASK) >> ASTNode.ParenthesizedSHIFT;
@@ -5375,7 +5375,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.NullLiteral, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.NullLiteral, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(StringLiteralConcatenation stringLiteral, BlockScope scope) {
 		final int numberOfParens = (stringLiteral.bits & ASTNode.ParenthesizedMASK) >> ASTNode.ParenthesizedSHIFT;
@@ -5426,7 +5426,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.SuperReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.SuperReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(SuperReference superReference, BlockScope scope) {
 
@@ -5443,7 +5443,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.SwitchStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.SwitchStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(SwitchStatement switchStatement, BlockScope scope) {
 		this.scribe.printNextToken(TerminalTokens.TokenNameswitch);
@@ -5589,7 +5589,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.SynchronizedStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.SynchronizedStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		SynchronizedStatement synchronizedStatement,
@@ -5613,7 +5613,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 		return false;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ThisReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ThisReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(ThisReference thisReference, BlockScope scope) {
 
@@ -5632,7 +5632,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.ThrowStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.ThrowStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(ThrowStatement throwStatement, BlockScope scope) {
 
@@ -5653,7 +5653,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.TrueLiteral, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.TrueLiteral, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(TrueLiteral trueLiteral, BlockScope scope) {
 
@@ -5670,7 +5670,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.TryStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.TryStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(TryStatement tryStatement, BlockScope scope) {
 
@@ -5777,7 +5777,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.TypeDeclaration, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.TypeDeclaration, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		TypeDeclaration localTypeDeclaration,
@@ -5788,7 +5788,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.TypeDeclaration, org.eclipse.jdt.internal.compiler.lookup.ClassScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.TypeDeclaration, org.summer.sdt.internal.compiler.lookup.ClassScope)
 	 */
 	public boolean visit(TypeDeclaration memberTypeDeclaration, ClassScope scope) {
 		format(memberTypeDeclaration);
@@ -5796,7 +5796,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.TypeDeclaration, org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.TypeDeclaration, org.summer.sdt.internal.compiler.lookup.CompilationUnitScope)
 	 */
 	public boolean visit(
 		TypeDeclaration typeDeclaration,
@@ -5865,7 +5865,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.UnaryExpression, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.UnaryExpression, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(UnaryExpression unaryExpression, BlockScope scope) {
 
@@ -5944,7 +5944,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.UnionTypeReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.UnionTypeReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		UnionTypeReference unionTypeReference,
@@ -5962,7 +5962,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.UnionTypeReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.UnionTypeReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 		UnionTypeReference unionTypeReference,
@@ -5980,7 +5980,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.WhileStatement, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.WhileStatement, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(WhileStatement whileStatement, BlockScope scope) {
 

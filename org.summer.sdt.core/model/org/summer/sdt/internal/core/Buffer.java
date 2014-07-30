@@ -359,7 +359,7 @@ public class Buffer implements IBuffer {
 	
 			// Special case for UTF-8 BOM files
 			// see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=110576
-			if (encoding != null && encoding.equals(org.summer.sdt.util.Util.UTF_8)) {
+			if (encoding != null && encoding.equals(org.summer.sdt.internal.compiler.util.Util.UTF_8)) {
 				IContentDescription description;
 				try {
 					description = this.file.getContentDescription();

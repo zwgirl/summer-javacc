@@ -47,19 +47,19 @@ public class AnnotationComponent extends ClassFileStruct implements IAnnotationC
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponent#getComponentNameIndex()
+	 * @see org.summer.sdt.core.util.IAnnotationComponent#getComponentNameIndex()
 	 */
 	public int getComponentNameIndex() {
 		return this.componentNameIndex;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponent#getComponentName()
+	 * @see org.summer.sdt.core.util.IAnnotationComponent#getComponentName()
 	 */
 	public char[] getComponentName() {
 		return this.componentName;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponent#getComponentValue()
+	 * @see org.summer.sdt.core.util.IAnnotationComponent#getComponentValue()
 	 */
 	public IAnnotationComponentValue getComponentValue() {
 		return this.componentValue;

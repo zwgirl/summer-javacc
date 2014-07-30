@@ -34,7 +34,7 @@ public class JavaSearchParticipant extends SearchParticipant {
 	private SourceIndexer sourceIndexer;
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.search.SearchParticipant#beginSearching()
+	 * @see org.summer.sdt.core.search.SearchParticipant#beginSearching()
 	 */
 	public void beginSearching() {
 		super.beginSearching();
@@ -42,7 +42,7 @@ public class JavaSearchParticipant extends SearchParticipant {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.search.SearchParticipant#doneSearching()
+	 * @see org.summer.sdt.core.search.SearchParticipant#doneSearching()
 	 */
 	public void doneSearching() {
 		this.indexSelector.set(null);
@@ -50,28 +50,28 @@ public class JavaSearchParticipant extends SearchParticipant {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.search.SearchParticipant#getName()
+	 * @see org.summer.sdt.core.search.SearchParticipant#getName()
 	 */
 	public String getDescription() {
 		return "Java"; //$NON-NLS-1$
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.search.SearchParticipant#getDocument(String)
+	 * @see org.summer.sdt.core.search.SearchParticipant#getDocument(String)
 	 */
 	public SearchDocument getDocument(String documentPath) {
 		return new JavaSearchDocument(documentPath, this);
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.search.SearchParticipant#indexDocument(SearchDocument)
+	 * @see org.summer.sdt.core.search.SearchParticipant#indexDocument(SearchDocument)
 	 */
 	public void indexDocument(SearchDocument document, IPath indexPath) {
 		// TODO must verify that the document + indexPath match, when this is not called from scheduleDocumentIndexing
 		document.removeAllIndexEntries(); // in case the document was already indexed
 
 		String documentPath = document.getPath();
-		if (org.summer.sdt.util.Util.isJavaLikeFileName(documentPath)) {
+		if (org.summer.sdt.internal.core.util.Util.isJavaLikeFileName(documentPath)) {
 			this.sourceIndexer = new SourceIndexer(document);
 			this.sourceIndexer.indexDocument();
 		} else if (org.summer.sdt.internal.compiler.util.Util.isClassFileName(documentPath)) {
@@ -80,12 +80,12 @@ public class JavaSearchParticipant extends SearchParticipant {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.search.SearchParticipant#indexResolvedDocument(SearchDocument, IPath)
+	 * @see org.summer.sdt.core.search.SearchParticipant#indexResolvedDocument(SearchDocument, IPath)
 	 */
 	@Override
 	public void indexResolvedDocument(SearchDocument document, IPath indexPath) {
 		String documentPath = document.getPath();
-		if (org.summer.sdt.util.Util.isJavaLikeFileName(documentPath)) {
+		if (org.summer.sdt.internal.core.util.Util.isJavaLikeFileName(documentPath)) {
 			if (this.sourceIndexer != null)
 				this.sourceIndexer.indexResolvedDocument();
 			this.sourceIndexer = null;
@@ -93,11 +93,11 @@ public class JavaSearchParticipant extends SearchParticipant {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.search.SearchParticipant#resolveDocument(SearchDocument document)
+	 * @see org.summer.sdt.core.search.SearchParticipant#resolveDocument(SearchDocument document)
 	 */
 	public void resolveDocument(SearchDocument document) {
 		String documentPath = document.getPath();
-		if (org.summer.sdt.util.Util.isJavaLikeFileName(documentPath)) {
+		if (org.summer.sdt.internal.core.util.Util.isJavaLikeFileName(documentPath)) {
 			if (this.sourceIndexer != null)
 				this.sourceIndexer.resolveDocument();
 		}
@@ -123,7 +123,7 @@ public class JavaSearchParticipant extends SearchParticipant {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.search.SearchParticipant#selectIndexes(org.eclipse.jdt.core.search.SearchQuery, org.eclipse.jdt.core.search.SearchContext)
+	 * @see org.summer.sdt.core.search.SearchParticipant#selectIndexes(org.summer.sdt.core.search.SearchQuery, org.summer.sdt.core.search.SearchContext)
 	 */
 	public IPath[] selectIndexes(SearchPattern pattern, IJavaSearchScope scope) {
 		IndexSelector selector = (IndexSelector) this.indexSelector.get();

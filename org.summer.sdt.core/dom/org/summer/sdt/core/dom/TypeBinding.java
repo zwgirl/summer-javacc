@@ -170,7 +170,7 @@ class TypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getBound()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getBound()
 	 */
 	public ITypeBinding getBound() {
 		switch (this.binding.kind()) {
@@ -186,7 +186,7 @@ class TypeBinding implements ITypeBinding {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getGenericTypeOfWildcardType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getGenericTypeOfWildcardType()
 	 */
 	public ITypeBinding getGenericTypeOfWildcardType() {
 		switch (this.binding.kind()) {
@@ -201,7 +201,7 @@ class TypeBinding implements ITypeBinding {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getRank()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getRank()
 	 */
 	public int getRank() {
 		switch (this.binding.kind()) {
@@ -266,7 +266,7 @@ class TypeBinding implements ITypeBinding {
 			 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=63550
 			 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=64299
 			 */
-			org.summer.sdt.util.Util.log(e, "Could not retrieve declared fields"); //$NON-NLS-1$
+			org.summer.sdt.internal.core.util.Util.log(e, "Could not retrieve declared fields"); //$NON-NLS-1$
 		}
 		return this.fields = NO_VARIABLE_BINDINGS;
 	}
@@ -314,7 +314,7 @@ class TypeBinding implements ITypeBinding {
 			 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=63550
 			 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=64299
 			 */
-			org.summer.sdt.util.Util.log(e, "Could not retrieve declared methods"); //$NON-NLS-1$
+			org.summer.sdt.internal.core.util.Util.log(e, "Could not retrieve declared methods"); //$NON-NLS-1$
 		}
 		return this.methods = NO_METHOD_BINDINGS;
 	}
@@ -357,7 +357,7 @@ class TypeBinding implements ITypeBinding {
 			 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=63550
 			 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=64299
 			 */
-			org.summer.sdt.util.Util.log(e, "Could not retrieve declared methods"); //$NON-NLS-1$
+			org.summer.sdt.internal.core.util.Util.log(e, "Could not retrieve declared methods"); //$NON-NLS-1$
 		}
 		return this.members = NO_TYPE_BINDINGS;
 	}
@@ -378,7 +378,7 @@ class TypeBinding implements ITypeBinding {
 					 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=63550
 					 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=64299
 					 */
-					org.summer.sdt.util.Util.log(e, "Could not retrieve declaring method"); //$NON-NLS-1$
+					org.summer.sdt.internal.core.util.Util.log(e, "Could not retrieve declaring method"); //$NON-NLS-1$
 				}
 			}
 		} else if (this.binding.isTypeVariable()) {
@@ -393,7 +393,7 @@ class TypeBinding implements ITypeBinding {
 					 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=63550
 					 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=64299
 					 */
-					org.summer.sdt.util.Util.log(e, "Could not retrieve declaring method"); //$NON-NLS-1$
+					org.summer.sdt.internal.core.util.Util.log(e, "Could not retrieve declaring method"); //$NON-NLS-1$
 				}
 			}
 		}
@@ -415,7 +415,7 @@ class TypeBinding implements ITypeBinding {
 					 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=63550
 					 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=64299
 					 */
-					org.summer.sdt.util.Util.log(e, "Could not retrieve declaring class"); //$NON-NLS-1$
+					org.summer.sdt.internal.core.util.Util.log(e, "Could not retrieve declaring class"); //$NON-NLS-1$
 				}
 			}
 		} else if (this.binding.isTypeVariable()) {
@@ -430,7 +430,7 @@ class TypeBinding implements ITypeBinding {
 					 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=63550
 					 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=64299
 					 */
-					org.summer.sdt.util.Util.log(e, "Could not retrieve declaring class"); //$NON-NLS-1$
+					org.summer.sdt.internal.core.util.Util.log(e, "Could not retrieve declaring class"); //$NON-NLS-1$
 				}
 			}
 		}
@@ -460,7 +460,7 @@ class TypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getTypeDeclaration()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getTypeDeclaration()
 	 */
 	public ITypeBinding getTypeDeclaration() {
 		if (this.binding instanceof ParameterizedTypeBinding)
@@ -469,14 +469,14 @@ class TypeBinding implements ITypeBinding {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getErasure()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getErasure()
 	 */
 	public ITypeBinding getErasure() {
 		return this.resolver.getTypeBinding(this.binding.erasure());
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getFunctionalInterfaceMethod
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getFunctionalInterfaceMethod
 	 */
 	@Override
 	public IMethodBinding getFunctionalInterfaceMethod() {
@@ -513,7 +513,7 @@ class TypeBinding implements ITypeBinding {
 			 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=63550
 			 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=64299
 			 */
-			org.summer.sdt.util.Util.log(e, "Could not retrieve interfaces"); //$NON-NLS-1$
+			org.summer.sdt.internal.core.util.Util.log(e, "Could not retrieve interfaces"); //$NON-NLS-1$
 		}
 		int length = internalInterfaces == null ? 0 : internalInterfaces.length;
 		if (length != 0) {
@@ -562,7 +562,7 @@ class TypeBinding implements ITypeBinding {
 		if (this.resolver instanceof DefaultBindingResolver) {
 			DefaultBindingResolver defaultBindingResolver = (DefaultBindingResolver) this.resolver;
 			if (!defaultBindingResolver.fromJavaProject) return null;
-			return org.summer.sdt.util.Util.getUnresolvedJavaElement(
+			return org.summer.sdt.internal.core.util.Util.getUnresolvedJavaElement(
 					typeBinding,
 					defaultBindingResolver.workingCopyOwner,
 					defaultBindingResolver.getBindingsToNodesMap());
@@ -850,7 +850,7 @@ class TypeBinding implements ITypeBinding {
 			 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=63550
 			 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=64299
 			 */
-			org.summer.sdt.util.Util.log(e, "Could not retrieve superclass"); //$NON-NLS-1$
+			org.summer.sdt.internal.core.util.Util.log(e, "Could not retrieve superclass"); //$NON-NLS-1$
 			return this.resolver.resolveWellKnownType("java.lang.Object"); //$NON-NLS-1$
 		}
 		if (superclass == null) {
@@ -860,7 +860,7 @@ class TypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getTypeArguments()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getTypeArguments()
 	 */
 	public ITypeBinding[] getTypeArguments() {
 		if (this.prototype != null) {
@@ -887,7 +887,7 @@ class TypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getTypeBounds()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getTypeBounds()
 	 */
 	public ITypeBinding[] getTypeBounds() {
 		if (this.prototype != null) {
@@ -953,7 +953,7 @@ class TypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getTypeParameters()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getTypeParameters()
 	 */
 	public ITypeBinding[] getTypeParameters() {
 		if (this.prototype != null) {
@@ -984,7 +984,7 @@ class TypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getWildcard()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getWildcard()
 	 * @since 3.1
 	 */
 	public ITypeBinding getWildcard() {
@@ -996,7 +996,7 @@ class TypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isGenericType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isGenericType()
 	 * @since 3.1
 	 */
 	public boolean isGenericType() {
@@ -1009,7 +1009,7 @@ class TypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isAnnotation()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isAnnotation()
 	 */
 	public boolean isAnnotation() {
 		return this.binding.isAnnotationType();
@@ -1230,7 +1230,7 @@ class TypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isParameterizedType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isParameterizedType()
 	 */
 	public boolean isParameterizedType() {
 		return this.binding.isParameterizedTypeWithActualArguments();
@@ -1244,7 +1244,7 @@ class TypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isRawType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isRawType()
 	 */
 	public boolean isRawType() {
 		return this.binding.isRawType();
@@ -1301,7 +1301,7 @@ class TypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isUpperbound()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isUpperbound()
 	 */
 	public boolean isUpperbound() {
 		switch (this.binding.kind()) {
@@ -1314,7 +1314,7 @@ class TypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isWildcardType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isWildcardType()
 	 */
 	public boolean isWildcardType() {
 		return this.binding.isWildcard();

@@ -21,7 +21,7 @@
  *							Bug 417295 - [1.8[[null] Massage type annotated null analysis to gel well with deep encoded type bindings.
  *							Bug 400874 - [1.8][compiler] Inference infrastructure should evolve to meet JLS8 18.x (Part G of JSR335 spec)
  *							Bug 426078 - [1.8] VerifyError when conditional expression passed as an argument
- *							Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *							Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *							Bug 418537 - [1.8][null] Fix null type annotation analysis for poly conditional expressions
  *							Bug 428352 - [1.8][compiler] Resolution errors don't always surface
  *******************************************************************************/
@@ -249,8 +249,8 @@ public FlowInfo analyseCode(BlockScope currentScope, FlowContext flowContext,
 	/**
 	 * Code generation for the conditional operator ?:
 	 *
-	 * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 * @param valueRequired boolean
 	*/
 	public void generateCode(

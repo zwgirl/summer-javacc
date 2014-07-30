@@ -37,7 +37,7 @@ import org.eclipse.osgi.util.NLS;
 public class JavaIndexerApplication implements IApplication {
 
 	private final static class Messages extends NLS {
-		private static final String MESSAGES_NAME = "org.eclipse.jdt.core.index.messages";//$NON-NLS-1$
+		private static final String MESSAGES_NAME = "org.summer.sdt.core.index.messages";//$NON-NLS-1$
 
 		public static String CommandLineProcessing;
 		public static String CommandLineUsage;

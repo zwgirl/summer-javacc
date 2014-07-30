@@ -99,7 +99,7 @@ class DocCommentParser extends AbstractCommentParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#createArgumentReference(char[], java.lang.Object, int)
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#createArgumentReference(char[], java.lang.Object, int)
 	 */
 	protected Object createArgumentReference(char[] name, int dim, boolean isVarargs, Object typeRef, long[] dimPositions, long argNamePos) throws InvalidInputException {
 		try {
@@ -155,7 +155,7 @@ class DocCommentParser extends AbstractCommentParser {
 		}
 	}
 /* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#createFieldReference()
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#createFieldReference()
 	 */
 	protected Object createFieldReference(Object receiver) throws InvalidInputException {
 		try {
@@ -183,7 +183,7 @@ class DocCommentParser extends AbstractCommentParser {
 		}
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#createMethodReference(java.lang.Object[])
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#createMethodReference(java.lang.Object[])
 	 */
 	protected Object createMethodReference(Object receiver, List arguments) throws InvalidInputException {
 		try {
@@ -222,7 +222,7 @@ class DocCommentParser extends AbstractCommentParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#createTag()
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#createTag()
 	 */
 	protected void createTag() {
 		TagElement tagElement = this.ast.newTagElement();
@@ -257,7 +257,7 @@ class DocCommentParser extends AbstractCommentParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#createTypeReference()
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#createTypeReference()
 	 */
 	protected Object createTypeReference(int primitiveToken) {
 		int size = this.identifierLengthStack[this.identifierLengthPtr];
@@ -332,7 +332,7 @@ class DocCommentParser extends AbstractCommentParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#parseIdentifierTag(boolean)
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#parseIdentifierTag(boolean)
 	 */
 	protected boolean parseIdentifierTag(boolean report) {
 		if (super.parseIdentifierTag(report)) {
@@ -353,7 +353,7 @@ class DocCommentParser extends AbstractCommentParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#parseTag(int)
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#parseTag(int)
 	 */
 	protected boolean parseTag(int previousPosition) throws InvalidInputException {
 
@@ -590,7 +590,7 @@ class DocCommentParser extends AbstractCommentParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#pushParamName(java.lang.Object)
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#pushParamName(java.lang.Object)
 	 */
 	protected boolean pushParamName(boolean isTypeParam) {
 		int idIndex = isTypeParam ? 1 : 0;
@@ -628,7 +628,7 @@ class DocCommentParser extends AbstractCommentParser {
 		return true;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#pushSeeRef(java.lang.Object)
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#pushSeeRef(java.lang.Object)
 	 */
 	protected boolean pushSeeRef(Object statement) {
 		TagElement seeTag = this.ast.newTagElement();
@@ -667,7 +667,7 @@ class DocCommentParser extends AbstractCommentParser {
 		return true;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#pushText(int, int)
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#pushText(int, int)
 	 */
 	protected void pushText(int start, int end) {
 
@@ -714,7 +714,7 @@ class DocCommentParser extends AbstractCommentParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#pushThrowName(java.lang.Object)
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#pushThrowName(java.lang.Object)
 	 */
 	protected boolean pushThrowName(Object typeRef) {
 		TagElement throwsTag = this.ast.newTagElement();
@@ -733,7 +733,7 @@ class DocCommentParser extends AbstractCommentParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.AbstractCommentParser#refreshInlineTagPosition(int)
+	 * @see org.summer.sdt.internal.compiler.parser.AbstractCommentParser#refreshInlineTagPosition(int)
 	 */
 	protected void refreshInlineTagPosition(int previousPosition) {
 		if (this.astPtr != -1) {

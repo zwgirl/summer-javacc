@@ -19,7 +19,7 @@
  *								Bug 416307 - [1.8][compiler][null] subclass with type parameter substitution confuses null checking
  *								Bug 392099 - [1.8][compiler][null] Apply null annotation on types for null analysis
  *								Bug 400874 - [1.8][compiler] Inference infrastructure should evolve to meet JLS8 18.x (Part G of JSR335 spec)
- *								Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *								Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *								Bug 430150 - [1.8][null] stricter checking against type variables
  *        Andy Clement (GoPivotal, Inc) aclement@gopivotal.com - Contributions for
  *                          Bug 415541 - [1.8][compiler] Type annotations in the body of static initializer get dropped
@@ -429,8 +429,8 @@ public class CastExpression extends Expression {
 	/**
 	 * Cast expression code generation
 	 *
-	 * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 * @param valueRequired boolean
 	 */
 	public void generateCode(BlockScope currentScope, CodeStream codeStream, boolean valueRequired) {
@@ -481,7 +481,7 @@ public class CastExpression extends Expression {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.Expression#localVariableBinding()
+	 * @see org.summer.sdt.internal.compiler.ast.Expression#localVariableBinding()
 	 */
 	public LocalVariableBinding localVariableBinding() {
 		return this.expression.localVariableBinding();
@@ -492,7 +492,7 @@ public class CastExpression extends Expression {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.Expression#optimizedBooleanConstant()
+	 * @see org.summer.sdt.internal.compiler.ast.Expression#optimizedBooleanConstant()
 	 */
 	public Constant optimizedBooleanConstant() {
 		switch(this.resolvedType.id) {
@@ -589,7 +589,7 @@ public class CastExpression extends Expression {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.Expression#setExpectedType(org.eclipse.jdt.internal.compiler.lookup.TypeBinding)
+	 * @see org.summer.sdt.internal.compiler.ast.Expression#setExpectedType(org.summer.sdt.internal.compiler.lookup.TypeBinding)
 	 */
 	public void setExpectedType(TypeBinding expectedType) {
 		this.expectedType = expectedType;
@@ -618,14 +618,14 @@ public class CastExpression extends Expression {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.Expression#tagAsNeedCheckCast()
+	 * @see org.summer.sdt.internal.compiler.ast.Expression#tagAsNeedCheckCast()
 	 */
 	public void tagAsNeedCheckCast() {
 		this.bits |= ASTNode.GenerateCheckcast;
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.Expression#tagAsUnnecessaryCast(Scope, TypeBinding)
+	 * @see org.summer.sdt.internal.compiler.ast.Expression#tagAsUnnecessaryCast(Scope, TypeBinding)
 	 */
 	public void tagAsUnnecessaryCast(Scope scope, TypeBinding castType) {
 		this.bits |= ASTNode.UnnecessaryCast;

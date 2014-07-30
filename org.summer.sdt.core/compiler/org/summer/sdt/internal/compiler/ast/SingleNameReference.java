@@ -267,7 +267,7 @@ public class SingleNameReference extends NameReference implements OperatorIds {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.Expression#computeConversion(org.eclipse.jdt.internal.compiler.lookup.Scope, org.eclipse.jdt.internal.compiler.lookup.TypeBinding, org.eclipse.jdt.internal.compiler.lookup.TypeBinding)
+	 * @see org.summer.sdt.internal.compiler.ast.Expression#computeConversion(org.summer.sdt.internal.compiler.lookup.Scope, org.summer.sdt.internal.compiler.lookup.TypeBinding, org.summer.sdt.internal.compiler.lookup.TypeBinding)
 	 */
 	public void computeConversion(Scope scope, TypeBinding runtimeTimeType, TypeBinding compileTimeType) {
 		if (runtimeTimeType == null || compileTimeType == null)
@@ -814,7 +814,7 @@ public class SingleNameReference extends NameReference implements OperatorIds {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#genericTypeArguments()
+	 * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#genericTypeArguments()
 	 */
 	public TypeBinding[] genericTypeArguments() {
 		return null;
@@ -913,7 +913,7 @@ public class SingleNameReference extends NameReference implements OperatorIds {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.Expression#postConversionType(Scope)
+	 * @see org.summer.sdt.internal.compiler.ast.Expression#postConversionType(Scope)
 	 */
 	public TypeBinding postConversionType(Scope scope) {
 		TypeBinding convertedType = this.resolvedType;

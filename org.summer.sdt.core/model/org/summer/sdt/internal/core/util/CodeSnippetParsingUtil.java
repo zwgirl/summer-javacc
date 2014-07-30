@@ -133,7 +133,7 @@ public class CodeSnippetParsingUtil {
 		//fill the methods bodies in order for the code to be generated
 		//real parse of the method....
 		parser.scanner.setSource(compilationResult);
-		org.eclipse.jdt.internal.compiler.ast.TypeDeclaration[] types = compilationUnitDeclaration.types;
+		org.summer.sdt.internal.compiler.ast.TypeDeclaration[] types = compilationUnitDeclaration.types;
 		if (types != null) {
 			for (int i = 0, length = types.length; i < length; i++) {
 				types[i].parseMethods(parser, compilationUnitDeclaration);

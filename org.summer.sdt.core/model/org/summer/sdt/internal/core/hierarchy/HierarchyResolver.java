@@ -42,6 +42,7 @@ import org.summer.sdt.internal.compiler.DefaultErrorHandlingPolicies;
 import org.summer.sdt.internal.compiler.IErrorHandlingPolicy;
 import org.summer.sdt.internal.compiler.IProblemFactory;
 import org.summer.sdt.internal.compiler.ast.*;
+import org.summer.sdt.internal.compiler.ast.LambdaExpression;
 import org.summer.sdt.internal.compiler.classfmt.ClassFileConstants;
 import org.summer.sdt.internal.compiler.env.AccessRestriction;
 import org.summer.sdt.internal.compiler.env.IBinaryType;

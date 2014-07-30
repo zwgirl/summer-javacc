@@ -47,7 +47,7 @@ public TypeBinding clone(TypeBinding outerType) {
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#collectMissingTypes(java.util.List)
+ * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#collectMissingTypes(java.util.List)
  */
 public List collectMissingTypes(List missingTypes) {
 	if (missingTypes == null) {
@@ -61,7 +61,7 @@ public List collectMissingTypes(List missingTypes) {
 
 /**
  * Missing binary type will answer <code>false</code> to #isValidBinding()
- * @see org.eclipse.jdt.internal.compiler.lookup.Binding#problemId()
+ * @see org.summer.sdt.internal.compiler.lookup.Binding#problemId()
  */
 public int problemId() {
 	return ProblemReasons.NotFound;

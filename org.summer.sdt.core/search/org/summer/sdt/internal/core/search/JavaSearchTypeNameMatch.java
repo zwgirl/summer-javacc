@@ -50,14 +50,14 @@ public boolean equals(Object obj) {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.core.search.TypeNameMatch#getAccessibility()
+ * @see org.summer.sdt.core.search.TypeNameMatch#getAccessibility()
  */
 public int getAccessibility() {
 	return this.accessibility;
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.core.search.TypeNameMatch#getModifiers()
+ * @see org.summer.sdt.core.search.TypeNameMatch#getModifiers()
  */
 public int getModifiers() {
 	return this.modifiers;
@@ -66,7 +66,7 @@ public int getModifiers() {
 /* (non-Javadoc)
  * Note that returned handle exists as it matches a type accepted
  * from up-to-date index file.
- * @see org.eclipse.jdt.core.search.TypeNameMatch#getType()
+ * @see org.summer.sdt.core.search.TypeNameMatch#getType()
  */
 public IType getType() {
 	return this.type;

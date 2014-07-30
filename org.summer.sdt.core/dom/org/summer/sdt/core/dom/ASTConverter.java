@@ -1445,37 +1445,37 @@ class ASTConverter {
 		int start = lhs.getStartPosition();
 		assignment.setSourceRange(start, expression.sourceEnd - start + 1);
 		switch (expression.operator) {
-			case org.summer.sdt.OperatorIds.PLUS :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.PLUS :
 				assignment.setOperator(Assignment.Operator.PLUS_ASSIGN);
 				break;
-			case org.summer.sdt.OperatorIds.MINUS :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.MINUS :
 				assignment.setOperator(Assignment.Operator.MINUS_ASSIGN);
 				break;
-			case org.summer.sdt.OperatorIds.MULTIPLY :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.MULTIPLY :
 				assignment.setOperator(Assignment.Operator.TIMES_ASSIGN);
 				break;
-			case org.summer.sdt.OperatorIds.DIVIDE :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.DIVIDE :
 				assignment.setOperator(Assignment.Operator.DIVIDE_ASSIGN);
 				break;
-			case org.summer.sdt.OperatorIds.AND :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.AND :
 				assignment.setOperator(Assignment.Operator.BIT_AND_ASSIGN);
 				break;
-			case org.summer.sdt.OperatorIds.OR :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.OR :
 				assignment.setOperator(Assignment.Operator.BIT_OR_ASSIGN);
 				break;
-			case org.summer.sdt.OperatorIds.XOR :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.XOR :
 				assignment.setOperator(Assignment.Operator.BIT_XOR_ASSIGN);
 				break;
-			case org.summer.sdt.OperatorIds.REMAINDER :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.REMAINDER :
 				assignment.setOperator(Assignment.Operator.REMAINDER_ASSIGN);
 				break;
-			case org.summer.sdt.OperatorIds.LEFT_SHIFT :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.LEFT_SHIFT :
 				assignment.setOperator(Assignment.Operator.LEFT_SHIFT_ASSIGN);
 				break;
-			case org.summer.sdt.OperatorIds.RIGHT_SHIFT :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.RIGHT_SHIFT :
 				assignment.setOperator(Assignment.Operator.RIGHT_SHIFT_SIGNED_ASSIGN);
 				break;
-			case org.summer.sdt.OperatorIds.UNSIGNED_RIGHT_SHIFT :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.UNSIGNED_RIGHT_SHIFT :
 				assignment.setOperator(Assignment.Operator.RIGHT_SHIFT_UNSIGNED_ASSIGN);
 				break;
 		}
@@ -1600,10 +1600,10 @@ class ASTConverter {
 		int startPosition = leftExpression.getStartPosition();
 		infixExpression.setSourceRange(startPosition, expression.sourceEnd - startPosition + 1);
 		switch ((expression.bits & org.summer.sdt.internal.compiler.ast.ASTNode.OperatorMASK) >> org.summer.sdt.internal.compiler.ast.ASTNode.OperatorSHIFT) {
-			case org.summer.sdt.OperatorIds.EQUAL_EQUAL :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.EQUAL_EQUAL :
 				infixExpression.setOperator(InfixExpression.Operator.EQUALS);
 				break;
-			case org.summer.sdt.OperatorIds.NOT_EQUAL :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.NOT_EQUAL :
 				infixExpression.setOperator(InfixExpression.Operator.NOT_EQUALS);
 		}
 		return infixExpression;
@@ -2439,10 +2439,10 @@ class ASTConverter {
 		postfixExpression.setSourceRange(expression.sourceStart, expression.sourceEnd - expression.sourceStart + 1);
 		postfixExpression.setOperand(convert(expression.lhs));
 		switch (expression.operator) {
-			case org.summer.sdt.OperatorIds.PLUS :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.PLUS :
 				postfixExpression.setOperator(PostfixExpression.Operator.INCREMENT);
 				break;
-			case org.summer.sdt.OperatorIds.MINUS :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.MINUS :
 				postfixExpression.setOperator(PostfixExpression.Operator.DECREMENT);
 				break;
 		}
@@ -2457,10 +2457,10 @@ class ASTConverter {
 		prefixExpression.setSourceRange(expression.sourceStart, expression.sourceEnd - expression.sourceStart + 1);
 		prefixExpression.setOperand(convert(expression.lhs));
 		switch (expression.operator) {
-			case org.summer.sdt.OperatorIds.PLUS :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.PLUS :
 				prefixExpression.setOperator(PrefixExpression.Operator.INCREMENT);
 				break;
-			case org.summer.sdt.OperatorIds.MINUS :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.MINUS :
 				prefixExpression.setOperator(PrefixExpression.Operator.DECREMENT);
 				break;
 		}
@@ -3035,16 +3035,16 @@ class ASTConverter {
 		prefixExpression.setSourceRange(expression.sourceStart, expression.sourceEnd - expression.sourceStart + 1);
 		prefixExpression.setOperand(convert(expression.expression));
 		switch ((expression.bits & org.summer.sdt.internal.compiler.ast.ASTNode.OperatorMASK) >> org.summer.sdt.internal.compiler.ast.ASTNode.OperatorSHIFT) {
-			case org.summer.sdt.OperatorIds.PLUS :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.PLUS :
 				prefixExpression.setOperator(PrefixExpression.Operator.PLUS);
 				break;
-			case org.summer.sdt.OperatorIds.MINUS :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.MINUS :
 				prefixExpression.setOperator(PrefixExpression.Operator.MINUS);
 				break;
-			case org.summer.sdt.OperatorIds.NOT :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.NOT :
 				prefixExpression.setOperator(PrefixExpression.Operator.NOT);
 				break;
-			case org.summer.sdt.OperatorIds.TWIDDLE :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.TWIDDLE :
 				prefixExpression.setOperator(PrefixExpression.Operator.COMPLEMENT);
 		}
 		return prefixExpression;
@@ -4029,43 +4029,43 @@ class ASTConverter {
 
 	protected InfixExpression.Operator getOperatorFor(int operatorID) {
 		switch (operatorID) {
-			case org.summer.sdt.OperatorIds.EQUAL_EQUAL :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.EQUAL_EQUAL :
 				return InfixExpression.Operator.EQUALS;
-			case org.summer.sdt.OperatorIds.LESS_EQUAL :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.LESS_EQUAL :
 				return InfixExpression.Operator.LESS_EQUALS;
-			case org.summer.sdt.OperatorIds.GREATER_EQUAL :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.GREATER_EQUAL :
 				return InfixExpression.Operator.GREATER_EQUALS;
-			case org.summer.sdt.OperatorIds.NOT_EQUAL :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.NOT_EQUAL :
 				return InfixExpression.Operator.NOT_EQUALS;
-			case org.summer.sdt.OperatorIds.LEFT_SHIFT :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.LEFT_SHIFT :
 				return InfixExpression.Operator.LEFT_SHIFT;
-			case org.summer.sdt.OperatorIds.RIGHT_SHIFT :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.RIGHT_SHIFT :
 				return InfixExpression.Operator.RIGHT_SHIFT_SIGNED;
-			case org.summer.sdt.OperatorIds.UNSIGNED_RIGHT_SHIFT :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.UNSIGNED_RIGHT_SHIFT :
 				return InfixExpression.Operator.RIGHT_SHIFT_UNSIGNED;
-			case org.summer.sdt.OperatorIds.OR_OR :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.OR_OR :
 				return InfixExpression.Operator.CONDITIONAL_OR;
-			case org.summer.sdt.OperatorIds.AND_AND :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.AND_AND :
 				return InfixExpression.Operator.CONDITIONAL_AND;
-			case org.summer.sdt.OperatorIds.PLUS :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.PLUS :
 				return InfixExpression.Operator.PLUS;
-			case org.summer.sdt.OperatorIds.MINUS :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.MINUS :
 				return InfixExpression.Operator.MINUS;
-			case org.summer.sdt.OperatorIds.REMAINDER :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.REMAINDER :
 				return InfixExpression.Operator.REMAINDER;
-			case org.summer.sdt.OperatorIds.XOR :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.XOR :
 				return InfixExpression.Operator.XOR;
-			case org.summer.sdt.OperatorIds.AND :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.AND :
 				return InfixExpression.Operator.AND;
-			case org.summer.sdt.OperatorIds.MULTIPLY :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.MULTIPLY :
 				return InfixExpression.Operator.TIMES;
-			case org.summer.sdt.OperatorIds.OR :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.OR :
 				return InfixExpression.Operator.OR;
-			case org.summer.sdt.OperatorIds.DIVIDE :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.DIVIDE :
 				return InfixExpression.Operator.DIVIDE;
-			case org.summer.sdt.OperatorIds.GREATER :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.GREATER :
 				return InfixExpression.Operator.GREATER;
-			case org.summer.sdt.OperatorIds.LESS :
+			case org.summer.sdt.internal.compiler.ast.OperatorIds.LESS :
 				return InfixExpression.Operator.LESS;
 		}
 		return null;

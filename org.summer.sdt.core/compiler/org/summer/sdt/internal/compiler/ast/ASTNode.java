@@ -24,7 +24,7 @@
  *								Bug 424205 - [1.8] Cannot infer type for diamond type with lambda on method invocation
  *								Bug 424415 - [1.8][compiler] Eventual resolution of ReferenceExpression is not seen to be happening.
  *								Bug 426366 - [1.8][compiler] Type inference doesn't handle multiple candidate target types in outer overload context
- *								Bug 427282 - [1.8][compiler] AIOOB (-1) at org.eclipse.jdt.internal.compiler.ClassFile.traverse(ClassFile.java:6209)
+ *								Bug 427282 - [1.8][compiler] AIOOB (-1) at org.summer.sdt.internal.compiler.ClassFile.traverse(ClassFile.java:6209)
  *								Bug 427483 - [Java 8] Variables in lambdas sometimes can't be resolved
  *								Bug 428352 - [1.8][compiler] Resolution errors don't always surface
  *								Bug 427163 - [1.8][null] bogus error "Contradictory null specification" on varags

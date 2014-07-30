@@ -29,7 +29,7 @@ import org.summer.sdt.internal.core.util.Messages;
  * @see DOMNode
  * @deprecated The JDOM was made obsolete by the addition in 2.0 of the more
  * powerful, fine-grained DOM/AST API found in the
- * org.eclipse.jdt.core.dom package.
+ * org.summer.sdt.core.dom package.
  */
 @SuppressWarnings("rawtypes")
 // TODO (jerome) - add implementation support for 1.5 features
@@ -168,7 +168,7 @@ DOMType() {
  *		character following the last comment. If no comments are present,
  *		this array contains two -1's.
  * @param flags - an integer representing the modifiers for this member. The
- *		integer can be analyzed with org.eclipse.jdt.core.Flags
+ *		integer can be analyzed with org.summer.sdt.core.Flags
  * @param modifierRange - a two element array describing the location of
  *		modifiers for this member within its source range. The first integer
  *		is the first character of the first modifier for this member, and
@@ -239,7 +239,7 @@ DOMType(char[] document, int[] sourceRange, String name, int[] nameRange, int[] 
  *		including any array qualifiers that might immediately follow the name
  *		or -1's if this node does not have a name.
  * @param flags - an integer representing the modifiers for this member. The
- *		integer can be analyzed with org.eclipse.jdt.core.Flags
+ *		integer can be analyzed with org.summer.sdt.core.Flags
  * @param implementsList - an array of names of the interfaces this type implements
  *		or extends, or <code>null</code> if this type does not implement or extend
  *		any interfaces.

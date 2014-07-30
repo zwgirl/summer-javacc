@@ -19,7 +19,7 @@ import org.summer.sdt.internal.compiler.lookup.TypeBinding;
 
 public class LambdaFactory {
 
-	public static LambdaExpression createLambdaExpression(JavaElement parent, org.eclipse.jdt.internal.compiler.ast.LambdaExpression lambdaExpression) {
+	public static LambdaExpression createLambdaExpression(JavaElement parent, org.summer.sdt.internal.compiler.ast.LambdaExpression lambdaExpression) {
 		if (isBinaryMember(parent)){
 			return new BinaryLambdaExpression(parent, lambdaExpression);
 		} else {
@@ -35,7 +35,7 @@ public class LambdaFactory {
 		}
 	}
 
-	public static LambdaMethod createLambdaMethod(JavaElement parent, org.eclipse.jdt.internal.compiler.ast.LambdaExpression lambdaExpression) {
+	public static LambdaMethod createLambdaMethod(JavaElement parent, org.summer.sdt.internal.compiler.ast.LambdaExpression lambdaExpression) {
 		int length;
 		JavaModelManager manager = JavaModelManager.getJavaModelManager();
 		String [] parameterTypes = new String[length = lambdaExpression.descriptor.parameters.length];

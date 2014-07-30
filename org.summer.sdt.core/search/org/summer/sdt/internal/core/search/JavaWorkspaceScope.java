@@ -64,7 +64,7 @@ public class JavaWorkspaceScope extends AbstractJavaSearchScope {
 		return true;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.search.IJavaSearchScope#enclosingProjectsAndJars()
+	 * @see org.summer.sdt.core.search.IJavaSearchScope#enclosingProjectsAndJars()
 	 */
 	public IPath[] enclosingProjectsAndJars() {
 		IPath[] result = this.enclosingPaths;

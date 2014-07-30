@@ -73,7 +73,7 @@ public interface IProblemFactory {
 	 * template matching the problem id before the message arguments are
 	 * injected.
 	 * @param problemId the problem id taken from
-	 *        {@link org.eclipse.jdt.core.compiler.IProblem} constants
+	 *        {@link org.summer.sdt.core.compiler.IProblem} constants
 	 * @param elaborationId 0 if the considered problem has no elaboration, a
 	 *        valid elaboration id else
 	 * @param messageArguments the arguments to inject into the template

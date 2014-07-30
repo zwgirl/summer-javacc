@@ -134,73 +134,73 @@ public class AnnotationComponentValue extends ClassFileStruct implements IAnnota
 		}
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponentValue#getAnnotationComponentValues()
+	 * @see org.summer.sdt.core.util.IAnnotationComponentValue#getAnnotationComponentValues()
 	 */
 	public IAnnotationComponentValue[] getAnnotationComponentValues() {
 		return this.annotationComponentValues;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponentValue#getAnnotationValue()
+	 * @see org.summer.sdt.core.util.IAnnotationComponentValue#getAnnotationValue()
 	 */
 	public IAnnotation getAnnotationValue() {
 		return this.annotationValue;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponentValue#getClassInfo()
+	 * @see org.summer.sdt.core.util.IAnnotationComponentValue#getClassInfo()
 	 */
 	public IConstantPoolEntry getClassInfo() {
 		return this.classInfo;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponentValue#getClassInfoIndex()
+	 * @see org.summer.sdt.core.util.IAnnotationComponentValue#getClassInfoIndex()
 	 */
 	public int getClassInfoIndex() {
 		return this.classFileInfoIndex;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponentValue#getConstantValue()
+	 * @see org.summer.sdt.core.util.IAnnotationComponentValue#getConstantValue()
 	 */
 	public IConstantPoolEntry getConstantValue() {
 		return this.constantValue;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponentValue#getConstantValueIndex()
+	 * @see org.summer.sdt.core.util.IAnnotationComponentValue#getConstantValueIndex()
 	 */
 	public int getConstantValueIndex() {
 		return this.constantValueIndex;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponentValue#getEnumConstantName()
+	 * @see org.summer.sdt.core.util.IAnnotationComponentValue#getEnumConstantName()
 	 */
 	public char[] getEnumConstantName() {
 		return this.enumConstantName;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponentValue#getEnumConstantNameIndex()
+	 * @see org.summer.sdt.core.util.IAnnotationComponentValue#getEnumConstantNameIndex()
 	 */
 	public int getEnumConstantNameIndex() {
 		return this.enumConstantNameIndex;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponentValue#getEnumConstantTypeName()
+	 * @see org.summer.sdt.core.util.IAnnotationComponentValue#getEnumConstantTypeName()
 	 */
 	public char[] getEnumConstantTypeName() {
 		return this.enumConstantTypeName;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponentValue#getEnumConstantTypeNameIndex()
+	 * @see org.summer.sdt.core.util.IAnnotationComponentValue#getEnumConstantTypeNameIndex()
 	 */
 	public int getEnumConstantTypeNameIndex() {
 		return this.enumConstantTypeNameIndex;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponentValue#getTag()
+	 * @see org.summer.sdt.core.util.IAnnotationComponentValue#getTag()
 	 */
 	public int getTag() {
 		return this.tag;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationComponentValue#getValuesNumber()
+	 * @see org.summer.sdt.core.util.IAnnotationComponentValue#getValuesNumber()
 	 */
 	public int getValuesNumber() {
 		return this.valuesNumber;

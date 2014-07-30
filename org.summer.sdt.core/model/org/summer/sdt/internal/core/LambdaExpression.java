@@ -36,7 +36,7 @@ public class LambdaExpression extends SourceType {
 	
 	
 	// Construction from AST node
-	LambdaExpression(JavaElement parent, org.eclipse.jdt.internal.compiler.ast.LambdaExpression lambdaExpression) {
+	LambdaExpression(JavaElement parent, org.summer.sdt.internal.compiler.ast.LambdaExpression lambdaExpression) {
 		super(parent, new String(CharOperation.NO_CHAR));
 		this.sourceStart = lambdaExpression.sourceStart;
 		this.sourceEnd = lambdaExpression.sourceEnd;

@@ -50,7 +50,7 @@ public class ArrayQualifiedTypeReference extends QualifiedTypeReference {
 	}
 
 	/**
-	 @see org.eclipse.jdt.internal.compiler.ast.TypeReference#getAnnotationsOnDimensions(boolean)
+	 @see org.summer.sdt.internal.compiler.ast.TypeReference#getAnnotationsOnDimensions(boolean)
 	*/
 	public Annotation[][] getAnnotationsOnDimensions(boolean useSourceOrder) {
 		if (useSourceOrder || this.annotationsOnDimensions == null || this.annotationsOnDimensions.length == 0 || this.extendedDimensions == 0 || this.extendedDimensions == this.dimensions)

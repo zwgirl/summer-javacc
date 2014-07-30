@@ -2734,7 +2734,7 @@ public class DeltaProcessor {
 										Openable cu = (Openable)pkg.getCompilationUnit(name);
 										updateIndex(cu, child);
 									}
-								} else if (org.summer.sdt.util.Util.isClassFileName(name)) {
+								} else if (org.summer.sdt.internal.compiler.util.Util.isClassFileName(name)) {
 									Openable classFile = (Openable)pkg.getClassFile(name);
 									updateIndex(classFile, child);
 								}

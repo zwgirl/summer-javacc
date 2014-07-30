@@ -11,7 +11,7 @@
  *								bug 395002 - Self bound generic class doesn't resolve bounds properly for wildcards for certain parametrisation.
  *								bug 331649 - [compiler][null] consider null annotations for fields
  *								bug 400761 - [compiler][null] null may be return as boolean without a diagnostic
- *								Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *								Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *								Bug 429403 - [1.8][null] null mismatch from type arguments is not reported at field initializer
  *        Andy Clement (GoPivotal, Inc) aclement@gopivotal.com - Contributions for
  *								Bug 409250 - [1.8][compiler] Various loose ends in 308 code generation
@@ -119,8 +119,8 @@ public class FieldDeclaration extends AbstractVariableDeclaration {
 	 * Code generation for a field declaration:
 	 *	   standard assignment to a field
 	 *
-	 * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 */
 	public void generateCode(BlockScope currentScope, CodeStream codeStream) {
 		if ((this.bits & IsReachable) == 0) {
@@ -154,7 +154,7 @@ public class FieldDeclaration extends AbstractVariableDeclaration {
 		}
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.AbstractVariableDeclaration#getKind()
+	 * @see org.summer.sdt.internal.compiler.ast.AbstractVariableDeclaration#getKind()
 	 */
 	public int getKind() {
 		return this.type == null ? ENUM_CONSTANT : FIELD;

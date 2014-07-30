@@ -114,7 +114,7 @@ public SearchRequestor requestor;
 public IJavaSearchScope scope;
 public IProgressMonitor progressMonitor;
 
-public org.eclipse.jdt.core.ICompilationUnit[] workingCopies;
+public org.summer.sdt.core.ICompilationUnit[] workingCopies;
 public HandleFactory handleFactory;
 
 // cache of all super type names if scope is hierarchy scope
@@ -156,8 +156,8 @@ private int sourceStartOfMethodToRetain;
 private int sourceEndOfMethodToRetain;
 
 public static class WorkingCopyDocument extends JavaSearchDocument {
-	public org.eclipse.jdt.core.ICompilationUnit workingCopy;
-	WorkingCopyDocument(org.eclipse.jdt.core.ICompilationUnit workingCopy, SearchParticipant participant) {
+	public org.summer.sdt.core.ICompilationUnit workingCopy;
+	WorkingCopyDocument(org.summer.sdt.core.ICompilationUnit workingCopy, SearchParticipant participant) {
 		super(workingCopy.getPath().toString(), participant);
 		this.charContents = ((CompilationUnit)workingCopy).getContents();
 		this.workingCopy = workingCopy;
@@ -175,7 +175,7 @@ public static class WrappedCoreException extends RuntimeException {
 	}
 }
 
-public static SearchDocument[] addWorkingCopies(SearchPattern pattern, SearchDocument[] indexMatches, org.eclipse.jdt.core.ICompilationUnit[] copies, SearchParticipant participant) {
+public static SearchDocument[] addWorkingCopies(SearchPattern pattern, SearchDocument[] indexMatches, org.summer.sdt.core.ICompilationUnit[] copies, SearchParticipant participant) {
 	if (copies == null) return indexMatches;
 	// working copies take precedence over corresponding compilation units
 	HashMap workingCopyDocuments = workingCopiesThatCanSeeFocus(copies, pattern, participant);
@@ -216,11 +216,11 @@ public static void setFocus(SearchPattern pattern, IJavaElement focus) {
 /*
  * Returns the working copies that can see the given focus.
  */
-private static HashMap workingCopiesThatCanSeeFocus(org.eclipse.jdt.core.ICompilationUnit[] copies, SearchPattern pattern, SearchParticipant participant) {
+private static HashMap workingCopiesThatCanSeeFocus(org.summer.sdt.core.ICompilationUnit[] copies, SearchPattern pattern, SearchParticipant participant) {
 	if (copies == null) return new HashMap();
 	HashMap result = new HashMap();
 	for (int i=0, length = copies.length; i<length; i++) {
-		org.eclipse.jdt.core.ICompilationUnit workingCopy = copies[i];
+		org.summer.sdt.core.ICompilationUnit workingCopy = copies[i];
 		IPath projectOrJar = MatchLocator.getProjectOrJar(workingCopy).getPath();
 		if (pattern.focus == null || IndexSelector.canSeeFocus(pattern, projectOrJar) != IndexSelector.PROJECT_CAN_NOT_SEE_FOCUS) {
 			result.put(
@@ -451,7 +451,7 @@ protected char[][][] computeSuperTypeNames(IType focusType) {
  * Creates an IMethod from the given lambda declaration and type.
  */
 protected IJavaElement createHandle(LambdaExpression lambdaExpression, IJavaElement parent) {
-	org.eclipse.jdt.internal.core.LambdaExpression lambdaElement = LambdaFactory.createLambdaExpression((JavaElement) parent, lambdaExpression);
+	org.summer.sdt.internal.core.LambdaExpression lambdaElement = LambdaFactory.createLambdaExpression((JavaElement) parent, lambdaExpression);
 	IMethod lambdaMethodElement = lambdaElement.getMethod();
 	this.methodHandles.add(lambdaMethodElement);
 	return lambdaMethodElement;
@@ -628,7 +628,7 @@ protected IJavaElement createHandle(AbstractVariableDeclaration variableDeclarat
 			}
 			break;
 		case AbstractVariableDeclaration.TYPE_PARAMETER:
-			return new org.eclipse.jdt.internal.core.TypeParameter((JavaElement)parent, new String(variableDeclaration.name));
+			return new org.summer.sdt.internal.core.TypeParameter((JavaElement)parent, new String(variableDeclaration.name));
 	}
 	return null;
 }
@@ -926,7 +926,7 @@ public MethodBinding getMethodBinding(MethodPattern methodPattern) {
     // special handling for methods of anonymous/local types. Since these cannot be looked up in the environment the usual way ...
     if (methodPattern.focus instanceof SourceMethod) {
     	char[] typeName = PatternLocator.qualifiedPattern(methodPattern.declaringSimpleName, methodPattern.declaringQualification);
-    	if (typeName != null && CharOperation.indexOf(IIndexConstants.ONE_STAR, typeName, true) >= 0) { // See org.eclipse.jdt.core.search.SearchPattern.enclosingTypeNames(IType)
+    	if (typeName != null && CharOperation.indexOf(IIndexConstants.ONE_STAR, typeName, true) >= 0) { // See org.summer.sdt.core.search.SearchPattern.enclosingTypeNames(IType)
     		IType type = methodPattern.declaringType;
     		IType enclosingType = type.getDeclaringType();
     		while (enclosingType != null) {
@@ -1237,7 +1237,7 @@ public void locateMatches(SearchDocument[] searchDocuments) throws CoreException
 		}
 	}
 	int copiesLength = copies.size();
-	this.workingCopies = new org.eclipse.jdt.core.ICompilationUnit[copiesLength];
+	this.workingCopies = new org.summer.sdt.core.ICompilationUnit[copiesLength];
 	copies.toArray(this.workingCopies);
 
 	JavaModelManager manager = JavaModelManager.getJavaModelManager();
@@ -1290,7 +1290,7 @@ public void locateMatches(SearchDocument[] searchDocuments) throws CoreException
 			previousPath = pathString;
 
 			Openable openable;
-			org.eclipse.jdt.core.ICompilationUnit workingCopy = null;
+			org.summer.sdt.core.ICompilationUnit workingCopy = null;
 			if (searchDocument instanceof WorkingCopyDocument) {
 				workingCopy = ((WorkingCopyDocument)searchDocument).workingCopy;
 				openable = (Openable) workingCopy;

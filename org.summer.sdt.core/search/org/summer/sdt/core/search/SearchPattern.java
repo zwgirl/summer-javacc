@@ -50,7 +50,7 @@ import org.summer.sdt.internal.core.search.matching.*;
  * This class is intended to be sub-classed by clients. A default behavior is provided for each of the methods above, that
  * clients can override if they wish.
  * </p>
- * @see #createPattern(org.eclipse.jdt.core.IJavaElement, int)
+ * @see #createPattern(org.summer.sdt.core.IJavaElement, int)
  * @see #createPattern(String, int, int, int)
  * @since 3.0
  */

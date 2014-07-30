@@ -56,7 +56,7 @@ public char[][] getIndexCategories() {
 }
 protected boolean hasNextQuery() {
 	// if package has at least 4 segments, don't look at the first 2 since they are mostly
-	// redundant (e.g. in 'org.eclipse.jdt.core.*' 'org.eclipse' is used all the time)
+	// redundant (e.g. in 'org.summer.sdt.core.*' 'org.eclipse' is used all the time)
 	return --this.currentSegment >= (this.segments.length >= 4 ? 2 : 0);
 }
 public boolean matchesDecodedKey(SearchPattern decodedPattern) {

@@ -420,7 +420,7 @@ class BinaryExpressionFragmentBuilder
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.QualifiedSuperReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.QualifiedSuperReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 			QualifiedSuperReference qualifiedSuperReference,
@@ -430,7 +430,7 @@ class BinaryExpressionFragmentBuilder
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.QualifiedThisReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.QualifiedThisReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(
 			QualifiedThisReference qualifiedThisReference,
@@ -452,7 +452,7 @@ class BinaryExpressionFragmentBuilder
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ASTVisitor#visit(org.eclipse.jdt.internal.compiler.ast.SuperReference, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ASTVisitor#visit(org.summer.sdt.internal.compiler.ast.SuperReference, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(SuperReference superReference, BlockScope scope) {
 		addRealFragment(superReference);

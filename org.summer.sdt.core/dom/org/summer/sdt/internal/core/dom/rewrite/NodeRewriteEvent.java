@@ -40,7 +40,7 @@ public class NodeRewriteEvent extends RewriteEvent {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.corext.dom.RewriteEvent#getChangeKind()
+	 * @see org.summer.sdt.internal.corext.dom.RewriteEvent#getChangeKind()
 	 */
 	public int getChangeKind() {
 		if (this.originalValue == this.newValue) {
@@ -60,7 +60,7 @@ public class NodeRewriteEvent extends RewriteEvent {
 
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.corext.dom.RewriteEvent#isListRewrite()
+	 * @see org.summer.sdt.internal.corext.dom.RewriteEvent#isListRewrite()
 	 */
 	public boolean isListRewrite() {
 		return false;
@@ -75,7 +75,7 @@ public class NodeRewriteEvent extends RewriteEvent {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.corext.dom.RewriteEvent#getChildren()
+	 * @see org.summer.sdt.internal.corext.dom.RewriteEvent#getChildren()
 	 */
 	public RewriteEvent[] getChildren() {
 		return null;

@@ -202,7 +202,7 @@ class PackageBinding implements IPackageBinding {
 		if (pkgs == null) return null;
 		if (pkgs.length == 0) {
 			// add additional tracing as this should not happen
-			org.summer.sdt.util.Util.log(
+			org.summer.sdt.internal.core.util.Util.log(
 				new Status(
 						IStatus.WARNING,
 						JavaCore.PLUGIN_ID,

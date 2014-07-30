@@ -274,7 +274,7 @@ protected int matchContainer() {
 	return CLASS_CONTAINER;
 }
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.core.search.matching.PatternLocator#matchLevelAndReportImportRef(org.eclipse.jdt.internal.compiler.ast.ImportReference, org.eclipse.jdt.internal.compiler.lookup.Binding, org.eclipse.jdt.internal.core.search.matching.MatchLocator)
+ * @see org.summer.sdt.internal.core.search.matching.PatternLocator#matchLevelAndReportImportRef(org.summer.sdt.internal.compiler.ast.ImportReference, org.summer.sdt.internal.compiler.lookup.Binding, org.summer.sdt.internal.core.search.matching.MatchLocator)
  * Accept to report match of static field on static import
  */
 protected void matchLevelAndReportImportRef(ImportReference importRef, Binding binding, MatchLocator locator) throws CoreException {
@@ -408,7 +408,7 @@ protected void matchReportReference(ASTNode reference, IJavaElement element, Bin
 	matchReportReference(reference, element, null, null, elementBinding, accuracy, locator);
 }
 /**
- * @see org.summer.sdt.internal.core.search.matching.PatternLocator#matchReportReference(org.eclipse.jdt.internal.compiler.ast.ASTNode, org.eclipse.jdt.core.IJavaElement, Binding, int, org.summer.sdt.internal.core.search.matching.MatchLocator)
+ * @see org.summer.sdt.internal.core.search.matching.PatternLocator#matchReportReference(org.summer.sdt.internal.compiler.ast.ASTNode, org.summer.sdt.core.IJavaElement, Binding, int, org.summer.sdt.internal.core.search.matching.MatchLocator)
  */
 protected void matchReportReference(ASTNode reference, IJavaElement element, IJavaElement localElement, IJavaElement[] otherElements, Binding elementBinding, int accuracy, MatchLocator locator) throws CoreException {
 	MethodBinding methodBinding = (reference instanceof MessageSend) ? ((MessageSend)reference).binding: ((elementBinding instanceof MethodBinding) ? (MethodBinding) elementBinding : null);
@@ -624,7 +624,7 @@ protected void reportDeclaration(MethodBinding methodBinding, MatchLocator locat
 		IResource resource = type.getResource();
 		if (resource == null)
 			resource = type.getJavaProject().getProject();
-		IBinaryType info = locator.getBinaryInfo((org.eclipse.jdt.internal.core.ClassFile)type.getClassFile(), resource);
+		IBinaryType info = locator.getBinaryInfo((org.summer.sdt.internal.core.ClassFile)type.getClassFile(), resource);
 		locator.reportBinaryMemberDeclaration(resource, method, methodBinding, info, SearchMatch.A_ACCURATE);
 		return;
 	}

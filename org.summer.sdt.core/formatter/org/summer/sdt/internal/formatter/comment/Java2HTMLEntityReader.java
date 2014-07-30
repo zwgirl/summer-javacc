@@ -60,7 +60,7 @@ public class Java2HTMLEntityReader extends SubstitutionTextReader {
 	}
 
 	/*
-	 * @see org.eclipse.jdt.internal.ui.text.SubstitutionTextReader#computeSubstitution(int)
+	 * @see org.summer.sdt.internal.ui.text.SubstitutionTextReader#computeSubstitution(int)
 	 */
 	protected String computeSubstitution(int c) throws IOException {
 		StringBuffer buf = new StringBuffer();

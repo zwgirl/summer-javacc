@@ -57,7 +57,7 @@ public TypeBinding clone(TypeBinding outerType) {
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.Binding#initializeDeprecatedAnnotationTagBits()
+ * @see org.summer.sdt.internal.compiler.lookup.Binding#initializeDeprecatedAnnotationTagBits()
  */
 public void initializeDeprecatedAnnotationTagBits() {
 	if (!isPrototype()) {

@@ -207,14 +207,14 @@ public boolean isTextAfterHtmlSeparatorTag(int separatorIndex) {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.formatter.FormatJavadocNode#isText()
+ * @see org.summer.sdt.internal.formatter.FormatJavadocNode#isText()
  */
 public boolean isText() {
 	return true;
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.formatter.FormatJavadocNode#setHeaderLine(int)
+ * @see org.summer.sdt.internal.formatter.FormatJavadocNode#setHeaderLine(int)
  */
 void setHeaderLine(int javadocLineStart) {
 	for (int i=0; i<this.htmlNodesPtr; i++) {

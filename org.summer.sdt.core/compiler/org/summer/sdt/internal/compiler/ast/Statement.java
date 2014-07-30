@@ -347,9 +347,9 @@ public abstract class Statement extends ASTNode {
 		return Constant.NotAConstant;
 	}
 	/** 
-	 * Implementation of {@link org.eclipse.jdt.internal.compiler.lookup.InvocationSite#invocationTargetType}
+	 * Implementation of {@link org.summer.sdt.internal.compiler.lookup.InvocationSite#invocationTargetType}
 	 * suitable at this level. Subclasses should override as necessary.
-	 * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#invocationTargetType()
+	 * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#invocationTargetType()
 	 */
 	public TypeBinding invocationTargetType() {
 		return null;

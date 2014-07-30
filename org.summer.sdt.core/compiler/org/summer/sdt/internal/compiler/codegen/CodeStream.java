@@ -6622,7 +6622,7 @@ public void recordPositionsFrom(int startPC, int sourcePos, boolean widen) {
 }
 
 /**
- * @param anExceptionLabel org.eclipse.jdt.internal.compiler.codegen.ExceptionLabel
+ * @param anExceptionLabel org.summer.sdt.internal.compiler.codegen.ExceptionLabel
  */
 public void registerExceptionHandler(ExceptionLabel anExceptionLabel) {
 	int length;
@@ -6674,8 +6674,8 @@ public void removeVariable(LocalVariableBinding localBinding) {
 }
 
 /**
- * @param referenceMethod org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration
- * @param targetClassFile org.eclipse.jdt.internal.compiler.codegen.ClassFile
+ * @param referenceMethod org.summer.sdt.internal.compiler.ast.AbstractMethodDeclaration
+ * @param targetClassFile org.summer.sdt.internal.compiler.codegen.ClassFile
  */
 public void reset(AbstractMethodDeclaration referenceMethod, ClassFile targetClassFile) {
 	init(targetClassFile);

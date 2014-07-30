@@ -409,7 +409,7 @@ public class ASTParser {
 	 * by this owner take precedence over the underlying compilation units when looking
 	 * up names and drawing the connections.
 	 * </p>
-	 * <p>Note that working copy owners are used only if the <code>org.eclipse.jdt.core</code>
+	 * <p>Note that working copy owners are used only if the <code>org.summer.sdt.core</code>
 	 * bundle is initialized.</p>
 	 * <p>
 	 * Binding information is obtained from the Java model.
@@ -1106,8 +1106,8 @@ public class ASTParser {
 					WorkingCopyOwner wcOwner = this.workingCopyOwner;
 					if (this.typeRoot instanceof ICompilationUnit) {
 							/*
-							 * this.compilationUnitSource is an instance of org.eclipse.jdt.internal.core.CompilationUnit that implements
-							 * both org.eclipse.jdt.core.ICompilationUnit and org.summer.sdt.internal.compiler.env.ICompilationUnit
+							 * this.compilationUnitSource is an instance of org.summer.sdt.internal.core.CompilationUnit that implements
+							 * both org.summer.sdt.core.ICompilationUnit and org.summer.sdt.internal.compiler.env.ICompilationUnit
 							 */
 							sourceUnit = (org.summer.sdt.internal.compiler.env.ICompilationUnit) this.typeRoot;
 							/*

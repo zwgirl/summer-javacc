@@ -33,7 +33,7 @@ public abstract class TypeNameRequestor {
 	 *		For example an interface defined by <code>interface A {}</code>,
 	 *		although obviously public, will be returned false by <code>Flags.isPublic(modifiers)</code>
 	 *		due to the fact that its declaration does not explicitly define public flag.
-	 *		@see org.eclipse.jdt.core.Flags
+	 *		@see org.summer.sdt.core.Flags
 	 * @param packageName the package name as specified in the package declaration (i.e. a dot-separated name)
 	 * @param simpleTypeName the simple name of the type
 	 * @param enclosingTypeNames if the type is a member type,

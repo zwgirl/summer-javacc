@@ -119,7 +119,7 @@ public class CompilationUnit extends ASTNode {
 	private DefaultCommentMapper commentMapper = null;
 
 	/**
-	 * The Java type root (an <code>org.eclipse.jdt.core.ICompilationUnit</code> or an <code>org.eclipse.jdt.core.IClassFile</code>)
+	 * The Java type root (an <code>org.summer.sdt.core.ICompilationUnit</code> or an <code>org.summer.sdt.core.IClassFile</code>)
 	 * this compilation unit was created from, or <code>null</code> if it was not created from a Java type root.
 	 */
 	private ITypeRoot typeRoot = null;
@@ -485,7 +485,7 @@ public class CompilationUnit extends ASTNode {
 	}
 
 	/**
-	 * The Java element (an <code>org.eclipse.jdt.core.ICompilationUnit</code> or an <code>org.eclipse.jdt.core.IClassFile</code>)
+	 * The Java element (an <code>org.summer.sdt.core.ICompilationUnit</code> or an <code>org.summer.sdt.core.IClassFile</code>)
 	 * this compilation unit was created from, or <code>null</code> if it was not created from a Java element.
 	 *
 	 * @return the Java element this compilation unit was created from, or <code>null</code> if none
@@ -627,7 +627,7 @@ public class CompilationUnit extends ASTNode {
 	}
 	
 	/**
-	 * The Java type root (a {@link org.eclipse.jdt.core.ICompilationUnit compilation unit} or a {@link org.eclipse.jdt.core.IClassFile class file})
+	 * The Java type root (a {@link org.summer.sdt.core.ICompilationUnit compilation unit} or a {@link org.summer.sdt.core.IClassFile class file})
 	 * this compilation unit was created from, or <code>null</code> if it was not created from a Java type root.
 	 *
 	 * @return the Java type root this compilation unit was created from, or <code>null</code> if none
@@ -915,7 +915,7 @@ public class CompilationUnit extends ASTNode {
 	 * @param options the table of formatter options
 	 * (key type: <code>String</code>; value type: <code>String</code>);
 	 * or <code>null</code> to use the standard global options
-	 * {@link org.eclipse.jdt.core.JavaCore#getOptions() JavaCore.getOptions()}.
+	 * {@link org.summer.sdt.core.JavaCore#getOptions() JavaCore.getOptions()}.
 	 * @return text edit object describing the changes to the
 	 * document corresponding to the recorded AST modifications
 	 * @exception IllegalArgumentException if the document passed is
@@ -970,7 +970,7 @@ public class CompilationUnit extends ASTNode {
 	}
 
 	/**
-	 * Sets the Java type root (a {@link org.eclipse.jdt.core.ICompilationUnit compilation unit} or a {@link org.eclipse.jdt.core.IClassFile class file})
+	 * Sets the Java type root (a {@link org.summer.sdt.core.ICompilationUnit compilation unit} or a {@link org.summer.sdt.core.IClassFile class file})
 	 * this compilation unit was created from, or <code>null</code> if it was not created from a Java type root.
 	 *
 	 * @param typeRoot the Java type root this compilation unit was created from

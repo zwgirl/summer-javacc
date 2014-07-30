@@ -55,13 +55,13 @@ public class RuntimeVisibleTypeAnnotationsAttribute
 		}
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IRuntimeVisibleTypeAnnotationsAttribute.getExtendedAnnotations()
+	 * @see org.summer.sdt.core.util.IRuntimeVisibleTypeAnnotationsAttribute.getExtendedAnnotations()
 	 */
 	public IExtendedAnnotation[] getExtendedAnnotations() {
 		return this.extendedAnnotations;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IRuntimeVisibleTypeAnnotationsAttribute.getExtendedAnnotationsNumber()
+	 * @see org.summer.sdt.core.util.IRuntimeVisibleTypeAnnotationsAttribute.getExtendedAnnotationsNumber()
 	 */
 	public int getExtendedAnnotationsNumber() {
 		return this.extendedAnnotationsNumber;

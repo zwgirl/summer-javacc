@@ -104,7 +104,7 @@ public class ThisReference extends Reference {
 	}
 
 	/*
-	 * @see org.eclipse.jdt.internal.compiler.ast.Reference#generatePostIncrement()
+	 * @see org.summer.sdt.internal.compiler.ast.Reference#generatePostIncrement()
 	 */
 	public void generatePostIncrement(BlockScope currentScope, CodeStream codeStream, CompoundAssignment postIncrement, boolean valueRequired) {
 

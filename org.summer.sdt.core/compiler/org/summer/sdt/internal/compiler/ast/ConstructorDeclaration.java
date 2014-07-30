@@ -276,8 +276,8 @@ public class ConstructorDeclaration extends AbstractMethodDeclaration {
 	/**
 	 * Bytecode generation for a constructor
 	 *
-	 * @param classScope org.eclipse.jdt.internal.compiler.lookup.ClassScope
-	 * @param classFile org.eclipse.jdt.internal.compiler.codegen.ClassFile
+	 * @param classScope org.summer.sdt.internal.compiler.lookup.ClassScope
+	 * @param classFile org.summer.sdt.internal.compiler.codegen.ClassFile
 	 */
 	public void generateCode(ClassScope classScope, ClassFile classFile) {
 		int problemResetPC = 0;

@@ -25,7 +25,7 @@
  *							Bug 424403 - [1.8][compiler] Generic method call with method reference argument fails to resolve properly.
  *							Bug 426563 - [1.8] AIOOBE when method with error invoked with lambda expression as argument
  *							Bug 420525 - [1.8] [compiler] Incorrect error "The type Integer does not define sum(Object, Object) that is applicable here"
- *							Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *							Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *							Bug 428294 - [1.8][compiler] Type mismatch: cannot convert from List<Object> to Collection<Object[]>
  *							Bug 428786 - [1.8][compiler] Inference needs to compute the "ground target type" when reducing a lambda compatibility constraint
  *							Bug 428980 - [1.8][null] simple expression as lambda body doesn't leverage null annotation on argument
@@ -210,9 +210,9 @@ public class LambdaExpression extends FunctionalExpression implements ReferenceC
 	
 	/* This code is arranged so that we can continue with as much analysis as possible while avoiding 
 	 * mine fields that would result in a slew of spurious messages. This method is a merger of:
-	 * @see org.eclipse.jdt.internal.compiler.lookup.MethodScope.createMethod(AbstractMethodDeclaration)
-	 * @see org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesFor(MethodBinding)
-	 * @see org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolve(ClassScope)
+	 * @see org.summer.sdt.internal.compiler.lookup.MethodScope.createMethod(AbstractMethodDeclaration)
+	 * @see org.summer.sdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesFor(MethodBinding)
+	 * @see org.summer.sdt.internal.compiler.ast.AbstractMethodDeclaration.resolve(ClassScope)
 	 */
 	public TypeBinding resolveType(BlockScope blockScope) {
 		

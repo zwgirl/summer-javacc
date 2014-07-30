@@ -32,14 +32,14 @@ public class ProblemReferenceBinding extends ReferenceBinding {
 		throw new IllegalStateException(); // shouldn't get here.
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#closestMatch()
+	 * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#closestMatch()
 	 */
 	public TypeBinding closestMatch() {
 		return this.closestMatch;
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#closestMatch()
+	 * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#closestMatch()
 	 */
 	public ReferenceBinding closestReferenceMatch() {
 		return this.closestMatch;
@@ -85,7 +85,7 @@ public class ProblemReferenceBinding extends ReferenceBinding {
 		return; // reject misguided attempts.
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding#shortReadableName()
+	 * @see org.summer.sdt.internal.compiler.lookup.ReferenceBinding#shortReadableName()
 	 */
 	public char[] shortReadableName() {
 		return readableName();

@@ -1494,7 +1494,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 		}
 
 		/* (non-Javadoc)
-		 * @see org.eclipse.jdt.internal.core.dom.rewrite.ASTRewriteAnalyzer.ListRewriter#getSeparatorString(int)
+		 * @see org.summer.sdt.internal.core.dom.rewrite.ASTRewriteAnalyzer.ListRewriter#getSeparatorString(int)
 		 */
 		protected String getSeparatorString(int nodeIndex) {
 			ASTNode curr= getNewNode(nodeIndex);
@@ -1594,7 +1594,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#postVisit(ASTNode)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#postVisit(ASTNode)
 	 */
 	public void postVisit(ASTNode node) {
 		TextEditGroup editGroup= this.eventStore.getTrackedNodeData(node);
@@ -1606,7 +1606,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#preVisit(ASTNode)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#preVisit(ASTNode)
 	 */
 	public void preVisit(ASTNode node) {
 		// copies, then range marker
@@ -1648,7 +1648,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(CompilationUnit)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(CompilationUnit)
 	 */
 	public boolean visit(CompilationUnit node) {
 		if (!hasChildrenChanges(node)) {
@@ -1668,7 +1668,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(TypeDeclaration)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(TypeDeclaration)
 	 */
 	public boolean visit(TypeDeclaration node) {
 		if (!hasChildrenChanges(node)) {
@@ -1978,7 +1978,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(MethodDeclaration)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(MethodDeclaration)
 	 */
 	public boolean visit(MethodDeclaration node) {
 		if (!hasChildrenChanges(node)) {
@@ -2037,7 +2037,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(Block)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(Block)
 	 */
 	public boolean visit(Block node) {
 		if (!hasChildrenChanges(node)) {
@@ -2056,7 +2056,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ReturnStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ReturnStatement)
 	 */
 	public boolean visit(ReturnStatement node) {
 		try {
@@ -2077,7 +2077,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(AnonymousClassDeclaration)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(AnonymousClassDeclaration)
 	 */
 	public boolean visit(AnonymousClassDeclaration node) {
 		if (!hasChildrenChanges(node)) {
@@ -2091,7 +2091,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ArrayAccess)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ArrayAccess)
 	 */
 	public boolean visit(ArrayAccess node) {
 		if (!hasChildrenChanges(node)) {
@@ -2104,7 +2104,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ArrayCreation)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ArrayCreation)
 	 */
 	public boolean visit(ArrayCreation node) {
 		if (!hasChildrenChanges(node)) {
@@ -2311,7 +2311,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ArrayInitializer)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ArrayInitializer)
 	 */
 	public boolean visit(ArrayInitializer node) {
 		if (!hasChildrenChanges(node)) {
@@ -2328,7 +2328,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ArrayType)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ArrayType)
 	 */
 	public boolean visit(ArrayType node) {
 		if (!hasChildrenChanges(node)) {
@@ -2344,7 +2344,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(AssertStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(AssertStatement)
 	 */
 	public boolean visit(AssertStatement node) {
 		try {
@@ -2365,7 +2365,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(Assignment)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(Assignment)
 	 */
 	public boolean visit(Assignment node) {
 		if (!hasChildrenChanges(node)) {
@@ -2379,7 +2379,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(BooleanLiteral)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(BooleanLiteral)
 	 */
 	public boolean visit(BooleanLiteral node) {
 		if (!hasChildrenChanges(node)) {
@@ -2393,7 +2393,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(BreakStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(BreakStatement)
 	 */
 	public boolean visit(BreakStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -2410,7 +2410,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(CastExpression)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(CastExpression)
 	 */
 	public boolean visit(CastExpression node) {
 		if (!hasChildrenChanges(node)) {
@@ -2423,7 +2423,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(CatchClause)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(CatchClause)
 	 */
 	public boolean visit(CatchClause node) { // catch (Exception) Block
 		if (!hasChildrenChanges(node)) {
@@ -2436,7 +2436,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(CharacterLiteral)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(CharacterLiteral)
 	 */
 	public boolean visit(CharacterLiteral node) {
 		if (!hasChildrenChanges(node)) {
@@ -2450,7 +2450,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ClassInstanceCreation)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ClassInstanceCreation)
 	 */
 	public boolean visit(ClassInstanceCreation node) {
 		if (!hasChildrenChanges(node)) {
@@ -2500,7 +2500,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ConditionalExpression)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ConditionalExpression)
 	 */
 	public boolean visit(ConditionalExpression node) { // expression ? thenExpression : elseExpression
 		if (!hasChildrenChanges(node)) {
@@ -2514,7 +2514,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ConstructorInvocation)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ConstructorInvocation)
 	 */
 	public boolean visit(ConstructorInvocation node) {
 		if (!hasChildrenChanges(node)) {
@@ -2534,7 +2534,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ContinueStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ContinueStatement)
 	 */
 	public boolean visit(ContinueStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -2562,7 +2562,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(CreationReference)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(CreationReference)
 	 */
 	public boolean visit(CreationReference node) {
 		if (!hasChildrenChanges(node)) {
@@ -2574,7 +2574,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(DoStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(DoStatement)
 	 */
 	public boolean visit(DoStatement node) { // do statement while expression
 		if (!hasChildrenChanges(node)) {
@@ -2602,7 +2602,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(EmptyStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(EmptyStatement)
 	 */
 	public boolean visit(EmptyStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -2614,7 +2614,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ExpressionStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ExpressionStatement)
 	 */
 	public boolean visit(ExpressionStatement node) { // expression
 		if (!hasChildrenChanges(node)) {
@@ -2626,7 +2626,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(FieldAccess)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(FieldAccess)
 	 */
 	public boolean visit(FieldAccess node) { // expression.name
 		if (!hasChildrenChanges(node)) {
@@ -2639,7 +2639,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(FieldDeclaration)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(FieldDeclaration)
 	 */
 	public boolean visit(FieldDeclaration node) { //{ Modifier } Type VariableDeclarationFragment { ',' VariableDeclarationFragment } ';'
 		if (!hasChildrenChanges(node)) {
@@ -2660,7 +2660,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ForStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ForStatement)
 	 */
 	public boolean visit(ForStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -2707,7 +2707,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(IfStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(IfStatement)
 	 */
 	public boolean visit(IfStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -2759,7 +2759,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ImportDeclaration)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ImportDeclaration)
 	 */
 	public boolean visit(ImportDeclaration node) {
 		if (!hasChildrenChanges(node)) {
@@ -2806,7 +2806,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(InfixExpression)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(InfixExpression)
 	 */
 	public boolean visit(InfixExpression node) {
 		if (!hasChildrenChanges(node)) {
@@ -2884,7 +2884,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(Initializer)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(Initializer)
 	 */
 	public boolean visit(Initializer node) {
 		if (!hasChildrenChanges(node)) {
@@ -2901,7 +2901,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(InstanceofExpression)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(InstanceofExpression)
 	 */
 	public boolean visit(InstanceofExpression node) {
 		if (!hasChildrenChanges(node)) {
@@ -2951,7 +2951,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(IntersectionType)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(IntersectionType)
 	 */
 	public boolean visit(IntersectionType node) {
 		if (!hasChildrenChanges(node)) {
@@ -2962,7 +2962,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(Javadoc)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(Javadoc)
 	 */
 	public boolean visit(Javadoc node) {
 		if (!hasChildrenChanges(node)) {
@@ -2976,7 +2976,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(LabeledStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(LabeledStatement)
 	 */
 	public boolean visit(LabeledStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -2989,7 +2989,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(LambdaExpression)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(LambdaExpression)
 	 */
 	public boolean visit(LambdaExpression node) {
 		if (!hasChildrenChanges(node)) {
@@ -3063,7 +3063,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(MethodInvocation)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(MethodInvocation)
 	 */
 	public boolean visit(MethodInvocation node) {
 		if (!hasChildrenChanges(node)) {
@@ -3092,7 +3092,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(NullLiteral)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(NullLiteral)
 	 */
 	public boolean visit(NullLiteral node) {
 		if (!hasChildrenChanges(node)) {
@@ -3104,7 +3104,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(NumberLiteral)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(NumberLiteral)
 	 */
 	public boolean visit(NumberLiteral node) {
 		if (!hasChildrenChanges(node)) {
@@ -3117,7 +3117,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(PackageDeclaration)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(PackageDeclaration)
 	 */
 	public boolean visit(PackageDeclaration node) {
 		if (!hasChildrenChanges(node)) {
@@ -3133,7 +3133,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ParenthesizedExpression)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ParenthesizedExpression)
 	 */
 	public boolean visit(ParenthesizedExpression node) {
 		if (!hasChildrenChanges(node)) {
@@ -3145,7 +3145,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(PostfixExpression)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(PostfixExpression)
 	 */
 	public boolean visit(PostfixExpression node) {
 		if (!hasChildrenChanges(node)) {
@@ -3158,7 +3158,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(PrefixExpression)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(PrefixExpression)
 	 */
 	public boolean visit(PrefixExpression node) {
 		if (!hasChildrenChanges(node)) {
@@ -3171,7 +3171,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(PrimitiveType)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(PrimitiveType)
 	 */
 	public boolean visit(PrimitiveType node) {
 		if (!hasChildrenChanges(node)) {
@@ -3187,7 +3187,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(QualifiedName)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(QualifiedName)
 	 */
 	public boolean visit(QualifiedName node) {
 		if (!hasChildrenChanges(node)) {
@@ -3200,7 +3200,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(SimpleName)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(SimpleName)
 	 */
 	public boolean visit(SimpleName node) {
 		if (!hasChildrenChanges(node)) {
@@ -3213,7 +3213,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(SimpleType)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(SimpleType)
 	 */
 	public boolean visit(SimpleType node) {
 		if (!hasChildrenChanges(node)) {
@@ -3227,7 +3227,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(SingleVariableDeclaration)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(SingleVariableDeclaration)
 	 */
 	public boolean visit(SingleVariableDeclaration node) {
 		if (!hasChildrenChanges(node)) {
@@ -3305,7 +3305,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(StringLiteral)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(StringLiteral)
 	 */
 	public boolean visit(StringLiteral node) {
 		if (!hasChildrenChanges(node)) {
@@ -3319,7 +3319,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(SuperConstructorInvocation)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(SuperConstructorInvocation)
 	 */
 	public boolean visit(SuperConstructorInvocation node) {
 		if (!hasChildrenChanges(node)) {
@@ -3347,7 +3347,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(SuperFieldAccess)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(SuperFieldAccess)
 	 */
 	public boolean visit(SuperFieldAccess node) {
 		if (!hasChildrenChanges(node)) {
@@ -3360,7 +3360,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(SuperMethodInvocation)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(SuperMethodInvocation)
 	 */
 	public boolean visit(SuperMethodInvocation node) {
 		if (!hasChildrenChanges(node)) {
@@ -3397,7 +3397,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(SwitchCase)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(SwitchCase)
 	 */
 	public boolean visit(SwitchCase node) {
 		if (!hasChildrenChanges(node)) {
@@ -3501,7 +3501,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(SwitchStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(SwitchStatement)
 	 */
 	public boolean visit(SwitchStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -3534,7 +3534,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(SynchronizedStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(SynchronizedStatement)
 	 */
 	public boolean visit(SynchronizedStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -3547,7 +3547,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ThisExpression)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ThisExpression)
 	 */
 	public boolean visit(ThisExpression node) {
 		if (!hasChildrenChanges(node)) {
@@ -3559,7 +3559,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ThrowStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ThrowStatement)
 	 */
 	public boolean visit(ThrowStatement node) {
 		try {
@@ -3579,7 +3579,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(TryStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(TryStatement)
 	 */
 	public boolean visit(TryStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -3613,7 +3613,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(TypeDeclarationStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(TypeDeclarationStatement)
 	 */
 	public boolean visit(TypeDeclarationStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -3628,7 +3628,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(TypeLiteral)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(TypeLiteral)
 	 */
 	public boolean visit(TypeLiteral node) {
 		if (!hasChildrenChanges(node)) {
@@ -3640,7 +3640,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(UnionType)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(UnionType)
 	 */
 	public boolean visit(UnionType node) {
 		if (!hasChildrenChanges(node)) {
@@ -3651,7 +3651,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(VariableDeclarationExpression)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(VariableDeclarationExpression)
 	 */
 	public boolean visit(VariableDeclarationExpression node) {
 		if (!hasChildrenChanges(node)) {
@@ -3671,7 +3671,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(VariableDeclarationFragment)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(VariableDeclarationFragment)
 	 */
 	public boolean visit(VariableDeclarationFragment node) {
 		if (!hasChildrenChanges(node)) {
@@ -3702,7 +3702,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(VariableDeclarationStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(VariableDeclarationStatement)
 	 */
 	public boolean visit(VariableDeclarationStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -3723,7 +3723,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(WhileStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(WhileStatement)
 	 */
 	public boolean visit(WhileStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -3746,7 +3746,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.MemberRef)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.MemberRef)
 	 */
 	public boolean visit(MemberRef node) {
 		if (!hasChildrenChanges(node)) {
@@ -3759,7 +3759,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.MethodRef)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.MethodRef)
 	 */
 	public boolean visit(MethodRef node) {
 		if (!hasChildrenChanges(node)) {
@@ -3784,7 +3784,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.MethodRefParameter)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.MethodRefParameter)
 	 */
 	public boolean visit(MethodRefParameter node) {
 		if (!hasChildrenChanges(node)) {
@@ -3810,7 +3810,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.TagElement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.TagElement)
 	 */
 	public boolean visit(TagElement node) {
 		if (!hasChildrenChanges(node)) {
@@ -3860,7 +3860,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.TextElement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.TextElement)
 	 */
 	public boolean visit(TextElement node) {
 		if (!hasChildrenChanges(node)) {
@@ -3874,7 +3874,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.AnnotationTypeDeclaration)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.AnnotationTypeDeclaration)
 	 */
 	public boolean visit(AnnotationTypeDeclaration node) {
 		if (!hasChildrenChanges(node)) {
@@ -3891,7 +3891,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.AnnotationTypeMemberDeclaration)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.AnnotationTypeMemberDeclaration)
 	 */
 	public boolean visit(AnnotationTypeMemberDeclaration node) {
 		if (!hasChildrenChanges(node)) {
@@ -3915,7 +3915,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.EnhancedForStatement)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.EnhancedForStatement)
 	 */
 	public boolean visit(EnhancedForStatement node) {
 		if (!hasChildrenChanges(node)) {
@@ -3940,7 +3940,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.EnumConstantDeclaration)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.EnumConstantDeclaration)
 	 */
 	public boolean visit(EnumConstantDeclaration node) {
 		if (!hasChildrenChanges(node)) {
@@ -3995,7 +3995,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 		return false;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.EnumDeclaration)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.EnumDeclaration)
 	 */
 	public boolean visit(EnumDeclaration node) {
 		if (!hasChildrenChanges(node)) {
@@ -4070,7 +4070,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(ExpressionMethodReference)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(ExpressionMethodReference)
 	 */
 	public boolean visit(ExpressionMethodReference node) {
 		if (!hasChildrenChanges(node)) {
@@ -4083,7 +4083,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.MarkerAnnotation)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.MarkerAnnotation)
 	 */
 	public boolean visit(MarkerAnnotation node) {
 		if (!hasChildrenChanges(node)) {
@@ -4093,7 +4093,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 		return false;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.MemberValuePair)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.MemberValuePair)
 	 */
 	public boolean visit(MemberValuePair node) {
 		if (!hasChildrenChanges(node)) {
@@ -4105,7 +4105,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 		return false;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.Modifier)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.Modifier)
 	 */
 	public boolean visit(Modifier node) {
 		if (!hasChildrenChanges(node)) {
@@ -4117,7 +4117,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 		return false;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.NormalAnnotation)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.NormalAnnotation)
 	 */
 	public boolean visit(NormalAnnotation node) {
 		if (!hasChildrenChanges(node)) {
@@ -4138,7 +4138,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 		return false;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.NameQualifiedType)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.NameQualifiedType)
 	 */
 	public boolean visit(NameQualifiedType node) {
 		if (!hasChildrenChanges(node)) {
@@ -4155,7 +4155,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 		return false;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.ParameterizedType)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.ParameterizedType)
 	 */
 	public boolean visit(ParameterizedType node) {
 		if (!hasChildrenChanges(node)) {
@@ -4176,7 +4176,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 		return false;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.QualifiedType)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.QualifiedType)
 	 */
 	public boolean visit(QualifiedType node) {
 		if (!hasChildrenChanges(node)) {
@@ -4195,7 +4195,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 		return false;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.SingleMemberAnnotation)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.SingleMemberAnnotation)
 	 */
 	public boolean visit(SingleMemberAnnotation node) {
 		if (!hasChildrenChanges(node)) {
@@ -4207,7 +4207,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(SuperMethodReference)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(SuperMethodReference)
 	 */
 	public boolean visit(SuperMethodReference node) {
 		if (!hasChildrenChanges(node)) {
@@ -4220,7 +4220,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(TypeMethodReference)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(TypeMethodReference)
 	 */
 	public boolean visit(TypeMethodReference node) {
 		if (!hasChildrenChanges(node)) {
@@ -4233,7 +4233,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.TypeParameter)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.TypeParameter)
 	 */
 	public boolean visit(TypeParameter node) {
 		if (!hasChildrenChanges(node)) {
@@ -4248,7 +4248,7 @@ public final class ASTRewriteAnalyzer extends ASTVisitor {
 		return false;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.WildcardType)
+	 * @see org.summer.sdt.core.dom.ASTVisitor#visit(org.summer.sdt.core.dom.WildcardType)
 	 */
 	public boolean visit(WildcardType node) {
 		if (!hasChildrenChanges(node)) {

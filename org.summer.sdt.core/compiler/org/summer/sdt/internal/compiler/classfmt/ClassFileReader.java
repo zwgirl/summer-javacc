@@ -536,14 +536,14 @@ public char[] getEnclosingTypeName() {
 
 /**
  * Answer the receiver's this.fields or null if the array is empty.
- * @return org.eclipse.jdt.internal.compiler.api.IBinaryField[]
+ * @return org.summer.sdt.internal.compiler.api.IBinaryField[]
  */
 public IBinaryField[] getFields() {
 	return this.fields;
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.env.IDependent#getFileName()
+ * @see org.summer.sdt.internal.compiler.env.IDependent#getFileName()
  */
 public char[] getFileName() {
 	return this.classFileName;
@@ -598,7 +598,7 @@ public char[][] getInterfaceNames() {
  * This nested type info is extracted from the inner class attributes. Ask the
  * name environment to find a member type using its compound name
  *
- * @return org.eclipse.jdt.internal.compiler.api.IBinaryNestedType[]
+ * @return org.summer.sdt.internal.compiler.api.IBinaryNestedType[]
  */
 public IBinaryNestedType[] getMemberTypes() {
 	// we might have some member types of the current type
@@ -652,7 +652,7 @@ public IBinaryNestedType[] getMemberTypes() {
 
 /**
  * Answer the receiver's this.methods or null if the array is empty.
- * @return org.eclipse.jdt.internal.compiler.api.env.IBinaryMethod[]
+ * @return org.summer.sdt.internal.compiler.api.env.IBinaryMethod[]
  */
 public IBinaryMethod[] getMethods() {
 	return this.methods;

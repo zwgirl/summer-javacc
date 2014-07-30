@@ -40,7 +40,7 @@ import org.summer.sdt.internal.core.util.Util;
  * @see ICompilationUnit
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class CompilationUnit extends Openable implements ICompilationUnit, org.eclipse.jdt.internal.compiler.env.ICompilationUnit, SuffixConstants {
+public class CompilationUnit extends Openable implements ICompilationUnit, org.summer.sdt.internal.compiler.env.ICompilationUnit, SuffixConstants {
 	/**
 	 * Internal synonym for deprecated constant AST.JSL2
 	 * to alleviate deprecation warnings.
@@ -333,30 +333,30 @@ public class CompilationUnit extends Openable implements ICompilationUnit, org.e
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.ICodeAssist#codeComplete(int, org.eclipse.jdt.core.CompletionRequestor)
+	 * @see org.summer.sdt.core.ICodeAssist#codeComplete(int, org.summer.sdt.core.CompletionRequestor)
 	 */
 	public void codeComplete(int offset, CompletionRequestor requestor) throws JavaModelException {
 		codeComplete(offset, requestor, DefaultWorkingCopyOwner.PRIMARY);
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.ICodeAssist#codeComplete(int, org.eclipse.jdt.core.CompletionRequestor, org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.summer.sdt.core.ICodeAssist#codeComplete(int, org.summer.sdt.core.CompletionRequestor, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void codeComplete(int offset, CompletionRequestor requestor, IProgressMonitor monitor) throws JavaModelException {
 		codeComplete(offset, requestor, DefaultWorkingCopyOwner.PRIMARY, monitor);
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.ICodeAssist#codeComplete(int, org.eclipse.jdt.core.CompletionRequestor, org.eclipse.jdt.core.WorkingCopyOwner)
+	 * @see org.summer.sdt.core.ICodeAssist#codeComplete(int, org.summer.sdt.core.CompletionRequestor, org.summer.sdt.core.WorkingCopyOwner)
 	 */
 	public void codeComplete(int offset, CompletionRequestor requestor, WorkingCopyOwner workingCopyOwner) throws JavaModelException {
 		codeComplete(offset, requestor, workingCopyOwner, null);
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.ICodeAssist#codeComplete(int, org.eclipse.jdt.core.CompletionRequestor, org.eclipse.jdt.core.WorkingCopyOwner, org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.summer.sdt.core.ICodeAssist#codeComplete(int, org.summer.sdt.core.CompletionRequestor, org.summer.sdt.core.WorkingCopyOwner, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void codeComplete(int offset, CompletionRequestor requestor, WorkingCopyOwner workingCopyOwner, IProgressMonitor monitor) throws JavaModelException {
 		codeComplete(
 				this,
-				isWorkingCopy() ? (org.eclipse.jdt.internal.compiler.env.ICompilationUnit) getOriginalElement() : this,
+				isWorkingCopy() ? (org.summer.sdt.internal.compiler.env.ICompilationUnit) getOriginalElement() : this,
 				offset,
 				requestor,
 				workingCopyOwner,
@@ -629,7 +629,7 @@ public class CompilationUnit extends Openable implements ICompilationUnit, org.e
 		return this;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.env.ICompilationUnit#getContents()
+	 * @see org.summer.sdt.internal.compiler.env.ICompilationUnit#getContents()
 	 */
 	public char[] getContents() {
 		IBuffer buffer = getBufferManager().getBuffer(this);
@@ -715,7 +715,7 @@ public class CompilationUnit extends Openable implements ICompilationUnit, org.e
 		return COMPILATION_UNIT;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.env.IDependent#getFileName()
+	 * @see org.summer.sdt.internal.compiler.env.IDependent#getFileName()
 	 */
 	public char[] getFileName(){
 		return getPath().toString().toCharArray();
@@ -795,7 +795,7 @@ public class CompilationUnit extends Openable implements ICompilationUnit, org.e
 		return this;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.env.ICompilationUnit#getMainTypeName()
+	 * @see org.summer.sdt.internal.compiler.env.ICompilationUnit#getMainTypeName()
 	 */
 	public char[] getMainTypeName(){
 		return Util.getNameWithoutJavaLikeExtension(getElementName()).toCharArray();
@@ -846,7 +846,7 @@ public class CompilationUnit extends Openable implements ICompilationUnit, org.e
 		return array;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.env.ICompilationUnit#getPackageName()
+	 * @see org.summer.sdt.internal.compiler.env.ICompilationUnit#getPackageName()
 	 */
 	public char[][] getPackageName() {
 		PackageFragment packageFragment = (PackageFragment) getParent();

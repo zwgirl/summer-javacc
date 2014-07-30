@@ -181,25 +181,25 @@ public final class JavaCore extends Plugin {
 	private static Plugin JAVA_CORE_PLUGIN = null;
 	/**
 	 * The plug-in identifier of the Java core support
-	 * (value <code>"org.eclipse.jdt.core"</code>).
+	 * (value <code>"org.summer.sdt.core"</code>).
 	 */
-	public static final String PLUGIN_ID = "org.eclipse.jdt.core" ; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.summer.sdt.core" ; //$NON-NLS-1$
 
 	/**
 	 * The identifier for the Java builder
-	 * (value <code>"org.eclipse.jdt.core.javabuilder"</code>).
+	 * (value <code>"org.summer.sdt.core.javabuilder"</code>).
 	 */
 	public static final String BUILDER_ID = PLUGIN_ID + ".javabuilder" ; //$NON-NLS-1$
 
 	/**
 	 * The identifier for the Java model
-	 * (value <code>"org.eclipse.jdt.core.javamodel"</code>).
+	 * (value <code>"org.summer.sdt.core.javamodel"</code>).
 	 */
 	public static final String MODEL_ID = PLUGIN_ID + ".javamodel" ; //$NON-NLS-1$
 
 	/**
 	 * The identifier for the Java nature
-	 * (value <code>"org.eclipse.jdt.core.javanature"</code>).
+	 * (value <code>"org.summer.sdt.core.javanature"</code>).
 	 * The presence of this nature on a project indicates that it is
 	 * Java-capable.
 	 *
@@ -211,13 +211,13 @@ public final class JavaCore extends Plugin {
 	 * Name of the handle id attribute in a Java marker.
 	 */
 	protected static final String ATT_HANDLE_ID =
-		"org.eclipse.jdt.internal.core.JavaModelManager.handleId" ; //$NON-NLS-1$
+		"org.summer.sdt.internal.core.JavaModelManager.handleId" ; //$NON-NLS-1$
 
 	/**
 	 * Name of the User Library Container id.
 	 * @since 3.0
 	 */
-	public static final String USER_LIBRARY_CONTAINER_ID= "org.eclipse.jdt.USER_LIBRARY"; //$NON-NLS-1$
+	public static final String USER_LIBRARY_CONTAINER_ID= "org.summer.sdt.USER_LIBRARY"; //$NON-NLS-1$
 
 	// Begin configurable option IDs {
 
@@ -227,7 +227,7 @@ public final class JavaCore extends Plugin {
 	 *    to be displayed in debugger, only in place where variables are
 	 *    definitely assigned (.class file is then bigger).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.debug.localVariable"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.debug.localVariable"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "generate", "do not generate" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"generate"</code></dd>
 	 * </dl>
@@ -239,7 +239,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When generated, this attribute will enable source code highlighting in debugger
 	 *    (.class file is then bigger).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.debug.lineNumber"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.debug.lineNumber"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "generate", "do not generate" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"generate"</code></dd>
 	 * </dl>
@@ -251,7 +251,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When generated, this attribute will enable the debugger to present the
 	 *    corresponding source code.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.debug.sourceFile"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.debug.sourceFile"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "generate", "do not generate" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"generate"</code></dd>
 	 * </dl>
@@ -263,7 +263,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Unless requested to preserve unused local variables (that is, never read), the
 	 *    compiler will optimize them out, potentially altering debugging.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.codegen.unusedLocal"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.codegen.unusedLocal"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "preserve", "optimize out" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"preserve"</code></dd>
 	 * </dl>
@@ -276,7 +276,7 @@ public final class JavaCore extends Plugin {
 	 * (such as their names) to be accessed from reflection libraries, annotation processing,
 	 * code weaving, and in the debugger, from platform target level 1.8 and later.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.codegen.methodParameters"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.codegen.methodParameters"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "generate", "do not generate" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"do not generate"</code></dd>
 	 * </dl>
@@ -292,7 +292,7 @@ public final class JavaCore extends Plugin {
 	 *    <code>"1.7"</code> target requires to toggle compliance mode to <code>"1.7"</code>.
 	 *    <code>"cldc1.1"</code> requires the source version to be <code>"1.3"</code> and the compliance version to be <code>"1.4"</code> or lower.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.codegen.targetPlatform"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.codegen.targetPlatform"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "cldc1.1" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"1.2"</code></dd>
 	 * </dl>
@@ -308,7 +308,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Note that JSR inlining is optional only for target platform lesser than 1.5. From 1.5 on, the JSR
 	 *    inlining is mandatory (also see related setting {@link #COMPILER_CODEGEN_TARGET_PLATFORM}).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.codegen.inlineJsrBytecode"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -322,7 +322,7 @@ public final class JavaCore extends Plugin {
 	 *    and will not report any javadoc problem. It will also not find any reference in javadoc comment and
 	 *    DOM AST Javadoc node will be only a flat text instead of having structured tag elements.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.doc.comment.support"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.doc.comment.support"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -350,7 +350,7 @@ public final class JavaCore extends Plugin {
 	 *    enabling this option, the compiler will signal such situations as an
 	 *    error or a warning.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.overridingPackageDefaultMethod"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.overridingPackageDefaultMethod"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -363,7 +363,7 @@ public final class JavaCore extends Plugin {
 	 *    style programming. When enabling this option, the compiler will signal such
 	 *    scenario either as an error or a warning.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.methodWithConstructorName"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.methodWithConstructorName"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -375,7 +375,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will signal use of deprecated API either as an
 	 *    error or a warning.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.deprecation"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.deprecation"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -387,7 +387,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will signal use of deprecated API inside deprecated code.</p>
 	 * <p>The severity of the problem is controlled with option {@link #COMPILER_PB_DEPRECATION}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.deprecationInDeprecatedCode"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.deprecationInDeprecatedCode"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -400,14 +400,14 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will signal the declaration of a method overriding a deprecated one.</p>
 	 * <p>The severity of the problem is controlled with option {@link #COMPILER_PB_DEPRECATION}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
 	 * @since 3.0
 	 * @category CompilerOptionID
 	 */
-	public static final String COMPILER_PB_DEPRECATION_WHEN_OVERRIDING_DEPRECATED_METHOD = "org.eclipse.jdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod"; //$NON-NLS-1$
+	public static final String COMPILER_PB_DEPRECATION_WHEN_OVERRIDING_DEPRECATED_METHOD = "org.summer.sdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod"; //$NON-NLS-1$
 	/**
 	 * Compiler option ID: Reporting Hidden Catch Block.
 	 * <p>Locally to a try statement, some catch blocks may hide others. For example,</p>
@@ -419,7 +419,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabling this option, the compiler will issue an error or a warning for hidden
 	 *    catch blocks corresponding to checked exceptions.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.hiddenCatchBlock"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.hiddenCatchBlock"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -431,7 +431,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning for unused local
 	 *    variables (that is, variables never read from).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedLocal"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedLocal"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -443,7 +443,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning for unused method
 	 *    parameters (that is, parameters never read from).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedParameter"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedParameter"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -455,7 +455,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will signal unused parameters in abstract method implementations.</p>
 	 * <p>The severity of the problem is controlled with option {@link #COMPILER_PB_UNUSED_PARAMETER}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedParameterWhenImplementingAbstract"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedParameterWhenImplementingAbstract"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -468,7 +468,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will signal unused parameters in methods overriding concrete ones.</p>
 	 * <p>The severity of the problem is controlled with option {@link #COMPILER_PB_UNUSED_PARAMETER}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedParameterWhenOverridingConcrete"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedParameterWhenOverridingConcrete"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -484,7 +484,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Note: this option has no effect until the doc comment support is enabled according to the
 	 *    option {@link #COMPILER_DOC_COMMENT_SUPPORT}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedParameterIncludeDocCommentReference"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedParameterIncludeDocCommentReference"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -497,7 +497,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning for unused import
 	 *    reference.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedImport"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedImport"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -511,7 +511,7 @@ public final class JavaCore extends Plugin {
 	 *    non-generic method invocation. Note that prior to compliance level is <code>"1.7"</code>, this situation would automatically result
 	 *    in an error. From Java7 on, unused type arguments are being tolerated, and optionally warned against.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedTypeArgumentsForMethodInvocation"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedTypeArgumentsForMethodInvocation"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -525,7 +525,7 @@ public final class JavaCore extends Plugin {
 	 *    access to a non-accessible member of an enclosing type. Such access can have
 	 *    performance implications.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.syntheticAccessEmulation"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.syntheticAccessEmulation"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -538,7 +538,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever it encounters an 
 	 * unused type parameter. </p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedTypeParameter"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedTypeParameter"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -552,7 +552,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning for non externalized
 	 *    String literal (that is, not tagged with <code>//$NON-NLS-&lt;n&gt;$</code>).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.nonExternalizedStringLiteral"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.nonExternalizedStringLiteral"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -565,7 +565,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever <code>'assert'</code> is
 	 *    used as an identifier (reserved keyword in 1.4).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.assertIdentifier"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.assertIdentifier"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -578,7 +578,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever <code>'enum'</code> is
 	 *    used as an identifier (reserved keyword in 1.5).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.enumIdentifier"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.enumIdentifier"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -592,7 +592,7 @@ public final class JavaCore extends Plugin {
 	 *    or method is accessed with an expression receiver. A reference to a static member should
 	 *    be qualified with a type name.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.staticAccessReceiver"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.staticAccessReceiver"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -606,7 +606,7 @@ public final class JavaCore extends Plugin {
 	 *    or method is accessed in an indirect way. A reference to a static member should
 	 *    preferably be qualified with its declaring type name.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.indirectStaticAccess"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.indirectStaticAccess"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -619,7 +619,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever an assignment
 	 *    has no effect (e.g <code>'x = x'</code>).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.noEffectAssignment"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.noEffectAssignment"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -638,7 +638,7 @@ public final class JavaCore extends Plugin {
 	 *      }
 	 *    </pre>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.incompatibleNonInheritedInterfaceMethod"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.incompatibleNonInheritedInterfaceMethod"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -651,7 +651,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever a private
 	 *    method or field is declared but never used within the same unit.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedPrivateMember"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedPrivateMember"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -664,7 +664,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever a local variable
 	 *    declaration is hiding some field or local variable (either locally, inherited or defined in enclosing type).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.localVariableHiding"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.localVariableHiding"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -678,7 +678,7 @@ public final class JavaCore extends Plugin {
 	 *    is hiding some field (either locally, inherited or defined in enclosing type).</p>
 	 * <p>The severity of the problem is controlled with option {@link #COMPILER_PB_LOCAL_VARIABLE_HIDING}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.specialParameterHidingField"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.specialParameterHidingField"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -691,7 +691,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever a field
 	 *    declaration is hiding some field or local variable (either locally, inherited or defined in enclosing type).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.fieldHiding"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.fieldHiding"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -705,7 +705,7 @@ public final class JavaCore extends Plugin {
 	 *    declaration is hiding some type, when a nested type is hiding some type parameter, or when
 	 *    a nested type is hiding another nested type defined in same unit.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.typeParameterHiding"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.typeParameterHiding"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -718,7 +718,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning if a boolean assignment is acting as the condition
 	 *    of a control statement  (where it probably was meant to be a boolean comparison).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.possibleAccidentalBooleanAssignment"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.possibleAccidentalBooleanAssignment"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -731,7 +731,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning if a case may be
 	 *    entered by falling through previous case. Empty cases are allowed.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.fallthroughCase"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.fallthroughCase"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -744,7 +744,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning if an empty statement or a
 	 *    unnecessary semicolon is encountered.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.emptyStatement"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.emptyStatement"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -755,7 +755,7 @@ public final class JavaCore extends Plugin {
 	/**
 	 * Compiler option ID.
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.booleanMethodThrowingException"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.booleanMethodThrowingException"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -769,7 +769,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning when a cast or an <code>instanceof</code> operation
 	 *    is unnecessary.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unnecessaryTypeCheck"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unnecessaryTypeCheck"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -782,7 +782,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning when a statement is unnecessarily
 	 *    nested within an <code>else</code> clause (in situation where then clause is not completing normally).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unnecessaryElse"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unnecessaryElse"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -795,7 +795,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning when an empty block is detected and it is not
 	 *    documented with any comment.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.undocumentedEmptyBlock"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.undocumentedEmptyBlock"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -807,7 +807,7 @@ public final class JavaCore extends Plugin {
 	 * Compiler option ID: Reporting Finally Blocks Not Completing Normally.
 	 * <p>When enabled, the compiler will issue an error or a warning when a finally block does not complete normally.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.finallyBlockNotCompletingNormally"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.finallyBlockNotCompletingNormally"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -826,7 +826,7 @@ public final class JavaCore extends Plugin {
 	 *    {@link #COMPILER_PB_UNUSED_DECLARED_THROWN_EXCEPTION_EXEMPT_EXCEPTION_AND_THROWABLE},
 	 *    and {@link #COMPILER_PB_UNUSED_DECLARED_THROWN_EXCEPTION_WHEN_OVERRIDING}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownException"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedDeclaredThrownException"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -844,7 +844,7 @@ public final class JavaCore extends Plugin {
 	 *    {@link #COMPILER_PB_UNUSED_DECLARED_THROWN_EXCEPTION_INCLUDE_DOC_COMMENT_REFERENCE} and
 	 *    {@link #COMPILER_PB_UNUSED_DECLARED_THROWN_EXCEPTION_EXEMPT_EXCEPTION_AND_THROWABLE}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionWhenOverriding"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedDeclaredThrownExceptionWhenOverriding"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -865,7 +865,7 @@ public final class JavaCore extends Plugin {
 	 *    {@link #COMPILER_PB_UNUSED_DECLARED_THROWN_EXCEPTION_EXEMPT_EXCEPTION_AND_THROWABLE}
 	 *    and {@link #COMPILER_PB_UNUSED_DECLARED_THROWN_EXCEPTION_WHEN_OVERRIDING}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionIncludeDocCommentReference"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedDeclaredThrownExceptionIncludeDocCommentReference"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -891,7 +891,7 @@ public final class JavaCore extends Plugin {
 	 *    {@link #COMPILER_PB_UNUSED_DECLARED_THROWN_EXCEPTION_INCLUDE_DOC_COMMENT_REFERENCE}
 	 *    and {@link #COMPILER_PB_UNUSED_DECLARED_THROWN_EXCEPTION_WHEN_OVERRIDING}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionExemptExceptionAndThrowable"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedDeclaredThrownExceptionExemptExceptionAndThrowable"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -904,7 +904,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning when a field is access without any qualification.
 	 *    In order to improve code readability, it should be qualified, e.g. <code>'x'</code> should rather be written <code>'this.x'</code>.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unqualifiedFieldAccess"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unqualifiedFieldAccess"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -923,7 +923,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever an operation involves generic types, and potentially
 	 *    invalidates type safety since involving raw types (e.g. invoking <code>#foo(X&lt;String&gt;)</code> with arguments <code>(X)</code>).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.uncheckedTypeOperation"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.uncheckedTypeOperation"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -937,7 +937,7 @@ public final class JavaCore extends Plugin {
 	 *    discouraged, and are intended to help interfacing with legacy code. In the future, the language specification may
 	 *    reject raw references to generic types.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.rawTypeReference"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.rawTypeReference"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -953,7 +953,7 @@ public final class JavaCore extends Plugin {
 	 *     in its method signatures and return types because the methods it overrides from a super type are declared to
 	 *     use raw types in the first place.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unavoidableGenericTypeProblems"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unavoidableGenericTypeProblems"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -967,7 +967,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever a generic type parameter is associated with a
 	 *    bound corresponding to a final type; since final types cannot be further extended, the parameter is pretty useless.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.finalParameterBound"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.finalParameterBound"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -980,7 +980,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever a serializable class is missing a local declaration
 	 *    of a <code>serialVersionUID</code> field. This field must be declared as static final and be of type <code>long</code>.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingSerialVersion"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingSerialVersion"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -994,7 +994,7 @@ public final class JavaCore extends Plugin {
 	 *    when passed to a method/constructor invocation. (e.g. <code>Class.getMethod(String name, Class ... args )</code>
 	 *    invoked with arguments <code>("foo", null)</code>).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.varargsArgumentNeedCast"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1007,7 +1007,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever a boxing or an unboxing
 	 *    conversion is performed.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.autoboxing"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.autoboxing"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1020,7 +1020,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever an annotation type is used
 	 *    as a super-interface. Though legal, this is discouraged.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.annotationSuperInterface"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.annotationSuperInterface"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1033,7 +1033,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever encountering a method
 	 *    declaration which overrides a superclass method but has no <code>@Override</code> annotation.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotation"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingOverrideAnnotation"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1048,7 +1048,7 @@ public final class JavaCore extends Plugin {
 	 * <p>This option only has an effect if the compiler compliance is 1.6 or greater.</p>
 	 * <p>The severity of the problem is controlled with option {@link #COMPILER_PB_MISSING_OVERRIDE_ANNOTATION}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotationForInterfaceMethodImplementation"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingOverrideAnnotationForInterfaceMethodImplementation"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -1061,7 +1061,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever encountering a declaration
 	 *    carrying a <code>@deprecated</code> doc tag but having no corresponding <code>@Deprecated</code> annotation.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingDeprecatedAnnotation"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingDeprecatedAnnotation"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1074,7 +1074,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning if a type
 	 * overrides Object.equals(Object) but does not override hashCode().</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingHashCodeMethod"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingHashCodeMethod"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1088,7 +1088,7 @@ public final class JavaCore extends Plugin {
 	 * is not reported as truly unreachable code by the Java Language Specification. If this diagnostic is enabled, then the invocation of <code>foo()</code> is
 	 * going to be signaled as being dead code.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.deadCode"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.deadCode"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1101,7 +1101,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will signal presence of dead code inside trivial IF statement, e.g. <code>if (DEBUG)...</code>.</p>
 	 * <p>The severity of the problem is controlled with option {@link #COMPILER_PB_DEAD_CODE}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.deadCodeInTrivialIfStatement"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.deadCodeInTrivialIfStatement"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1115,7 +1115,7 @@ public final class JavaCore extends Plugin {
 	 * 		regarding each enum constant for which a corresponding case label is lacking.
 	 * 		Reporting is further controlled by the option {@link #COMPILER_PB_MISSING_ENUM_CASE_DESPITE_DEFAULT}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.incompleteEnumSwitch"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.incompleteEnumSwitch"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1133,7 +1133,7 @@ public final class JavaCore extends Plugin {
 	 *  </ul>
 	 *  This option has no effect if {@link #COMPILER_PB_INCOMPLETE_ENUM_SWITCH} is set to <code>"ignore"</code>.
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingEnumCaseDespiteDefault"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingEnumCaseDespiteDefault"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1146,7 +1146,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning 
 	 * 		against each switch statement that lacks a default case.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingDefaultCase"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingDefaultCase"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1167,7 +1167,7 @@ public final class JavaCore extends Plugin {
 	 *    or continue statement; for instance the following label would be considered unreferenced:</p>
 	 *    <code>LABEL: { break; }</code>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedLabel"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedLabel"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1180,7 +1180,7 @@ public final class JavaCore extends Plugin {
 	 * <p>This is the generic control for the severity of Javadoc problems.
 	 *    When enabled, the compiler will issue an error or a warning for a problem in Javadoc.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.invalidJavadoc"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.invalidJavadoc"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1195,7 +1195,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Note that this diagnosis can be enabled based on the visibility of the construct associated with the Javadoc;
 	 *    also see the setting {@link #COMPILER_PB_INVALID_JAVADOC_TAGS_VISIBILITY}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.invalidJavadocTags"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.invalidJavadocTags"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1209,7 +1209,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Note that this diagnosis can be enabled based on the visibility of the construct associated with the Javadoc;
 	 *    also see the setting {@link #COMPILER_PB_INVALID_JAVADOC_TAGS_VISIBILITY}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.invalidJavadocTagsDeprecatedRef"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.invalidJavadocTagsDeprecatedRef"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1223,7 +1223,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Note that this diagnosis can be enabled based on the visibility of the construct associated with the Javadoc;
 	 *    also see the setting {@link #COMPILER_PB_INVALID_JAVADOC_TAGS_VISIBILITY}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.invalidJavadocTagsNotVisibleRef"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.invalidJavadocTagsNotVisibleRef"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1235,7 +1235,7 @@ public final class JavaCore extends Plugin {
 	 * Compiler option ID: Visibility Level For Invalid Javadoc Tags.
 	 * <p>Set the minimum visibility level for Javadoc tag problems. Below this level problems will be ignored.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.invalidJavadocTagsVisibility"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.invalidJavadocTagsVisibility"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "public", "protected", "default", "private" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"public"</code></dd>
 	 * </dl>
@@ -1252,7 +1252,7 @@ public final class JavaCore extends Plugin {
 	 *       a subset of the standard <a href="http://download.oracle.com/javase/6/docs/technotes/tools/windows/javadoc.html#javadoctags">Javadoc tags</a>
 	 *       that have a description, text or label are checked. While this set may grow in the future, note that user-defined tags are not and will not be checked.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingJavadocTagDescription"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingJavadocTagDescription"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "return_tag", "all_standard_tags", "no_tag" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"return_tag"</code></dd>
 	 * </dl>
@@ -1267,7 +1267,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Note that this diagnosis can be enabled based on the visibility of the construct associated with the Javadoc;
 	 *    also see the setting {@link #COMPILER_PB_MISSING_JAVADOC_TAGS_VISIBILITY}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingJavadocTags"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingJavadocTags"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1279,7 +1279,7 @@ public final class JavaCore extends Plugin {
 	 * Compiler option ID: Visibility Level For Missing Javadoc Tags.
 	 * <p>Set the minimum visibility level for Javadoc missing tag problems. Below this level problems will be ignored.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingJavadocTagsVisibility"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingJavadocTagsVisibility"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "public", "protected", "default", "private" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"public"</code></dd>
 	 * </dl>
@@ -1291,7 +1291,7 @@ public final class JavaCore extends Plugin {
 	 * Compiler option ID: Reporting Missing Javadoc Tags on Overriding Methods.
 	 * <p>Specify whether the compiler will verify overriding methods in order to report Javadoc missing tag problems.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingJavadocTagsOverriding"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingJavadocTagsOverriding"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1306,7 +1306,7 @@ public final class JavaCore extends Plugin {
 	 *    corresponding <code>@param</code> tag.</p>
 	 * <p>This option only has an effect if the compiler compliance is 1.5 or greater.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingJavadocTagsMethodTypeParameters"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingJavadocTagsMethodTypeParameters"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1321,7 +1321,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Note that this diagnosis can be enabled based on the visibility of the construct associated with the expected Javadoc;
 	 *    also see the setting {@link #COMPILER_PB_MISSING_JAVADOC_COMMENTS_VISIBILITY}.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingJavadocComments"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingJavadocComments"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1333,7 +1333,7 @@ public final class JavaCore extends Plugin {
 	 * Compiler option ID: Visibility Level For Missing Javadoc Comments.
 	 * <p>Set the minimum visibility level for missing Javadoc problems. Below this level problems will be ignored.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingJavadocCommentsVisibility"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingJavadocCommentsVisibility"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "public", "protected", "default", "private" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"public"</code></dd>
 	 * </dl>
@@ -1345,7 +1345,7 @@ public final class JavaCore extends Plugin {
 	 * Compiler option ID: Reporting Missing Javadoc Comments on Overriding Methods.
 	 * <p>Specify whether the compiler will verify overriding methods in order to report missing Javadoc comment problems.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingJavadocCommentsOverriding"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingJavadocCommentsOverriding"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1358,7 +1358,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning whenever a <code>char[]</code> expression
 	 *    is used in String concatenations (for example, <code>"hello" + new char[]{'w','o','r','l','d'}</code>).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.noImplicitStringConversion"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.noImplicitStringConversion"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1370,7 +1370,7 @@ public final class JavaCore extends Plugin {
 	 * Compiler option ID: Maximum Number of Problems Reported per Compilation Unit.
 	 * <p>Specify the maximum number of problems reported on each compilation unit.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.maxProblemPerUnit"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.maxProblemPerUnit"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>"&lt;n&gt;"</code> where <code>&lt;n&gt;</code> is zero or a positive integer (if zero then all problems are reported).</dd>
 	 * <dt>Default:</dt><dd><code>"100"</code></dd>
 	 * </dl>
@@ -1386,7 +1386,7 @@ public final class JavaCore extends Plugin {
 	 *    severe. Note that by default, optional errors are not fatal. Non-optional errors are
 	 *    always fatal.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.fatalOptionalError"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.fatalOptionalError"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1399,7 +1399,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning if a parameter is
 	 *    assigned to.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.parameterAssignment"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.parameterAssignment"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1412,7 +1412,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning if a method has
 	 *    not been declared as <code>static</code>, even though it qualifies as one.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.reportMethodCanBeStatic"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.reportMethodCanBeStatic"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1426,7 +1426,7 @@ public final class JavaCore extends Plugin {
 	 *    not been declared as <code>static</code>, even though it may qualify as one,
 	 *    when another method doesn't override it.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.reportMethodCanBePotentiallyStatic"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.reportMethodCanBePotentiallyStatic"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1441,7 +1441,7 @@ public final class JavaCore extends Plugin {
 	 *    or a value of type <code>java.io.Closeable</code> (compliance<=1.6) and if
 	 *    flow analysis shows that the method <code>close()</code> is not invoked locally on that value.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.reportUnclosedCloseable"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.reportUnclosedCloseable"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1457,7 +1457,7 @@ public final class JavaCore extends Plugin {
 	 *    flow analysis shows that the method <code>close()</code> is 
 	 *    not invoked locally on that value for all execution paths.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.reportPotentiallyUnclosedCloseable"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.reportPotentiallyUnclosedCloseable"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1472,7 +1472,7 @@ public final class JavaCore extends Plugin {
 	 *    <code>close()</code> is explicitly invoked on that resource, but the resource is
 	 *    not managed by a try-with-resources block.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.reportPotentiallyUnclosedCloseable"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.reportPotentiallyUnclosedCloseable"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1493,7 +1493,7 @@ public final class JavaCore extends Plugin {
 	 *    {@link #COMPILER_PB_NULL_UNCHECKED_CONVERSION}.
 	 * </p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.annotation.nullanalysis"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.annotation.nullanalysis"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "disabled", "enabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1519,9 +1519,9 @@ public final class JavaCore extends Plugin {
 	 *    {@link #COMPILER_PB_NULL_UNCHECKED_CONVERSION}.</p>
 	 * <p>This option only has an effect if the option {@link #COMPILER_ANNOTATION_NULL_ANALYSIS} is enabled.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.annotation.nullable"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.annotation.nullable"</code></dd>
 	 * <dt>Possible values:</dt><dd>any legal, fully qualified Java type name; must resolve to an annotation type.</dd>
-	 * <dt>Default:</dt><dd><code>"org.eclipse.jdt.annotation.Nullable"</code></dd>
+	 * <dt>Default:</dt><dd><code>"org.summer.sdt.annotation.Nullable"</code></dd>
 	 * </dl>
 	 * @since 3.8
 	 * @category CompilerOptionID
@@ -1545,9 +1545,9 @@ public final class JavaCore extends Plugin {
 	 *    {@link #COMPILER_PB_NULL_UNCHECKED_CONVERSION}.</p>
 	 * <p>This option only has an effect if the option {@link #COMPILER_ANNOTATION_NULL_ANALYSIS} is enabled.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.annotation.nonnull"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.annotation.nonnull"</code></dd>
 	 * <dt>Possible values:</dt><dd>any legal, fully qualified Java type name; must resolve to an annotation type.</dd>
-	 * <dt>Default:</dt><dd><code>"org.eclipse.jdt.annotation.NonNull"</code></dd>
+	 * <dt>Default:</dt><dd><code>"org.summer.sdt.annotation.NonNull"</code></dd>
 	 * </dl>
 	 * @since 3.8
 	 * @category CompilerOptionID
@@ -1564,10 +1564,10 @@ public final class JavaCore extends Plugin {
 	 *    all corresponding defaults at outer scopes will be canceled for the annotated element.</p>
 	 * <p>This option only has an effect if the option {@link #COMPILER_ANNOTATION_NULL_ANALYSIS} is enabled.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.annotation.nonnullbydefault"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.annotation.nonnullbydefault"</code></dd>
 	 * <dt>Possible values:</dt><dd>any legal, fully qualified Java type name; must resolve to an annotation type.
 	 *     That annotation type should have exactly one boolean parameter.</dd>
-	 * <dt>Default:</dt><dd><code>"org.eclipse.jdt.annotation.NonNullByDefault"</code></dd>
+	 * <dt>Default:</dt><dd><code>"org.summer.sdt.annotation.NonNullByDefault"</code></dd>
 	 * </dl>
 	 * @since 3.8
 	 * @category CompilerOptionID
@@ -1583,7 +1583,7 @@ public final class JavaCore extends Plugin {
 	 * </ul>
 	 * <p>This option only has an effect if the option {@link #COMPILER_ANNOTATION_NULL_ANALYSIS} is enabled.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.annotation.missingNonNullByDefaultAnnotation"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.annotation.missingNonNullByDefaultAnnotation"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code>.</dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1623,7 +1623,7 @@ public final class JavaCore extends Plugin {
 	 * </p>
 	 * <p>This option only has an effect if the option {@link #COMPILER_ANNOTATION_NULL_ANALYSIS} is enabled.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.nullSpecViolation"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.nullSpecViolation"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"error"</code></dd>
 	 * </dl>
@@ -1650,7 +1650,7 @@ public final class JavaCore extends Plugin {
 	 * </p>
 	 * <p>This option only has an effect if the option {@link #COMPILER_ANNOTATION_NULL_ANALYSIS} is enabled.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.nullAnnotationInferenceConflict"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.nullAnnotationInferenceConflict"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"error"</code></dd>
 	 * </dl>
@@ -1682,7 +1682,7 @@ public final class JavaCore extends Plugin {
 	 * </p>
 	 * <p>This option only has an effect if the option {@link #COMPILER_ANNOTATION_NULL_ANALYSIS} is enabled.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.nullUncheckedConversion"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.nullUncheckedConversion"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1700,7 +1700,7 @@ public final class JavaCore extends Plugin {
 	 * </p>
 	 * <p>This option only has an effect if the option {@link #COMPILER_ANNOTATION_NULL_ANALYSIS} is enabled.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.redundantNullAnnotation"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.redundantNullAnnotation"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1714,7 +1714,7 @@ public final class JavaCore extends Plugin {
 	 *	  related warning against a field reference would normally be raised but can be suppressed
 	 *    at low risk given that the same field reference was known to be non-null immediately before.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.syntacticNullAnalysisForFields"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.syntacticNullAnalysisForFields"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "disabled", "enabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1734,7 +1734,7 @@ public final class JavaCore extends Plugin {
 	 *    to the same type in a method signature, this is flagged as an error 
 	 *    and an explicit null annotation must be used to disambiguate.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.annotation.inheritNullAnnotations"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.annotation.inheritNullAnnotations"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "disabled", "enabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1759,7 +1759,7 @@ public final class JavaCore extends Plugin {
 	 *    If that is not intended or possible, it is recommended to annotate the parameter as nullable,
 	 *    in order to make this (legal) change of contract explicit.</p>   
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.nonnullParameterAnnotationDropped"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.nonnullParameterAnnotationDropped"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1781,7 +1781,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Once the source level 1.7 is toggled, the target VM level should be set to <code>"1.7"</code> and the compliance mode
 	 *    should be <code>"1.7"</code>.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.source"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.source"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "1.3", "1.4", "1.5", "1.6", "1.7" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"1.3"</code></dd>
 	 * </dl>
@@ -1794,7 +1794,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Select the compliance level for the compiler. In <code>"1.3"</code> mode, source and target settings
 	 *    should not go beyond <code>"1.3"</code> level.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.compliance"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.compliance"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "1.3", "1.4", "1.5", "1.6", "1.7" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"1.4"</code></dd>
 	 * </dl>
@@ -1810,7 +1810,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Task Priorities and task tags must have the same length. If task priorities are set, then task tags should also
 	 * be set.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.taskPriorities"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.taskPriorities"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;priority&gt;[,&lt;priority&gt;]*" }</code> where <code>&lt;priority&gt;</code> is one of <code>"HIGH"</code>, <code>"NORMAL"</code> or <code>"LOW"</code></dd>
 	 * <dt>Default:</dt><dd><code>"NORMAL,HIGH,NORMAL"</code></dd>
 	 * </dl>
@@ -1836,7 +1836,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Task Priorities and task tags must have the same length. If task tags are set, then task priorities should also
 	 * be set.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.taskTags"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.taskTags"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;tag&gt;[,&lt;tag&gt;]*" }</code> where <code>&lt;tag&gt;</code> is a String without any wild-card or leading/trailing spaces</dd>
 	 * <dt>Default:</dt><dd><code>"TODO,FIXME,XXX"</code></dd>
 	 * </dl>
@@ -1849,7 +1849,7 @@ public final class JavaCore extends Plugin {
 	 * Compiler option ID: Determining whether task tags are case-sensitive.
 	 * <p>When enabled, task tags are considered in a case-sensitive way.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.taskCaseSensitive"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.taskCaseSensitive"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -1862,7 +1862,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning when referring to a type that is non accessible, as defined according
 	 *    to the access rule specifications.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.forbiddenReference"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.forbiddenReference"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"error"</code></dd>
 	 * </dl>
@@ -1875,7 +1875,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning when referring to a type with discouraged access, as defined according
 	 *    to the access rule specifications.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.discouragedReference"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.discouragedReference"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1888,7 +1888,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the <code>@SuppressWarnings</code> annotation can be used to suppress some compiler warnings.</p>
 	 * <p>When disabled, all <code>@SupressWarnings</code> annotations are ignored; i.e., warnings are reported.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.suppressWarnings"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.suppressWarnings"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -1903,7 +1903,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When disabled, the compiler will not flag null related errors or warnings on variables that got marked as maybe or definitely
 	 *    <code>null</code> in an assert statement upstream.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.includeNullInfoFromAsserts"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.includeNullInfoFromAsserts"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1918,7 +1918,7 @@ public final class JavaCore extends Plugin {
 	 * optional compiler diagnostics that have been configured as {@link #ERROR}.</p>
 	 * <p>When disabled, all <code>@SuppressWarnings</code> annotations only affects warnings.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.suppressOptionalErrors"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.suppressOptionalErrors"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -1931,7 +1931,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning when encountering a token
 	 *    it cannot handle inside a <code>@SuppressWarnings</code> annotation.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unhandledWarningToken"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unhandledWarningToken"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1946,7 +1946,7 @@ public final class JavaCore extends Plugin {
 	 *    rid of transient <code>@SuppressWarnings</code> no longer needed. Note that <code>@SuppressWarnings("all")</code> is still
 	 *    silencing the warning for unnecessary <code>@SuppressWarnings</code>, as it is the master switch to silence ALL warnings.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedWarningToken"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedWarningToken"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1962,7 +1962,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Assert statements are ignored unless {@link #COMPILER_PB_INCLUDE_ASSERTS_IN_NULL_ANALYSIS}
 	 *    is enabled.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.nullReference"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.nullReference"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -1979,7 +1979,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Assert statements are ignored unless {@link #COMPILER_PB_INCLUDE_ASSERTS_IN_NULL_ANALYSIS}
 	 *    is enabled.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.potentialNullReference"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.potentialNullReference"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -1995,7 +1995,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Assert statements are ignored unless {@link #COMPILER_PB_INCLUDE_ASSERTS_IN_NULL_ANALYSIS}
 	 *    is enabled.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.redundantNullCheck"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.redundantNullCheck"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -2008,7 +2008,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning if a method is overriding a method without calling
 	 *    the super invocation.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.overridingMethodWithoutSuperInvocation"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.overridingMethodWithoutSuperInvocation"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -2022,7 +2022,7 @@ public final class JavaCore extends Plugin {
 	 *    explicitly implements an interface that is already implemented by any
 	 *    of its supertypes.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.redundantSuperinterface"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.redundantSuperinterface"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -2035,7 +2035,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning if a comparison
 	 * is involving identical operands (e.g <code>'x == x'</code>).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.comparingIdentical"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.comparingIdentical"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -2048,7 +2048,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning if a method
 	 * overrides a synchronized method without having a synchronized modifier.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.missingSynchronizedOnInheritedMethod"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.missingSynchronizedOnInheritedMethod"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -2061,7 +2061,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, the compiler will issue an error or a warning if an object is allocated but never used,
 	 * neither by holding a reference nor by invoking one of the object's methods.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.unusedObjectAllocation"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.unusedObjectAllocation"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -2075,7 +2075,7 @@ public final class JavaCore extends Plugin {
 	 * when the '&lt;&gt;' operator can be used instead.</p>
 	 * <p>This option only has an effect if the compiler compliance is 1.7 or greater.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.compiler.problem.redundantSpecificationOfTypeArguments"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.compiler.problem.redundantSpecificationOfTypeArguments"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -2089,7 +2089,7 @@ public final class JavaCore extends Plugin {
 	 *    the classpath prerequisite chain. When requesting to compute, this takes over
 	 *    the platform default order (based on project references).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.computeJavaBuildOrder"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.computeJavaBuildOrder"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "compute", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -2100,7 +2100,7 @@ public final class JavaCore extends Plugin {
 	 * Core option ID: Specifying Filters for Resource Copying Control.
 	 * <p>Allow to specify some filters to control the resource copy process.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.builder.resourceCopyExclusionFilter"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.builder.resourceCopyExclusionFilter"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;name&gt;[,&lt;name&gt;]* }</code> where <code>&lt;name&gt;</code> is a file name pattern (* and ? wild-cards allowed)
 	 *	   or the name of a folder which ends with <code>'/'</code></dd>
 	 * <dt>Default:</dt><dd><code>""</code></dd>
@@ -2114,7 +2114,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Indicate the severity of the problem reported when more than one occurrence
 	 *    of a resource is to be copied into the output location.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.builder.duplicateResourceTask"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.builder.duplicateResourceTask"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"warning"</code></dd>
 	 * </dl>
@@ -2127,7 +2127,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Indicate whether the JavaBuilder is allowed to clean the output folders
 	 *    when performing full build operations.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.builder.cleanOutputFolder"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.builder.cleanOutputFolder"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "clean", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"clean"</code></dd>
 	 * </dl>
@@ -2143,7 +2143,7 @@ public final class JavaCore extends Plugin {
 	 *    the changes are left as is. Tools further altering generated .class files, like optimizers,
 	 *    should ensure this option remains set in its default state of ignore.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.builder.recreateModifiedClassFileInOutputFolder"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.builder.recreateModifiedClassFileInOutputFolder"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -2156,7 +2156,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Indicate the severity of the problem reported when an entry on the classpath does not exist,
 	 *    is not legitimate or is not visible (for example, a referenced project is closed).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.incompleteClasspath"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.incompleteClasspath"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning"}</code></dd>
 	 * <dt>Default:</dt><dd><code>"error"</code></dd>
 	 * </dl>
@@ -2168,7 +2168,7 @@ public final class JavaCore extends Plugin {
 	 * Core option ID: Reporting Classpath Cycle.
 	 * <p>Indicate the severity of the problem reported when a project is involved in a cycle.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.circularClasspath"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.circularClasspath"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"error"</code></dd>
 	 * </dl>
@@ -2181,7 +2181,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Indicate the severity of the problem reported when a project prerequisites another project
 	 *    or library with an incompatible target JDK level (e.g. project targeting 1.1 vm, but compiled against 1.4 libraries).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.incompatibleJDKLevel"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.incompatibleJDKLevel"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"ignore"</code></dd>
 	 * </dl>
@@ -2193,7 +2193,7 @@ public final class JavaCore extends Plugin {
 	 * Core option ID: Abort if Invalid Classpath.
 	 * <p>Allow to toggle the builder to abort if the classpath is invalid.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.builder.invalidClasspath"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.builder.invalidClasspath"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "abort", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"abort"</code></dd>
 	 * </dl>
@@ -2207,7 +2207,7 @@ public final class JavaCore extends Plugin {
 	 *    immutable and preset to the result of <code>ResourcesPlugin.getEncoding()</code>.</p>
 	 * <p>It is offered as a convenience shortcut only.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.encoding"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.encoding"</code></dd>
 	 * <dt>value:</dt><dd><code>&lt;immutable, platform default value&gt;</code></dd>
 	 * </dl>
 	 * @since 2.0
@@ -2219,7 +2219,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When disabled, no entry on a project classpath can be associated with
 	 *    an exclusion pattern.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.classpath.exclusionPatterns"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.classpath.exclusionPatterns"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -2232,7 +2232,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When disabled, no entry on a project classpath can be associated with
 	 *    a specific output location, preventing thus usage of multiple output locations.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.classpath.multipleOutputLocations"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.classpath.multipleOutputLocations"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -2246,7 +2246,7 @@ public final class JavaCore extends Plugin {
 	 * source entry.</p>
 	 * 
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.classpath.outputOverlappingAnotherSource"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.classpath.outputOverlappingAnotherSource"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "error", "warning", "ignore" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"error"</code></dd>
 	 * </dl>
@@ -2258,7 +2258,7 @@ public final class JavaCore extends Plugin {
 	 * <p>Timeout in milliseconds to retrieve the method's parameter names from javadoc.</p>
 	 * <p>If the value is <code>0</code>, the parameter names are not fetched and the raw names are returned.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.timeoutForParameterNameFromAttachedJavadoc"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.timeoutForParameterNameFromAttachedJavadoc"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>"&lt;n&gt;"</code>, where <code>n</code> is an integer greater than or equal to <code>0</code></dd>
 	 * <dt>Default:</dt><dd><code>"50"</code></dd>
 	 * </dl>
@@ -2340,7 +2340,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When active, completion doesn't show that you can not see
 	 *    (for example, you can not see private methods of a super class).</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.visibilityCheck"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.visibilityCheck"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -2352,7 +2352,7 @@ public final class JavaCore extends Plugin {
 	 * Code assist option ID: Activate Deprecation Sensitive Completion.
 	 * <p>When enabled, completion doesn't propose deprecated members and types.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.deprecationCheck"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.deprecationCheck"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -2365,7 +2365,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, completion shows proposals whose name match the CamelCase
 	 *    pattern.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.camelCaseMatch"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.camelCaseMatch"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -2378,7 +2378,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When active, completion automatically qualifies completion on implicit
 	 *    field references and message expressions.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.forceImplicitQualification"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.forceImplicitQualification"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -2391,7 +2391,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When the prefixes is non empty, completion for field name will begin with
 	 *    one of the proposed prefixes.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.fieldPrefixes"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.fieldPrefixes"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;prefix&gt;[,&lt;prefix&gt;]*" }</code> where <code>&lt;prefix&gt;</code> is a String without any wild-card</dd>
 	 * <dt>Default:</dt><dd><code>""</code></dd>
 	 * </dl>
@@ -2404,7 +2404,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When the prefixes is non empty, completion for static field name will begin with
 	 *    one of the proposed prefixes.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.staticFieldPrefixes"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.staticFieldPrefixes"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;prefix&gt;[,&lt;prefix&gt;]*" }</code> where <code>&lt;prefix&gt;</code> is a String without any wild-card</dd>
 	 * <dt>Default:</dt><dd><code>""</code></dd>
 	 * </dl>
@@ -2417,7 +2417,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When the prefixes is non empty, completion for static final field name will begin with
 	 *    one of the proposed prefixes.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.staticFinalFieldPrefixes"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.staticFinalFieldPrefixes"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;prefix&gt;[,&lt;prefix&gt;]*" }</code> where <code>&lt;prefix&gt;</code> is a String without any wild-card</dd>
 	 * <dt>Default:</dt><dd><code>""</code></dd>
 	 * </dl>
@@ -2430,7 +2430,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When the prefixes is non empty, completion for local variable name will begin with
 	 *    one of the proposed prefixes.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.localPrefixes"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.localPrefixes"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;prefix&gt;[,&lt;prefix&gt;]*" }</code> where <code>&lt;prefix&gt;</code> is a String without any wild-card</dd>
 	 * <dt>Default:</dt><dd><code>""</code></dd>
 	 * </dl>
@@ -2443,7 +2443,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When the prefixes is non empty, completion for argument name will begin with
 	 *    one of the proposed prefixes.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.argumentPrefixes"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.argumentPrefixes"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;prefix&gt;[,&lt;prefix&gt;]*" }</code> where <code>&lt;prefix&gt;</code> is a String without any wild-card</dd>
 	 * <dt>Default:</dt><dd><code>""</code></dd>
 	 * </dl>
@@ -2456,7 +2456,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When the suffixes is non empty, completion for field name will end with
 	 *    one of the proposed suffixes.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.fieldSuffixes"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.fieldSuffixes"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;suffix&gt;[,&lt;suffix&gt;]*" }</code> where <code>&lt;suffix&gt;</code> is a String without any wild-card</dd>
 	 * <dt>Default:</dt><dd><code>""</code></dd>
 	 * </dl>
@@ -2469,7 +2469,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When the suffixes is non empty, completion for static field name will end with
 	 *    one of the proposed suffixes.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.staticFieldSuffixes"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.staticFieldSuffixes"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;suffix&gt;[,&lt;suffix&gt;]*" }</code>< where <code>&lt;suffix&gt;</code> is a String without any wild-card</dd>
 	 * <dt>Default:</dt><dd><code>""</code></dd>
 	 * </dl>
@@ -2482,7 +2482,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When the suffixes is non empty, completion for static final field name will end with
 	 *    one of the proposed suffixes.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.staticFinalFieldSuffixes"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.staticFinalFieldSuffixes"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;suffix&gt;[,&lt;suffix&gt;]*" }</code>< where <code>&lt;suffix&gt;</code> is a String without any wild-card</dd>
 	 * <dt>Default:</dt><dd><code>""</code></dd>
 	 * </dl>
@@ -2495,7 +2495,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When the suffixes is non empty, completion for local variable name will end with
 	 *    one of the proposed suffixes.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.localSuffixes"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.localSuffixes"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;suffix&gt;[,&lt;suffix&gt;]*" }</code> where <code>&lt;suffix&gt;</code> is a String without any wild-card</dd>
 	 * <dt>Default:</dt><dd><code>""</code></dd>
 	 * </dl>
@@ -2508,7 +2508,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When the suffixes is non empty, completion for argument name will end with
 	 *    one of the proposed suffixes.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.argumentSuffixes"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.argumentSuffixes"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "&lt;suffix&gt;[,&lt;suffix&gt;]*" }</code> where <code>&lt;suffix&gt;</code> is a String without any wild-card</dd>
 	 * <dt>Default:</dt><dd><code>""</code></dd>
 	 * </dl>
@@ -2521,7 +2521,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, completion doesn't propose elements which match a
 	 *    forbidden reference rule.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.forbiddenReferenceCheck"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.forbiddenReferenceCheck"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -2534,7 +2534,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, completion doesn't propose elements which match a
 	 *    discouraged reference rule.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.discouragedReferenceCheck"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.discouragedReferenceCheck"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"disabled"</code></dd>
 	 * </dl>
@@ -2547,7 +2547,7 @@ public final class JavaCore extends Plugin {
 	 * <p>When enabled, completion proposals can contain static import
 	 *    pattern.</p>
 	 * <dl>
-	 * <dt>Option id:</dt><dd><code>"org.eclipse.jdt.core.codeComplete.suggestStaticImports"</code></dd>
+	 * <dt>Option id:</dt><dd><code>"org.summer.sdt.core.codeComplete.suggestStaticImports"</code></dd>
 	 * <dt>Possible values:</dt><dd><code>{ "enabled", "disabled" }</code></dd>
 	 * <dt>Default:</dt><dd><code>"enabled"</code></dd>
 	 * </dl>
@@ -3215,7 +3215,7 @@ public final class JavaCore extends Plugin {
 	 * used as additional hints for resolution. If no container was ever recorded for this container path
 	 * onto this project (using <code>setClasspathContainer</code>, then a
 	 * <code>ClasspathContainerInitializer</code> will be activated if any was registered for this container
-	 * ID onto the extension point "org.eclipse.jdt.core.classpathContainerInitializer".
+	 * ID onto the extension point "org.summer.sdt.core.classpathContainerInitializer".
 	 * </p>
 	 * <p>
 	 * There is no assumption that the returned container must answer the exact same containerPath
@@ -3226,7 +3226,7 @@ public final class JavaCore extends Plugin {
 	 * Classpath container values are persisted locally to the workspace, but
 	 * are not preserved from a session to another. It is thus highly recommended to register a
 	 * <code>ClasspathContainerInitializer</code> for each referenced container
-	 * (through the extension point "org.eclipse.jdt.core.ClasspathContainerInitializer").
+	 * (through the extension point "org.summer.sdt.core.ClasspathContainerInitializer").
 	 * </p>
 	 *
 	 * @param containerPath the name of the container, which needs to be resolved
@@ -3254,7 +3254,7 @@ public final class JavaCore extends Plugin {
 	/**
 	 * Helper method finding the classpath container initializer registered for a given classpath container ID
 	 * or <code>null</code> if none was found while iterating over the contributions to extension point to
-	 * the extension point "org.eclipse.jdt.core.classpathContainerInitializer".
+	 * the extension point "org.summer.sdt.core.classpathContainerInitializer".
 	 * <p>
 	 * A containerID is the first segment of any container path, used to identify the registered container initializer.
 	 * </p>
@@ -3333,7 +3333,7 @@ public final class JavaCore extends Plugin {
 	 * </p>
 	 * <p>
 	 * Note that classpath variables can be contributed registered initializers for,
-	 * using the extension point "org.eclipse.jdt.core.classpathVariableInitializer".
+	 * using the extension point "org.summer.sdt.core.classpathVariableInitializer".
 	 * If an initializer is registered for a variable, its persisted value will be ignored:
 	 * its initializer will thus get the opportunity to rebind the variable differently on
 	 * each session.
@@ -3471,7 +3471,7 @@ public final class JavaCore extends Plugin {
 	/**
 	 * Helper method finding the classpath variable initializer registered for a given classpath variable name
 	 * or <code>null</code> if none was found while iterating over the contributions to extension point to
-	 * the extension point "org.eclipse.jdt.core.classpathVariableInitializer".
+	 * the extension point "org.summer.sdt.core.classpathVariableInitializer".
 	 *
  	 * @param variable the given variable
  	 * @return ClasspathVariableInitializer - the registered classpath variable initializer or <code>null</code> if
@@ -3601,12 +3601,12 @@ public final class JavaCore extends Plugin {
 	 * <p>The contents of the array is accurate only if the elements of the given region have been built.</p>
 	 * <p>The given region can contain instances of:</p>
 	 * <ul>
-	 * <li><code>org.eclipse.jdt.core.ICompilationUnit</code></li>
-	 * <li><code>org.eclipse.jdt.core.IPackageFragment</code></li>
-	 * <li><code>org.eclipse.jdt.core.IPackageFragmentRoot</code></li>
-	 * <li><code>org.eclipse.jdt.core.IJavaProject</code></li>
+	 * <li><code>org.summer.sdt.core.ICompilationUnit</code></li>
+	 * <li><code>org.summer.sdt.core.IPackageFragment</code></li>
+	 * <li><code>org.summer.sdt.core.IPackageFragmentRoot</code></li>
+	 * <li><code>org.summer.sdt.core.IJavaProject</code></li>
 	 * </ul>
-	 * <p>All other types of <code>org.eclipse.jdt.core.IJavaElement</code> are ignored.</p>
+	 * <p>All other types of <code>org.summer.sdt.core.IJavaElement</code> are ignored.</p>
 	 *
 	 * @param region the given region
 	 * @param includesNonJavaResources a flag that indicates if non-java resources should be included
@@ -4381,14 +4381,14 @@ public final class JavaCore extends Plugin {
 	 * </p>
 	 * <p>
 	 * A container is exclusively resolved by a <code>ClasspathContainerInitializer</code> registered onto the
-	 * extension point "org.eclipse.jdt.core.classpathContainerInitializer".
+	 * extension point "org.summer.sdt.core.classpathContainerInitializer".
 	 * </p>
 	 * <p>
 	 * A container path must be formed of at least one segment, where:
 	 * </p>
 	 * <ul>
 	 * <li> the first segment is a unique ID identifying the target container, there must be a container initializer registered
-	 * 	onto this ID through the extension point  "org.eclipse.jdt.core.classpathContainerInitializer". </li>
+	 * 	onto this ID through the extension point  "org.summer.sdt.core.classpathContainerInitializer". </li>
 	 * <li> the remaining segments will be passed onto the initializer, and can be used as additional
 	 * 	hints during the initialization phase. </li>
 	 * </ul>
@@ -4399,7 +4399,7 @@ public final class JavaCore extends Plugin {
 	 * containerEntry = JavaCore.newContainerEntry(new Path("MyProvidedJDK/default"));
 	 *
 	 * &lt;extension
-	 *    point="org.eclipse.jdt.core.classpathContainerInitializer"&gt;
+	 *    point="org.summer.sdt.core.classpathContainerInitializer"&gt;
 	 *    &lt;containerInitializer
 	 *       id="MyProvidedJDK"
 	 *       class="com.example.MyInitializer"/&gt;
@@ -5086,7 +5086,7 @@ public final class JavaCore extends Plugin {
 	 * </p>
 	 * <p>
 	 * It is possible to register an automatic initializer (<code>ClasspathVariableInitializer</code>),
-	 * which will be invoked through the extension point "org.eclipse.jdt.core.classpathVariableInitializer".
+	 * which will be invoked through the extension point "org.summer.sdt.core.classpathVariableInitializer".
 	 * After resolution, a classpath variable entry may either correspond to a project or a library entry.
 	 * </p>
 	 * <p>
@@ -5368,7 +5368,7 @@ public final class JavaCore extends Plugin {
 	 * container classpath entries (<code>IClasspathEntry#CPE_CONTAINER</code>). A container path
 	 * is formed by a first ID segment followed with extra segments, which can be used as additional hints
 	 * for the resolution. The container ID is used to identify a <code>ClasspathContainerInitializer</code>
-	 * registered on the extension point "org.eclipse.jdt.core.classpathContainerInitializer".
+	 * registered on the extension point "org.summer.sdt.core.classpathContainerInitializer".
 	 * </p>
 	 * <p>
 	 * There is no assumption that each individual container value passed in argument
@@ -5376,7 +5376,7 @@ public final class JavaCore extends Plugin {
 	 * <code>IClasspathContainer#getPath</code>.
 	 * Indeed, the containerPath is just an indication for resolving it to an actual container object. It can be
 	 * delegated to a <code>ClasspathContainerInitializer</code>, which can be activated through the extension
-	 * point "org.eclipse.jdt.core.ClasspathContainerInitializer").
+	 * point "org.summer.sdt.core.ClasspathContainerInitializer").
 	 * </p>
 	 * <p>
 	 * In reaction to changing container values, the JavaModel will be updated to reflect the new
@@ -5392,7 +5392,7 @@ public final class JavaCore extends Plugin {
 	 * Classpath container values are persisted locally to the workspace, but
 	 * are not preserved from a session to another. It is thus highly recommended to register a
 	 * <code>ClasspathContainerInitializer</code> for each referenced container
-	 * (through the extension point "org.eclipse.jdt.core.ClasspathContainerInitializer").
+	 * (through the extension point "org.summer.sdt.core.ClasspathContainerInitializer").
 	 * </p>
 	 * <p>
 	 * Note: setting a container to <code>null</code> will cause it to be lazily resolved again whenever

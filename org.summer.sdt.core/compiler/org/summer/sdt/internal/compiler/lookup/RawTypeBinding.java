@@ -80,7 +80,7 @@ public class RawTypeBinding extends ParameterizedTypeBinding {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.ParameterizedTypeBinding#createParameterizedMethod(org.eclipse.jdt.internal.compiler.lookup.MethodBinding)
+	 * @see org.summer.sdt.internal.compiler.lookup.ParameterizedTypeBinding#createParameterizedMethod(org.summer.sdt.internal.compiler.lookup.MethodBinding)
 	 */
 	public ParameterizedMethodBinding createParameterizedMethod(MethodBinding originalMethod) {
 		if (originalMethod.typeVariables == Binding.NO_TYPE_VARIABLES || originalMethod.isStatic()) {
@@ -98,7 +98,7 @@ public class RawTypeBinding extends ParameterizedTypeBinding {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#debugName()
+	 * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#debugName()
 	 */
 	public String debugName() {
 		if (this.hasTypeAnnotations())
@@ -226,7 +226,7 @@ public class RawTypeBinding extends ParameterizedTypeBinding {
 		return this.singleAbstractMethod[index];
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.Binding#readableName()
+	 * @see org.summer.sdt.internal.compiler.lookup.Binding#readableName()
 	 */
 	public char[] readableName() /*java.lang.Object,  p.X<T> */ {
 	    char[] readableName;
@@ -239,7 +239,7 @@ public class RawTypeBinding extends ParameterizedTypeBinding {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.Binding#shortReadableName()
+	 * @see org.summer.sdt.internal.compiler.lookup.Binding#shortReadableName()
 	 */
 	public char[] shortReadableName() /*Object*/ {
 	    char[] shortReadableName;

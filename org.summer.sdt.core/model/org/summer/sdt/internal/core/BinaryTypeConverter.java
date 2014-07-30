@@ -139,7 +139,7 @@ public class BinaryTypeConverter extends TypeConverter {
 
 		AbstractMethodDeclaration methodDeclaration;
 
-		org.eclipse.jdt.internal.compiler.ast.TypeParameter[] typeParams = null;
+		org.summer.sdt.internal.compiler.ast.TypeParameter[] typeParams = null;
 
 		// convert 1.5 specific constructs only if compliance is 1.5 or above
 		if (this.has1_5Compliance) {
@@ -147,7 +147,7 @@ public class BinaryTypeConverter extends TypeConverter {
 			ITypeParameter[] typeParameters = method.getTypeParameters();
 			if (typeParameters != null && typeParameters.length > 0) {
 				int parameterCount = typeParameters.length;
-				typeParams = new org.eclipse.jdt.internal.compiler.ast.TypeParameter[parameterCount];
+				typeParams = new org.summer.sdt.internal.compiler.ast.TypeParameter[parameterCount];
 				for (int i = 0; i < parameterCount; i++) {
 					ITypeParameter typeParameter = typeParameters[i];
 					typeParams[i] =
@@ -258,7 +258,7 @@ public class BinaryTypeConverter extends TypeConverter {
 			ITypeParameter[] typeParameters = type.getTypeParameters();
 			if (typeParameters != null && typeParameters.length > 0) {
 				int parameterCount = typeParameters.length;
-				org.eclipse.jdt.internal.compiler.ast.TypeParameter[] typeParams = new org.eclipse.jdt.internal.compiler.ast.TypeParameter[parameterCount];
+				org.summer.sdt.internal.compiler.ast.TypeParameter[] typeParams = new org.summer.sdt.internal.compiler.ast.TypeParameter[parameterCount];
 				for (int i = 0; i < parameterCount; i++) {
 					ITypeParameter typeParameter = typeParameters[i];
 					typeParams[i] =

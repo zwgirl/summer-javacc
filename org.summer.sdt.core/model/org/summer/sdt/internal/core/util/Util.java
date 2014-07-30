@@ -23,9 +23,6 @@ import org.eclipse.core.runtime.*;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.text.edits.MalformedTreeException;
-import org.eclipse.text.edits.TextEdit;
 import org.summer.sdt.core.*;
 import org.summer.sdt.core.compiler.CharOperation;
 import org.summer.sdt.core.dom.ASTNode;
@@ -44,9 +41,9 @@ import org.summer.sdt.core.util.IMethodInfo;
 import org.summer.sdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.summer.sdt.internal.compiler.ast.AnnotationMethodDeclaration;
 import org.summer.sdt.internal.compiler.ast.Argument;
+import org.summer.sdt.internal.compiler.ast.UnionTypeReference;
 import org.summer.sdt.internal.compiler.ast.MethodDeclaration;
 import org.summer.sdt.internal.compiler.ast.TypeReference;
-import org.summer.sdt.internal.compiler.ast.UnionTypeReference;
 import org.summer.sdt.internal.compiler.classfmt.ClassFileReader;
 import org.summer.sdt.internal.compiler.classfmt.ClassFormatException;
 import org.summer.sdt.internal.compiler.env.ClassSignature;
@@ -70,6 +67,9 @@ import org.summer.sdt.internal.core.Member;
 import org.summer.sdt.internal.core.MemberValuePair;
 import org.summer.sdt.internal.core.PackageFragment;
 import org.summer.sdt.internal.core.PackageFragmentRoot;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.text.edits.MalformedTreeException;
+import org.eclipse.text.edits.TextEdit;
 
 /**
  * Provides convenient utility methods to other types in this package.
@@ -507,7 +507,7 @@ public class Util {
 		int len = a.length;
 		if (len != b.length) return false;
 		// walk array from end to beginning as this optimizes package name cases
-		// where the first part is always the same (e.g. org.eclipse.jdt)
+		// where the first part is always the same (e.g. org.summer.sdt)
 		for (int i = len-1; i >= 0; i--) {
 			if (a[i] == null) {
 				if (b[i] != null) return false;

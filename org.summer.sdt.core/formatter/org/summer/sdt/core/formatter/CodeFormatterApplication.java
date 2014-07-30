@@ -35,7 +35,7 @@ import org.summer.sdt.core.ToolFactory;
 import org.summer.sdt.internal.core.util.Util;
 
 /**
- * Implements an Eclipse Application for org.eclipse.jdt.core.JavaCodeFormatter.
+ * Implements an Eclipse Application for org.summer.sdt.core.JavaCodeFormatter.
  * 
  * <p>On MacOS, when invoked using the Eclipse executable, the "user.dir" property is set to the folder
  * in which the eclipse.ini file is located. This makes it harder to use relative paths to point to the 
@@ -58,7 +58,7 @@ public class CodeFormatterApplication implements IApplication {
 	 * generated class).
 	 */
 	private final static class Messages extends NLS {
-		private static final String BUNDLE_NAME = "org.eclipse.jdt.core.formatter.messages";//$NON-NLS-1$
+		private static final String BUNDLE_NAME = "org.summer.sdt.core.formatter.messages";//$NON-NLS-1$
 
 		public static String CommandLineConfigFile;
 

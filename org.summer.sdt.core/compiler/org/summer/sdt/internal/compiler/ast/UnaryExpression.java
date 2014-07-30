@@ -62,8 +62,8 @@ public FlowInfo analyseCode(
 	/**
 	 * Code generation for an unary operation
 	 *
-	 * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 * @param valueRequired boolean
 	 */
 	public void generateCode(

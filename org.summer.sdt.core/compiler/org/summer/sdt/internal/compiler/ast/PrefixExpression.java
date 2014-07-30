@@ -17,8 +17,8 @@ public class PrefixExpression extends CompoundAssignment {
 
 /**
  * PrefixExpression constructor comment.
- * @param lhs org.eclipse.jdt.internal.compiler.ast.Expression
- * @param expression org.eclipse.jdt.internal.compiler.ast.Expression
+ * @param lhs org.summer.sdt.internal.compiler.ast.Expression
+ * @param expression org.summer.sdt.internal.compiler.ast.Expression
  * @param operator int
  */
 public PrefixExpression(Expression lhs, Expression expression, int operator, int pos) {

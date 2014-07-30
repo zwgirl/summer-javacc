@@ -33,14 +33,14 @@ public class ResolvedSourceType extends SourceType {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.core.SourceType#getKey()
+	 * @see org.summer.sdt.internal.core.SourceType#getKey()
 	 */
 	public String getKey() {
 		return this.uniqueKey;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.core.SourceType#isResolved()
+	 * @see org.summer.sdt.internal.core.SourceType#isResolved()
 	 */
 	public boolean isResolved() {
 		return true;

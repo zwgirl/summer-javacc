@@ -616,7 +616,7 @@ public AnnotationBinding[] getAnnotations() {
 /**
  * Compute the tagbits for standard annotations. For source types, these could require
  * lazily resolving corresponding annotation nodes, in case of forward references.
- * @see org.eclipse.jdt.internal.compiler.lookup.Binding#getAnnotationTagBits()
+ * @see org.summer.sdt.internal.compiler.lookup.Binding#getAnnotationTagBits()
  */
 public long getAnnotationTagBits() {
 	MethodBinding originalMethod = original();
@@ -955,7 +955,7 @@ protected final void setSelector(char[] selector) {
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.Binding#shortReadableName()
+ * @see org.summer.sdt.internal.compiler.lookup.Binding#shortReadableName()
  */
 public char[] shortReadableName() {
 	StringBuffer buffer = new StringBuffer(this.parameters.length + 1 * 20);

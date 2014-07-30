@@ -173,8 +173,8 @@ public int hashCode() {
 }
 /**
  * Return the constant of the field.
- * Return org.eclipse.jdt.internal.compiler.impl.Constant.NotAConstant if there is none.
- * @return org.eclipse.jdt.internal.compiler.impl.Constant
+ * Return org.summer.sdt.internal.compiler.impl.Constant.NotAConstant if there is none.
+ * @return org.summer.sdt.internal.compiler.impl.Constant
  */
 public Constant getConstant() {
 	if (this.constant == null) {

@@ -4679,60 +4679,60 @@ public class ProblemReporter extends ProblemHandler {
 			end);
 	}
 	private boolean isIdentifier(int token) {
-		return token == TerminalTokens.IDENTIFIER;
+		return token == TerminalTokens.TokenNameIdentifier;
 	}
 	private boolean isKeyword(int token) {
 		switch(token) {
-			case TerminalTokens.ABSTRACT:
-			case TerminalTokens.ASSERT:
-			case TerminalTokens.BYTE:
-			case TerminalTokens.BREAK:
-			case TerminalTokens.BOOLEAN:
-			case TerminalTokens.CASE:
-			case TerminalTokens.CHAR:
-			case TerminalTokens.CATCH:
-			case TerminalTokens.CLASS:
-			case TerminalTokens.CONTINUE:
-			case TerminalTokens.DO:
-			case TerminalTokens.DOUBLE:
-			case TerminalTokens.DEFAULT_:
-			case TerminalTokens.ELSE:
-			case TerminalTokens.EXTENDS:
-			case TerminalTokens.FOR:
-			case TerminalTokens.FINAL:
-			case TerminalTokens.FLOAT:
-			case TerminalTokens.FALSE:
-			case TerminalTokens.FINALLY:
-			case TerminalTokens.IF:
-			case TerminalTokens.INT:
-			case TerminalTokens.IMPORT:
-			case TerminalTokens.INTERFACE:
-			case TerminalTokens.IMPLEMENTS:
-			case TerminalTokens.INSTANCEOF:
-			case TerminalTokens.LONG:
-			case TerminalTokens.NEW:
-			case TerminalTokens.NULL:
-			case TerminalTokens.NATIVE:
-			case TerminalTokens.PUBLIC:
-			case TerminalTokens.PACKAGE:
-			case TerminalTokens.PRIVATE:
-			case TerminalTokens.PROTECTED:
-			case TerminalTokens.RETURN:
-			case TerminalTokens.SHORT:
-			case TerminalTokens.SUPER:
-			case TerminalTokens.STATIC:
-			case TerminalTokens.SWITCH:
-			case TerminalTokens.STRICTFP:
-			case TerminalTokens.SYNCHRONIZED:
-			case TerminalTokens.TRY:
-			case TerminalTokens.THIS:
-			case TerminalTokens.TRUE:
-			case TerminalTokens.THROW:
-			case TerminalTokens.THROWS:
-			case TerminalTokens.TRANSIENT:
-			case TerminalTokens.VOID:
-			case TerminalTokens.VOLATILE:
-			case TerminalTokens.WHILE:
+			case TerminalTokens.TokenNameabstract:
+			case TerminalTokens.TokenNameassert:
+			case TerminalTokens.TokenNamebyte:
+			case TerminalTokens.TokenNamebreak:
+			case TerminalTokens.TokenNameboolean:
+			case TerminalTokens.TokenNamecase:
+			case TerminalTokens.TokenNamechar:
+			case TerminalTokens.TokenNamecatch:
+			case TerminalTokens.TokenNameclass:
+			case TerminalTokens.TokenNamecontinue:
+			case TerminalTokens.TokenNamedo:
+			case TerminalTokens.TokenNamedouble:
+			case TerminalTokens.TokenNamedefault:
+			case TerminalTokens.TokenNameelse:
+			case TerminalTokens.TokenNameextends:
+			case TerminalTokens.TokenNamefor:
+			case TerminalTokens.TokenNamefinal:
+			case TerminalTokens.TokenNamefloat:
+			case TerminalTokens.TokenNamefalse:
+			case TerminalTokens.TokenNamefinally:
+			case TerminalTokens.TokenNameif:
+			case TerminalTokens.TokenNameint:
+			case TerminalTokens.TokenNameimport:
+			case TerminalTokens.TokenNameinterface:
+			case TerminalTokens.TokenNameimplements:
+			case TerminalTokens.TokenNameinstanceof:
+			case TerminalTokens.TokenNamelong:
+			case TerminalTokens.TokenNamenew:
+			case TerminalTokens.TokenNamenull:
+			case TerminalTokens.TokenNamenative:
+			case TerminalTokens.TokenNamepublic:
+			case TerminalTokens.TokenNamepackage:
+			case TerminalTokens.TokenNameprivate:
+			case TerminalTokens.TokenNameprotected:
+			case TerminalTokens.TokenNamereturn:
+			case TerminalTokens.TokenNameshort:
+			case TerminalTokens.TokenNamesuper:
+			case TerminalTokens.TokenNamestatic:
+			case TerminalTokens.TokenNameswitch:
+			case TerminalTokens.TokenNamestrictfp:
+			case TerminalTokens.TokenNamesynchronized:
+			case TerminalTokens.TokenNametry:
+			case TerminalTokens.TokenNamethis:
+			case TerminalTokens.TokenNametrue:
+			case TerminalTokens.TokenNamethrow:
+			case TerminalTokens.TokenNamethrows:
+			case TerminalTokens.TokenNametransient:
+			case TerminalTokens.TokenNamevoid:
+			case TerminalTokens.TokenNamevolatile:
+			case TerminalTokens.TokenNamewhile:
 				return true;
 			default:
 				return false;
@@ -7303,19 +7303,19 @@ public class ProblemReporter extends ProblemHandler {
 		int count = 0;
 		try {
 			int token;
-			loop: while ((token = this.positionScanner.getNextToken1()) != TerminalTokens.EOF) {
+			loop: while ((token = this.positionScanner.getNextToken()) != TerminalTokens.TokenNameEOF) {
 				switch(token) {
-					case TerminalTokens.LESS:
+					case TerminalTokens.TokenNameLESS:
 						count++;
 						break;
-					case TerminalTokens.GREATER:
+					case TerminalTokens.TokenNameGREATER:
 						count--;
 						if (count == 0) {
 							end = this.positionScanner.currentPosition - 1;
 							break loop;
 						}
 						break;
-					case TerminalTokens.LBRACE :
+					case TerminalTokens.TokenNameLBRACE :
 						break loop;
 				}
 			}
@@ -7340,9 +7340,9 @@ public class ProblemReporter extends ProblemHandler {
 		try {
 			int token;
 			int previousSourceEnd = sourceEnd;
-			while ((token = this.positionScanner.getNextToken1()) != TerminalTokens.EOF) {
+			while ((token = this.positionScanner.getNextToken()) != TerminalTokens.TokenNameEOF) {
 				switch(token) {
-					case TerminalTokens.RPAREN:
+					case TerminalTokens.TokenNameRPAREN:
 						return previousSourceEnd;
 					default :
 						previousSourceEnd = this.positionScanner.currentPosition - 1;
@@ -7369,12 +7369,12 @@ public class ProblemReporter extends ProblemHandler {
 		int count = 0;
 		try {
 			int token;
-			while ((token = this.positionScanner.getNextToken1()) != TerminalTokens.EOF) {
+			while ((token = this.positionScanner.getNextToken()) != TerminalTokens.TokenNameEOF) {
 				switch(token) {
-					case TerminalTokens.LPAREN:
+					case TerminalTokens.TokenNameLPAREN:
 						count++;
 						if (count == numberOfParen) {
-							this.positionScanner.getNextToken1();
+							this.positionScanner.getNextToken();
 							return this.positionScanner.startPosition;
 						}
 				}
@@ -7385,78 +7385,78 @@ public class ProblemReporter extends ProblemHandler {
 		return sourceStart;
 	}
 	public void scannerError(Parser parser, String errorTokenName) {
-//		Scanner scanner = parser.scanner;
-//	
-//		int flag = IProblem.ParsingErrorNoSuggestion;
-//		int startPos = scanner.startPosition;
-//		int endPos = scanner.currentPosition - 1;
-//	
-//		//special treatment for recognized errors....
-//		if (errorTokenName.equals(Scanner.END_OF_SOURCE))
-//			flag = IProblem.EndOfSource;
-//		else if (errorTokenName.equals(Scanner.INVALID_HEXA))
-//			flag = IProblem.InvalidHexa;
-//		else if (errorTokenName.equals(Scanner.ILLEGAL_HEXA_LITERAL))
-//			flag = IProblem.IllegalHexaLiteral;
-//		else if (errorTokenName.equals(Scanner.INVALID_OCTAL))
-//			flag = IProblem.InvalidOctal;
-//		else if (errorTokenName.equals(Scanner.INVALID_CHARACTER_CONSTANT))
-//			flag = IProblem.InvalidCharacterConstant;
-//		else if (errorTokenName.equals(Scanner.INVALID_ESCAPE))
-//			flag = IProblem.InvalidEscape;
-//		else if (errorTokenName.equals(Scanner.INVALID_UNICODE_ESCAPE)){
-//			flag = IProblem.InvalidUnicodeEscape;
-//			// better locate the error message
-//			char[] source = scanner.source;
-//			int checkPos = scanner.currentPosition - 1;
-//			if (checkPos >= source.length) checkPos = source.length - 1;
-//			while (checkPos >= startPos){
-//				if (source[checkPos] == '\\') break;
-//				checkPos --;
-//			}
-//			startPos = checkPos;
-//		} else if (errorTokenName.equals(Scanner.INVALID_LOW_SURROGATE)) {
-//			flag = IProblem.InvalidLowSurrogate;
-//		} else if (errorTokenName.equals(Scanner.INVALID_HIGH_SURROGATE)) {
-//			flag = IProblem.InvalidHighSurrogate;
-//			// better locate the error message
-//			char[] source = scanner.source;
-//			int checkPos = scanner.startPosition + 1;
-//			while (checkPos <= endPos){
-//				if (source[checkPos] == '\\') break;
-//				checkPos ++;
-//			}
-//			endPos = checkPos - 1;
-//		} else if (errorTokenName.equals(Scanner.INVALID_FLOAT))
-//			flag = IProblem.InvalidFloat;
-//		else if (errorTokenName.equals(Scanner.UNTERMINATED_STRING))
-//			flag = IProblem.UnterminatedString;
-//		else if (errorTokenName.equals(Scanner.UNTERMINATED_COMMENT))
-//			flag = IProblem.UnterminatedComment;
-//		else if (errorTokenName.equals(Scanner.INVALID_CHAR_IN_STRING))
-//			flag = IProblem.UnterminatedString;
-//		else if (errorTokenName.equals(Scanner.INVALID_DIGIT))
-//			flag = IProblem.InvalidDigit;
-//		else if (errorTokenName.equals(Scanner.INVALID_BINARY))
-//			flag = IProblem.InvalidBinary;
-//		else if (errorTokenName.equals(Scanner.BINARY_LITERAL_NOT_BELOW_17))
-//			flag = IProblem.BinaryLiteralNotBelow17;
-//		else if (errorTokenName.equals(Scanner.INVALID_UNDERSCORE))
-//			flag = IProblem.IllegalUnderscorePosition;
-//		else if (errorTokenName.equals(Scanner.UNDERSCORES_IN_LITERALS_NOT_BELOW_17))
-//			flag = IProblem.UnderscoresInLiteralsNotBelow17;
-//	
-//		String[] arguments = flag == IProblem.ParsingErrorNoSuggestion
-//				? new String[] {errorTokenName}
-//				: NoArgument;
-//		this.handle(
-//			flag,
-//			arguments,
-//			arguments,
-//			// this is the current -invalid- token position
-//			startPos,
-//			endPos,
-//			parser.compilationUnit.compilationResult);
+		Scanner scanner = parser.scanner;
+	
+		int flag = IProblem.ParsingErrorNoSuggestion;
+		int startPos = scanner.startPosition;
+		int endPos = scanner.currentPosition - 1;
+	
+		//special treatment for recognized errors....
+		if (errorTokenName.equals(Scanner.END_OF_SOURCE))
+			flag = IProblem.EndOfSource;
+		else if (errorTokenName.equals(Scanner.INVALID_HEXA))
+			flag = IProblem.InvalidHexa;
+		else if (errorTokenName.equals(Scanner.ILLEGAL_HEXA_LITERAL))
+			flag = IProblem.IllegalHexaLiteral;
+		else if (errorTokenName.equals(Scanner.INVALID_OCTAL))
+			flag = IProblem.InvalidOctal;
+		else if (errorTokenName.equals(Scanner.INVALID_CHARACTER_CONSTANT))
+			flag = IProblem.InvalidCharacterConstant;
+		else if (errorTokenName.equals(Scanner.INVALID_ESCAPE))
+			flag = IProblem.InvalidEscape;
+		else if (errorTokenName.equals(Scanner.INVALID_UNICODE_ESCAPE)){
+			flag = IProblem.InvalidUnicodeEscape;
+			// better locate the error message
+			char[] source = scanner.source;
+			int checkPos = scanner.currentPosition - 1;
+			if (checkPos >= source.length) checkPos = source.length - 1;
+			while (checkPos >= startPos){
+				if (source[checkPos] == '\\') break;
+				checkPos --;
+			}
+			startPos = checkPos;
+		} else if (errorTokenName.equals(Scanner.INVALID_LOW_SURROGATE)) {
+			flag = IProblem.InvalidLowSurrogate;
+		} else if (errorTokenName.equals(Scanner.INVALID_HIGH_SURROGATE)) {
+			flag = IProblem.InvalidHighSurrogate;
+			// better locate the error message
+			char[] source = scanner.source;
+			int checkPos = scanner.startPosition + 1;
+			while (checkPos <= endPos){
+				if (source[checkPos] == '\\') break;
+				checkPos ++;
+			}
+			endPos = checkPos - 1;
+		} else if (errorTokenName.equals(Scanner.INVALID_FLOAT))
+			flag = IProblem.InvalidFloat;
+		else if (errorTokenName.equals(Scanner.UNTERMINATED_STRING))
+			flag = IProblem.UnterminatedString;
+		else if (errorTokenName.equals(Scanner.UNTERMINATED_COMMENT))
+			flag = IProblem.UnterminatedComment;
+		else if (errorTokenName.equals(Scanner.INVALID_CHAR_IN_STRING))
+			flag = IProblem.UnterminatedString;
+		else if (errorTokenName.equals(Scanner.INVALID_DIGIT))
+			flag = IProblem.InvalidDigit;
+		else if (errorTokenName.equals(Scanner.INVALID_BINARY))
+			flag = IProblem.InvalidBinary;
+		else if (errorTokenName.equals(Scanner.BINARY_LITERAL_NOT_BELOW_17))
+			flag = IProblem.BinaryLiteralNotBelow17;
+		else if (errorTokenName.equals(Scanner.INVALID_UNDERSCORE))
+			flag = IProblem.IllegalUnderscorePosition;
+		else if (errorTokenName.equals(Scanner.UNDERSCORES_IN_LITERALS_NOT_BELOW_17))
+			flag = IProblem.UnderscoresInLiteralsNotBelow17;
+	
+		String[] arguments = flag == IProblem.ParsingErrorNoSuggestion
+				? new String[] {errorTokenName}
+				: NoArgument;
+		this.handle(
+			flag,
+			arguments,
+			arguments,
+			// this is the current -invalid- token position
+			startPos,
+			endPos,
+			parser.compilationUnit.compilationResult);
 	}
 	public void shouldImplementHashcode(SourceTypeBinding type) {	
 		this.handle(
@@ -7617,7 +7617,7 @@ public class ProblemReporter extends ProblemHandler {
 		String errorTokenName,
 		String expectedToken) {
 	
-		if (currentKind == TerminalTokens.AT && expectedToken != null && expectedToken.equals("@")) { //$NON-NLS-1$
+		if (currentKind == TerminalTokens.TokenNameAT && expectedToken != null && expectedToken.equals("@")) { //$NON-NLS-1$
 			// In the diagnose parser case, we don't have the wherewithal to discriminate when we should hand out @308 vs @. So we always answer @.
 			// We should silently recover so swallow the message.
 			return;

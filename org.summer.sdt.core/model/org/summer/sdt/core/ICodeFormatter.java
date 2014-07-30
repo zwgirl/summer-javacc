@@ -12,7 +12,7 @@ package org.summer.sdt.core;
 
 /**
  * Specification for a generic source code formatter. Client plug-ins can contribute
- * an implementation for an ICodeFormatter, through the extension point "org.eclipse.jdt.core.codeFormatter".
+ * an implementation for an ICodeFormatter, through the extension point "org.summer.sdt.core.codeFormatter".
  * In case none is found, a default formatter can be provided through the ToolFactory.
  *
  * @see ToolFactory#createCodeFormatter()

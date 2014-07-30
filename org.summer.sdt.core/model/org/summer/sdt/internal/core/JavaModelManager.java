@@ -705,15 +705,15 @@ public class JavaModelManager implements ISaveParticipant, IContentTypeChangeLis
 			"CPContainer SET  - missbehaving container\n" + //$NON-NLS-1$
 			"	container path: " + containerPath + '\n' + //$NON-NLS-1$
 			"	projects: {" +//$NON-NLS-1$
-			org.summer.sdt.util.Util.toString(
+			org.summer.sdt.internal.compiler.util.Util.toString(
 				projects,
-				new org.eclipse.jdt.internal.compiler.util.Util.Displayable(){
+				new org.summer.sdt.internal.compiler.util.Util.Displayable(){
 					public String displayString(Object o) { return ((IJavaProject) o).getElementName(); }
 				}) +
 			"}\n	values on previous session: {\n"  +//$NON-NLS-1$
 			org.summer.sdt.internal.compiler.util.Util.toString(
 				respectiveContainers,
-				new org.eclipse.jdt.internal.compiler.util.Util.Displayable(){
+				new org.summer.sdt.internal.compiler.util.Util.Displayable(){
 					public String displayString(Object o) {
 						StringBuffer buffer = new StringBuffer("		"); //$NON-NLS-1$
 						if (o == null) {
@@ -739,7 +739,7 @@ public class JavaModelManager implements ISaveParticipant, IContentTypeChangeLis
 			"}\n	new values: {\n"  +//$NON-NLS-1$
 			org.summer.sdt.internal.compiler.util.Util.toString(
 				respectiveContainers,
-				new org.eclipse.jdt.internal.compiler.util.Util.Displayable(){
+				new org.summer.sdt.internal.compiler.util.Util.Displayable(){
 					public String displayString(Object o) {
 						StringBuffer buffer = new StringBuffer("		"); //$NON-NLS-1$
 						if (o == null) {
@@ -768,7 +768,7 @@ public class JavaModelManager implements ISaveParticipant, IContentTypeChangeLis
 			"	classpath entries: {\n" + //$NON-NLS-1$
 			org.summer.sdt.internal.compiler.util.Util.toString(
 				classpathEntries,
-				new org.eclipse.jdt.internal.compiler.util.Util.Displayable(){
+				new org.summer.sdt.internal.compiler.util.Util.Displayable(){
 					public String displayString(Object o) {
 						StringBuffer buffer = new StringBuffer("		"); //$NON-NLS-1$
 						if (o == null) {

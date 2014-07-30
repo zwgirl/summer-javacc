@@ -51,8 +51,8 @@ public class Initializer extends FieldDeclaration {
 	 * Code generation for a non-static initializer:
 	 *    standard block code gen
 	 *
-	 * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 */
 	public void generateCode(BlockScope currentScope, CodeStream codeStream) {
 
@@ -65,7 +65,7 @@ public class Initializer extends FieldDeclaration {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.AbstractVariableDeclaration#getKind()
+	 * @see org.summer.sdt.internal.compiler.ast.AbstractVariableDeclaration#getKind()
 	 */
 	public int getKind() {
 		return INITIALIZER;

@@ -27,8 +27,8 @@ public class DefaultProblem extends CategorizedProblem {
 	private String message;
 
 	// cannot directly point to IJavaModelMarker constants from within batch compiler
-	private static final String MARKER_TYPE_PROBLEM = "org.eclipse.jdt.core.problem"; //$NON-NLS-1$
-	private static final String MARKER_TYPE_TASK = "org.eclipse.jdt.core.task"; //$NON-NLS-1$
+	private static final String MARKER_TYPE_PROBLEM = "org.summer.sdt.core.problem"; //$NON-NLS-1$
+	private static final String MARKER_TYPE_TASK = "org.summer.sdt.core.task"; //$NON-NLS-1$
 
 	public static final Object[] EMPTY_VALUES = {};
 
@@ -115,7 +115,7 @@ public String[] getArguments() {
 	return this.arguments;
 }
 /**
- * @see org.eclipse.jdt.core.compiler.CategorizedProblem#getCategoryID()
+ * @see org.summer.sdt.core.compiler.CategorizedProblem#getCategoryID()
  */
 public int getCategoryID() {
 	return ProblemReporter.getProblemCategory(this.severity, this.id);
@@ -123,7 +123,7 @@ public int getCategoryID() {
 
 /**
  * Answer the type of problem.
- * @see org.eclipse.jdt.core.compiler.IProblem#getID()
+ * @see org.summer.sdt.core.compiler.IProblem#getID()
  * @return int
  */
 public int getID() {
@@ -176,7 +176,7 @@ public String getInternalCategoryMessage() {
 
 /**
  * Returns the marker type associated to this problem.
- * @see org.eclipse.jdt.core.compiler.CategorizedProblem#getMarkerType()
+ * @see org.summer.sdt.core.compiler.CategorizedProblem#getMarkerType()
  */
 public String getMarkerType() {
 	return this.id == IProblem.Task

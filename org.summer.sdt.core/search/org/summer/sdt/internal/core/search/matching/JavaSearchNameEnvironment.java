@@ -17,8 +17,8 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-//import org.eclipse.jdt.core.*;
-//import org.eclipse.jdt.core.JavaCore;
+//import org.summer.sdt.core.*;
+//import org.summer.sdt.core.JavaCore;
 import org.summer.sdt.core.*;
 import org.summer.sdt.core.compiler.CharOperation;
 import org.summer.sdt.internal.compiler.env.ICompilationUnit;
@@ -47,14 +47,14 @@ public class JavaSearchNameEnvironment implements INameEnvironment, SuffixConsta
 	 */
 	HashMap workingCopies;
 
-public JavaSearchNameEnvironment(IJavaProject javaProject, org.eclipse.jdt.core.ICompilationUnit[] copies) {
+public JavaSearchNameEnvironment(IJavaProject javaProject, org.summer.sdt.core.ICompilationUnit[] copies) {
 	computeClasspathLocations(javaProject.getProject().getWorkspace().getRoot(), (JavaProject) javaProject);
 	try {
 		int length = copies == null ? 0 : copies.length;
 		this.workingCopies = new HashMap(length);
 		if (copies != null) {
 			for (int i = 0; i < length; i++) {
-				org.eclipse.jdt.core.ICompilationUnit workingCopy = copies[i];
+				org.summer.sdt.core.ICompilationUnit workingCopy = copies[i];
 				IPackageDeclaration[] pkgs = workingCopy.getPackageDeclarations();
 				String pkg = pkgs.length > 0 ? pkgs[0].getElementName() : ""; //$NON-NLS-1$
 				String cuName = workingCopy.getElementName();

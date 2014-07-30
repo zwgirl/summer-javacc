@@ -32,7 +32,7 @@ public class BatchOperation extends JavaModelOperation {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.core.JavaModelOperation#executeOperation()
+	 * @see org.summer.sdt.internal.core.JavaModelOperation#executeOperation()
 	 */
 	protected void executeOperation() throws JavaModelException {
 		try {
@@ -53,7 +53,7 @@ public class BatchOperation extends JavaModelOperation {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.core.JavaModelOperation#verify()
+	 * @see org.summer.sdt.internal.core.JavaModelOperation#verify()
 	 */
 	protected IJavaModelStatus verify() {
 		// cannot verify user defined operation

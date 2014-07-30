@@ -61,7 +61,7 @@ class AddFolderToIndex extends IndexRequest {
 					new IResourceProxyVisitor() {
 						public boolean visit(IResourceProxy proxy) /* throws CoreException */{
 							if (proxy.getType() == IResource.FILE) {
-								if (org.summer.sdt.util.Util.isJavaLikeFileName(proxy.getName()))
+								if (org.summer.sdt.internal.core.util.Util.isJavaLikeFileName(proxy.getName()))
 									indexManager.addSource((IFile) proxy.requestResource(), container, parser);
 								return false;
 							}
@@ -76,7 +76,7 @@ class AddFolderToIndex extends IndexRequest {
 						public boolean visit(IResourceProxy proxy) /* throws CoreException */{
 							switch(proxy.getType()) {
 								case IResource.FILE :
-									if (org.summer.sdt.util.Util.isJavaLikeFileName(proxy.getName())) {
+									if (org.summer.sdt.internal.core.util.Util.isJavaLikeFileName(proxy.getName())) {
 										IResource resource = proxy.requestResource();
 										if (!Util.isExcluded(resource, AddFolderToIndex.this.inclusionPatterns, AddFolderToIndex.this.exclusionPatterns))
 											indexManager.addSource((IFile)resource, container, parser);

@@ -255,7 +255,7 @@ public class JarPackageFragmentRoot extends PackageFragmentRoot {
 
 		// add classfile info amongst children
 		ArrayList[] children = (ArrayList[]) rawPackageInfo.get(pkgName);
-		if (org.summer.sdt.util.Util.isClassFileName(entryName)) {
+		if (org.summer.sdt.internal.compiler.util.Util.isClassFileName(entryName)) {
 			if (children[0/*JAVA*/] == EMPTY_LIST) children[0/*JAVA*/] = new ArrayList();
 			String nameWithoutExtension = entryName.substring(lastSeparator + 1, entryName.length() - 6);
 			children[0/*JAVA*/].add(nameWithoutExtension);

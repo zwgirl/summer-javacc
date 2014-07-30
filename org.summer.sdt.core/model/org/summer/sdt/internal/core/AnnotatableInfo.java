@@ -34,17 +34,17 @@ public class AnnotatableInfo extends MemberElementInfo {
 	protected int nameEnd= -1;
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.env.ISourceType#getNameSourceEnd()
-	 * @see org.eclipse.jdt.internal.compiler.env.ISourceMethod#getNameSourceEnd()
-	 * @see org.eclipse.jdt.internal.compiler.env.ISourceField#getNameSourceEnd()
+	 * @see org.summer.sdt.internal.compiler.env.ISourceType#getNameSourceEnd()
+	 * @see org.summer.sdt.internal.compiler.env.ISourceMethod#getNameSourceEnd()
+	 * @see org.summer.sdt.internal.compiler.env.ISourceField#getNameSourceEnd()
 	 */
 	public int getNameSourceEnd() {
 		return this.nameEnd;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.env.ISourceType#getNameSourceStart()
-	 * @see org.eclipse.jdt.internal.compiler.env.ISourceMethod#getNameSourceStart()
-	 * @see org.eclipse.jdt.internal.compiler.env.ISourceField#getNameSourceStart()
+	 * @see org.summer.sdt.internal.compiler.env.ISourceType#getNameSourceStart()
+	 * @see org.summer.sdt.internal.compiler.env.ISourceMethod#getNameSourceStart()
+	 * @see org.summer.sdt.internal.compiler.env.ISourceField#getNameSourceStart()
 	 */
 	public int getNameSourceStart() {
 		return this.nameStart;

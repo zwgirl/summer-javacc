@@ -83,7 +83,7 @@ public void resolve(BlockScope scope) {
 
 /**
  * Returns the constant intValue or ordinal for enum constants. If constant is NotAConstant, then answers Float.MIN_VALUE
- * @see org.eclipse.jdt.internal.compiler.ast.Statement#resolveCase(org.eclipse.jdt.internal.compiler.lookup.BlockScope, org.eclipse.jdt.internal.compiler.lookup.TypeBinding, org.eclipse.jdt.internal.compiler.ast.SwitchStatement)
+ * @see org.summer.sdt.internal.compiler.ast.Statement#resolveCase(org.summer.sdt.internal.compiler.lookup.BlockScope, org.summer.sdt.internal.compiler.lookup.TypeBinding, org.summer.sdt.internal.compiler.ast.SwitchStatement)
  */
 public Constant resolveCase(BlockScope scope, TypeBinding switchExpressionType, SwitchStatement switchStatement) {
 	// switchExpressionType maybe null in error case

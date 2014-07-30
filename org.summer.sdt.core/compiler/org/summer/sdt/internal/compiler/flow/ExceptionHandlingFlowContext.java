@@ -303,7 +303,7 @@ public void recordReturnFrom(UnconditionalFlowInfo flowInfo) {
  * only once (in case parented with true InsideSubRoutineFlowContext).
  * Standard management of subroutines need to also operate on intermediate
  * exception handlers.
- * @see org.eclipse.jdt.internal.compiler.flow.FlowContext#subroutine()
+ * @see org.summer.sdt.internal.compiler.flow.FlowContext#subroutine()
  */
 public SubRoutineStatement subroutine() {
 	if (this.associatedNode instanceof SubRoutineStatement) {

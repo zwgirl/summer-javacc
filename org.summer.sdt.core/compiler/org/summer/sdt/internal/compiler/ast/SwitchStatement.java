@@ -157,8 +157,8 @@ public class SwitchStatement extends Statement {
 	 *
 	 * @see "http://download.oracle.com/javase/6/docs/api/java/lang/String.html"
 	 *
-	 * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 */
 	public void generateCodeForStringSwitch(BlockScope currentScope, CodeStream codeStream) {
 
@@ -318,8 +318,8 @@ public class SwitchStatement extends Statement {
 	/**
 	 * Switch code generation
 	 *
-	 * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 */
 	public void generateCode(BlockScope currentScope, CodeStream codeStream) {
 		if (this.expression.resolvedType.id == TypeIds.T_JavaLangString) {

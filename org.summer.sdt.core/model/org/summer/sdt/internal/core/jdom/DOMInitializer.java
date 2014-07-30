@@ -23,7 +23,7 @@ import org.summer.sdt.internal.core.util.Util;
  * @see DOMNode
  * @deprecated The JDOM was made obsolete by the addition in 2.0 of the more
  * powerful, fine-grained DOM/AST API found in the
- * org.eclipse.jdt.core.dom package.
+ * org.summer.sdt.core.dom package.
  */
 class DOMInitializer extends DOMMember implements IDOMInitializer {
 
@@ -62,7 +62,7 @@ DOMInitializer() {
  *		character following the last comment. If no comments are present,
  *		this array contains two -1's.
  * @param flags - an integer representing the modifiers for this member. The
- *		integer can be analyzed with org.eclipse.jdt.core.Flags
+ *		integer can be analyzed with org.summer.sdt.core.Flags
  * @param modifierRange - a two element array describing the location of
  *		modifiers for this member within its source range. The first integer
  *		is the first character of the first modifier for this member, and
@@ -92,7 +92,7 @@ DOMInitializer(char[] document, int[] sourceRange, int[] commentRange, int flags
  *		An array of -1's indicates this node's contents do not exist
  *		in the document.
  * @param flags - an integer representing the modifiers for this member. The
- *		integer can be analyzed with org.eclipse.jdt.core.Flags
+ *		integer can be analyzed with org.summer.sdt.core.Flags
  */
 DOMInitializer(char[] document, int[] sourceRange, int flags) {
 	this(document, sourceRange, new int[] {-1, -1}, flags, new int[] {-1, -1}, -1);

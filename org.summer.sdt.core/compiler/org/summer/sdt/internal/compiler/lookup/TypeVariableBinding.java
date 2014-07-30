@@ -224,7 +224,7 @@ public class TypeVariableBinding extends ReferenceBinding {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding#canBeInstantiated()
+	 * @see org.summer.sdt.internal.compiler.lookup.ReferenceBinding#canBeInstantiated()
 	 */
 	public boolean canBeInstantiated() {
 		return false;
@@ -341,7 +341,7 @@ public class TypeVariableBinding extends ReferenceBinding {
 		return buffer.toString();
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#debugName()
+	 * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#debugName()
 	 */
 	public String debugName() {
 		if (this.hasTypeAnnotations())
@@ -642,7 +642,7 @@ public class TypeVariableBinding extends ReferenceBinding {
 	}
 
 	/**
-     * @see org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding#readableName()
+     * @see org.summer.sdt.internal.compiler.lookup.ReferenceBinding#readableName()
      */
     public char[] readableName() {
         return this.sourceName;
@@ -702,7 +702,7 @@ public class TypeVariableBinding extends ReferenceBinding {
 		super.setTypeAnnotations(annotations, evalNullAnnotations);
 	}
 	/**
-     * @see org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding#shortReadableName()
+     * @see org.summer.sdt.internal.compiler.lookup.ReferenceBinding#shortReadableName()
      */
     public char[] shortReadableName() {
         return readableName();

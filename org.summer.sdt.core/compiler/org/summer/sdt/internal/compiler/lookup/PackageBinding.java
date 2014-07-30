@@ -86,7 +86,7 @@ public class PackageBinding extends Binding implements TypeConstants {
 	}
 	/*
 	 * slash separated name
-	 * org.eclipse.jdt.core --> org/eclipse/jdt/core
+	 * org.summer.sdt.core --> org/eclipse/jdt/core
 	 */
 	public char[] computeUniqueKey(boolean isLeaf) {
 		return CharOperation.concatWith(this.compoundName, '/');

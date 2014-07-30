@@ -209,7 +209,7 @@ public void acceptPackage(ImportReference importReference) {
 
 		if (importReference.annotations != null) {
 			for (int i = 0, length = importReference.annotations.length; i < length; i++) {
-				org.eclipse.jdt.internal.compiler.ast.Annotation annotation = importReference.annotations[i];
+				org.summer.sdt.internal.compiler.ast.Annotation annotation = importReference.annotations[i];
 				acceptAnnotation(annotation, info, handle);
 			}
 		}
@@ -273,7 +273,7 @@ protected static String[] convertTypeNamesToSigs(char[][] typeNames) {
 	}
 	return typeSigs;
 }
-protected IAnnotation acceptAnnotation(org.eclipse.jdt.internal.compiler.ast.Annotation annotation, AnnotatableInfo parentInfo, JavaElement parentHandle) {
+protected IAnnotation acceptAnnotation(org.summer.sdt.internal.compiler.ast.Annotation annotation, AnnotatableInfo parentInfo, JavaElement parentHandle) {
 	String nameString = new String(CharOperation.concatWith(annotation.type.getTypeName(), '.'));
 	Annotation handle = createAnnotation(parentHandle, nameString); //NB: occurenceCount is computed in resolveDuplicates
 	resolveDuplicates(handle);
@@ -438,7 +438,7 @@ private SourceMethodElementInfo createMethodInfo(MethodInfo methodInfo, SourceMe
 		int length = methodInfo.annotations.length;
 		this.unitInfo.annotationNumber += length;
 		for (int i = 0; i < length; i++) {
-			org.eclipse.jdt.internal.compiler.ast.Annotation annotation = methodInfo.annotations[i];
+			org.summer.sdt.internal.compiler.ast.Annotation annotation = methodInfo.annotations[i];
 			acceptAnnotation(annotation, info, handle);
 		}
 	}
@@ -482,7 +482,7 @@ private LocalVariable[] acceptMethodParameters(Argument[] arguments, JavaElement
 		if (argument.annotations != null) {
 			paramAnnotations[i] = new Annotation[argument.annotations.length];
 			for (int  j = 0; j < argument.annotations.length; j++ ) {
-				org.eclipse.jdt.internal.compiler.ast.Annotation annotation = argument.annotations[j];
+				org.summer.sdt.internal.compiler.ast.Annotation annotation = argument.annotations[j];
 				acceptAnnotation(annotation, localVarInfo, result[i]);
 			}
 		}
@@ -543,7 +543,7 @@ private SourceTypeElementInfo createTypeInfo(TypeInfo typeInfo, SourceType handl
 		int length = typeInfo.annotations.length;
 		this.unitInfo.annotationNumber += length;
 		for (int i = 0; i < length; i++) {
-			org.eclipse.jdt.internal.compiler.ast.Annotation annotation = typeInfo.annotations[i];
+			org.summer.sdt.internal.compiler.ast.Annotation annotation = typeInfo.annotations[i];
 			acceptAnnotation(annotation, info, handle);
 		}
 	}
@@ -630,7 +630,7 @@ public void exitField(int initializationStart, int declarationEnd, int declarati
 		int length = fieldInfo.annotations.length;
 		this.unitInfo.annotationNumber += length;
 		for (int i = 0; i < length; i++) {
-			org.eclipse.jdt.internal.compiler.ast.Annotation annotation = fieldInfo.annotations[i];
+			org.summer.sdt.internal.compiler.ast.Annotation annotation = fieldInfo.annotations[i];
 			acceptAnnotation(annotation, info, handle);
 		}
 	}
@@ -769,8 +769,8 @@ protected Object getMemberValue(org.summer.sdt.internal.core.MemberValuePair mem
 	} else if (expression instanceof Literal) {
 		((Literal) expression).computeConstant();
 		return Util.getAnnotationMemberValue(memberValuePair, expression.constant);
-	} else if (expression instanceof org.eclipse.jdt.internal.compiler.ast.Annotation) {
-		org.eclipse.jdt.internal.compiler.ast.Annotation annotation = (org.eclipse.jdt.internal.compiler.ast.Annotation) expression;
+	} else if (expression instanceof org.summer.sdt.internal.compiler.ast.Annotation) {
+		org.summer.sdt.internal.compiler.ast.Annotation annotation = (org.summer.sdt.internal.compiler.ast.Annotation) expression;
 		Object handle = acceptAnnotation(annotation, null, (JavaElement) this.handleStack.peek());
 		memberValuePair.valueKind = IMemberValuePair.K_ANNOTATION;
 		return handle;

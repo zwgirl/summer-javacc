@@ -40,21 +40,21 @@ public ParameterizedFieldBinding(ParameterizedTypeBinding parameterizedDeclaring
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.VariableBinding#constant()
+ * @see org.summer.sdt.internal.compiler.lookup.VariableBinding#constant()
  */
 public Constant constant() {
 	return this.originalField.constant();
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.FieldBinding#original()
+ * @see org.summer.sdt.internal.compiler.lookup.FieldBinding#original()
  */
 public FieldBinding original() {
 	return this.originalField.original();
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.VariableBinding#constant()
+ * @see org.summer.sdt.internal.compiler.lookup.VariableBinding#constant()
  */
 public void setConstant(Constant constant) {
 	this.originalField.setConstant(constant);

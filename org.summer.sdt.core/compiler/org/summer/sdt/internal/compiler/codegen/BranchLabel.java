@@ -31,7 +31,7 @@ public class BranchLabel extends Label {
 	}
 	
 	/**
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 */
 	public BranchLabel(CodeStream codeStream) {
 		super(codeStream);

@@ -81,7 +81,7 @@ public char[] getContents() {
 	}
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.env.IDependent#getFileName()
+ * @see org.summer.sdt.internal.compiler.env.IDependent#getFileName()
  */
 public char[] getFileName() {
 	return this.fileName;

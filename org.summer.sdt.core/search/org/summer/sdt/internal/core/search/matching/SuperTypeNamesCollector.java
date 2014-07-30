@@ -130,7 +130,7 @@ protected void addToResult(char[][] compoundName) {
  */
 protected CompilationUnitDeclaration buildBindings(ICompilationUnit compilationUnit, boolean isTopLevelOrMember) throws JavaModelException {
 	// source unit
-	org.eclipse.jdt.internal.compiler.env.ICompilationUnit sourceUnit = (org.eclipse.jdt.internal.compiler.env.ICompilationUnit) compilationUnit;
+	org.summer.sdt.internal.compiler.env.ICompilationUnit sourceUnit = (org.summer.sdt.internal.compiler.env.ICompilationUnit) compilationUnit;
 
 	CompilationResult compilationResult = new CompilationResult(sourceUnit, 1, 1, 0);
 	CompilationUnitDeclaration unit =

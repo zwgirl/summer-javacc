@@ -279,7 +279,7 @@ protected IBinaryType createInfoFromClassFile(Openable handle, IResource file) {
 	IBinaryType info = null;
 	try {
 		info = Util.newClassFileReader(file);
-	} catch (org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException e) {
+	} catch (org.summer.sdt.internal.compiler.classfmt.ClassFormatException e) {
 		if (TypeHierarchy.DEBUG) {
 			e.printStackTrace();
 		}
@@ -311,7 +311,7 @@ protected IBinaryType createInfoFromClassFileInJar(Openable classFile) {
 		info = org.summer.sdt.internal.compiler.classfmt.ClassFileReader.read(
 			zipFile,
 			classFilePath);
-	} catch (org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException e) {
+	} catch (org.summer.sdt.internal.compiler.classfmt.ClassFormatException e) {
 		if (TypeHierarchy.DEBUG) {
 			e.printStackTrace();
 		}

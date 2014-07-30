@@ -34,7 +34,7 @@ class MethodBinding implements IMethodBinding {
 		Modifier.ABSTRACT | Modifier.STATIC | Modifier.FINAL | Modifier.SYNCHRONIZED | Modifier.NATIVE |
 		Modifier.STRICTFP | Modifier.DEFAULT;
 	private static final ITypeBinding[] NO_TYPE_BINDINGS = new ITypeBinding[0];
-	private org.eclipse.jdt.internal.compiler.lookup.MethodBinding binding;
+	private org.summer.sdt.internal.compiler.lookup.MethodBinding binding;
 	private BindingResolver resolver;
 	private ITypeBinding[] parameterTypes;
 	private ITypeBinding[] exceptionTypes;
@@ -47,7 +47,7 @@ class MethodBinding implements IMethodBinding {
 	private IAnnotationBinding[] annotations;
 	private IAnnotationBinding[][] parameterAnnotations;
 
-	MethodBinding(BindingResolver resolver, org.eclipse.jdt.internal.compiler.lookup.MethodBinding binding) {
+	MethodBinding(BindingResolver resolver, org.summer.sdt.internal.compiler.lookup.MethodBinding binding) {
 		this.resolver = resolver;
 		this.binding = binding;
 	}
@@ -100,7 +100,7 @@ class MethodBinding implements IMethodBinding {
 		if (this.annotations != null) {
 			return this.annotations;
 		}
-		org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding[] internalAnnotations = this.binding.getAnnotations();
+		org.summer.sdt.internal.compiler.lookup.AnnotationBinding[] internalAnnotations = this.binding.getAnnotations();
 		return this.annotations = filterTypeAnnotations(internalAnnotations);
 	}
 
@@ -121,13 +121,13 @@ class MethodBinding implements IMethodBinding {
 		if (this.parameterAnnotations != null) {
 			return this.parameterAnnotations[index];
 		}
-		org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding[][] bindingAnnotations = this.binding.getParameterAnnotations();
+		org.summer.sdt.internal.compiler.lookup.AnnotationBinding[][] bindingAnnotations = this.binding.getParameterAnnotations();
 		if (bindingAnnotations == null) return AnnotationBinding.NoAnnotations;
 
 		int length = bindingAnnotations.length;
 		IAnnotationBinding[][] domAnnotations = new IAnnotationBinding[length][];
 		for (int i = 0; i < length; i++) {
-			org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding[] paramBindingAnnotations = bindingAnnotations[i];
+			org.summer.sdt.internal.compiler.lookup.AnnotationBinding[] paramBindingAnnotations = bindingAnnotations[i];
 			int pLength = paramBindingAnnotations.length;
 			domAnnotations[i] = new AnnotationBinding[pLength];
 			for (int j=0; j<pLength; j++) {
@@ -151,7 +151,7 @@ class MethodBinding implements IMethodBinding {
 		if (this.parameterTypes != null) {
 			return this.parameterTypes;
 		}
-		org.eclipse.jdt.internal.compiler.lookup.TypeBinding[] parameters = this.binding.parameters;
+		org.summer.sdt.internal.compiler.lookup.TypeBinding[] parameters = this.binding.parameters;
 		int length = parameters == null ? 0 : parameters.length;
 		if (length == 0) {
 			return this.parameterTypes = NO_TYPE_BINDINGS;
@@ -194,14 +194,14 @@ class MethodBinding implements IMethodBinding {
 		return this.returnType;
 	}
 
-	protected IAnnotationBinding[] filterTypeAnnotations(org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding[] internalAnnotations) {
+	protected IAnnotationBinding[] filterTypeAnnotations(org.summer.sdt.internal.compiler.lookup.AnnotationBinding[] internalAnnotations) {
 		int length = internalAnnotations == null ? 0 : internalAnnotations.length;
 		if (length != 0) {
 			IAnnotationBinding[] tempAnnotations = new IAnnotationBinding[length];
 			int convertedAnnotationCount = 0;
 			final boolean isConstructor = this.isConstructor();
 			for (int i = 0; i < length; i++) {
-				org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding internalAnnotation = internalAnnotations[i];
+				org.summer.sdt.internal.compiler.lookup.AnnotationBinding internalAnnotation = internalAnnotations[i];
 				final ReferenceBinding annotationType = internalAnnotation.getAnnotationType();
 				long metaTagBits = annotationType.getAnnotationTagBits();
 
@@ -239,7 +239,7 @@ class MethodBinding implements IMethodBinding {
 		if (this.exceptionTypes != null) {
 			return this.exceptionTypes;
 		}
-		org.eclipse.jdt.internal.compiler.lookup.TypeBinding[] exceptions = this.binding.thrownExceptions;
+		org.summer.sdt.internal.compiler.lookup.TypeBinding[] exceptions = this.binding.thrownExceptions;
 		int length = exceptions == null ? 0 : exceptions.length;
 		if (length == 0) {
 			return this.exceptionTypes = NO_TYPE_BINDINGS;
@@ -345,7 +345,7 @@ class MethodBinding implements IMethodBinding {
 		if (!(other instanceof MethodBinding)) {
 			return false;
 		}
-		org.eclipse.jdt.internal.compiler.lookup.MethodBinding otherBinding = ((MethodBinding) other).binding;
+		org.summer.sdt.internal.compiler.lookup.MethodBinding otherBinding = ((MethodBinding) other).binding;
 		return BindingComparator.isEqual(this.binding, otherBinding);
 	}
 
@@ -395,7 +395,7 @@ class MethodBinding implements IMethodBinding {
 
 		if (this.binding instanceof ParameterizedGenericMethodBinding) {
 			ParameterizedGenericMethodBinding genericMethodBinding = (ParameterizedGenericMethodBinding) this.binding;
-			org.eclipse.jdt.internal.compiler.lookup.TypeBinding[] typeArgumentsBindings = genericMethodBinding.typeArguments;
+			org.summer.sdt.internal.compiler.lookup.TypeBinding[] typeArgumentsBindings = genericMethodBinding.typeArguments;
 			int typeArgumentsLength = typeArgumentsBindings == null ? 0 : typeArgumentsBindings.length;
 			if (typeArgumentsLength != 0) {
 				ITypeBinding[] tArguments = new ITypeBinding[typeArgumentsLength];

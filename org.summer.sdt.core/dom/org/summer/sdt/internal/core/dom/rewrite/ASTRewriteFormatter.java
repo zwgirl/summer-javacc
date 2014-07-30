@@ -55,7 +55,7 @@ public final class ASTRewriteFormatter {
 		}
 
 		/* (non-Javadoc)
-		 * @see org.eclipse.jdt.core.dom.ASTVisitor#preVisit(ASTNode)
+		 * @see org.summer.sdt.core.dom.ASTVisitor#preVisit(ASTNode)
 		 */
 		public void preVisit(ASTNode node) {
 			Object trackData= getEventStore().getTrackedNodeData(node);
@@ -69,7 +69,7 @@ public final class ASTRewriteFormatter {
 		}
 
 		/* (non-Javadoc)
-		 * @see org.eclipse.jdt.core.dom.ASTVisitor#postVisit(ASTNode)
+		 * @see org.summer.sdt.core.dom.ASTVisitor#postVisit(ASTNode)
 		 */
 		public void postVisit(ASTNode node) {
 			Object placeholderData= getPlaceholders().getPlaceholderData(node);
@@ -83,7 +83,7 @@ public final class ASTRewriteFormatter {
 		}
 
 		/* (non-Javadoc)
-		 * @see org.eclipse.jdt.internal.corext.dom.ASTRewriteFlattener#visit(org.eclipse.jdt.core.dom.Block)
+		 * @see org.summer.sdt.internal.corext.dom.ASTRewriteFlattener#visit(org.summer.sdt.core.dom.Block)
 		 */
 		public boolean visit(Block node) {
 			if (getPlaceholders().isCollapsed(node)) {

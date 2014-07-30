@@ -1355,7 +1355,7 @@ public class Main implements ProblemSeverities, SuffixConstants {
 	private PrintWriter err;
 
 	protected ArrayList extraProblems;
-	public final static String bundleName = "org.eclipse.jdt.internal.compiler.batch.messages"; //$NON-NLS-1$
+	public final static String bundleName = "org.summer.sdt.internal.compiler.batch.messages"; //$NON-NLS-1$
 	// two uses: recognize 'none' in options; code the singleton none
 	// for the '-d none' option (wherever it may be found)
 	public static final int DEFAULT_SIZE_CLASSPATH = 4;
@@ -1613,13 +1613,13 @@ public String bind(String id, String[] arguments) {
  * <p>This only checks the major version, since the minor version is always 0 (at least for the useful cases).</p>
  * <p>The given minimalSupportedVersion is one of the constants:</p>
  * <ul>
- * <li><code>org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants.JDK1_1</code></li>
- * <li><code>org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants.JDK1_2</code></li>
- * <li><code>org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants.JDK1_3</code></li>
- * <li><code>org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants.JDK1_4</code></li>
- * <li><code>org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants.JDK1_5</code></li>
- * <li><code>org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants.JDK1_6</code></li>
- * <li><code>org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants.JDK1_7</code></li>
+ * <li><code>org.summer.sdt.internal.compiler.classfmt.ClassFileConstants.JDK1_1</code></li>
+ * <li><code>org.summer.sdt.internal.compiler.classfmt.ClassFileConstants.JDK1_2</code></li>
+ * <li><code>org.summer.sdt.internal.compiler.classfmt.ClassFileConstants.JDK1_3</code></li>
+ * <li><code>org.summer.sdt.internal.compiler.classfmt.ClassFileConstants.JDK1_4</code></li>
+ * <li><code>org.summer.sdt.internal.compiler.classfmt.ClassFileConstants.JDK1_5</code></li>
+ * <li><code>org.summer.sdt.internal.compiler.classfmt.ClassFileConstants.JDK1_6</code></li>
+ * <li><code>org.summer.sdt.internal.compiler.classfmt.ClassFileConstants.JDK1_7</code></li>
  * </ul>
  * @param minimalSupportedVersion the given minimal version
  * @return true if and only if the running VM supports the given minimal version, false otherwise
@@ -2890,7 +2890,7 @@ private void initializeWarnings(String propertiesFile) {
 	for (Iterator iterator = properties.entrySet().iterator(); iterator.hasNext(); ) {
 		Map.Entry entry = (Map.Entry) iterator.next();
 		final String key = (String) entry.getKey();
-		if (key.startsWith("org.eclipse.jdt.core.compiler.")) { //$NON-NLS-1$
+		if (key.startsWith("org.summer.sdt.core.compiler.")) { //$NON-NLS-1$
 			this.options.put(key, entry.getValue());
 		}
 	}
@@ -3991,7 +3991,7 @@ protected void initialize(PrintWriter outWriter, PrintWriter errWriter, boolean 
 }
 protected void initializeAnnotationProcessorManager() {
 	try {
-		Class c = Class.forName("org.eclipse.jdt.internal.compiler.apt.dispatch.BatchAnnotationProcessorManager"); //$NON-NLS-1$
+		Class c = Class.forName("org.summer.sdt.internal.compiler.apt.dispatch.BatchAnnotationProcessorManager"); //$NON-NLS-1$
 		AbstractAnnotationProcessorManager annotationManager = (AbstractAnnotationProcessorManager) c.newInstance();
 		annotationManager.configure(this, this.expandedCommandLine);
 		annotationManager.setErr(this.err);

@@ -17,7 +17,7 @@
  *							Bug 425153 - [1.8] Having wildcard allows incompatible types in a lambda expression
  *							Bug 425156 - [1.8] Lambda as an argument is flagged with incompatible error
  *							Bug 424403 - [1.8][compiler] Generic method call with method reference argument fails to resolve properly.
- *							Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *							Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *							Bug 428352 - [1.8][compiler] Resolution errors don't always surface
  *     Andy Clement (GoPivotal, Inc) aclement@gopivotal.com - Contributions for
  *                          Bug 405104 - [1.8][compiler][codegen] Implement support for serializeable lambdas

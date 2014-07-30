@@ -161,7 +161,7 @@ public class Javadoc extends ASTNode {
 	}
 
 	/*
-	 * @see org.eclipse.jdt.internal.compiler.ast.ASTNode#print(int, java.lang.StringBuffer)
+	 * @see org.summer.sdt.internal.compiler.ast.ASTNode#print(int, java.lang.StringBuffer)
 	 */
 	public StringBuffer print(int indent, StringBuffer output) {
 		printIndent(indent, output).append("/**\n"); //$NON-NLS-1$

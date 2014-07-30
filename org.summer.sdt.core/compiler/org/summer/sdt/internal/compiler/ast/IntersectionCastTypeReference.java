@@ -48,14 +48,14 @@ public class IntersectionCastTypeReference extends TypeReference {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ast.TypeReference#getLastToken()
+	 * @see org.summer.sdt.internal.compiler.ast.TypeReference#getLastToken()
 	 */
 	public char[] getLastToken() {
 		return null;
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.ArrayQualifiedTypeReference#getTypeBinding(org.eclipse.jdt.internal.compiler.lookup.Scope)
+	 * @see org.summer.sdt.internal.compiler.ast.ArrayQualifiedTypeReference#getTypeBinding(org.summer.sdt.internal.compiler.lookup.Scope)
 	 */
 	protected TypeBinding getTypeBinding(Scope scope) {
 		return null; // not supported here - combined with resolveType(...)
@@ -66,7 +66,7 @@ public class IntersectionCastTypeReference extends TypeReference {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ast.TypeReference#getTypeBinding(org.eclipse.jdt.internal.compiler.lookup.Scope)
+	 * @see org.summer.sdt.internal.compiler.ast.TypeReference#getTypeBinding(org.summer.sdt.internal.compiler.lookup.Scope)
 	 */
 	public TypeBinding resolveType(BlockScope scope, boolean checkBounds, int location) {
 
@@ -157,7 +157,7 @@ public class IntersectionCastTypeReference extends TypeReference {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ast.TypeReference#getTypeName()
+	 * @see org.summer.sdt.internal.compiler.ast.TypeReference#getTypeName()
 	 */
 	public char[][] getTypeName() {
 		// we need to keep a return value that is a char[][]
@@ -165,7 +165,7 @@ public class IntersectionCastTypeReference extends TypeReference {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ast.TypeReference#traverse(org.eclipse.jdt.internal.compiler.ASTVisitor, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ast.TypeReference#traverse(org.summer.sdt.internal.compiler.ASTVisitor, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public void traverse(ASTVisitor visitor, BlockScope scope) {
 		if (visitor.visit(this, scope)) {
@@ -178,14 +178,14 @@ public class IntersectionCastTypeReference extends TypeReference {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ast.TypeReference#traverse(org.eclipse.jdt.internal.compiler.ASTVisitor, org.eclipse.jdt.internal.compiler.lookup.ClassScope)
+	 * @see org.summer.sdt.internal.compiler.ast.TypeReference#traverse(org.summer.sdt.internal.compiler.ASTVisitor, org.summer.sdt.internal.compiler.lookup.ClassScope)
 	 */
 	public void traverse(ASTVisitor visitor, ClassScope scope) {
 		throw new UnsupportedOperationException("Unexpected traversal request: IntersectionTypeReference in class scope"); //$NON-NLS-1$
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.ast.Expression#printExpression(int, java.lang.StringBuffer)
+	 * @see org.summer.sdt.internal.compiler.ast.Expression#printExpression(int, java.lang.StringBuffer)
 	 */
 	public StringBuffer printExpression(int indent, StringBuffer output) {
 		int length = this.typeReferences == null ? 0 : this.typeReferences.length;

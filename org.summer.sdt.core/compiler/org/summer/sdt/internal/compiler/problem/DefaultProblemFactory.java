@@ -212,7 +212,7 @@ public final String localizedMessage(CategorizedProblem problem) {
  */
 public static HashtableOfInt loadMessageTemplates(Locale loc) {
 	ResourceBundle bundle = null;
-	String bundleName = "org.eclipse.jdt.internal.compiler.problem.messages"; //$NON-NLS-1$
+	String bundleName = "org.summer.sdt.internal.compiler.problem.messages"; //$NON-NLS-1$
 	try {
 		bundle = ResourceBundle.getBundle(bundleName, loc);
 	} catch(MissingResourceException e) {

@@ -15,7 +15,7 @@
  *								Bug 400874 - [1.8][compiler] Inference infrastructure should evolve to meet JLS8 18.x (Part G of JSR335 spec)
  *								Bug 424710 - [1.8][compiler] CCE in SingleNameReference.localVariableBinding
  *								Bug 423505 - [1.8] Implement "18.5.4 More Specific Method Inference"
- *								Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *								Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *								Bug 418743 - [1.8][null] contradictory annotations on invocation of generic method not reported
  *								Bug 416182 - [1.8][compiler][null] Contradictory null annotations not rejected
  *								Bug 429958 - [1.8][null] evaluate new DefaultLocation attribute of @NonNullByDefault
@@ -564,7 +564,7 @@ public class ParameterizedGenericMethodBinding extends ParameterizedMethodBindin
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.Substitution#environment()
+	 * @see org.summer.sdt.internal.compiler.lookup.Substitution#environment()
 	 */
 	public LookupEnvironment environment() {
 		return this.environment;
@@ -724,14 +724,14 @@ public class ParameterizedGenericMethodBinding extends ParameterizedMethodBindin
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.Substitution#isRawSubstitution()
+	 * @see org.summer.sdt.internal.compiler.lookup.Substitution#isRawSubstitution()
 	 */
 	public boolean isRawSubstitution() {
 		return this.isRaw;
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.Substitution#substitute(org.eclipse.jdt.internal.compiler.lookup.TypeVariableBinding)
+	 * @see org.summer.sdt.internal.compiler.lookup.Substitution#substitute(org.summer.sdt.internal.compiler.lookup.TypeVariableBinding)
 	 */
 	public TypeBinding substitute(TypeVariableBinding originalVariable) {
         TypeVariableBinding[] variables = this.originalMethod.typeVariables;
@@ -744,7 +744,7 @@ public class ParameterizedGenericMethodBinding extends ParameterizedMethodBindin
 	    return originalVariable;
 	}
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.lookup.MethodBinding#tiebreakMethod()
+	 * @see org.summer.sdt.internal.compiler.lookup.MethodBinding#tiebreakMethod()
 	 */
 	public MethodBinding tiebreakMethod() {
 		if (this.tiebreakMethod == null)

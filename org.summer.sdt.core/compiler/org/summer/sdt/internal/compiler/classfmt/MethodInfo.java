@@ -244,7 +244,7 @@ public IBinaryAnnotation[] getAnnotations() {
 	return null;
 }
 /**
- * @see org.eclipse.jdt.internal.compiler.env.IGenericMethod#getArgumentNames()
+ * @see org.summer.sdt.internal.compiler.env.IGenericMethod#getArgumentNames()
  */
 public char[][] getArgumentNames() {
 	if (this.argumentNames == null) {

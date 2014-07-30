@@ -88,21 +88,21 @@ public class CommentRecorderParser extends Parser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.Parser#consumeClassHeader()
+	 * @see org.summer.sdt.internal.compiler.parser.Parser#consumeClassHeader()
 	 */
 	protected void consumeClassHeader() {
 		pushOnCommentsStack(0, this.scanner.commentPtr);
 		super.consumeClassHeader();
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.Parser#consumeEmptyTypeDeclaration()
+	 * @see org.summer.sdt.internal.compiler.parser.Parser#consumeEmptyTypeDeclaration()
 	 */
 	protected void consumeEmptyTypeDeclaration() {
 		pushOnCommentsStack(0, this.scanner.commentPtr);
 		super.consumeEmptyTypeDeclaration();
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.Parser#consumeInterfaceHeader()
+	 * @see org.summer.sdt.internal.compiler.parser.Parser#consumeInterfaceHeader()
 	 */
 	protected void consumeInterfaceHeader() {
 		pushOnCommentsStack(0, this.scanner.commentPtr);
@@ -110,7 +110,7 @@ public class CommentRecorderParser extends Parser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.Parser#endParse(int)
+	 * @see org.summer.sdt.internal.compiler.parser.Parser#endParse(int)
 	 */
 	protected CompilationUnitDeclaration endParse(int act) {
 		CompilationUnitDeclaration unit = super.endParse(act);
@@ -123,7 +123,7 @@ public class CommentRecorderParser extends Parser {
 
 	/* (non-Javadoc)
 	 * Save all source comments currently stored before flushing them.
-	 * @see org.eclipse.jdt.internal.compiler.parser.Parser#flushCommentsDefinedPriorTo(int)
+	 * @see org.summer.sdt.internal.compiler.parser.Parser#flushCommentsDefinedPriorTo(int)
 	 */
 	public int flushCommentsDefinedPriorTo(int position) {
 
@@ -201,14 +201,14 @@ public class CommentRecorderParser extends Parser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.Parser#initialize()
+	 * @see org.summer.sdt.internal.compiler.parser.Parser#initialize()
 	 */
 	public void initialize(boolean parsingCompilationUnit) {
 		super.initialize(parsingCompilationUnit);
 		this.commentPtr = -1;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.parser.Parser#initialize()
+	 * @see org.summer.sdt.internal.compiler.parser.Parser#initialize()
 	 */
 	public void initialize() {
 		super.initialize();
@@ -217,7 +217,7 @@ public class CommentRecorderParser extends Parser {
 
 	/* (non-Javadoc)
 	 * Create and store a specific comment recorder scanner.
-	 * @see org.eclipse.jdt.internal.compiler.parser.Parser#initializeScanner()
+	 * @see org.summer.sdt.internal.compiler.parser.Parser#initializeScanner()
 	 */
 	public void initializeScanner() {
 		this.scanner = new Scanner(
@@ -259,7 +259,7 @@ public class CommentRecorderParser extends Parser {
 	/* (non-Javadoc)
 	 * Save all source comments currently stored before flushing them.
 	 * this.scanner.commentPtr is expected *not* yet being reset before calling this method.
-	 * @see org.eclipse.jdt.internal.compiler.parser.Parser#resetModifiers()
+	 * @see org.summer.sdt.internal.compiler.parser.Parser#resetModifiers()
 	 */
 	protected void resetModifiers() {
 		pushOnCommentsStack(0, this.scanner.commentPtr);

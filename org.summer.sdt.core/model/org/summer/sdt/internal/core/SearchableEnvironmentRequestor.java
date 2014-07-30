@@ -25,7 +25,7 @@ import org.summer.sdt.internal.compiler.env.ICompilationUnit;
 
 /**
  * Implements <code>IJavaElementRequestor</code>, wrappering and forwarding
- * results onto a <code>org.eclipse.jdt.internal.codeassist.api.ISearchRequestor</code>.
+ * results onto a <code>org.summer.sdt.internal.codeassist.api.ISearchRequestor</code>.
  */
 class SearchableEnvironmentRequestor extends JavaElementRequestor {
 	/**

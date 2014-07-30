@@ -60,7 +60,7 @@ public AndPattern(SearchPattern leftPattern, SearchPattern rightPattern) {
 }
 
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.core.search.matching.InternalSearchPattern#currentPattern()
+ * @see org.summer.sdt.internal.core.search.matching.InternalSearchPattern#currentPattern()
  */
 public SearchPattern currentPattern() {
 	return this.patterns[this.current++];

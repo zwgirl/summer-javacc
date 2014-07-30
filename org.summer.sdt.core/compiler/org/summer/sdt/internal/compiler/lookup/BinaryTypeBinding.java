@@ -273,7 +273,7 @@ public BinaryTypeBinding(PackageBinding packageBinding, IBinaryType binaryType, 
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding#availableFields()
+ * @see org.summer.sdt.internal.compiler.lookup.ReferenceBinding#availableFields()
  */
 public FieldBinding[] availableFields() {
 	
@@ -333,7 +333,7 @@ private TypeVariableBinding[] addMethodTypeVariables(TypeVariableBinding[] metho
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding#availableMethods()
+ * @see org.summer.sdt.internal.compiler.lookup.ReferenceBinding#availableMethods()
  */
 public MethodBinding[] availableMethods() {
 	
@@ -980,7 +980,7 @@ private MethodBinding findMethod(char[] methodDescriptor, char[][][] missingType
 }
 
 /**
- * @see org.eclipse.jdt.internal.compiler.lookup.TypeBinding#genericTypeSignature()
+ * @see org.summer.sdt.internal.compiler.lookup.TypeBinding#genericTypeSignature()
  */
 public char[] genericTypeSignature() {
 	if (!isPrototype())

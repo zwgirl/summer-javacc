@@ -47,7 +47,7 @@ public class BinaryType extends BinaryMember implements IType, SuffixConstants {
 	private static final IMethod[] NO_METHODS = new IMethod[0];
 	private static final IType[] NO_TYPES = new IType[0];
 	private static final IInitializer[] NO_INITIALIZERS = new IInitializer[0];
-	public static final JavadocContents EMPTY_JAVADOC = new JavadocContents(null, org.summer.sdt.util.Util.EMPTY_STRING);
+	public static final JavadocContents EMPTY_JAVADOC = new JavadocContents(null, org.summer.sdt.internal.compiler.util.Util.EMPTY_STRING);
 
 protected BinaryType(JavaElement parent, String name) {
 	super(parent, name);
@@ -512,7 +512,7 @@ public String getSuperclassTypeSignature() throws JavaModelException {
 			index++;
 		}
 		int start = index;
-		index = org.summer.sdt.util.Util.scanClassTypeSignature(genericSignature, start) + 1;
+		index = org.summer.sdt.internal.compiler.util.Util.scanClassTypeSignature(genericSignature, start) + 1;
 		char[] superclassSig = CharOperation.subarray(genericSignature, start, index);
 		return new String(ClassFile.translatedName(superclassSig));
 	} else {
@@ -598,10 +598,10 @@ public String[] getSuperInterfaceTypeSignatures() throws JavaModelException {
 			index++;
 		}
 		// skip superclass
-		index = org.summer.sdt.util.Util.scanClassTypeSignature(genericSignature, index) + 1;
+		index = org.summer.sdt.internal.compiler.util.Util.scanClassTypeSignature(genericSignature, index) + 1;
 		while (index  < signatureLength) {
 			int start = index;
-			index = org.summer.sdt.util.Util.scanClassTypeSignature(genericSignature, start) + 1;
+			index = org.summer.sdt.internal.compiler.util.Util.scanClassTypeSignature(genericSignature, start) + 1;
 			char[] interfaceSig = CharOperation.subarray(genericSignature, start, index);
 			interfaces.add(new String(ClassFile.translatedName(interfaceSig)));
 		}
@@ -754,7 +754,7 @@ public boolean isMember() throws JavaModelException {
 	return info.isMember();
 }
 /* (non-Javadoc)
- * @see org.eclipse.jdt.core.IType#isResolved()
+ * @see org.summer.sdt.core.IType#isResolved()
  */
 public boolean isResolved() {
 	return false;

@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *     Stephan Herrmann - Contributions for
- *								bug 342671 - ClassCastException: org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding cannot be cast to org.eclipse.jdt.internal.compiler.lookup.ArrayBinding
+ *								bug 342671 - ClassCastException: org.summer.sdt.internal.compiler.lookup.SourceTypeBinding cannot be cast to org.summer.sdt.internal.compiler.lookup.ArrayBinding
  *								bug 392099 - [1.8][compiler][null] Apply null annotation on types for null analysis
  *								Bug 415043 - [1.8][null] Follow-up re null type annotations after bug 392099
  *								Bug 416181 – [1.8][compiler][null] Invalid assignment is not rejected by the compiler
@@ -149,7 +149,7 @@ public class ParameterizedQualifiedTypeReference extends ArrayQualifiedTypeRefer
 	}
 	
 	/* (non-Javadoc)
-     * @see org.eclipse.jdt.internal.compiler.ast.ArrayQualifiedTypeReference#getTypeBinding(org.eclipse.jdt.internal.compiler.lookup.Scope)
+     * @see org.summer.sdt.internal.compiler.ast.ArrayQualifiedTypeReference#getTypeBinding(org.summer.sdt.internal.compiler.lookup.Scope)
      */
     protected TypeBinding getTypeBinding(Scope scope) {
         return null; // not supported here - combined with resolveType(...)

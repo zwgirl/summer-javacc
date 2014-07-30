@@ -275,7 +275,7 @@ public class AND_AND_Expression extends BinaryExpression {
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.BinaryExpression#resolveType(org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ast.BinaryExpression#resolveType(org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public TypeBinding resolveType(BlockScope scope) {
 		TypeBinding result = super.resolveType(scope);

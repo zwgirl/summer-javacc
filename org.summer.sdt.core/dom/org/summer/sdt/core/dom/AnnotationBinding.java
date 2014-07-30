@@ -230,7 +230,7 @@ class AnnotationBinding implements IAnnotationBinding {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.IBinding#isRecovered()
+	 * @see org.summer.sdt.core.dom.IBinding#isRecovered()
 	 */
 	public boolean isRecovered() {
         ReferenceBinding annotationType = this.binding.getAnnotationType();

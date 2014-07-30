@@ -1324,8 +1324,8 @@ public final class ImportRewriteAnalyzer {
 		}
 
 		/**
-		 * @param name Name of the package entry. e.g. org.eclipse.jdt.ui, containing imports like
-		 * org.eclipse.jdt.ui.JavaUI.
+		 * @param name Name of the package entry. e.g. org.summer.sdt.ui, containing imports like
+		 * org.summer.sdt.ui.JavaUI.
 		 * @param group The index of the preference order entry assigned
 		 *    different group id's will result in spacers between the entries
 		 */

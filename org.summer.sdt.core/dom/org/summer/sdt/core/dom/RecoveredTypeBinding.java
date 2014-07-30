@@ -69,42 +69,42 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#createArrayType(int)
+	 * @see org.summer.sdt.core.dom.ITypeBinding#createArrayType(int)
 	 */
 	public ITypeBinding createArrayType(int dims) {
 		return this.resolver.getTypeBinding(this, dims);
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getBinaryName()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getBinaryName()
 	 */
 	public String getBinaryName() {
 		return null;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getBound()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getBound()
 	 */
 	public ITypeBinding getBound() {
 		return null;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getGenericTypeOfWildcardType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getGenericTypeOfWildcardType()
 	 */
 	public ITypeBinding getGenericTypeOfWildcardType() {
 		return null;
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getRank()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getRank()
 	 */
 	public int getRank() {
 		return -1;
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getComponentType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getComponentType()
 	 */
 	public ITypeBinding getComponentType() {
 		if (this.dimensions == 0) return null;
@@ -112,21 +112,21 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getDeclaredFields()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getDeclaredFields()
 	 */
 	public IVariableBinding[] getDeclaredFields() {
 		return TypeBinding.NO_VARIABLE_BINDINGS;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getDeclaredMethods()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getDeclaredMethods()
 	 */
 	public IMethodBinding[] getDeclaredMethods() {
 		return TypeBinding.NO_METHOD_BINDINGS;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getDeclaredModifiers()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getDeclaredModifiers()
 	 * @deprecated Use ITypeBinding#getModifiers() instead
 	 */
 	public int getDeclaredModifiers() {
@@ -134,35 +134,35 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getDeclaredTypes()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getDeclaredTypes()
 	 */
 	public ITypeBinding[] getDeclaredTypes() {
 		return TypeBinding.NO_TYPE_BINDINGS;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getDeclaringClass()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getDeclaringClass()
 	 */
 	public ITypeBinding getDeclaringClass() {
 		return null;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getDeclaringMethod()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getDeclaringMethod()
 	 */
 	public IMethodBinding getDeclaringMethod() {
 		return null;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getDimensions()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getDimensions()
 	 */
 	public int getDimensions() {
 		return this.dimensions;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getElementType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getElementType()
 	 */
 	public ITypeBinding getElementType() {
 		if (this.binding != null) {
@@ -186,14 +186,14 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getErasure()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getErasure()
 	 */
 	public ITypeBinding getErasure() {
 		return this;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getFunctionalInterfaceMethod
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getFunctionalInterfaceMethod
 	 */
 	@Override
 	public IMethodBinding getFunctionalInterfaceMethod() {
@@ -201,21 +201,21 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getInterfaces()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getInterfaces()
 	 */
 	public ITypeBinding[] getInterfaces() {
 		return TypeBinding.NO_TYPE_BINDINGS;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getModifiers()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getModifiers()
 	 */
 	public int getModifiers() {
 		return Modifier.NONE;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getName()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getName()
 	 */
 	public String getName() {
 		char[] brackets = new char[this.dimensions * 2];
@@ -240,7 +240,7 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getPackage()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getPackage()
 	 */
 	public IPackageBinding getPackage() {
 		if (this.binding != null) {
@@ -266,7 +266,7 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getQualifiedName()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getQualifiedName()
 	 */
 	public String getQualifiedName() {
 		ReferenceBinding referenceBinding = getReferenceBinding();
@@ -302,7 +302,7 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getSuperclass()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getSuperclass()
 	 */
 	public ITypeBinding getSuperclass() {
 		if (getQualifiedName().equals("java.lang.Object")) {	//$NON-NLS-1$
@@ -312,7 +312,7 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getTypeArguments()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getTypeArguments()
 	 */
 	public ITypeBinding[] getTypeArguments() {
 		if (this.binding != null) {
@@ -344,56 +344,56 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getTypeBounds()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getTypeBounds()
 	 */
 	public ITypeBinding[] getTypeBounds() {
 		return TypeBinding.NO_TYPE_BINDINGS;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getTypeDeclaration()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getTypeDeclaration()
 	 */
 	public ITypeBinding getTypeDeclaration() {
 		return this;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getTypeParameters()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getTypeParameters()
 	 */
 	public ITypeBinding[] getTypeParameters() {
 		return TypeBinding.NO_TYPE_BINDINGS;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#getWildcard()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#getWildcard()
 	 */
 	public ITypeBinding getWildcard() {
 		return null;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isAnnotation()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isAnnotation()
 	 */
 	public boolean isAnnotation() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isAnonymous()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isAnonymous()
 	 */
 	public boolean isAnonymous() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isArray()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isArray()
 	 */
 	public boolean isArray() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isAssignmentCompatible(org.eclipse.jdt.core.dom.ITypeBinding)
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isAssignmentCompatible(org.summer.sdt.core.dom.ITypeBinding)
 	 */
 	public boolean isAssignmentCompatible(ITypeBinding typeBinding) {
 		if ("java.lang.Object".equals(typeBinding.getQualifiedName())) { //$NON-NLS-1$
@@ -404,14 +404,14 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isCapture()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isCapture()
 	 */
 	public boolean isCapture() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isCastCompatible(org.eclipse.jdt.core.dom.ITypeBinding)
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isCastCompatible(org.summer.sdt.core.dom.ITypeBinding)
 	 */
 	public boolean isCastCompatible(ITypeBinding typeBinding) {
 		if ("java.lang.Object".equals(typeBinding.getQualifiedName())) { //$NON-NLS-1$
@@ -422,70 +422,70 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isClass()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isClass()
 	 */
 	public boolean isClass() {
 		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isEnum()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isEnum()
 	 */
 	public boolean isEnum() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isFromSource()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isFromSource()
 	 */
 	public boolean isFromSource() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isGenericType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isGenericType()
 	 */
 	public boolean isGenericType() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isInterface()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isInterface()
 	 */
 	public boolean isInterface() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isLocal()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isLocal()
 	 */
 	public boolean isLocal() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isMember()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isMember()
 	 */
 	public boolean isMember() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isNested()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isNested()
 	 */
 	public boolean isNested() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isNullType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isNullType()
 	 */
 	public boolean isNullType() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isParameterizedType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isParameterizedType()
 	 */
 	public boolean isParameterizedType() {
 		if (this.innerTypeBinding != null) {
@@ -498,21 +498,21 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isPrimitive()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isPrimitive()
 	 */
 	public boolean isPrimitive() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isRawType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isRawType()
 	 */
 	public boolean isRawType() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isSubTypeCompatible(org.eclipse.jdt.core.dom.ITypeBinding)
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isSubTypeCompatible(org.summer.sdt.core.dom.ITypeBinding)
 	 */
 	public boolean isSubTypeCompatible(ITypeBinding typeBinding) {
 		if ("java.lang.Object".equals(typeBinding.getQualifiedName())) { //$NON-NLS-1$
@@ -523,42 +523,42 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isTopLevel()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isTopLevel()
 	 */
 	public boolean isTopLevel() {
 		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isTypeVariable()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isTypeVariable()
 	 */
 	public boolean isTypeVariable() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isUpperbound()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isUpperbound()
 	 */
 	public boolean isUpperbound() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.ITypeBinding#isWildcardType()
+	 * @see org.summer.sdt.core.dom.ITypeBinding#isWildcardType()
 	 */
 	public boolean isWildcardType() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.IBinding#getAnnotations()
+	 * @see org.summer.sdt.core.dom.IBinding#getAnnotations()
 	 */
 	public IAnnotationBinding[] getAnnotations() {
 		return AnnotationBinding.NoAnnotations;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.IBinding#getJavaElement()
+	 * @see org.summer.sdt.core.dom.IBinding#getJavaElement()
 	 */
 	public IJavaElement getJavaElement() {
 		IPackageBinding packageBinding = getPackage();
@@ -573,7 +573,7 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.IBinding#getKey()
+	 * @see org.summer.sdt.core.dom.IBinding#getKey()
 	 */
 	public String getKey() {
 		StringBuffer buffer = new StringBuffer();
@@ -609,21 +609,21 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.IBinding#getKind()
+	 * @see org.summer.sdt.core.dom.IBinding#getKind()
 	 */
 	public int getKind() {
 		return IBinding.TYPE;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.IBinding#isDeprecated()
+	 * @see org.summer.sdt.core.dom.IBinding#isDeprecated()
 	 */
 	public boolean isDeprecated() {
 		return false;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.IBinding#isEqualTo(org.eclipse.jdt.core.dom.IBinding)
+	 * @see org.summer.sdt.core.dom.IBinding#isEqualTo(org.summer.sdt.core.dom.IBinding)
 	 */
 	public boolean isEqualTo(IBinding other) {
 		if (!other.isRecovered() || other.getKind() != IBinding.TYPE) return false;
@@ -631,14 +631,14 @@ class RecoveredTypeBinding implements ITypeBinding {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.IBinding#isRecovered()
+	 * @see org.summer.sdt.core.dom.IBinding#isRecovered()
 	 */
 	public boolean isRecovered() {
 		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.IBinding#isSynthetic()
+	 * @see org.summer.sdt.core.dom.IBinding#isSynthetic()
 	 */
 	public boolean isSynthetic() {
 		return false;

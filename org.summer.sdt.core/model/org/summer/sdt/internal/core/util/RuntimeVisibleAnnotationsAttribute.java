@@ -54,13 +54,13 @@ public class RuntimeVisibleAnnotationsAttribute
 		}
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IRuntimeVisibleAnnotations#getAnnotations()
+	 * @see org.summer.sdt.core.util.IRuntimeVisibleAnnotations#getAnnotations()
 	 */
 	public IAnnotation[] getAnnotations() {
 		return this.annotations;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IRuntimeVisibleAnnotations#getAnnotationsNumber()
+	 * @see org.summer.sdt.core.util.IRuntimeVisibleAnnotations#getAnnotationsNumber()
 	 */
 	public int getAnnotationsNumber() {
 		return this.annotationsNumber;

@@ -82,12 +82,12 @@ public String getTypeSignature() throws JavaModelException {
 	return new String(ClassFile.translatedName(info.getTypeName()));
 }
 /* (non-Javadoc)
- * @see org.eclipse.jdt.core.IField#isEnumConstant()
+ * @see org.summer.sdt.core.IField#isEnumConstant()
  */public boolean isEnumConstant() throws JavaModelException {
 	return Flags.isEnum(getFlags());
 }
 /* (non-Javadoc)
- * @see org.eclipse.jdt.core.IField#isResolved()
+ * @see org.summer.sdt.core.IField#isResolved()
  */
 public boolean isResolved() {
 	return false;

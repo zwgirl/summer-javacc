@@ -17,7 +17,7 @@ package org.summer.sdt.core.dom.rewrite;
  * This interface is not intended to be implemented by clients.
  * </p>
  *
- * @see ASTRewrite#track(org.eclipse.jdt.core.dom.ASTNode)
+ * @see ASTRewrite#track(org.summer.sdt.core.dom.ASTNode)
  * @since 3.0
  * @noimplement This interface is not intended to be implemented by clients.
  */

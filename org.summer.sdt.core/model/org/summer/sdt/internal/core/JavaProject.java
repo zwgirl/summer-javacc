@@ -471,7 +471,7 @@ public class JavaProject
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.core.JavaElement#close()
+	 * @see org.summer.sdt.internal.core.JavaElement#close()
 	 */
 	public void close() throws JavaModelException {
 		if (JavaProject.hasJavaNature(this.project)) {

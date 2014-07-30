@@ -62,7 +62,7 @@ protected int matchContainer() {
 	return CLASS_CONTAINER;
 }
 /* (non-Javadoc)
- * @see org.eclipse.jdt.internal.core.search.matching.PatternLocator#matchReportReference(org.eclipse.jdt.internal.compiler.ast.ASTNode, org.eclipse.jdt.core.IJavaElement, org.eclipse.jdt.internal.compiler.lookup.Binding, int, org.eclipse.jdt.internal.core.search.matching.MatchLocator)
+ * @see org.summer.sdt.internal.core.search.matching.PatternLocator#matchReportReference(org.summer.sdt.internal.compiler.ast.ASTNode, org.summer.sdt.core.IJavaElement, org.summer.sdt.internal.compiler.lookup.Binding, int, org.summer.sdt.internal.core.search.matching.MatchLocator)
  */
 protected void matchReportReference(ASTNode reference, IJavaElement element, Binding elementBinding, int accuracy, MatchLocator locator) throws CoreException {
 	if (elementBinding instanceof ReferenceBinding) {

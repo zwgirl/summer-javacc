@@ -70,8 +70,8 @@ public class InstanceOfExpression extends OperatorExpression {
 	/**
 	 * Code generation for instanceOfExpression
 	 *
-	 * @param currentScope org.eclipse.jdt.internal.compiler.lookup.BlockScope
-	 * @param codeStream org.eclipse.jdt.internal.compiler.codegen.CodeStream
+	 * @param currentScope org.summer.sdt.internal.compiler.lookup.BlockScope
+	 * @param codeStream org.summer.sdt.internal.compiler.codegen.CodeStream
 	 * @param valueRequired boolean
 	*/
 	public void generateCode(BlockScope currentScope, CodeStream codeStream, boolean valueRequired) {
@@ -116,7 +116,7 @@ public class InstanceOfExpression extends OperatorExpression {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.Expression#tagAsUnnecessaryCast(Scope,TypeBinding)
+	 * @see org.summer.sdt.internal.compiler.ast.Expression#tagAsUnnecessaryCast(Scope,TypeBinding)
 	 */
 	public void tagAsUnnecessaryCast(Scope scope, TypeBinding castType) {
 		// null is not instanceof Type, recognize direct scenario

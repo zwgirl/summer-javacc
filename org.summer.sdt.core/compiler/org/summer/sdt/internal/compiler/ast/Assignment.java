@@ -26,7 +26,7 @@
  *							bug 402993 - [null] Follow up of bug 401088: Missing warning about redundant null check
  *							bug 403147 - [compiler][null] FUP of bug 400761: consolidate interaction between unboxing, NPE, and deferred checking
  *							Bug 392099 - [1.8][compiler][null] Apply null annotation on types for null analysis
- *							Bug 427438 - [1.8][compiler] NPE at org.eclipse.jdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
+ *							Bug 427438 - [1.8][compiler] NPE at org.summer.sdt.internal.compiler.ast.ConditionalExpression.generateCode(ConditionalExpression.java:280)
  *******************************************************************************/
 package org.summer.sdt.internal.compiler.ast;
 
@@ -244,7 +244,7 @@ public class Assignment extends Expression {
 	}
 	
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.ast.Expression#resolveTypeExpecting(org.eclipse.jdt.internal.compiler.lookup.BlockScope, org.eclipse.jdt.internal.compiler.lookup.TypeBinding)
+	 * @see org.summer.sdt.internal.compiler.ast.Expression#resolveTypeExpecting(org.summer.sdt.internal.compiler.lookup.BlockScope, org.summer.sdt.internal.compiler.lookup.TypeBinding)
 	 */
 	public TypeBinding resolveTypeExpecting(BlockScope scope, TypeBinding expectedType) {
 	

@@ -140,7 +140,7 @@ public class RecoveryScanner extends Scanner {
 	protected int getNextToken0() throws InvalidInputException {
 		if(this.pendingTokensPtr > -1) {
 			int nextToken = this.pendingTokens[this.pendingTokensPtr--];
-			if(nextToken == TerminalTokens.IDENTIFIER){
+			if(nextToken == TerminalTokens.TokenNameIdentifier){
 				this.fakeTokenSource = FAKE_IDENTIFIER;
 			} else {
 				this.fakeTokenSource = CharOperation.NO_CHAR;
@@ -161,7 +161,7 @@ public class RecoveryScanner extends Scanner {
 					this.startPosition = this.currentPosition;
 					this.skipNextInsertedTokens = i;
 					int nextToken = this.pendingTokens[this.pendingTokensPtr--];
-					if(nextToken == TerminalTokens.IDENTIFIER){
+					if(nextToken == TerminalTokens.TokenNameIdentifier){
 						this.fakeTokenSource = FAKE_IDENTIFIER;
 					} else {
 						this.fakeTokenSource = CharOperation.NO_CHAR;
@@ -187,7 +187,7 @@ public class RecoveryScanner extends Scanner {
 					this.isInserted = false;
 					this.currentPosition = this.data.replacedTokensEnd[i] + 1;
 					int nextToken = this.pendingTokens[this.pendingTokensPtr--];
-					if(nextToken == TerminalTokens.IDENTIFIER){
+					if(nextToken == TerminalTokens.TokenNameIdentifier){
 						this.fakeTokenSource = FAKE_IDENTIFIER;
 					} else {
 						this.fakeTokenSource = CharOperation.NO_CHAR;

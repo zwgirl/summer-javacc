@@ -43,7 +43,7 @@ public class AnnotationDefaultAttribute extends ClassFileAttribute
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.util.IAnnotationDefaultAttribute#getMemberValue()
+	 * @see org.summer.sdt.core.util.IAnnotationDefaultAttribute#getMemberValue()
 	 */
 	public IAnnotationComponentValue getMemberValue() {
 		return this.memberValue;

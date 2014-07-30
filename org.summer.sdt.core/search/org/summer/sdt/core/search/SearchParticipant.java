@@ -118,7 +118,7 @@ public abstract class SearchParticipant {
 	 * delegatee's one). In the particular case of delegating to the default
 	 * search participant (see {@link SearchEngine#getDefaultSearchParticipant()}),
 	 * the provided document's path must be a path ending with one of the
-	 * {@link org.eclipse.jdt.core.JavaCore#getJavaLikeExtensions() Java-like extensions}
+	 * {@link org.summer.sdt.core.JavaCore#getJavaLikeExtensions() Java-like extensions}
 	 * or with '.class'.
 	 * <p>
 	 * The given index location must represent a path in the file system to a file that
@@ -143,7 +143,7 @@ public abstract class SearchParticipant {
 	 * delegatee's one). In the particular case of delegating to the default
 	 * search participant (see {@link SearchEngine#getDefaultSearchParticipant()}),
 	 * the provided document's path must be a path ending with one of the
-	 * {@link org.eclipse.jdt.core.JavaCore#getJavaLikeExtensions() Java-like extensions}
+	 * {@link org.summer.sdt.core.JavaCore#getJavaLikeExtensions() Java-like extensions}
 	 * or with '.class'.
 	 * <p>
 	 * The given index location must represent a path in the file system to a file that

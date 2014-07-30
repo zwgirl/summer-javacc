@@ -24,14 +24,14 @@ import org.summer.sdt.internal.core.util.Util;
 public class UserLibraryClasspathContainerInitializer extends ClasspathContainerInitializer {
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.ClasspathContainerInitializer#canUpdateClasspathContainer(org.eclipse.core.runtime.IPath, org.eclipse.jdt.core.IJavaProject)
+	 * @see org.summer.sdt.core.ClasspathContainerInitializer#canUpdateClasspathContainer(org.eclipse.core.runtime.IPath, org.summer.sdt.core.IJavaProject)
 	 */
 	public boolean canUpdateClasspathContainer(IPath containerPath, IJavaProject project) {
 		return isUserLibraryContainer(containerPath);
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.ClasspathContainerInitializer#getComparisonID(org.eclipse.core.runtime.IPath, org.eclipse.jdt.core.IJavaProject)
+	 * @see org.summer.sdt.core.ClasspathContainerInitializer#getComparisonID(org.eclipse.core.runtime.IPath, org.summer.sdt.core.IJavaProject)
 	 */
 	public Object getComparisonID(IPath containerPath, IJavaProject project) {
 		return containerPath;

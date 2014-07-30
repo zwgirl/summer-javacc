@@ -26,13 +26,13 @@ public class ResolvedBinaryMethod extends BinaryMethod {
 		this.uniqueKey = uniqueKey;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.core.BinaryMethod#getKey()
+	 * @see org.summer.sdt.internal.core.BinaryMethod#getKey()
 	 */
 	public String getKey() {
 		return this.uniqueKey;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.core.IMethod#isResolved()
+	 * @see org.summer.sdt.core.IMethod#isResolved()
 	 */
 	public boolean isResolved() {
 		return true;

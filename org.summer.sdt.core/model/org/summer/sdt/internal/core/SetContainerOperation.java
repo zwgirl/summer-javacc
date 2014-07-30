@@ -162,13 +162,13 @@ public class SetContainerOperation extends ChangeClasspathOperation {
 			"	projects: {" +//$NON-NLS-1$
 			org.summer.sdt.internal.compiler.util.Util.toString(
 				this.affectedProjects,
-				new org.eclipse.jdt.internal.compiler.util.Util.Displayable(){
+				new org.summer.sdt.internal.compiler.util.Util.Displayable(){
 					public String displayString(Object o) { return ((IJavaProject) o).getElementName(); }
 				}) +
 			"}\n	values: {\n"  +//$NON-NLS-1$
 			org.summer.sdt.internal.compiler.util.Util.toString(
 				this.respectiveContainers,
-				new org.eclipse.jdt.internal.compiler.util.Util.Displayable(){
+				new org.summer.sdt.internal.compiler.util.Util.Displayable(){
 					public String displayString(Object o) {
 						StringBuffer buffer = new StringBuffer("		"); //$NON-NLS-1$
 						if (o == null) {

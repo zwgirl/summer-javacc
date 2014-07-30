@@ -28,7 +28,7 @@ IBinaryAnnotation[] getAnnotations();
 
 /**
  * Return {@link ClassSignature} for a Class {@link java.lang.Class}.
- * Return {@link org.eclipse.jdt.internal.compiler.impl.Constant} for compile-time constant of primitive type, as well as String literals.
+ * Return {@link org.summer.sdt.internal.compiler.impl.Constant} for compile-time constant of primitive type, as well as String literals.
  * Return {@link EnumConstantSignature} if value is an enum constant.
  * Return {@link IBinaryAnnotation} for annotation type.
  * Return {@link Object}[] for array type.

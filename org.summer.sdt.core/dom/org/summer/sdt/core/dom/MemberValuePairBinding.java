@@ -77,12 +77,12 @@ class MemberValuePairBinding implements IMemberValuePairBinding {
 					// TypeIds.T_JavaLangString:
 					return constant.stringValue();
 			}
-		} else if (internalObject instanceof org.eclipse.jdt.internal.compiler.lookup.TypeBinding) {
-			return resolver.getTypeBinding((org.eclipse.jdt.internal.compiler.lookup.TypeBinding) internalObject);
-		} else if (internalObject instanceof org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding) {
-			return resolver.getAnnotationInstance((org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding) internalObject);
-		} else if (internalObject instanceof org.eclipse.jdt.internal.compiler.lookup.FieldBinding) {
-			return resolver.getVariableBinding((org.eclipse.jdt.internal.compiler.lookup.FieldBinding) internalObject);
+		} else if (internalObject instanceof org.summer.sdt.internal.compiler.lookup.TypeBinding) {
+			return resolver.getTypeBinding((org.summer.sdt.internal.compiler.lookup.TypeBinding) internalObject);
+		} else if (internalObject instanceof org.summer.sdt.internal.compiler.lookup.AnnotationBinding) {
+			return resolver.getAnnotationInstance((org.summer.sdt.internal.compiler.lookup.AnnotationBinding) internalObject);
+		} else if (internalObject instanceof org.summer.sdt.internal.compiler.lookup.FieldBinding) {
+			return resolver.getVariableBinding((org.summer.sdt.internal.compiler.lookup.FieldBinding) internalObject);
 		} else if (internalObject instanceof Object[]) {
 			Object[] elements = (Object[]) internalObject;
 			int length = elements.length;
@@ -221,7 +221,7 @@ class MemberValuePairBinding implements IMemberValuePairBinding {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jdt.core.dom.IBinding#isRecovered()
+	 * @see org.summer.sdt.core.dom.IBinding#isRecovered()
 	 */
 	public boolean isRecovered() {
 		return false;

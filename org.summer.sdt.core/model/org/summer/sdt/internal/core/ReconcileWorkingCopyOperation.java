@@ -153,7 +153,7 @@ public class ReconcileWorkingCopyOperation extends JavaModelOperation {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.core.JavaModelOperation#isReadOnly()
+	 * @see org.summer.sdt.internal.core.JavaModelOperation#isReadOnly()
 	 */
 	public boolean isReadOnly() {
 		return true;

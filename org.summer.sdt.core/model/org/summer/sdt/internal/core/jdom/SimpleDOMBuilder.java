@@ -28,7 +28,7 @@ import org.summer.sdt.internal.compiler.problem.DefaultProblemFactory;
  * A DOM builder that uses the SourceElementParser
  * @deprecated The JDOM was made obsolete by the addition in 2.0 of the more
  * powerful, fine-grained DOM/AST API found in the
- * org.eclipse.jdt.core.dom package.
+ * org.summer.sdt.core.dom package.
  */
 @SuppressWarnings({"rawtypes"})
 public class SimpleDOMBuilder extends AbstractDOMBuilder implements ISourceElementRequestor {

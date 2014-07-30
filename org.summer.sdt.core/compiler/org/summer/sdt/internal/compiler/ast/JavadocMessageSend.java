@@ -187,7 +187,7 @@ public class JavadocMessageSend extends MessageSend {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.internal.compiler.lookup.InvocationSite#isSuperAccess()
+	 * @see org.summer.sdt.internal.compiler.lookup.InvocationSite#isSuperAccess()
 	 */
 	public boolean isSuperAccess() {
 		return (this.bits & ASTNode.SuperAccess) != 0;
@@ -218,7 +218,7 @@ public class JavadocMessageSend extends MessageSend {
 
 	/* (non-Javadoc)
 	 * Redefine to capture javadoc specific signatures
-	 * @see org.eclipse.jdt.internal.compiler.ast.ASTNode#traverse(org.eclipse.jdt.internal.compiler.ASTVisitor, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ast.ASTNode#traverse(org.summer.sdt.internal.compiler.ASTVisitor, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public void traverse(ASTVisitor visitor, BlockScope blockScope) {
 		if (visitor.visit(this, blockScope)) {
@@ -235,7 +235,7 @@ public class JavadocMessageSend extends MessageSend {
 	}
 	/* (non-Javadoc)
 	 * Redefine to capture javadoc specific signatures
-	 * @see org.eclipse.jdt.internal.compiler.ast.ASTNode#traverse(org.eclipse.jdt.internal.compiler.ASTVisitor, org.eclipse.jdt.internal.compiler.lookup.BlockScope)
+	 * @see org.summer.sdt.internal.compiler.ast.ASTNode#traverse(org.summer.sdt.internal.compiler.ASTVisitor, org.summer.sdt.internal.compiler.lookup.BlockScope)
 	 */
 	public void traverse(ASTVisitor visitor, ClassScope scope) {
 		if (visitor.visit(this, scope)) {

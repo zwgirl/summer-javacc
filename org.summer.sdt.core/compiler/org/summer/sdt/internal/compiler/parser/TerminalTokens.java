@@ -13,7 +13,7 @@ package org.summer.sdt.internal.compiler.parser;
 
 /**
  * IMPORTANT NOTE: These constants are dedicated to the internal Scanner implementation.
- * It is mirrored in org.eclipse.jdt.core.compiler public package where it is API.
+ * It is mirrored in org.summer.sdt.core.compiler public package where it is API.
  * The mirror implementation is using the backward compatible ITerminalSymbols constant
  * definitions (stable with 2.0), whereas the internal implementation uses TerminalTokens
  * which constant values reflect the latest parser generation state.
@@ -32,707 +32,125 @@ public interface TerminalTokens {
 	int TokenNameNotAToken = 0,
 		TokenNameWHITESPACE = 1000,
 		TokenNameCOMMENT_LINE = 1001,
-		TokenNameCOMMENT_BLOCK = 1010,
-		TokenNameCOMMENT_JAVADOC = 1011;
+		TokenNameCOMMENT_BLOCK = 1002,
+		TokenNameCOMMENT_JAVADOC = 1003;
 
-//	int IDENTIFIER = 22,
-//		ABSTRACT = 51,
-//		ASSERT = 72,
-//		BOOLEAN = 97,
-//		BREAK = 73,
-//		BYTE = 98,
-//		CASE = 99,
-//		CATCH = 100,
-//		CHAR = 101,
-//		CLASS = 67,
-//		CONTINUE = 74,
-//		CONST = 116,
-//		DEFAULT_ = 75,
-//		DO = 76,
-//		DOUBLE = 102,
-//		ELSE = 111,
-//		ENUM = 69,
-//		EXTENDS = 96,
-//		FALSE = 38,
-//		FINAL = 52,
-//		FINALLY = 109,
-//		FLOAT = 103,
-//		FOR = 77,
-//		GOTO = 117,
-//		IF = 78,
-//		IMPLEMENTS = 114,
-//		IMPORT = 104,
-//		INSTANCEOF = 17,
-//		INT = 105,
-//		INTERFACE = 68,
-//		LONG = 106,
-//		NATIVE = 53,
-//		NEW = 36,
-//		NULL = 39,
-//		PACKAGE = 95,
-//		PRIVATE = 54,
-//		PROTECTED = 55,
-//		PUBLIC = 56,
-//		RETURN = 79,
-//		SHORT = 107,
-//		STATIC = 40,
-//		STRICTFP = 57,
-//		SUPER = 34,
-//		SWITCH = 80,
-//		SYNCHRONIZED = 41,
-//		THIS = 35,
-//		THROW = 81,
-//		THROWS = 112,
-//		TRANSIENT = 58,
-//		TRUE = 42,
-//		TRY = 82,
-//		VOID = 108,
-//		VOLATILE = 59,
-//		WHILE = 71,
-//		INTEGER_LITERAL = 43,
-//		LONG_LITERAL = 44,
-//		FLOAT_LITERAL = 45,
-//		DOUBLE_LITERAL = 46,
-//		CHARACTER_LITERAL = 47,
-//		STRING_LITERAL = 48,
-//		PLUS_PLUS = 1,
-//		MINUS_MINUS = 2,
-//		EQUAL_EQUAL = 19,
-//		LESS_EQUAL = 12,
-//		GREATER_EQUAL = 13,
-//		NOT_EQUAL = 20,
-//		LEFT_SHIFT = 18,
-//		RIGHT_SHIFT = 14,
-//		UNSIGNED_RIGHT_SHIFT = 16,
-//		PLUS_EQUAL = 84,
-//		MINUS_EQUAL = 85,
-//		MULTIPLY_EQUAL = 86,
-//		DIVIDE_EQUAL = 87,
-//		AND_EQUAL = 88,
-//		OR_EQUAL = 89,
-//		XOR_EQUAL = 90,
-//		REMAINDER_EQUAL = 91,
-//		LEFT_SHIFT_EQUAL = 92,
-//		RIGHT_SHIFT_EQUAL = 93,
-//		UNSIGNED_RIGHT_SHIFT_EQUAL = 94,
-//		OR_OR = 31,
-//		AND_AND = 30,
-//		PLUS = 4,
-//		MINUS = 5,
-//		NOT = 62,
-//		REMAINDER = 7,
-//		XOR = 23,
-//		AND = 21,
-//		MULTIPLY = 6,
-//		OR = 25,
-//		TWIDDLE = 63,
-//		DIVIDE = 8,
-//		GREATER = 15,
-//		LESS = 11,
-//		LPAREN = 24,
-//		RPAREN = 26,
-//		LBRACE = 49,
-//		RBRACE = 32,
-//		LBRACKET = 10,
-//		RBRACKET = 64,
-//		SEMICOLON = 28,
-//		QUESTION = 29,
-//		COLON = 61,
-//		COMMA = 33,
-//		DOT = 3,
-//		EQUAL = 70,
-//		AT = 37,
-//		ELLIPSIS = 113,
-//		ARROW = 110,
-//		COLON_COLON = 9,
-//		TokenNameBeginLambda = 50,
-//		TokenNameBeginIntersectionCast = 65,
-//		TokenNameBeginTypeArguments = 83,
-//		TokenNameElidedSemicolonAndRightBrace = 66,
-//		AT308 = 27,
-//		AT308DOTDOTDOT = 115,
-//		 STUFF_TO_IGNORE = 139,		
-//		REF = 130,
-//		OUT = 131,
-//		GET = 132,
-//		SET = 133, 
-//		ADD = 134,
-//		REMOVE = 135,
-//		EVENT =136,
-//		EXPORT = 137,
-//		FUNCTION = 138,
-//		MODULE = 140,
-//		
-//		EOF = 0,
-//		ERROR = 148;
-//	
-//	/** Literal token values. */
-//	  String[] tokenImage = {
-//	    "<EOF>",
-//	    "\" \"",
-//	    "\"\\t\"",
-//	    "\"\\n\"",
-//	    "\"\\r\"",
-//	    "\"\\f\"",
-//	    "<token of kind 6>",
-//	    "\"/*\"",
-//	    "<SINGLE_LINE_COMMENT>",
-//	    "\"*/\"",
-//	    "\"*/\"",
-//	    "<token of kind 11>",
-//	    "\"abstract\"",
-//	    "\"assert\"",
-//	    "\"boolean\"",
-//	    "\"break\"",
-//	    "\"byte\"",
-//	    "\"case\"",
-//	    "\"catch\"",
-//	    "\"char\"",
-//	    "\"class\"",
-//	    "\"const\"",
-//	    "\"continue\"",
-//	    "\"default\"",
-//	    "\"do\"",
-//	    "\"double\"",
-//	    "\"else\"",
-//	    "\"enum\"",
-//	    "\"extends\"",
-//	    "\"false\"",
-//	    "\"final\"",
-//	    "\"finally\"",
-//	    "\"float\"",
-//	    "\"for\"",
-//	    "\"goto\"",
-//	    "\"if\"",
-//	    "\"implements\"",
-//	    "\"import\"",
-//	    "\"instanceof\"",
-//	    "\"int\"",
-//	    "\"interface\"",
-//	    "\"long\"",
-//	    "\"native\"",
-//	    "\"new\"",
-//	    "\"null\"",
-//	    "\"package\"",
-//	    "\"private\"",
-//	    "\"protected\"",
-//	    "\"public\"",
-//	    "\"return\"",
-//	    "\"short\"",
-//	    "\"static\"",
-//	    "\"strictfp\"",
-//	    "\"super\"",
-//	    "\"switch\"",
-//	    "\"synchronized\"",
-//	    "\"this\"",
-//	    "\"throw\"",
-//	    "\"throws\"",
-//	    "\"transient\"",
-//	    "\"true\"",
-//	    "\"try\"",
-//	    "\"void\"",
-//	    "\"volatile\"",
-//	    "\"while\"",
-//	    "<INTEGER_LITERAL>",
-//	    "<DECIMAL_LITERAL>",
-//	    "<HEX_LITERAL>",
-//	    "<OCTAL_LITERAL>",
-//	    "<FLOATING_POINT_LITERAL>",
-//	    "<DECIMAL_FLOATING_POINT_LITERAL>",
-//	    "<DECIMAL_EXPONENT>",
-//	    "<HEXADECIMAL_FLOATING_POINT_LITERAL>",
-//	    "<HEXADECIMAL_EXPONENT>",
-//	    "<CHARACTER_LITERAL>",
-//	    "<STRING_LITERAL>",
-//	    "<IDENTIFIER>",
-//	    "<LETTER>",
-//	    "<PART_LETTER>",
-//	    "\"(\"",
-//	    "\")\"",
-//	    "\"{\"",
-//	    "\"}\"",
-//	    "\"[\"",
-//	    "\"]\"",
-//	    "\";\"",
-//	    "\",\"",
-//	    "\".\"",
-//	    "\"@\"",
-//	    "\"=\"",
-//	    "\"<\"",
-//	    "\"!\"",
-//	    "\"~\"",
-//	    "\"?\"",
-//	    "\":\"",
-//	    "\"==\"",
-//	    "\"<=\"",
-//	    "\">=\"",
-//	    "\"!=\"",
-//	    "\"||\"",
-//	    "\"&&\"",
-//	    "\"++\"",
-//	    "\"--\"",
-//	    "\"+\"",
-//	    "\"-\"",
-//	    "\"*\"",
-//	    "\"/\"",
-//	    "\"&\"",
-//	    "\"|\"",
-//	    "\"^\"",
-//	    "\"%\"",
-//	    "\"<<\"",
-//	    "\"+=\"",
-//	    "\"-=\"",
-//	    "\"*=\"",
-//	    "\"/=\"",
-//	    "\"&=\"",
-//	    "\"|=\"",
-//	    "\"^=\"",
-//	    "\"%=\"",
-//	    "\"<<=\"",
-//	    "\">>=\"",
-//	    "\">>>=\"",
-//	    "\"...\"",
-//	    "\">>>\"",
-//	    "\">>\"",
-//	    "\">\"",
-//	    "\"\\u001a\"",
-//	    "<STUFF_TO_IGNORE>",
-//	    "\"</\"",
-//	    "\"/>\"",
-//	    "\"->\"",
-//	  };
-
-	/** End of File. */
-	  int EOF = 0;
-	  /** RegularExpression Id. */
-	  int SINGLE_LINE_COMMENT = 8;
-	  /** RegularExpression Id. */
-	  int FORMAL_COMMENT = 9;
-	  /** RegularExpression Id. */
-	  int MULTI_LINE_COMMENT = 10;
-	  /** RegularExpression Id. */
-	  int ABSTRACT = 12;
-	  /** RegularExpression Id. */
-	  int ASSERT = 13;
-	  /** RegularExpression Id. */
-	  int BOOLEAN = 14;
-	  /** RegularExpression Id. */
-	  int BREAK = 15;
-	  /** RegularExpression Id. */
-	  int BYTE = 16;
-	  /** RegularExpression Id. */
-	  int CASE = 17;
-	  /** RegularExpression Id. */
-	  int CATCH = 18;
-	  /** RegularExpression Id. */
-	  int CHAR = 19;
-	  /** RegularExpression Id. */
-	  int CLASS = 20;
-	  /** RegularExpression Id. */
-	  int CONST = 21;
-	  /** RegularExpression Id. */
-	  int CONTINUE = 22;
-	  /** RegularExpression Id. */
-	  int DEFAULT_ = 23;
-	  /** RegularExpression Id. */
-	  int DO = 24;
-	  /** RegularExpression Id. */
-	  int DOUBLE = 25;
-	  /** RegularExpression Id. */
-	  int ELSE = 26;
-	  /** RegularExpression Id. */
-	  int ENUM = 27;
-	  /** RegularExpression Id. */
-	  int EXTENDS = 28;
-	  /** RegularExpression Id. */
-	  int FALSE = 29;
-	  /** RegularExpression Id. */
-	  int FINAL = 30;
-	  /** RegularExpression Id. */
-	  int FINALLY = 31;
-	  /** RegularExpression Id. */
-	  int FLOAT = 32;
-	  /** RegularExpression Id. */
-	  int FOR = 33;
-	  /** RegularExpression Id. */
-	  int GOTO = 34;
-	  /** RegularExpression Id. */
-	  int IF = 35;
-	  /** RegularExpression Id. */
-	  int IMPLEMENTS = 36;
-	  /** RegularExpression Id. */
-	  int IMPORT = 37;
-	  /** RegularExpression Id. */
-	  int INSTANCEOF = 38;
-	  /** RegularExpression Id. */
-	  int INT = 39;
-	  /** RegularExpression Id. */
-	  int INTERFACE = 40;
-	  /** RegularExpression Id. */
-	  int LONG = 41;
-	  /** RegularExpression Id. */
-	  int NATIVE = 42;
-	  /** RegularExpression Id. */
-	  int NEW = 43;
-	  /** RegularExpression Id. */
-	  int NULL = 44;
-	  /** RegularExpression Id. */
-	  int PACKAGE = 45;
-	  /** RegularExpression Id. */
-	  int PRIVATE = 46;
-	  /** RegularExpression Id. */
-	  int PROTECTED = 47;
-	  /** RegularExpression Id. */
-	  int PUBLIC = 48;
-	  /** RegularExpression Id. */
-	  int RETURN = 49;
-	  /** RegularExpression Id. */
-	  int SHORT = 50;
-	  /** RegularExpression Id. */
-	  int STATIC = 51;
-	  /** RegularExpression Id. */
-	  int STRICTFP = 52;
-	  /** RegularExpression Id. */
-	  int SUPER = 53;
-	  /** RegularExpression Id. */
-	  int SWITCH = 54;
-	  /** RegularExpression Id. */
-	  int SYNCHRONIZED = 55;
-	  /** RegularExpression Id. */
-	  int THIS = 56;
-	  /** RegularExpression Id. */
-	  int THROW = 57;
-	  /** RegularExpression Id. */
-	  int THROWS = 58;
-	  /** RegularExpression Id. */
-	  int TRANSIENT = 59;
-	  /** RegularExpression Id. */
-	  int TRUE = 60;
-	  /** RegularExpression Id. */
-	  int TRY = 61;
-	  /** RegularExpression Id. */
-	  int VOID = 62;
-	  /** RegularExpression Id. */
-	  int VOLATILE = 63;
-	  /** RegularExpression Id. */
-	  int WHILE = 64;
-	  /** RegularExpression Id. */
-	  int MODULE = 65;
-	  /** RegularExpression Id. */
-	  int EXPORT = 66;
-	  /** RegularExpression Id. */
-	  int REF = 67;
-	  /** RegularExpression Id. */
-	  int OUT = 68;
-	  /** RegularExpression Id. */
-	  int GET = 69;
-	  /** RegularExpression Id. */
-	  int SET = 70;
-	  /** RegularExpression Id. */
-	  int ADD = 71;
-	  /** RegularExpression Id. */
-	  int REMOVE = 72;
-	  /** RegularExpression Id. */
-	  int EVENT = 73;
-	  /** RegularExpression Id. */
-	  int FUNCTION = 74;
-	  /** RegularExpression Id. */
-	  int INTEGER_LITERAL = 75;
-	  /** RegularExpression Id. */
-	  int LONG_LITERAL = 76;
-	  /** RegularExpression Id. */
-	  int DECIMAL_LITERAL = 77;
-	  /** RegularExpression Id. */
-	  int HEX_LITERAL = 78;
-	  /** RegularExpression Id. */
-	  int BINARY_LITERAL = 79;
-	  /** RegularExpression Id. */
-	  int OCTAL_LITERAL = 80;
-	  /** RegularExpression Id. */
-	  int FLOAT_LITERAL = 81;
-	  /** RegularExpression Id. */
-	  int DOUBLE_LITERAL = 82;
-	  /** RegularExpression Id. */
-	  int DECIMAL_FLOATING_POINT_LITERAL = 83;
-	  /** RegularExpression Id. */
-	  int DECIMAL_EXPONENT = 84;
-	  /** RegularExpression Id. */
-	  int HEXADECIMAL_FLOATING_POINT_LITERAL = 85;
-	  /** RegularExpression Id. */
-	  int HEXADECIMAL_EXPONENT = 86;
-	  /** RegularExpression Id. */
-	  int CHARACTER_LITERAL = 87;
-	  /** RegularExpression Id. */
-	  int STRING_LITERAL = 88;
-	  /** RegularExpression Id. */
-	  int IDENTIFIER = 89;
-	  /** RegularExpression Id. */
-	  int LETTER = 90;
-	  /** RegularExpression Id. */
-	  int PART_LETTER = 91;
-	  /** RegularExpression Id. */
-	  int LPAREN = 92;
-	  /** RegularExpression Id. */
-	  int RPAREN = 93;
-	  /** RegularExpression Id. */
-	  int LBRACE = 94;
-	  /** RegularExpression Id. */
-	  int RBRACE = 95;
-	  /** RegularExpression Id. */
-	  int LBRACKET = 96;
-	  /** RegularExpression Id. */
-	  int RBRACKET = 97;
-	  /** RegularExpression Id. */
-	  int SEMICOLON = 98;
-	  /** RegularExpression Id. */
-	  int COMMA = 99;
-	  /** RegularExpression Id. */
-	  int DOT = 100;
-	  /** RegularExpression Id. */
-	  int AT = 101;
-	  /** RegularExpression Id. */
-	  int EQUAL = 102;
-	  /** RegularExpression Id. */
-	  int LESS = 103;
-	  /** RegularExpression Id. */
-	  int NOT = 104;
-	  /** RegularExpression Id. */
-	  int TWIDDLE = 105;
-	  /** RegularExpression Id. */
-	  int QUESTION = 106;
-	  /** RegularExpression Id. */
-	  int COLON = 107;
-	  /** RegularExpression Id. */
-	  int EQUAL_EQUAL = 108;
-	  /** RegularExpression Id. */
-	  int LESS_EQUAL = 109;
-	  /** RegularExpression Id. */
-	  int GREATER_EQUAL = 110;
-	  /** RegularExpression Id. */
-	  int NOT_EQUAL = 111;
-	  /** RegularExpression Id. */
-	  int OR_OR = 112;
-	  /** RegularExpression Id. */
-	  int AND_AND = 113;
-	  /** RegularExpression Id. */
-	  int PLUS_PLUS = 114;
-	  /** RegularExpression Id. */
-	  int MINUS_MINUS = 115;
-	  /** RegularExpression Id. */
-	  int PLUS = 116;
-	  /** RegularExpression Id. */
-	  int MINUS = 117;
-	  /** RegularExpression Id. */
-	  int MULTIPLY = 118;
-	  /** RegularExpression Id. */
-	  int DIVIDE = 119;
-	  /** RegularExpression Id. */
-	  int AND = 120;
-	  /** RegularExpression Id. */
-	  int OR = 121;
-	  /** RegularExpression Id. */
-	  int XOR = 122;
-	  /** RegularExpression Id. */
-	  int REMAINDER = 123;
-	  /** RegularExpression Id. */
-	  int LEFT_SHIFT = 124;
-	  /** RegularExpression Id. */
-	  int PLUS_EQUAL = 125;
-	  /** RegularExpression Id. */
-	  int MINUS_EQUAL = 126;
-	  /** RegularExpression Id. */
-	  int MULTIPLY_EQUAL = 127;
-	  /** RegularExpression Id. */
-	  int DIVIDE_EQUAL = 128;
-	  /** RegularExpression Id. */
-	  int AND_EQUAL = 129;
-	  /** RegularExpression Id. */
-	  int OR_EQUAL = 130;
-	  /** RegularExpression Id. */
-	  int XOR_EQUAL = 131;
-	  /** RegularExpression Id. */
-	  int REMAINDER_EQUAL = 132;
-	  /** RegularExpression Id. */
-	  int LEFT_SHIFT_EQUAL = 133;
-	  /** RegularExpression Id. */
-	  int RIGHT_SHIFT_EQUAL = 134;
-	  /** RegularExpression Id. */
-	  int UNSIGNED_RIGHT_SHIFT_EQUAL = 135;
-	  /** RegularExpression Id. */
-	  int ELLIPSIS = 136;
-	  /** RegularExpression Id. */
-	  int COLON_COLON = 137;
-	  /** RegularExpression Id. */
-	  int ARROW = 138;
-	  /** RegularExpression Id. */
-	  int SIMPLE_CLOSE_TAG = 139;
-	  /** RegularExpression Id. */
-	  int CLOSE_TAG = 140;
-	  /** RegularExpression Id. */
-	  int UNSIGNED_RIGHT_SHIFT = 141;
-	  /** RegularExpression Id. */
-	  int RIGHT_SHIFT = 142;
-	  /** RegularExpression Id. */
-	  int GREATER = 143;
-	  /** RegularExpression Id. */
-	  int STUFF_TO_IGNORE = 145;
-	  
-	  int ERROR = 148;
-
-	  /** Lexical state. */
-	  int DEFAULT = 0;
-	  /** Lexical state. */
-	  int IN_FORMAL_COMMENT = 1;
-	  /** Lexical state. */
-	  int IN_MULTI_LINE_COMMENT = 2;
-
-	  /** Literal token values. */
-	  String[] tokenImage = {
-	    "<EOF>",
-	    "\" \"",
-	    "\"\\t\"",
-	    "\"\\n\"",
-	    "\"\\r\"",
-	    "\"\\f\"",
-	    "<token of kind 6>",
-	    "\"/*\"",
-	    "<SINGLE_LINE_COMMENT>",
-	    "\"*/\"",
-	    "\"*/\"",
-	    "<token of kind 11>",
-	    "\"abstract\"",
-	    "\"assert\"",
-	    "\"boolean\"",
-	    "\"break\"",
-	    "\"byte\"",
-	    "\"case\"",
-	    "\"catch\"",
-	    "\"char\"",
-	    "\"class\"",
-	    "\"const\"",
-	    "\"continue\"",
-	    "\"default\"",
-	    "\"do\"",
-	    "\"double\"",
-	    "\"else\"",
-	    "\"enum\"",
-	    "\"extends\"",
-	    "\"false\"",
-	    "\"final\"",
-	    "\"finally\"",
-	    "\"float\"",
-	    "\"for\"",
-	    "\"goto\"",
-	    "\"if\"",
-	    "\"implements\"",
-	    "\"import\"",
-	    "\"instanceof\"",
-	    "\"int\"",
-	    "\"interface\"",
-	    "\"long\"",
-	    "\"native\"",
-	    "\"new\"",
-	    "\"null\"",
-	    "\"package\"",
-	    "\"private\"",
-	    "\"protected\"",
-	    "\"public\"",
-	    "\"return\"",
-	    "\"short\"",
-	    "\"static\"",
-	    "\"strictfp\"",
-	    "\"super\"",
-	    "\"switch\"",
-	    "\"synchronized\"",
-	    "\"this\"",
-	    "\"throw\"",
-	    "\"throws\"",
-	    "\"transient\"",
-	    "\"true\"",
-	    "\"try\"",
-	    "\"void\"",
-	    "\"volatile\"",
-	    "\"while\"",
-	    "\"module\"",
-	    "\"export\"",
-	    "\"ref\"",
-	    "\"out\"",
-	    "\"get\"",
-	    "\"set\"",
-	    "\"add\"",
-	    "\"remove\"",
-	    "\"event\"",
-	    "\"function\"",
-	    "<INTEGER_LITERAL>",
-	    "<LONG_LITERAL>",
-	    "<DECIMAL_LITERAL>",
-	    "<HEX_LITERAL>",
-	    "<BINARY_LITERAL>",
-	    "<OCTAL_LITERAL>",
-	    "<FLOAT_LITERAL>",
-	    "<DOUBLE_LITERAL>",
-	    "<DECIMAL_FLOATING_POINT_LITERAL>",
-	    "<DECIMAL_EXPONENT>",
-	    "<HEXADECIMAL_FLOATING_POINT_LITERAL>",
-	    "<HEXADECIMAL_EXPONENT>",
-	    "<CHARACTER_LITERAL>",
-	    "<STRING_LITERAL>",
-	    "<IDENTIFIER>",
-	    "<LETTER>",
-	    "<PART_LETTER>",
-	    "\"(\"",
-	    "\")\"",
-	    "\"{\"",
-	    "\"}\"",
-	    "\"[\"",
-	    "\"]\"",
-	    "\";\"",
-	    "\",\"",
-	    "\".\"",
-	    "\"@\"",
-	    "\"=\"",
-	    "\"<\"",
-	    "\"!\"",
-	    "\"~\"",
-	    "\"?\"",
-	    "\":\"",
-	    "\"==\"",
-	    "\"<=\"",
-	    "\">=\"",
-	    "\"!=\"",
-	    "\"||\"",
-	    "\"&&\"",
-	    "\"++\"",
-	    "\"--\"",
-	    "\"+\"",
-	    "\"-\"",
-	    "\"*\"",
-	    "\"/\"",
-	    "\"&\"",
-	    "\"|\"",
-	    "\"^\"",
-	    "\"%\"",
-	    "\"<<\"",
-	    "\"+=\"",
-	    "\"-=\"",
-	    "\"*=\"",
-	    "\"/=\"",
-	    "\"&=\"",
-	    "\"|=\"",
-	    "\"^=\"",
-	    "\"%=\"",
-	    "\"<<=\"",
-	    "\">>=\"",
-	    "\">>>=\"",
-	    "\"...\"",
-	    "\"::\"",
-	    "\"->\"",
-	    "\"/>\"",
-	    "\"</\"",
-	    "\">>>\"",
-	    "\">>\"",
-	    "\">\"",
-	    "\"\\u001a\"",
-	    "<STUFF_TO_IGNORE>",
-	  };
+	int TokenNameIdentifier = 22,
+		TokenNameabstract = 51,
+		TokenNameassert = 72,
+		TokenNameboolean = 97,
+		TokenNamebreak = 73,
+		TokenNamebyte = 98,
+		TokenNamecase = 99,
+		TokenNamecatch = 100,
+		TokenNamechar = 101,
+		TokenNameclass = 67,
+		TokenNamecontinue = 74,
+		TokenNameconst = 116,
+		TokenNamedefault = 75,
+		TokenNamedo = 76,
+		TokenNamedouble = 102,
+		TokenNameelse = 111,
+		TokenNameenum = 69,
+		TokenNameextends = 96,
+		TokenNamefalse = 38,
+		TokenNamefinal = 52,
+		TokenNamefinally = 109,
+		TokenNamefloat = 103,
+		TokenNamefor = 77,
+		TokenNamegoto = 117,
+		TokenNameif = 78,
+		TokenNameimplements = 114,
+		TokenNameimport = 104,
+		TokenNameinstanceof = 17,
+		TokenNameint = 105,
+		TokenNameinterface = 68,
+		TokenNamelong = 106,
+		TokenNamenative = 53,
+		TokenNamenew = 36,
+		TokenNamenull = 39,
+		TokenNamepackage = 95,
+		TokenNameprivate = 54,
+		TokenNameprotected = 55,
+		TokenNamepublic = 56,
+		TokenNamereturn = 79,
+		TokenNameshort = 107,
+		TokenNamestatic = 40,
+		TokenNamestrictfp = 57,
+		TokenNamesuper = 34,
+		TokenNameswitch = 80,
+		TokenNamesynchronized = 41,
+		TokenNamethis = 35,
+		TokenNamethrow = 81,
+		TokenNamethrows = 112,
+		TokenNametransient = 58,
+		TokenNametrue = 42,
+		TokenNametry = 82,
+		TokenNamevoid = 108,
+		TokenNamevolatile = 59,
+		TokenNamewhile = 71,
+		TokenNameIntegerLiteral = 43,
+		TokenNameLongLiteral = 44,
+		TokenNameFloatingPointLiteral = 45,
+		TokenNameDoubleLiteral = 46,
+		TokenNameCharacterLiteral = 47,
+		TokenNameStringLiteral = 48,
+		TokenNamePLUS_PLUS = 1,
+		TokenNameMINUS_MINUS = 2,
+		TokenNameEQUAL_EQUAL = 19,
+		TokenNameLESS_EQUAL = 12,
+		TokenNameGREATER_EQUAL = 13,
+		TokenNameNOT_EQUAL = 20,
+		TokenNameLEFT_SHIFT = 18,
+		TokenNameRIGHT_SHIFT = 14,
+		TokenNameUNSIGNED_RIGHT_SHIFT = 16,
+		TokenNamePLUS_EQUAL = 84,
+		TokenNameMINUS_EQUAL = 85,
+		TokenNameMULTIPLY_EQUAL = 86,
+		TokenNameDIVIDE_EQUAL = 87,
+		TokenNameAND_EQUAL = 88,
+		TokenNameOR_EQUAL = 89,
+		TokenNameXOR_EQUAL = 90,
+		TokenNameREMAINDER_EQUAL = 91,
+		TokenNameLEFT_SHIFT_EQUAL = 92,
+		TokenNameRIGHT_SHIFT_EQUAL = 93,
+		TokenNameUNSIGNED_RIGHT_SHIFT_EQUAL = 94,
+		TokenNameOR_OR = 31,
+		TokenNameAND_AND = 30,
+		TokenNamePLUS = 4,
+		TokenNameMINUS = 5,
+		TokenNameNOT = 62,
+		TokenNameREMAINDER = 7,
+		TokenNameXOR = 23,
+		TokenNameAND = 21,
+		TokenNameMULTIPLY = 6,
+		TokenNameOR = 25,
+		TokenNameTWIDDLE = 63,
+		TokenNameDIVIDE = 8,
+		TokenNameGREATER = 15,
+		TokenNameLESS = 11,
+		TokenNameLPAREN = 24,
+		TokenNameRPAREN = 26,
+		TokenNameLBRACE = 49,
+		TokenNameRBRACE = 32,
+		TokenNameLBRACKET = 10,
+		TokenNameRBRACKET = 64,
+		TokenNameSEMICOLON = 28,
+		TokenNameQUESTION = 29,
+		TokenNameCOLON = 61,
+		TokenNameCOMMA = 33,
+		TokenNameDOT = 3,
+		TokenNameEQUAL = 70,
+		TokenNameAT = 37,
+		TokenNameELLIPSIS = 113,
+		TokenNameARROW = 110,
+		TokenNameCOLON_COLON = 9,
+		TokenNameBeginLambda = 50,
+		TokenNameBeginIntersectionCast = 65,
+		TokenNameBeginTypeArguments = 83,
+		TokenNameElidedSemicolonAndRightBrace = 66,
+		TokenNameAT308 = 27,
+		TokenNameAT308DOTDOTDOT = 115,
+		TokenNameEOF = 60,
+		TokenNameERROR = 118;
 }

@@ -265,7 +265,7 @@ public class SearchableEnvironment
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.env.INameEnvironment#findType(char[][])
+	 * @see org.summer.sdt.internal.compiler.env.INameEnvironment#findType(char[][])
 	 */
 	public NameEnvironmentAnswer findType(char[][] compoundTypeName) {
 		if (compoundTypeName == null) return null;
@@ -286,7 +286,7 @@ public class SearchableEnvironment
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.env.INameEnvironment#findType(char[], char[][])
+	 * @see org.summer.sdt.internal.compiler.env.INameEnvironment#findType(char[], char[][])
 	 */
 	public NameEnvironmentAnswer findType(char[] name, char[][] packageName) {
 		if (name == null) return null;
@@ -666,7 +666,7 @@ public class SearchableEnvironment
 	}
 
 	/**
-	 * @see org.eclipse.jdt.internal.compiler.env.INameEnvironment#isPackage(char[][], char[])
+	 * @see org.summer.sdt.internal.compiler.env.INameEnvironment#isPackage(char[][], char[])
 	 */
 	public boolean isPackage(char[][] parentPackageName, char[] subPackageName) {
 		String[] pkgName;
