@@ -1,3401 +1,0 @@
-/* Copyright (c) 2006, Sun Microsystems, Inc.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright notice,
- *       this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Sun Microsystems, Inc. nor the names of its
- *       contributors may be used to endorse or promote products derived from
- *       this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
- * THE POSSIBILITY OF SUCH DAMAGE.
- */
-
-options {
-  JAVA_UNICODE_ESCAPE = true;
-  ERROR_REPORTING = false;
-  STATIC = false;
-  COMMON_TOKEN_ACTION = false;
-  TOKEN_FACTORY = "MyToken";
-  JDK_VERSION = "1.5";
-}
-
-PARSER_BEGIN(Parser)
-package org.summer.sdt.internal.compiler.parser;
-import java.io.*;
-import java.util.*;
-import org.summer.sdt.internal.compiler.xaml.*;
-import org.summer.sdt.internal.compiler.ast.*;
-import org.summer.sdt.internal.compiler.env.*;
-import org.summer.sdt.internal.compiler.*;
-import org.summer.sdt.internal.compiler.problem.*;
-import org.summer.sdt.internal.compiler.impl.*;
-import org.summer.sdt.internal.compiler.parser.*;
-import org.summer.sdt.internal.compiler.lookup.*;
-import org.summer.sdt.internal.compiler.classfmt.*;
-import org.summer.sdt.core.compiler.*;
-
-/**
- * Grammar to parse Java version 1.5
- * @author Sreenivasa Viswanadha - Simplified and enhanced for 1.5
- */
-public class Parser
-{
-  	//modifiers dimensions nestedType etc.......
-	protected boolean optimizeStringLiterals =true;
-	protected CompilerOptions options;
-
-    protected ProblemReporter problemReporter;
-	public ReferenceContext referenceContext;
-    protected CompilationResult compilationResult;
-
-	public CompilationUnitDeclaration compilationUnit; /*the result from parse()*/
-
-	protected RecoveredElement currentElement;
-	
-	protected boolean diet = false; //tells the scanner to jump over some parts of the code/expressions like method bodies
-
-	public org.summer.sdt.internal.compiler.ReadManager readManager;
-
-	public int modifiers;
-
-	public Scanner scanner;
-
-	// javadoc
-	public Javadoc javadoc;
-	public JavadocParser javadocParser;
-	public Parser () {
-		// Caveat Emptor: For inheritance purposes and then only in very special needs. Only minimal state is initialized !
-	}
-	public Parser(ProblemReporter problemReporter, boolean optimizeStringLiterals) {
-	
-		this.problemReporter = problemReporter;
-		this.options = problemReporter.options;
-		this.optimizeStringLiterals = optimizeStringLiterals;
-//		initializeScanner();
-//		this.parsingJava8Plus = this.options.sourceLevel >= ClassFileConstants.JDK1_8;//		this.astLengthStack = new int[50];//		this.expressionLengthStack = new int[30];//		this.typeAnnotationLengthStack = new int[30];//		this.intStack = new int[50];//		this.identifierStack = new char[30][];//		this.identifierLengthStack = new int[30];//		this.nestedMethod = new int[30];//		this.realBlockStack = new int[30];//		this.identifierPositionStack = new long[30];//		this.variablesCounter = new int[30];
-	
-		// javadoc support
-		this.javadocParser = createJavadocParser();
-	}
-
-//	public void initializeScanner(){//		this.scanner = new Scanner(//			false /*comment*/,//			false /*whitespace*/,//			false, /* will be set in initialize(boolean) *///			this.options.sourceLevel /*sourceLevel*/,//			this.options.complianceLevel /*complianceLevel*/,//			this.options.taskTags/*taskTags*/,//			this.options.taskPriorities/*taskPriorities*/,//			this.options.isTaskCaseSensitive/*taskCaseSensitive*/);//	}
-
-	protected JavadocParser createJavadocParser() {
-		return new JavadocParser(this);
-	}
-    /**
-     * Class to hold modifiers.
-     */
-    static public final class ModifierSet implements ClassFileConstants {
-
-     /** A set of accessors that indicate whether the specified modifier
-         is in the set. */
-
-     public boolean isPublic(int modifiers) {
-       return (modifiers & AccPublic) != 0;
-     }
-
-     public boolean isProtected(int modifiers) {
-       return (modifiers & AccProtected) != 0;
-     }
-
-     public boolean isPrivate(int modifiers) {
-       return (modifiers & AccPrivate) != 0;
-     }
-
-     public boolean isStatic(int modifiers) {
-       return (modifiers & AccStatic) != 0;
-     }
-
-     public boolean isAbstract(int modifiers) {
-       return (modifiers & AccAbstract) != 0;
-     }
-
-     public boolean isFinal(int modifiers) {
-       return (modifiers & AccFinal) != 0;
-     }
-
-     public boolean isNative(int modifiers) {
-       return (modifiers & AccNative) != 0;
-     }
-
-     public boolean isStrictfp(int modifiers) {
-       return (modifiers & AccStrictfp) != 0;
-     }
-
-     public boolean isSynchronized(int modifiers) {
-       return (modifiers & AccSynchronized) != 0;
-     }
-
-     public boolean isTransient(int modifiers) {
-       return (modifiers & AccTransient) != 0;
-     }
-
-     public boolean isVolatile(int modifiers) {
-       return (modifiers & AccVolatile) != 0;
-     }
-
-     public boolean isExport(int modifiers) {
-       return (modifiers & AccExport) != 0;
-     }
-
-     /**
-      * Removes the given modifier.
-      */
-     static int removeModifier(int modifiers, int mod)
-     {
-        return modifiers & ~mod;
-     }
-   }
-
-    class Modifier    {
-      int modifiers;
-      Annotation[] annotations;
-      Modifier(int modifiers, Annotation[] annotations) {
-        this.modifiers = modifiers;
-        this.annotations = annotations;      }    }
-
-    class MemberSelector {
-      Expression[] typeArguments;
-      Token id;
-      MemberSelector(Expression[] typeArguments, Token id) {
-        this.typeArguments = typeArguments;
-        this.id = id;      }    }
-
-   class IndexerPart {
-     Expression pos;
-     IndexerPart(Expression pos) {
-       this.pos = pos;
-     }
-   }
-
-   class CallArgument {
-     Expression[] arguments;
-     CallArgument(Expression[] arguments) {
-       this.arguments = arguments;     }
-   }
-
-   class NamePart
-   {
-   }
-
-   class VariableDeclarator   {
-     Expression initialization;
-     Token name;
-     VariableDeclarator(Token name, Expression initialization){
-       this.name = name;
-       this.initialization = initialization;     }   }
-
-   private long getTokenRange(Token token)   {
-     return ((long)token.sourceStart) << 32 + token.sourceEnd;   }
-
-
-   char[] getTokenText(Token token)   {
-     return token.image.toCharArray(); //jj_input_stream.GetImage().toCharArray(); //getTokenText(token);   }
-
-  public static void main(String args[]) {
-    Parser parser;
-      try {
-        parser = new Parser(new java.io.FileInputStream("Test.java"));
-      } catch (java.io.FileNotFoundException e) {
-        System.out.println("Java Parser Version 1.1:  File " + args[0] + " not found.");
-        return;
-      }
-    try {
-      parser.CompilationUnit();
-      System.out.println("Java Parser Version 1.1:  Java program parsed successfully.");
-    } catch (ParseException e) {
-      e.printStackTrace();
-      System.out.println(e.getMessage());
-      System.out.println("Java Parser Version 1.1:  Encountered errors during parse.");
-    }
-  }
-
-  public void initialize() {
-         this.initialize(false);
-   }
-   public void initialize(boolean parsingCompilationUnit) {
-    //positioning the parser for a new compilation unit
-    //avoiding stack reallocation and all that....
-    this.javadoc = null;
-    this.compilationUnit = null;
-    this.referenceContext = null;
-
-    // recovery
-    this.currentElement = null;
-  }
-
-	public CompilationUnitDeclaration dietParse(ICompilationUnit sourceUnit,
-			CompilationResult unitResult) {
-	  // TODO Auto-generated method stub
-	  return null;
-	}
-
-	public void parse(ConstructorDeclaration cd, CompilationUnitDeclaration unit, boolean recordLineSeparator) {
-
-      this.referenceContext = cd;
-      this.compilationUnit = unit;
-    
-//      this.jj_input_stream.setBuffer(cd.bodyStart, cd.bodyEnd);
-    
-      try {
-		ConstructorDeclaration();
-      } catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-      }
-                
-    }
-    // A P I
-    public void parse(
-      FieldDeclaration field,
-      TypeDeclaration type,
-      CompilationUnitDeclaration unit,
-      char[] initializationSource) {
-
-//      this.referenceContext = type;//      this.compilationUnit = unit;////      this.scanner.setSource(initializationSource);//      field.initialization = Expression();////      // mark field with local type if one was found during parsing//      if ((type.bits & ASTNode.HasLocalType) != 0) {//        field.bits |= ASTNode.HasLocalType;//      }
-    }
-        // A P I
-        public CompilationUnitDeclaration parse(
-          ICompilationUnit sourceUnit,
-          CompilationResult compilationResult) {
-//          // parses a compilation unit and manages error handling (even bugs....)//          return parse(sourceUnit, compilationResult, -1, -1/*parse without reseting the scanner*/);
-        }
-
-        // A P I
-        public CompilationUnitDeclaration parse(
-            ICompilationUnit sourceUnit,
-            CompilationResult compilationResult,
-            int start,
-            int end) {
-            // parses a compilation unit and manages error handling (even bugs....)
-
-            CompilationUnitDeclaration unit;
-//            try {//                /* automaton initialization *///                initialize(true);//                goForCompilationUnit();//                /* unit creation */                this.referenceContext =                        this.compilationUnit =                                new CompilationUnitDeclaration(                                        this.problemReporter,                                        compilationResult,                                        0);////                /* scanners initialization *///                char[] contents;//                try {//                    contents = this.readManager != null ? this.readManager.getContents(sourceUnit) : sourceUnit.getContents();//                } catch(AbortCompilationUnit abortException) {//                    problemReporter().cannotReadSource(this.compilationUnit, abortException, this.options.verbose);//                    contents = CharOperation.NO_CHAR; // pretend empty from thereon//                }//                this.scanner.setSource(contents);//                this.compilationUnit.sourceEnd = this.scanner.source.length - 1;//                if (end != -1) this.scanner.resetTo(start, end);//                if (this.javadocParser != null && this.javadocParser.checkDocComment) {//                    this.javadocParser.scanner.setSource(contents);//                    if (end != -1) {//                        this.javadocParser.scanner.resetTo(start, end);//                    }//                }//                /* run automaton *///                CompilationUnit();//            } finally {                unit = this.compilationUnit;//                this.compilationUnit = null; // reset parser//                // tag unit has having read bodies//                if (!this.diet) unit.bits |= ASTNode.HasAllMethodBodies;//            }
-            return unit;
-        }
-
-        public void getMethodBodies(CompilationUnitDeclaration unit) {
-//            //fill the methods bodies in order for the code to be generated////            if (unit == null) return;////            if (unit.ignoreMethodBodies) {//                unit.ignoreFurtherInvestigation = true;//                return;//                // if initial diet parse did not work, no need to dig into method bodies.//            }////            if ((unit.bits & ASTNode.HasAllMethodBodies) != 0)//                return; //work already done ...////            // save existing values to restore them at the end of the parsing process//            // see bug 47079 for more details//            int[] oldLineEnds = this.scanner.lineEnds;//            int oldLinePtr = this.scanner.linePtr;////            //real parse of the method....//            CompilationResult compilationResult = unit.compilationResult;//            char[] contents = this.readManager != null//                    ? this.readManager.getContents(compilationResult.compilationUnit)//                    : compilationResult.compilationUnit.getContents();//            this.scanner.setSource(contents, compilationResult);////            if (this.javadocParser != null && this.javadocParser.checkDocComment) {//                this.javadocParser.scanner.setSource(contents);//            }//            if (unit.types != null) {//                for (int i = 0, length = unit.types.length; i < length; i++)//                    unit.types[i].parseMethods(this, unit);//            }////            // tag unit has having read bodies//            unit.bits |= ASTNode.HasAllMethodBodies;
-        }
-
-        // A P I
-
-        public void parse(
-            Initializer initializer,
-            TypeDeclaration type,
-            CompilationUnitDeclaration unit) {
-
-//            this.referenceContext = type;//            this.compilationUnit = unit;////            this.scanner.resetTo(initializer.bodyStart, initializer.bodyEnd); // just on the beginning {//            try {//                parse();//            } catch (AbortCompilation ex) {//                    this.lastAct = ERROR_ACTION;//            } finally {//                this.nestedMethod[this.nestedType]--;//                if(this.options.performStatementsRecovery) {//                    this.methodRecoveryActivated = oldMethodRecoveryActivated;//                }//            }////            //refill statements//            initializer.block.explicitDeclarations = this.realBlockStack[this.realBlockPtr--];//            int length;//            if (this.astLengthPtr > -1 && (length = this.astLengthStack[this.astLengthPtr--]) > 0) {//                System.arraycopy(this.astStack, (this.astPtr -= length) + 1, initializer.block.statements = new Statement[length], 0, length);//            } else {//                    // check whether this block at least contains some comment in it//                if (!containsComment(initializer.block.sourceStart, initializer.block.sourceEnd)) {//                    initializer.block.bits |= ASTNode.UndocumentedEmptyBlock;//                }//            }////            // mark initializer with local type if one was found during parsing//            if ((type.bits & ASTNode.HasLocalType) != 0) {//                initializer.bits |= ASTNode.HasLocalType;//            }
-        }
-        // A P I
-        public void parse(MethodDeclaration md, CompilationUnitDeclaration unit) {
-
-//            if (md.isAbstract())//                return;//            if (md.isNative())//                return;//            if ((md.modifiers & ExtraCompilerModifiers.AccSemicolonBody) != 0)//                return;////            this.referenceContext = md;//            this.compilationUnit = unit;////            this.scanner.resetTo(md.bodyStart, md.bodyEnd);//            // reset the scanner to parser from { down to }//            try {//                parse();//            } catch (AbortCompilation ex) {//                this.lastAct = ERROR_ACTION;//            } finally {//                this.nestedMethod[this.nestedType]--;//                if(this.options.performStatementsRecovery) {//                        this.methodRecoveryActivated = oldMethodRecoveryActivated;//                }//            }////            if (this.lastAct == ERROR_ACTION) {//                md.bits |= ASTNode.HasSyntaxErrors;//                return;//            }////            //refill statements//            md.explicitDeclarations = this.realBlockStack[this.realBlockPtr--];//            int length;//            if (this.astLengthPtr > -1 && (length = this.astLengthStack[this.astLengthPtr--]) != 0) {//                if (this.options.ignoreMethodBodies) {//                    // ignore statements//                    this.astPtr -= length;//                } else {//                    System.arraycopy(//                        this.astStack,//                        (this.astPtr -= length) + 1,//                        md.statements = new Statement[length],//                        0,//                        length);//                }//            } else {//                if (!containsComment(md.bodyStart, md.bodyEnd)) {//                        md.bits |= ASTNode.UndocumentedEmptyBlock;//                }//            }
-        }
-        public ASTNode[] parseClassBodyDeclarations(char[] source, int offset, int length, CompilationUnitDeclaration unit) {
-//            boolean oldDiet = this.diet;//            boolean oldTolerateDefaultClassMethods = this.tolerateDefaultClassMethods;//            /* automaton initialization *///            initialize();//            goForClassBodyDeclarations();//            /* scanner initialization *///            this.scanner.setSource(source);//            this.scanner.resetTo(offset, offset + length - 1);//            if (this.javadocParser != null && this.javadocParser.checkDocComment) {//                    this.javadocParser.scanner.setSource(source);//                    this.javadocParser.scanner.resetTo(offset, offset + length - 1);//            }////            /* type declaration should be parsed as member type declaration *///            this.nestedType = 1;////            /* unit creation *///            TypeDeclaration referenceContextTypeDeclaration = new TypeDeclaration(unit.compilationResult);//            referenceContextTypeDeclaration.name = Util.EMPTY_STRING.toCharArray();//            referenceContextTypeDeclaration.fields = new FieldDeclaration[0];//            this.compilationUnit = unit;//            unit.types = new TypeDeclaration[1];//            unit.types[0] = referenceContextTypeDeclaration;//            this.referenceContext = unit;////            /* run automaton *///            try {//                this.diet = true;//                this.tolerateDefaultClassMethods = this.parsingJava8Plus;//                    parse();//            } catch (AbortCompilation ex) {//                this.lastAct = ERROR_ACTION;//            } finally {//                this.diet = oldDiet;//                this.tolerateDefaultClassMethods = oldTolerateDefaultClassMethods;//            }
-
-            ASTNode[] result = null;
-//            if (this.lastAct == ERROR_ACTION) {//                if (!this.options.performMethodsFullRecovery && !this.options.performStatementsRecovery) {//                    return null;//                }//                // collect all body declaration inside the compilation unit except the default constructor//                final List bodyDeclarations = new ArrayList();//                ASTVisitor visitor = new ASTVisitor() {//                    public boolean visit(MethodDeclaration methodDeclaration, ClassScope scope) {//                        if (!methodDeclaration.isDefaultConstructor()) {//                            bodyDeclarations.add(methodDeclaration);//                        }//                        return false;//                    }//                    public boolean visit(FieldDeclaration fieldDeclaration, MethodScope scope) {//                        bodyDeclarations.add(fieldDeclaration);//                        return false;//                    }//                    public boolean visit(TypeDeclaration memberTypeDeclaration, ClassScope scope) {//                        bodyDeclarations.add(memberTypeDeclaration);//                        return false;//                    }//                };//                unit.ignoreFurtherInvestigation = false;//                unit.traverse(visitor, unit.scope);//                unit.ignoreFurtherInvestigation = true;//                result = (ASTNode[]) bodyDeclarations.toArray(new ASTNode[bodyDeclarations.size()]);//            } else {//                int astLength;//                if (this.astLengthPtr > -1 && (astLength = this.astLengthStack[this.astLengthPtr--]) != 0) {//                    result = new ASTNode[astLength];//                    this.astPtr -= astLength;//                    System.arraycopy(this.astStack, this.astPtr + 1, result, 0, astLength);//                } else {//                    // empty class body declaration (like ';' see https://bugs.eclipse.org/bugs/show_bug.cgi?id=280079).//                    result = new ASTNode[0];//                }//            }//            boolean containsInitializers = false;//            TypeDeclaration typeDeclaration = null;//            for (int i = 0, max = result.length; i < max; i++) {//                // parse each class body declaration//                ASTNode node = result[i];//                if (node instanceof TypeDeclaration) {//                    ((TypeDeclaration) node).parseMethods(this, unit);//                } else if (node instanceof AbstractMethodDeclaration) {//                    ((AbstractMethodDeclaration) node).parseStatements(this, unit);//                } else if (node instanceof FieldDeclaration) {//                    FieldDeclaration fieldDeclaration = (FieldDeclaration) node;//                    switch(fieldDeclaration.getKind()) {//                        case AbstractVariableDeclaration.INITIALIZER://                            containsInitializers = true;//                            if (typeDeclaration == null) {//                                typeDeclaration = referenceContextTypeDeclaration;//                            }//                            if (typeDeclaration.fields == null) {//                                typeDeclaration.fields = new FieldDeclaration[1];//                                typeDeclaration.fields[0] = fieldDeclaration;//                            } else {//                                int length2 = typeDeclaration.fields.length;//                                FieldDeclaration[] temp = new FieldDeclaration[length2 + 1];//                                System.arraycopy(typeDeclaration.fields, 0, temp, 0, length2);//                                temp[length2] = fieldDeclaration;//                                typeDeclaration.fields = temp;//                            }//                            break;//                    }//                }//                if (((node.bits & ASTNode.HasSyntaxErrors) != 0) && (!this.options.performMethodsFullRecovery && !this.options.performStatementsRecovery)) {//                    return null;//                }//            }//            if (containsInitializers) {//                FieldDeclaration[] fieldDeclarations = typeDeclaration.fields;//                for (int i = 0, max = fieldDeclarations.length; i < max; i++) {//                    Initializer initializer = (Initializer) fieldDeclarations[i];//                    initializer.parseStatements(this, typeDeclaration , unit);//                    if (((initializer.bits & ASTNode.HasSyntaxErrors) != 0) && (!this.options.performMethodsFullRecovery && !this.options.performStatementsRecovery)) {//                            return null;//                    }//                }//            }
-            return result;
-        }
-
-        public Expression parseLambdaExpression(char[] source, int offset, int length, CompilationUnitDeclaration unit, boolean recordLineSeparators) {
-//            this.haltOnSyntaxError = true; // unexposed/unshared object, no threading concerns.//            return parseExpression(source, offset, length, unit, recordLineSeparators);
-			return null;
-        }
-
-        public Expression parseExpression(char[] source, int offset, int length, CompilationUnitDeclaration unit, boolean recordLineSeparators) {
-
-//            initialize();//            goForExpression(recordLineSeparators);//            this.nestedMethod[this.nestedType]++;////            this.referenceContext = unit;//            this.compilationUnit = unit;////            this.scanner.setSource(source);//            this.scanner.resetTo(offset, offset + length - 1);//            try {//                parse();//            } catch (AbortCompilation ex) {//                    this.lastAct = ERROR_ACTION;//            } finally {//                this.nestedMethod[this.nestedType]--;//            }////            if (this.lastAct == ERROR_ACTION) {//                return null;//            }////            return this.expressionStack[this.expressionPtr];
-	        try {
-				return Expression();
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			return null;
-        }
-        public Expression parseMemberValue(char[] source, int offset, int length, CompilationUnitDeclaration unit) {
-
-//            initialize();//            goForMemberValue();//            this.nestedMethod[this.nestedType]++;////            this.referenceContext = unit;//            this.compilationUnit = unit;////            this.scanner.setSource(source);//            this.scanner.resetTo(offset, offset + length - 1);//            try {//                parse();//            } catch (AbortCompilation ex) {//                this.lastAct = ERROR_ACTION;//            } finally {//                this.nestedMethod[this.nestedType]--;//            }////            if (this.lastAct == ERROR_ACTION) {//                return null;//            }////            return this.expressionStack[this.expressionPtr];
-            try {
-				return Expression();
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return null;
-        }
-        public void parseStatements(ReferenceContext rc, int start, int end, TypeDeclaration[] types, CompilationUnitDeclaration unit) {
-//            boolean oldStatementRecoveryEnabled = this.statementRecoveryActivated;//            this.statementRecoveryActivated = true;////            initialize();////            goForBlockStatementsopt();//            this.nestedMethod[this.nestedType]++;//            pushOnRealBlockStack(0);////            pushOnAstLengthStack(0);////            this.referenceContext = rc;//            this.compilationUnit = unit;////            this.pendingRecoveredType = null;////            if(types != null && types.length > 0) {//                this.recoveredTypes = types;//                this.recoveredTypePtr = 0;//                this.nextTypeStart =//                        this.recoveredTypes[0].allocation == null//                                ? this.recoveredTypes[0].declarationSourceStart//                                                : this.recoveredTypes[0].allocation.sourceStart;//            } else {//                this.recoveredTypes = null;//                this.recoveredTypePtr = -1;//                this.nextTypeStart = -1;//            }////            this.scanner.resetTo(start, end);//            // reset the scanner to parser from { down to }////            this.lastCheckPoint = this.scanner.initialPosition;//////            this.stateStackTop = -1;////            try {//                parse();//            } catch (AbortCompilation ex) {//                    this.lastAct = ERROR_ACTION;//            } finally {//                this.nestedMethod[this.nestedType]--;//                this.recoveredTypes = null;//                this.statementRecoveryActivated = oldStatementRecoveryEnabled;//            }////            checkNonNLSAfterBodyEnd(end);
-        }
-        public void persistLineSeparatorPositions() {
-//            if (this.scanner.recordLineSeparator) {//                this.compilationUnit.compilationResult.lineSeparatorPositions = this.scanner.getLineEnds();//            }
-        }
-	
-	/**
-	 * Returns this parser's problem reporter initialized with its reference context.
-	 * Also it is assumed that a problem is going to be reported, so initializes
-	 * the compilation result's line positions.
-	 *
-	 * @return ProblemReporter
-	 */
-	public ProblemReporter problemReporter(){
-//		if (this.scanner.recordLineSeparator) {//			this.compilationUnit.compilationResult.lineSeparatorPositions = this.scanner.getLineEnds();//		}
-		this.problemReporter.referenceContext = this.referenceContext;
-		return this.problemReporter;
-	}
-	
-	public MethodDeclaration convertToMethodDeclaration(ConstructorDeclaration c, CompilationResult compilationResult) {
-		MethodDeclaration m = new MethodDeclaration(compilationResult);
-		m.typeParameters = c.typeParameters;
-		m.sourceStart = c.sourceStart;
-		m.sourceEnd = c.sourceEnd;
-		m.bodyStart = c.bodyStart;
-		m.bodyEnd = c.bodyEnd;
-		m.declarationSourceEnd = c.declarationSourceEnd;
-		m.declarationSourceStart = c.declarationSourceStart;
-		m.selector = c.selector;
-		m.statements = c.statements;
-		m.modifiers = c.modifiers;
-		m.annotations = c.annotations;
-		m.arguments = c.arguments;
-		m.thrownExceptions = c.thrownExceptions;
-		m.explicitDeclarations = c.explicitDeclarations;
-		m.returnType = null;
-		m.javadoc = c.javadoc;
-		m.bits = c.bits;
-		return m;
-	}
-
-}
-
-PARSER_END(Parser)
-
-/* WHITE SPACE */
-
-SKIP :
-{
-  " "
-| "\t"
-| "\n"
-| "\r"
-| "\f"
-}
-
-/* COMMENTS */
-
-MORE :
-{
-  <"/**" ~["/"]> { input_stream.backup(1); } : IN_FORMAL_COMMENT
-|
-  "/*" : IN_MULTI_LINE_COMMENT
-}
-
-SPECIAL_TOKEN :
-{
-  <SINGLE_LINE_COMMENT: "//" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?>
-}
-
-<IN_FORMAL_COMMENT>
-SPECIAL_TOKEN :
-{
-  <FORMAL_COMMENT: "*/" > : DEFAULT
-}
-
-<IN_MULTI_LINE_COMMENT>
-SPECIAL_TOKEN :
-{
-  <MULTI_LINE_COMMENT: "*/" > : DEFAULT
-}
-
-<IN_FORMAL_COMMENT,IN_MULTI_LINE_COMMENT>
-MORE :
-{
-  < ~[] >
-}
-
-/* RESERVED WORDS AND LITERALS */
-
-TOKEN :
-{
-  < ABSTRACT: "abstract" >
-| < ASSERT: "assert" >
-| < BOOLEAN: "boolean" >
-| < BREAK: "break" >
-| < BYTE: "byte" >
-| < CASE: "case" >
-| < CATCH: "catch" >
-| < CHAR: "char" >
-| < CLASS: "class" >
-| < CONST: "const" >
-| < CONTINUE: "continue" >
-| < DEFAULT_: "default" >
-| < DO: "do" >
-| < DOUBLE: "double" >
-| < ELSE: "else" >
-| < ENUM: "enum" >
-| < EXTENDS: "extends" >
-| < FALSE: "false" >
-| < FINAL: "final" >
-| < FINALLY: "finally" >
-| < FLOAT: "float" >
-| < FOR: "for" >
-| < GOTO: "goto" >
-| < IF: "if" >
-| < IMPLEMENTS: "implements" >
-| < IMPORT: "import" >
-| < INSTANCEOF: "instanceof" >
-| < INT: "int" >
-| < INTERFACE: "interface" >
-| < LONG: "long" >
-| < NATIVE: "native" >
-| < NEW: "new" >
-| < NULL: "null" >
-| < PACKAGE: "package">
-| < PRIVATE: "private" >
-| < PROTECTED: "protected" >
-| < PUBLIC: "public" >
-| < RETURN: "return" >
-| < SHORT: "short" >
-| < STATIC: "static" >
-| < STRICTFP: "strictfp" >
-| < SUPER: "super" >
-| < SWITCH: "switch" >
-| < SYNCHRONIZED: "synchronized" >
-| < THIS: "this" >
-| < THROW: "throw" >
-| < THROWS: "throws" >
-| < TRANSIENT: "transient" >
-| < TRUE: "true" >
-| < TRY: "try" >
-| < VOID: "void" >
-| < VOLATILE: "volatile" >
-| < WHILE: "while" >
-| < MODULE: "module" >
-| < EXPORT: "export" >
-| < REF: "ref" >
-| < OUT: "out" >
-| < GET: "get" >
-| < SET: "set" >
-| < ADD: "add" >
-| < REMOVE: "remove" >
-| < EVENT: "event" >
-| < FUNCTION: "function" >
-}
-
-/* LITERALS */
-
-TOKEN :
-{
-  < INTEGER_LITERAL:
-        <DECIMAL_LITERAL> (["l","L"])?
-      | <HEX_LITERAL> (["l","L"])?
-      | <BINARY_LITERAL> (["l", "L"])?
-      | <OCTAL_LITERAL> (["l","L"])?
-  >
-| 
- < LONG_LITERAL:
-        <DECIMAL_LITERAL> (["l","L"])?
-      | <HEX_LITERAL> (["l","L"])?
-      | <BINARY_LITERAL> (["l", "L"])?
-      | <OCTAL_LITERAL> (["l","L"])?
-  >
-|
-  < #DECIMAL_LITERAL: ["1"-"9"] (["0"-"9", "_"])* >
-|
-  < #HEX_LITERAL: "0" ["x","X"] (["0","1", "_"])+ >
-|
-  < #BINARY_LITERAL: "0" ["b","B"] (["0"-"9","a"-"f","A"-"F", "_"])+ >
-|
-  < #OCTAL_LITERAL: "0" (["0"-"7", "_"])* >
-|
-  < FLOAT_LITERAL:
-        <DECIMAL_FLOATING_POINT_LITERAL>
-      | <HEXADECIMAL_FLOATING_POINT_LITERAL>
-  >
-|
-  < DOUBLE_LITERAL:
-        <DECIMAL_FLOATING_POINT_LITERAL>
-      | <HEXADECIMAL_FLOATING_POINT_LITERAL>
-  >
-|
-  < #DECIMAL_FLOATING_POINT_LITERAL:
-        (["0"-"9"])+ "." (["0"-"9"])* (<DECIMAL_EXPONENT>)? (["f","F","d","D"])?
-      | "." (["0"-"9"])+ (<DECIMAL_EXPONENT>)? (["f","F","d","D"])?
-      | (["0"-"9"])+ <DECIMAL_EXPONENT> (["f","F","d","D"])?
-      | (["0"-"9"])+ (<DECIMAL_EXPONENT>)? ["f","F","d","D"]
-  >
-|
-  < #DECIMAL_EXPONENT: ["e","E"] (["+","-"])? (["0"-"9"])+ >
-|
-  < #HEXADECIMAL_FLOATING_POINT_LITERAL:
-        "0" ["x", "X"] (["0"-"9","a"-"f","A"-"F"])+ (".")? <HEXADECIMAL_EXPONENT> (["f","F","d","D"])?
-      | "0" ["x", "X"] (["0"-"9","a"-"f","A"-"F"])* "." (["0"-"9","a"-"f","A"-"F"])+ <HEXADECIMAL_EXPONENT> (["f","F","d","D"])?
-  >
-|
-  < #HEXADECIMAL_EXPONENT: ["p","P"] (["+","-"])? (["0"-"9"])+ >
-|
-  < CHARACTER_LITERAL:
-      "'"
-      (   (~["'","\\","\n","\r"])
-        | ("\\"
-            ( ["n","t","b","r","f","\\","'","\""]
-            | ["0"-"7"] ( ["0"-"7"] )?
-            | ["0"-"3"] ["0"-"7"] ["0"-"7"]
-            )
-          )
-      )
-      "'"
-  >
-|
-  < STRING_LITERAL:
-      "\""
-      (   (~["\"","\\","\n","\r"])
-        | ("\\"
-            ( ["n","t","b","r","f","\\","'","\""]
-            | ["0"-"7"] ( ["0"-"7"] )?
-            | ["0"-"3"] ["0"-"7"] ["0"-"7"]
-            )
-          )
-      )*
-      "\""
-  >
-}
-
-/* IDENTIFIERS */
-
-TOKEN :
-{
-  < IDENTIFIER: <LETTER> (<PART_LETTER>)* >
-|
-  < #LETTER:
-      [  // all chars for which Character.isIdentifierStart is true
-         "$",
-         "A"-"Z",
-         "_",
-         "a"-"z",
-         "\u00a2"-"\u00a5",
-         "\u00aa",
-         "\u00b5",
-         "\u00ba",
-         "\u00c0"-"\u00d6",
-         "\u00d8"-"\u00f6",
-         "\u00f8"-"\u021f",
-         "\u0222"-"\u0233",
-         "\u0250"-"\u02ad",
-         "\u02b0"-"\u02b8",
-         "\u02bb"-"\u02c1",
-         "\u02d0"-"\u02d1",
-         "\u02e0"-"\u02e4",
-         "\u02ee",
-         "\u037a",
-         "\u0386",
-         "\u0388"-"\u038a",
-         "\u038c",
-         "\u038e"-"\u03a1",
-         "\u03a3"-"\u03ce",
-         "\u03d0"-"\u03d7",
-         "\u03da"-"\u03f3",
-         "\u0400"-"\u0481",
-         "\u048c"-"\u04c4",
-         "\u04c7"-"\u04c8",
-         "\u04cb"-"\u04cc",
-         "\u04d0"-"\u04f5",
-         "\u04f8"-"\u04f9",
-         "\u0531"-"\u0556",
-         "\u0559",
-         "\u0561"-"\u0587",
-         "\u05d0"-"\u05ea",
-         "\u05f0"-"\u05f2",
-         "\u0621"-"\u063a",
-         "\u0640"-"\u064a",
-         "\u0671"-"\u06d3",
-         "\u06d5",
-         "\u06e5"-"\u06e6",
-         "\u06fa"-"\u06fc",
-         "\u0710",
-         "\u0712"-"\u072c",
-         "\u0780"-"\u07a5",
-         "\u0905"-"\u0939",
-         "\u093d",
-         "\u0950",
-         "\u0958"-"\u0961",
-         "\u0985"-"\u098c",
-         "\u098f"-"\u0990",
-         "\u0993"-"\u09a8",
-         "\u09aa"-"\u09b0",
-         "\u09b2",
-         "\u09b6"-"\u09b9",
-         "\u09dc"-"\u09dd",
-         "\u09df"-"\u09e1",
-         "\u09f0"-"\u09f3",
-         "\u0a05"-"\u0a0a",
-         "\u0a0f"-"\u0a10",
-         "\u0a13"-"\u0a28",
-         "\u0a2a"-"\u0a30",
-         "\u0a32"-"\u0a33",
-         "\u0a35"-"\u0a36",
-         "\u0a38"-"\u0a39",
-         "\u0a59"-"\u0a5c",
-         "\u0a5e",
-         "\u0a72"-"\u0a74",
-         "\u0a85"-"\u0a8b",
-         "\u0a8d",
-         "\u0a8f"-"\u0a91",
-         "\u0a93"-"\u0aa8",
-         "\u0aaa"-"\u0ab0",
-         "\u0ab2"-"\u0ab3",
-         "\u0ab5"-"\u0ab9",
-         "\u0abd",
-         "\u0ad0",
-         "\u0ae0",
-         "\u0b05"-"\u0b0c",
-         "\u0b0f"-"\u0b10",
-         "\u0b13"-"\u0b28",
-         "\u0b2a"-"\u0b30",
-         "\u0b32"-"\u0b33",
-         "\u0b36"-"\u0b39",
-         "\u0b3d",
-         "\u0b5c"-"\u0b5d",
-         "\u0b5f"-"\u0b61",
-         "\u0b85"-"\u0b8a",
-         "\u0b8e"-"\u0b90",
-         "\u0b92"-"\u0b95",
-         "\u0b99"-"\u0b9a",
-         "\u0b9c",
-         "\u0b9e"-"\u0b9f",
-         "\u0ba3"-"\u0ba4",
-         "\u0ba8"-"\u0baa",
-         "\u0bae"-"\u0bb5",
-         "\u0bb7"-"\u0bb9",
-         "\u0c05"-"\u0c0c",
-         "\u0c0e"-"\u0c10",
-         "\u0c12"-"\u0c28",
-         "\u0c2a"-"\u0c33",
-         "\u0c35"-"\u0c39",
-         "\u0c60"-"\u0c61",
-         "\u0c85"-"\u0c8c",
-         "\u0c8e"-"\u0c90",
-         "\u0c92"-"\u0ca8",
-         "\u0caa"-"\u0cb3",
-         "\u0cb5"-"\u0cb9",
-         "\u0cde",
-         "\u0ce0"-"\u0ce1",
-         "\u0d05"-"\u0d0c",
-         "\u0d0e"-"\u0d10",
-         "\u0d12"-"\u0d28",
-         "\u0d2a"-"\u0d39",
-         "\u0d60"-"\u0d61",
-         "\u0d85"-"\u0d96",
-         "\u0d9a"-"\u0db1",
-         "\u0db3"-"\u0dbb",
-         "\u0dbd",
-         "\u0dc0"-"\u0dc6",
-         "\u0e01"-"\u0e30",
-         "\u0e32"-"\u0e33",
-         "\u0e3f"-"\u0e46",
-         "\u0e81"-"\u0e82",
-         "\u0e84",
-         "\u0e87"-"\u0e88",
-         "\u0e8a",
-         "\u0e8d",
-         "\u0e94"-"\u0e97",
-         "\u0e99"-"\u0e9f",
-         "\u0ea1"-"\u0ea3",
-         "\u0ea5",
-         "\u0ea7",
-         "\u0eaa"-"\u0eab",
-         "\u0ead"-"\u0eb0",
-         "\u0eb2"-"\u0eb3",
-         "\u0ebd",
-         "\u0ec0"-"\u0ec4",
-         "\u0ec6",
-         "\u0edc"-"\u0edd",
-         "\u0f00",
-         "\u0f40"-"\u0f47",
-         "\u0f49"-"\u0f6a",
-         "\u0f88"-"\u0f8b",
-         "\u1000"-"\u1021",
-         "\u1023"-"\u1027",
-         "\u1029"-"\u102a",
-         "\u1050"-"\u1055",
-         "\u10a0"-"\u10c5",
-         "\u10d0"-"\u10f6",
-         "\u1100"-"\u1159",
-         "\u115f"-"\u11a2",
-         "\u11a8"-"\u11f9",
-         "\u1200"-"\u1206",
-         "\u1208"-"\u1246",
-         "\u1248",
-         "\u124a"-"\u124d",
-         "\u1250"-"\u1256",
-         "\u1258",
-         "\u125a"-"\u125d",
-         "\u1260"-"\u1286",
-         "\u1288",
-         "\u128a"-"\u128d",
-         "\u1290"-"\u12ae",
-         "\u12b0",
-         "\u12b2"-"\u12b5",
-         "\u12b8"-"\u12be",
-         "\u12c0",
-         "\u12c2"-"\u12c5",
-         "\u12c8"-"\u12ce",
-         "\u12d0"-"\u12d6",
-         "\u12d8"-"\u12ee",
-         "\u12f0"-"\u130e",
-         "\u1310",
-         "\u1312"-"\u1315",
-         "\u1318"-"\u131e",
-         "\u1320"-"\u1346",
-         "\u1348"-"\u135a",
-         "\u13a0"-"\u13f4",
-         "\u1401"-"\u166c",
-         "\u166f"-"\u1676",
-         "\u1681"-"\u169a",
-         "\u16a0"-"\u16ea",
-         "\u1780"-"\u17b3",
-         "\u17db",
-         "\u1820"-"\u1877",
-         "\u1880"-"\u18a8",
-         "\u1e00"-"\u1e9b",
-         "\u1ea0"-"\u1ef9",
-         "\u1f00"-"\u1f15",
-         "\u1f18"-"\u1f1d",
-         "\u1f20"-"\u1f45",
-         "\u1f48"-"\u1f4d",
-         "\u1f50"-"\u1f57",
-         "\u1f59",
-         "\u1f5b",
-         "\u1f5d",
-         "\u1f5f"-"\u1f7d",
-         "\u1f80"-"\u1fb4",
-         "\u1fb6"-"\u1fbc",
-         "\u1fbe",
-         "\u1fc2"-"\u1fc4",
-         "\u1fc6"-"\u1fcc",
-         "\u1fd0"-"\u1fd3",
-         "\u1fd6"-"\u1fdb",
-         "\u1fe0"-"\u1fec",
-         "\u1ff2"-"\u1ff4",
-         "\u1ff6"-"\u1ffc",
-         "\u203f"-"\u2040",
-         "\u207f",
-         "\u20a0"-"\u20af",
-         "\u2102",
-         "\u2107",
-         "\u210a"-"\u2113",
-         "\u2115",
-         "\u2119"-"\u211d",
-         "\u2124",
-         "\u2126",
-         "\u2128",
-         "\u212a"-"\u212d",
-         "\u212f"-"\u2131",
-         "\u2133"-"\u2139",
-         "\u2160"-"\u2183",
-         "\u3005"-"\u3007",
-         "\u3021"-"\u3029",
-         "\u3031"-"\u3035",
-         "\u3038"-"\u303a",
-         "\u3041"-"\u3094",
-         "\u309d"-"\u309e",
-         "\u30a1"-"\u30fe",
-         "\u3105"-"\u312c",
-         "\u3131"-"\u318e",
-         "\u31a0"-"\u31b7",
-         "\u3400"-"\u4db5",
-         "\u4e00"-"\u9fa5",
-         "\ua000"-"\ua48c",
-         "\uac00"-"\ud7a3",
-         "\uf900"-"\ufa2d",
-         "\ufb00"-"\ufb06",
-         "\ufb13"-"\ufb17",
-         "\ufb1d",
-         "\ufb1f"-"\ufb28",
-         "\ufb2a"-"\ufb36",
-         "\ufb38"-"\ufb3c",
-         "\ufb3e",
-         "\ufb40"-"\ufb41",
-         "\ufb43"-"\ufb44",
-         "\ufb46"-"\ufbb1",
-         "\ufbd3"-"\ufd3d",
-         "\ufd50"-"\ufd8f",
-         "\ufd92"-"\ufdc7",
-         "\ufdf0"-"\ufdfb",
-         "\ufe33"-"\ufe34",
-         "\ufe4d"-"\ufe4f",
-         "\ufe69",
-         "\ufe70"-"\ufe72",
-         "\ufe74",
-         "\ufe76"-"\ufefc",
-         "\uff04",
-         "\uff21"-"\uff3a",
-         "\uff3f",
-         "\uff41"-"\uff5a",
-         "\uff65"-"\uffbe",
-         "\uffc2"-"\uffc7",
-         "\uffca"-"\uffcf",
-         "\uffd2"-"\uffd7",
-         "\uffda"-"\uffdc",
-         "\uffe0"-"\uffe1",
-         "\uffe5"-"\uffe6"
-      ]
-  >
-|
-  < #PART_LETTER:
-      [  // all chars for which Character.isIdentifierPart is true
-         "\u0000"-"\u0008",
-         "\u000e"-"\u001b",
-         "$",
-         "0"-"9",
-         "A"-"Z",
-         "_",
-         "a"-"z",
-         "\u007f"-"\u009f",
-         "\u00a2"-"\u00a5",
-         "\u00aa",
-         "\u00b5",
-         "\u00ba",
-         "\u00c0"-"\u00d6",
-         "\u00d8"-"\u00f6",
-         "\u00f8"-"\u021f",
-         "\u0222"-"\u0233",
-         "\u0250"-"\u02ad",
-         "\u02b0"-"\u02b8",
-         "\u02bb"-"\u02c1",
-         "\u02d0"-"\u02d1",
-         "\u02e0"-"\u02e4",
-         "\u02ee",
-         "\u0300"-"\u034e",
-         "\u0360"-"\u0362",
-         "\u037a",
-         "\u0386",
-         "\u0388"-"\u038a",
-         "\u038c",
-         "\u038e"-"\u03a1",
-         "\u03a3"-"\u03ce",
-         "\u03d0"-"\u03d7",
-         "\u03da"-"\u03f3",
-         "\u0400"-"\u0481",
-         "\u0483"-"\u0486",
-         "\u048c"-"\u04c4",
-         "\u04c7"-"\u04c8",
-         "\u04cb"-"\u04cc",
-         "\u04d0"-"\u04f5",
-         "\u04f8"-"\u04f9",
-         "\u0531"-"\u0556",
-         "\u0559",
-         "\u0561"-"\u0587",
-         "\u0591"-"\u05a1",
-         "\u05a3"-"\u05b9",
-         "\u05bb"-"\u05bd",
-         "\u05bf",
-         "\u05c1"-"\u05c2",
-         "\u05c4",
-         "\u05d0"-"\u05ea",
-         "\u05f0"-"\u05f2",
-         "\u0621"-"\u063a",
-         "\u0640"-"\u0655",
-         "\u0660"-"\u0669",
-         "\u0670"-"\u06d3",
-         "\u06d5"-"\u06dc",
-         "\u06df"-"\u06e8",
-         "\u06ea"-"\u06ed",
-         "\u06f0"-"\u06fc",
-         "\u070f"-"\u072c",
-         "\u0730"-"\u074a",
-         "\u0780"-"\u07b0",
-         "\u0901"-"\u0903",
-         "\u0905"-"\u0939",
-         "\u093c"-"\u094d",
-         "\u0950"-"\u0954",
-         "\u0958"-"\u0963",
-         "\u0966"-"\u096f",
-         "\u0981"-"\u0983",
-         "\u0985"-"\u098c",
-         "\u098f"-"\u0990",
-         "\u0993"-"\u09a8",
-         "\u09aa"-"\u09b0",
-         "\u09b2",
-         "\u09b6"-"\u09b9",
-         "\u09bc",
-         "\u09be"-"\u09c4",
-         "\u09c7"-"\u09c8",
-         "\u09cb"-"\u09cd",
-         "\u09d7",
-         "\u09dc"-"\u09dd",
-         "\u09df"-"\u09e3",
-         "\u09e6"-"\u09f3",
-         "\u0a02",
-         "\u0a05"-"\u0a0a",
-         "\u0a0f"-"\u0a10",
-         "\u0a13"-"\u0a28",
-         "\u0a2a"-"\u0a30",
-         "\u0a32"-"\u0a33",
-         "\u0a35"-"\u0a36",
-         "\u0a38"-"\u0a39",
-         "\u0a3c",
-         "\u0a3e"-"\u0a42",
-         "\u0a47"-"\u0a48",
-         "\u0a4b"-"\u0a4d",
-         "\u0a59"-"\u0a5c",
-         "\u0a5e",
-         "\u0a66"-"\u0a74",
-         "\u0a81"-"\u0a83",
-         "\u0a85"-"\u0a8b",
-         "\u0a8d",
-         "\u0a8f"-"\u0a91",
-         "\u0a93"-"\u0aa8",
-         "\u0aaa"-"\u0ab0",
-         "\u0ab2"-"\u0ab3",
-         "\u0ab5"-"\u0ab9",
-         "\u0abc"-"\u0ac5",
-         "\u0ac7"-"\u0ac9",
-         "\u0acb"-"\u0acd",
-         "\u0ad0",
-         "\u0ae0",
-         "\u0ae6"-"\u0aef",
-         "\u0b01"-"\u0b03",
-         "\u0b05"-"\u0b0c",
-         "\u0b0f"-"\u0b10",
-         "\u0b13"-"\u0b28",
-         "\u0b2a"-"\u0b30",
-         "\u0b32"-"\u0b33",
-         "\u0b36"-"\u0b39",
-         "\u0b3c"-"\u0b43",
-         "\u0b47"-"\u0b48",
-         "\u0b4b"-"\u0b4d",
-         "\u0b56"-"\u0b57",
-         "\u0b5c"-"\u0b5d",
-         "\u0b5f"-"\u0b61",
-         "\u0b66"-"\u0b6f",
-         "\u0b82"-"\u0b83",
-         "\u0b85"-"\u0b8a",
-         "\u0b8e"-"\u0b90",
-         "\u0b92"-"\u0b95",
-         "\u0b99"-"\u0b9a",
-         "\u0b9c",
-         "\u0b9e"-"\u0b9f",
-         "\u0ba3"-"\u0ba4",
-         "\u0ba8"-"\u0baa",
-         "\u0bae"-"\u0bb5",
-         "\u0bb7"-"\u0bb9",
-         "\u0bbe"-"\u0bc2",
-         "\u0bc6"-"\u0bc8",
-         "\u0bca"-"\u0bcd",
-         "\u0bd7",
-         "\u0be7"-"\u0bef",
-         "\u0c01"-"\u0c03",
-         "\u0c05"-"\u0c0c",
-         "\u0c0e"-"\u0c10",
-         "\u0c12"-"\u0c28",
-         "\u0c2a"-"\u0c33",
-         "\u0c35"-"\u0c39",
-         "\u0c3e"-"\u0c44",
-         "\u0c46"-"\u0c48",
-         "\u0c4a"-"\u0c4d",
-         "\u0c55"-"\u0c56",
-         "\u0c60"-"\u0c61",
-         "\u0c66"-"\u0c6f",
-         "\u0c82"-"\u0c83",
-         "\u0c85"-"\u0c8c",
-         "\u0c8e"-"\u0c90",
-         "\u0c92"-"\u0ca8",
-         "\u0caa"-"\u0cb3",
-         "\u0cb5"-"\u0cb9",
-         "\u0cbe"-"\u0cc4",
-         "\u0cc6"-"\u0cc8",
-         "\u0cca"-"\u0ccd",
-         "\u0cd5"-"\u0cd6",
-         "\u0cde",
-         "\u0ce0"-"\u0ce1",
-         "\u0ce6"-"\u0cef",
-         "\u0d02"-"\u0d03",
-         "\u0d05"-"\u0d0c",
-         "\u0d0e"-"\u0d10",
-         "\u0d12"-"\u0d28",
-         "\u0d2a"-"\u0d39",
-         "\u0d3e"-"\u0d43",
-         "\u0d46"-"\u0d48",
-         "\u0d4a"-"\u0d4d",
-         "\u0d57",
-         "\u0d60"-"\u0d61",
-         "\u0d66"-"\u0d6f",
-         "\u0d82"-"\u0d83",
-         "\u0d85"-"\u0d96",
-         "\u0d9a"-"\u0db1",
-         "\u0db3"-"\u0dbb",
-         "\u0dbd",
-         "\u0dc0"-"\u0dc6",
-         "\u0dca",
-         "\u0dcf"-"\u0dd4",
-         "\u0dd6",
-         "\u0dd8"-"\u0ddf",
-         "\u0df2"-"\u0df3",
-         "\u0e01"-"\u0e3a",
-         "\u0e3f"-"\u0e4e",
-         "\u0e50"-"\u0e59",
-         "\u0e81"-"\u0e82",
-         "\u0e84",
-         "\u0e87"-"\u0e88",
-         "\u0e8a",
-         "\u0e8d",
-         "\u0e94"-"\u0e97",
-         "\u0e99"-"\u0e9f",
-         "\u0ea1"-"\u0ea3",
-         "\u0ea5",
-         "\u0ea7",
-         "\u0eaa"-"\u0eab",
-         "\u0ead"-"\u0eb9",
-         "\u0ebb"-"\u0ebd",
-         "\u0ec0"-"\u0ec4",
-         "\u0ec6",
-         "\u0ec8"-"\u0ecd",
-         "\u0ed0"-"\u0ed9",
-         "\u0edc"-"\u0edd",
-         "\u0f00",
-         "\u0f18"-"\u0f19",
-         "\u0f20"-"\u0f29",
-         "\u0f35",
-         "\u0f37",
-         "\u0f39",
-         "\u0f3e"-"\u0f47",
-         "\u0f49"-"\u0f6a",
-         "\u0f71"-"\u0f84",
-         "\u0f86"-"\u0f8b",
-         "\u0f90"-"\u0f97",
-         "\u0f99"-"\u0fbc",
-         "\u0fc6",
-         "\u1000"-"\u1021",
-         "\u1023"-"\u1027",
-         "\u1029"-"\u102a",
-         "\u102c"-"\u1032",
-         "\u1036"-"\u1039",
-         "\u1040"-"\u1049",
-         "\u1050"-"\u1059",
-         "\u10a0"-"\u10c5",
-         "\u10d0"-"\u10f6",
-         "\u1100"-"\u1159",
-         "\u115f"-"\u11a2",
-         "\u11a8"-"\u11f9",
-         "\u1200"-"\u1206",
-         "\u1208"-"\u1246",
-         "\u1248",
-         "\u124a"-"\u124d",
-         "\u1250"-"\u1256",
-         "\u1258",
-         "\u125a"-"\u125d",
-         "\u1260"-"\u1286",
-         "\u1288",
-         "\u128a"-"\u128d",
-         "\u1290"-"\u12ae",
-         "\u12b0",
-         "\u12b2"-"\u12b5",
-         "\u12b8"-"\u12be",
-         "\u12c0",
-         "\u12c2"-"\u12c5",
-         "\u12c8"-"\u12ce",
-         "\u12d0"-"\u12d6",
-         "\u12d8"-"\u12ee",
-         "\u12f0"-"\u130e",
-         "\u1310",
-         "\u1312"-"\u1315",
-         "\u1318"-"\u131e",
-         "\u1320"-"\u1346",
-         "\u1348"-"\u135a",
-         "\u1369"-"\u1371",
-         "\u13a0"-"\u13f4",
-         "\u1401"-"\u166c",
-         "\u166f"-"\u1676",
-         "\u1681"-"\u169a",
-         "\u16a0"-"\u16ea",
-         "\u1780"-"\u17d3",
-         "\u17db",
-         "\u17e0"-"\u17e9",
-         "\u180b"-"\u180e",
-         "\u1810"-"\u1819",
-         "\u1820"-"\u1877",
-         "\u1880"-"\u18a9",
-         "\u1e00"-"\u1e9b",
-         "\u1ea0"-"\u1ef9",
-         "\u1f00"-"\u1f15",
-         "\u1f18"-"\u1f1d",
-         "\u1f20"-"\u1f45",
-         "\u1f48"-"\u1f4d",
-         "\u1f50"-"\u1f57",
-         "\u1f59",
-         "\u1f5b",
-         "\u1f5d",
-         "\u1f5f"-"\u1f7d",
-         "\u1f80"-"\u1fb4",
-         "\u1fb6"-"\u1fbc",
-         "\u1fbe",
-         "\u1fc2"-"\u1fc4",
-         "\u1fc6"-"\u1fcc",
-         "\u1fd0"-"\u1fd3",
-         "\u1fd6"-"\u1fdb",
-         "\u1fe0"-"\u1fec",
-         "\u1ff2"-"\u1ff4",
-         "\u1ff6"-"\u1ffc",
-         "\u200c"-"\u200f",
-         "\u202a"-"\u202e",
-         "\u203f"-"\u2040",
-         "\u206a"-"\u206f",
-         "\u207f",
-         "\u20a0"-"\u20af",
-         "\u20d0"-"\u20dc",
-         "\u20e1",
-         "\u2102",
-         "\u2107",
-         "\u210a"-"\u2113",
-         "\u2115",
-         "\u2119"-"\u211d",
-         "\u2124",
-         "\u2126",
-         "\u2128",
-         "\u212a"-"\u212d",
-         "\u212f"-"\u2131",
-         "\u2133"-"\u2139",
-         "\u2160"-"\u2183",
-         "\u3005"-"\u3007",
-         "\u3021"-"\u302f",
-         "\u3031"-"\u3035",
-         "\u3038"-"\u303a",
-         "\u3041"-"\u3094",
-         "\u3099"-"\u309a",
-         "\u309d"-"\u309e",
-         "\u30a1"-"\u30fe",
-         "\u3105"-"\u312c",
-         "\u3131"-"\u318e",
-         "\u31a0"-"\u31b7",
-         "\u3400"-"\u4db5",
-         "\u4e00"-"\u9fa5",
-         "\ua000"-"\ua48c",
-         "\uac00"-"\ud7a3",
-         "\uf900"-"\ufa2d",
-         "\ufb00"-"\ufb06",
-         "\ufb13"-"\ufb17",
-         "\ufb1d"-"\ufb28",
-         "\ufb2a"-"\ufb36",
-         "\ufb38"-"\ufb3c",
-         "\ufb3e",
-         "\ufb40"-"\ufb41",
-         "\ufb43"-"\ufb44",
-         "\ufb46"-"\ufbb1",
-         "\ufbd3"-"\ufd3d",
-         "\ufd50"-"\ufd8f",
-         "\ufd92"-"\ufdc7",
-         "\ufdf0"-"\ufdfb",
-         "\ufe20"-"\ufe23",
-         "\ufe33"-"\ufe34",
-         "\ufe4d"-"\ufe4f",
-         "\ufe69",
-         "\ufe70"-"\ufe72",
-         "\ufe74",
-         "\ufe76"-"\ufefc",
-         "\ufeff",
-         "\uff04",
-         "\uff10"-"\uff19",
-         "\uff21"-"\uff3a",
-         "\uff3f",
-         "\uff41"-"\uff5a",
-         "\uff65"-"\uffbe",
-         "\uffc2"-"\uffc7",
-         "\uffca"-"\uffcf",
-         "\uffd2"-"\uffd7",
-         "\uffda"-"\uffdc",
-         "\uffe0"-"\uffe1",
-         "\uffe5"-"\uffe6",
-         "\ufff9"-"\ufffb"
-      ]
-  >
-}
-
-/* SEPARATORS */
-
-TOKEN :
-{
-  < LPAREN: "(" >
-| < RPAREN: ")" >
-| < LBRACE: "{" >
-| < RBRACE: "}" >
-| < LBRACKET: "[" >
-| < RBRACKET: "]" >
-| < SEMICOLON: ";" >
-| < COMMA: "," >
-| < DOT: "." >
-| < AT: "@" >
-}
-
-/* OPERATORS */
-
-TOKEN :
-{
-  < EQUAL: "=" >
-| < LESS: "<" >
-| < NOT: "!" >
-| < TWIDDLE: "~" >
-| < QUESTION: "?" >
-| < COLON: ":" >
-| < EQUAL_EQUAL: "==" >
-| < LESS_EQUAL: "<=" >
-| < GREATER_EQUAL: ">=" >
-| < NOT_EQUAL: "!=" >
-| < OR_OR: "||" >
-| < AND_AND: "&&" >
-| < PLUS_PLUS: "++" >
-| < MINUS_MINUS: "--" >
-| < PLUS: "+" >
-| < MINUS: "-" >
-| < MULTIPLY: "*" >
-| < DIVIDE: "/" >
-| < AND: "&" >
-| < OR: "|" >
-| < XOR: "^" >
-| < REMAINDER: "%" >
-| < LEFT_SHIFT: "<<" >
-| < PLUS_EQUAL: "+=" >
-| < MINUS_EQUAL: "-=" >
-| < MULTIPLY_EQUAL: "*=" >
-| < DIVIDE_EQUAL: "/=" >
-| < AND_EQUAL: "&=" >
-| < OR_EQUAL: "|=" >
-| < XOR_EQUAL: "^=" >
-| < REMAINDER_EQUAL: "%=" >
-| < LEFT_SHIFT_EQUAL: "<<=" >
-| < RIGHT_SHIFT_EQUAL: ">>=" >
-| < UNSIGNED_RIGHT_SHIFT_EQUAL: ">>>=" >
-| < ELLIPSIS: "..." >
-| < COLON_COLON: "::" >
-| < ARROW: "->" >
-| < SIMPLE_CLOSE_TAG: "/>" >
-| < CLOSE_TAG: "</" >
-}
-
-/* >'s need special attention due to generics syntax. */
-TOKEN :
-{
-  < UNSIGNED_RIGHT_SHIFT: ">>>" >
-  {
-     matchedToken.kind = GT;
-     ((MyToken)matchedToken).realKind = UNSIGNED_RIGHT_SHIFT;
-     input_stream.backup(2);
-     matchedToken.image = ">";
-  }
-| < RIGHT_SHIFT: ">>" >
-  {
-     matchedToken.kind = GREATER;
-     ((MyToken)matchedToken).realKind = RIGHT_SHIFT;
-     input_stream.backup(1);
-     matchedToken.image = ">";
-  }
-| < GREATER: ">" >
-}
-
-/*****************************************
- * THE JAVA LANGUAGE GRAMMAR STARTS HERE *
- *****************************************/
-/*
- * Program structuring syntax follows.
- */
-// starting point for parsing a java file
-//CompilationUnitDeclaration CompilationUnit()://{//  CompilationUnitDeclaration unit= new CompilationUnitDeclaration();//  String name = null;//  ModuleDeclaration module = null;//  Element element = null;//}//{//  [ LOOKAHEAD( ( Annotation() )* <PACKAGE> ) PackageDeclaration(unit) ]//  ( ImportDeclaration(unit) )*//  <MODULE> <IDENTIFIER> <LBRACE>//  {//	module = new ModuleDeclaration(unit);//  }//	  (LOOKAHEAD(2) element = ObjectElement()//	  {//	    module.element = element;//	  })? //	  ( ModuleBlock(module) )*//  <RBRACE>//  ( < "\u001a" > )?//  ( <STUFF_TO_IGNORE: ~[]> )?//  <EOF>//  {//	return unit;//  }//}////void ModuleBlock(ModuleDeclaration module)://{//  Statement statement = null;//  List<LocalDeclaration > declarations = null;//  boolean export = false;//}//{//  LOOKAHEAD(3)//  declarations = LocalVariableDeclaration()//  {//    module.contents.addAll(declarations);//  }//  | LOOKAHEAD(3) statement = Statement()//  {//    module.contents.add(statement);//  }//  | statement = TypeDeclaration()//  {//    module.contents.add(statement);//  }//  | (<EXPOR>{ export = true; })? statement = MethodDeclaration() //  	{//  	  if(export)//  	  {//        statement.bits |= ModifierSet.EXPORT;//  	  }//      module.contents.add(statement);//    }//}////Element Element()://{//   Element result = null, child = null;//}//{//	 LOOKAHEAD(2)//	 child = ObjectElement()//	 {//	   result.addElement(child);//	 }//   	|//     child = AttributeElement()//     {//       result.addElement(child);//     }//  {//      return result;//  }//}////Element ObjectElement()://{//  ObjectElement result = null;//}//{//    <LESS> Type() ( AbstractAttribute())* ((<GREATER> //       // (element | ~<LESS>)*//        (Element())*// //    <CLOSE_TAG>  Type() <GREATER>) | <SIMPLE_CLOSE_TAG>)//  {//      return result;//  }//}//////////fragment PCDATA : (~<LESS>)* ;////Element AttributeElement()://{//  Element result = null;//}//{ //    <LESS> <LPAREN> Type()<RPAREN> <DOT> Name() ((<GREATER>//        ( Element())*//    <CLOSE_TAG> <LPAREN> Type() <RPAREN> <DOT> Name() <GREATER>) |  <SIMPLE_CLOSE_TAG>)//  {//      return result;//  }//}////AbstractAttribute AbstractAttribute()://{//	AbstractAttribute result = null;//}//{//  //    result = GeneralAttribute()//    |result = AttachAttribute()//  {//      return result;//  }//}////AbstractAttribute AttachAttribute()://{//	AbstractAttribute result = null;//}//{//    <LPAREN>Type()<RPAREN> <DOT> Name()<EQUAL> PropertyExpression()//  {//      return result;//  }//}////AbstractAttribute GeneralAttribute()://{//}//{//	Name() <EQUAL> PropertyExpression()//  {//      return result;//  }//}////Expression MarkupExtenson()://{//  Expression result = null;//}//{//   <LBRACE>//        Type()//        ( AbstractAttribute())* //    <RBRACE>//  {//      return result;//  }//}////Expression PropertyExpression()://{//	Expression result = null;//}//   {//      <STRING_LITERAL> //    |MarkupExtenson()//  {//      return result;//  }//}
-
-CompilationUnitDeclaration CompilationUnit():{
-  ImportReference currentPkg = null;
-  ImportReference[] imports = null;
-  ImportReference importRef = null;
-  TypeDeclaration[] types = null; //new TypeDeclaration[0];
-  TypeDeclaration type = null;
-  int length = 0;
-}{  [ LOOKAHEAD( ( Annotation() )* <PACKAGE> ) currentPkg = PackageDeclaration() ]  ( importRef = ImportDeclaration()  {
-    if(imports == null) {
-      imports = new ImportReference[1];
-      imports[0] = importRef;    } else    {
-      length = imports.length;
-      System.arraycopy(imports, 0, imports = new ImportReference[length + 1], 0, length);
-      imports[length] = importRef;    }  } )*    ( type = TypeDeclaration()  {
-    if(types == null) {
-      types = new TypeDeclaration[1];
-      types[0] = type;    } else {
-      length = types.length;
-      System.arraycopy(types, 0, types = new TypeDeclaration[length + 1], 0, length);
-      types[length] = type;    }
-  })+  ( < "\u001a" > )?  ( <STUFF_TO_IGNORE: ~[]> )?  <EOF>
-  {
-    CompilationUnitDeclaration unit = new CompilationUnitDeclaration(this.problemReporter, this.compilationResult, types[types.length-1].sourceEnd);
-	unit.currentPackage = currentPkg;
-	unit.imports = imports;
-	unit.types = types;
-    return unit;  }}
-
-//ImportReference PackageDeclaration(CompilationUnitDeclaration unit)://{//  Modifier modifier = null;//}//{//  modifier = Modifiers() <PACKAGE> Name() <SEMICOLON>//  {//    //  }//}
-
-//ImportReference PackageDeclaration(CompilationUnitDeclaration unit)://{//  Annotation[] annotations = null;//  Annotation annotation = null;//}//{//  ( Annotation() )* <PACKAGE> Name() <SEMICOLON>//  {//    //  }//}////ImportReference ImportDeclaration(CompilationUnitDeclaration unit)://{}//{//  <IMPORT> [ "static" ] Name() [ "." <MULTIPLY> ] <SEMICOLON>//}
-
-ImportReference PackageDeclaration():
-{
-  Annotation[] annotations = null;
-  Annotation annotation = null;
-  Token token = null;
-  char[][] tokens = new char[1][];
-  long[] positions = new long[1];
-  int length = 0;
-}
-{
-  ( annotation = Annotation()  {
-    if(annotations == null) {      annotations = new Annotation[0];
-      annotations[0] = annotation;    } else {
-      length = annotations.length;
-      System.arraycopy(annotations, 0, annotations = new Annotation[length + 1], 0, length);
-      annotations[length] = annotation;    }  } )* <PACKAGE>   token = <IDENTIFIER>  {
-    tokens[0] = getTokenText(token);
-    positions[0] = getTokenRange(token);  }
-  ( LOOKAHEAD(2) <DOT> token = <IDENTIFIER>  {
-    length = tokens.length;
-    System.arraycopy(tokens, 0 , tokens = new char[length + 1][], 0, length);
-    tokens[length] = getTokenText(token);
-    System.arraycopy(positions, 0 , positions = new long[length + 1], 0, length);
-    positions[length] = getTokenRange(token);  }
-  )* <SEMICOLON>
-  {
-    ImportReference result =  new ImportReference(tokens, positions, false, ClassFileConstants.AccDefault);
-    result.annotations = annotations;
-    return result;
-  }
-}
-
-ImportReference ImportDeclaration():
-{
-  Token token = null;
-  char[][] tokens = new char[1][];
-  long[] positions = new long[1];
-  int length = 0;
-  boolean isStatic = false;
-}
-{
-  <IMPORT> [ <STATIC>  {
-    isStatic = true;  } ]   token = <IDENTIFIER>  {
-    tokens[0] = getTokenText(token);
-    positions[0] = getTokenRange(token);    }
-  ( LOOKAHEAD(2) <DOT> token = <IDENTIFIER>  {
-    length = tokens.length;
-    System.arraycopy(tokens, 0 , tokens = new char[length + 1][], 0, length);
-    tokens[length] = getTokenText(token);
-    System.arraycopy(positions, 0 , positions = new long[length + 1], 0, length);
-    positions[length] = getTokenRange(token);  }
-  )* [ <DOT> <MULTIPLY> ] <SEMICOLON>  {
-    return new ImportReference(tokens, positions, true, ClassFileConstants.AccDefault);  }
-}
-
-/*
- * Modifiers. We match all modifiers in a single rule to reduce the chances of
- * syntax errors for simple modifier mistakes. It will also enable us to give
- * better error messages.
- */
-//int Modifiers()://{//   int modifiers = 0; Annotation[] annotations = null;//}//{// (//  LOOKAHEAD(2)//  (//   <PUBLIC> { modifiers |= ModifierSet.PUBLIC; }//  |//   "static" { modifiers |= ModifierSet.STATIC; }//  |//   "protected" { modifiers |= ModifierSet.PROTECTED; }//  |//   "private" { modifiers |= ModifierSet.PRIVATE; }//  |//   "final" { modifiers |= ModifierSet.FINAL; }//  |//   "abstract" { modifiers |= ModifierSet.ABSTRACT; }//  |//   "synchronized" { modifiers |= ModifierSet.SYNCHRONIZED; }//  |//   "native" { modifiers |= ModifierSet.NATIVE; }//  |//   "transient" { modifiers |= ModifierSet.TRANSIENT; }//  |//   "volatile" { modifiers |= ModifierSet.VOLATILE; }//  |//   "strictfp" { modifiers |= ModifierSet.STRICTFP; }//  |//   annotation = Annotation()//   {//     annotations.add(annotation);//   }//  )// )*//// {//    return modifiers;// }//}
-
-Modifier Modifiers():
-{
-   int modifiers = 0, length = 0; Annotation[] annotations = null; Annotation annotation = null;
-}
-{
- (
-  LOOKAHEAD(2)
-  (
-   <PUBLIC> { modifiers |= ModifierSet.AccPublic; }
-  |
-   <STATIC> { modifiers |= ModifierSet.AccStatic; }
-  |
-   <PROTECTED> { modifiers |= ModifierSet.AccProtected; }
-  |
-   <PRIVATE> { modifiers |= ModifierSet.AccPrivate; }
-  |
-   <FINAL> { modifiers |= ModifierSet.AccFinal; }
-  |
-   <ABSTRACT> { modifiers |= ModifierSet.AccAbstract; }
-  |
-   <SYNCHRONIZED> { modifiers |= ModifierSet.AccSynchronized; }
-  |
-   <NATIVE> { modifiers |= ModifierSet.AccNative; }
-  |
-   <TRANSIENT> { modifiers |= ModifierSet.AccTransient; }
-  |
-   <VOLATILE> { modifiers |= ModifierSet.AccVolatile; }
-  |
-   <STRICTFP> { modifiers |= ModifierSet.AccStrictfp; }
-  |
-   annotation = Annotation()
-   {
-     if(annotations == null) {
-       annotations = new Annotation[0];     } else     {
-       length = annotations.length;
-       System.arraycopy(annotations, 0, annotations = new Annotation[length + 1], 0, length);       annotations[length] = annotation;
-     }
-   }
-  )
- )*
- {
-    return new Modifier(modifiers, annotations);
- }
-}
-
-/*
- * Declaration syntax follows.
- */
-TypeDeclaration TypeDeclaration():
-{
-   Modifier modifier;
-   TypeDeclaration typeDecl = null;
-}
-{
-  <SEMICOLON>
-|
-  modifier = Modifiers()
-  (
-     typeDecl = ClassOrInterfaceDeclaration()
-   |
-     typeDecl = EnumDeclaration()
-   |
-     typeDecl = AnnotationTypeDeclaration()
-  )
-  {
-    typeDecl.modifiers |= modifier.modifiers;
-    typeDecl.annotations = modifier.annotations;
-    return typeDecl;  }
-}
-
-
-TypeDeclaration ClassOrInterfaceDeclaration():
-{
-   boolean isInterface = false;
-   TypeDeclaration typeDecl = new TypeDeclaration(this.compilationResult);
-   TypeParameter[]  typePars = null;
-   TypeReference[]  types = null;
-   Token id = null;
-}
-{
-  ( <CLASS>{ typeDecl.modifiers |= TypeDeclaration.CLASS_DECL; } | <INTERFACE> { isInterface = true; typeDecl.modifiers |= TypeDeclaration.INTERFACE_DECL;} )
-  id = <IDENTIFIER>  {
-    typeDecl.name = getTokenText(id);
-    typeDecl.sourceStart = id.sourceStart;
-    typeDecl.sourceEnd = id.sourceEnd;  }
-  [ typePars = TypeParameters()  {
-    typeDecl.typeParameters = typePars;  } ]
-  [ types = ExtendsList(isInterface)  {
-    if(isInterface)    {      typeDecl.superInterfaces = types;
-    } else {
-      typeDecl.superclass = types[0];    }
-  } ]
-  [ types = ImplementsList(isInterface)  {
-    typeDecl.superInterfaces = types;  }]  ClassOrInterfaceBody(isInterface, typeDecl)
-  {
-	return typeDecl;
-  }
-}
-
-TypeReference[] ExtendsList(boolean isInterface):
-{
-   boolean extendsMoreThanOne = false;
-   TypeReference[] baseTypes = new TypeReference[1];
-   TypeReference type = null;
-   int length = 0;
-}
-{
-   <EXTENDS> type = ClassOrInterfaceType()   {
-     baseTypes[0] = type;   }
-   ( <COMMA> type = ClassOrInterfaceType()
-   {
-     extendsMoreThanOne = true;
-     length = baseTypes.length;
-     System.arraycopy(baseTypes, 0, baseTypes = new TypeReference[length + 1], 0, length);
-     baseTypes[length] = type;
-   } )*
-   {
-      if (extendsMoreThanOne && !isInterface)
-         throw new ParseException("A class cannot extend more than one other class");
-
-      return baseTypes;
-   }
-}
-
-TypeReference[] ImplementsList(boolean isInterface):
-{
-   TypeReference[] baseTypes = new TypeReference[1];
-   TypeReference type = null;
-   int length = 0;
-}
-{
-   <IMPLEMENTS> type = ClassOrInterfaceType()   {
-     baseTypes[0] = type;   }
-   ( <COMMA> type = ClassOrInterfaceType()   {
-     length = baseTypes.length;
-     System.arraycopy(baseTypes, 0, baseTypes = new TypeReference[length + 1], 0, length);
-     baseTypes[length] = type;   } )*
-   {
-      if (isInterface)
-         throw new ParseException("An interface cannot implement other interfaces");
-	  	
-      return baseTypes;
-   }
-}
-
-TypeDeclaration EnumDeclaration():
-{
-  TypeDeclaration typeDecl = null;
-}
-{
-  <ENUM> <IDENTIFIER>
-  [ ImplementsList(false) ]
-  EnumBody(typeDecl)  {
-    return typeDecl;  }
-}
-
-void EnumBody(TypeDeclaration typeDecl):
-{
-  FieldDeclaration[] fields = null; FieldDeclaration field = null; int length = 0;
-}
-{
-   <LBRACE>
-   [ field = EnumConstant(typeDecl) ( LOOKAHEAD(2) <COMMA> field = EnumConstant(typeDecl)   {
-     if(fields == null)     {
-       fields = new FieldDeclaration[1];
-       fields[0] = field;     }else     {
-       length = fields.length;
-       System.arraycopy(fields, 0, fields = new FieldDeclaration[length + 1], 0, length);
-       fields[length] = field;     }   } )* ]
-    [ <COMMA> ]
-   [ <SEMICOLON> ( ClassOrInterfaceBodyDeclaration(false, typeDecl) )* ]
-   <RBRACE>
-}
-
-FieldDeclaration EnumConstant(TypeDeclaration typeDecl):
-{
-	Modifier modifier = null; Token id = null;
-	Expression[] arguments = null;
-}
-{
-  modifier = Modifiers() id = <IDENTIFIER> [ arguments = Arguments() ] [ ClassOrInterfaceBody(false, typeDecl) ]  {
-    return new FieldDeclaration(getTokenText(id), id.sourceStart, id.sourceEnd);
-  }
-}
-
-TypeParameter[] TypeParameters():
-{
-  TypeParameter[] result = new TypeParameter[1];
-  TypeParameter typeParameter = null;
-  int length = 0;
-}
-{
-   <LESS> typeParameter = TypeParameter()   {
-     result[0] = typeParameter;   } ( <COMMA> typeParameter = TypeParameter()   {
-     length = result.length;
-     System.arraycopy(result, 0, result = new TypeParameter[length + 1], 0, length);
-     result[length] = typeParameter;   } )* <GREATER>   {
-     return result;   }
-}
-
-TypeParameter TypeParameter():
-{
-  Token id = null;
-  TypeReference[] bounds = null;
-}
-{
-   (id= <IDENTIFIER> | id = <QUESTION>) [ bounds = TypeBound() ]   {
-     TypeParameter result = new TypeParameter();
-     result.name = getTokenText(id);
-     result.sourceStart = id.sourceStart;
-	 result.bounds = bounds;
-     return result;
-   }
-}
-
-TypeReference[] TypeBound():
-{
- TypeReference[] result = new TypeReference[1];
- TypeReference type = null;
- int length = 0;
-}
-{
-   <EXTENDS> type = ClassOrInterfaceType()   {
-     result[0] = type;   } ( <AND> type = ClassOrInterfaceType()   {
-     length = result.length;
-     System.arraycopy(result, 0, result = new TypeReference[length + 1], 0, length);
-     result[length] = type;   } )*   {
-     return result;   }
-}
-
-void ClassOrInterfaceBody(boolean isInterface, TypeDeclaration typeDecl):
-{
-  Token rBrace= null, lBrace = null;
-}
-{
-  lBrace = <LBRACE> ( ClassOrInterfaceBodyDeclaration(isInterface, typeDecl) )* rBrace= <RBRACE>  {
-    typeDecl.bodyStart = lBrace.sourceStart;
-    typeDecl.bodyEnd = rBrace.sourceEnd;  }
-}
-
-void ClassOrInterfaceBodyDeclaration(boolean isInterface, TypeDeclaration typeDecl):
-{
-   boolean isNestedInterface = false;
-   Modifier modifier;
-   AbstractMethodDeclaration methodDecl = null;
-   FieldDeclaration[] fields = null;
-   PropertyDeclaration propDecl = null;
-   EventDeclaration eventDecl = null;
-   IndexerDeclaration indexerDecl = null;
-   int length = 0;
-}
-{
-  LOOKAHEAD(2)
-  Initializer()
-  {
-     if (isInterface)
-        throw new ParseException("An interface cannot have initializers");
-  }
-|
-  modifier = Modifiers() // Just get all the modifiers out of the way. If you want to do
-              // more checks, pass the modifiers down to the member
-  (
-      ClassOrInterfaceDeclaration()
-    |
-      EnumDeclaration()
-    |
-      LOOKAHEAD( [ TypeParameters() ] <IDENTIFIER> <LPAREN> )
-      methodDecl = ConstructorDeclaration()      {
-        if(typeDecl.methods == null)        {
-          typeDecl.methods = new AbstractMethodDeclaration[1];
-          typeDecl.methods[0] = methodDecl;        } else {
-          System.arraycopy(typeDecl.methods, 0, typeDecl.methods = new AbstractMethodDeclaration[length + 1], 0, length);
-          typeDecl.methods[length] = methodDecl;        }
-      }
-    |
-      LOOKAHEAD(Type() <THIS> <LBRACKET>)
-      indexerDecl = IndexerDeclaration()      {
-        if(typeDecl.indexers == null)
-        {
-          typeDecl.indexers = new IndexerDeclaration[1];
-          typeDecl.indexers[0] = indexerDecl;
-        } else {
-          length  = typeDecl.indexers.length;
-          System.arraycopy(typeDecl.indexers, 0, typeDecl.indexers = new IndexerDeclaration[length + 1], 0, length);
-          typeDecl.indexers[length] = indexerDecl;
-        }      }
-    | 
-      LOOKAHEAD( Type() <IDENTIFIER> /*( <LBRACKET> <RBRACKET> )* */ ( <COMMA> | <EQUAL> | <SEMICOLON> ) )
-      fields = FieldDeclaration(modifier)      {
-        if(typeDecl.fields == null)
-        {
-          typeDecl.fields = fields;
-        } else {
-          length  = typeDecl.fields.length;
-          System.arraycopy(typeDecl.fields, 0, typeDecl.fields = new FieldDeclaration[length + fields.length], 0, length);
-          System.arraycopy(fields, 0, typeDecl.fields, length, fields.length);
-        }      }
-    |
-      LOOKAHEAD(Type() <IDENTIFIER> <LBRACE>)
-      propDecl = PropertyDeclaration()      {
-        propDecl.modifiers = modifier.modifiers;
-        propDecl.annotations = modifier.annotations;
-        if(typeDecl.properties == null)
-        {
-          typeDecl.properties = new PropertyDeclaration[1];
-          typeDecl.properties[0] = propDecl;
-        } else {
-          length  = typeDecl.properties.length;
-          System.arraycopy(typeDecl.properties, 0, typeDecl.properties = new PropertyDeclaration[length + 1], 0, length);
-          typeDecl.properties[length] = propDecl;
-        }      }
-    |
-      eventDecl = EventDeclaration()      {
-        eventDecl.modifiers = modifier.modifiers;
-        eventDecl.annotations = modifier.annotations;
-        if(typeDecl.properties == null)
-        {
-          typeDecl.events = new EventDeclaration[1];
-          typeDecl.events[0] = eventDecl;
-        } else {
-          length  = typeDecl.events.length;
-          System.arraycopy(typeDecl.events, 0, typeDecl.events = new EventDeclaration[length + 1], 0, length);
-          typeDecl.events[length] = eventDecl;
-        }      }
-    |
-      methodDecl = MethodDeclaration()      {
-        methodDecl.modifiers = modifier.modifiers;
-        methodDecl.annotations = modifier.annotations;
-        if(typeDecl.methods == null)
-        {
-          typeDecl.methods = new AbstractMethodDeclaration[1];
-          typeDecl.methods[0] = methodDecl;
-        } else {
-          length = typeDecl.methods.length;
-          System.arraycopy(typeDecl.methods, 0, typeDecl.methods = new AbstractMethodDeclaration[length + 1], 0, length);
-          typeDecl.methods[length] = methodDecl;
-        }
-      }
-    |
-      AnnotationTypeDeclaration()
-  )
-|
-  <SEMICOLON>
-}
-
-IndexerDeclaration IndexerDeclaration():
-{
-  TypeReference type = null;
-  Argument argument = null; Argument[] arguments = new Argument[1]; int length = 0;
-  Block setter = null, getter = null;
-  Token lBracket = null, rBracket = null;}
-{      type = Type()     {
-    } <THIS> lBracket = <LBRACKET>  argument = FormalParameter()    {
-      arguments[0] = argument;    } ( <COMMA> argument = FormalParameter()    {
-      length = arguments.length;
-      System.arraycopy(arguments, 0, arguments = new Argument[length + 1], 0 ,length);
-      arguments[length] = argument;    } )*  rBracket = <RBRACKET> <LBRACE>
-       <GET> getter = Block()       <SET> setter = Block()
-    <RBRACE>
-	{	  return new IndexerDeclaration(type, arguments, getter, setter, lBracket.sourceStart, rBracket.sourceEnd);	}	
-}
-
-PropertyDeclaration PropertyDeclaration():
-{
-  TypeReference type = null;
-  Token id = null;
-  Block setter = null, getter = null;
-}
-{  type = Type() id = <IDENTIFIER>
-  <LBRACE>
-     <GET> getter = Block()
-     <SET> setter = Block()
-  <RBRACE>
-  {
-    return new PropertyDeclaration(type, getTokenText(id), getter, setter, id.sourceStart, id.sourceEnd);  }
-}
-EventDeclaration EventDeclaration():
-{
-  TypeReference type = null;
-  Token id = null;
-  Block add = null, remove = null;
-}
-{   <EVENT> type = Type() id = <IDENTIFIER> <LBRACE>
-   	  <ADD> add = Block()
-      <REMOVE> remove = Block()
-    <RBRACE>    {
-      return new EventDeclaration(type, getTokenText(id), add, remove, id.sourceStart, id.sourceEnd);    }
-}
-
-FieldDeclaration[] FieldDeclaration(Modifier modifier):
-{
-  FieldDeclaration[] fieldDecls = new FieldDeclaration[1];
-  TypeReference type = null;
-  VariableDeclarator vd = null;
-  int length = 0;
-}
-  {
-    (  // Modifiers are already matched in the caller
-  type = Type() vd = VariableDeclarator()  {
-    fieldDecls[0] = new FieldDeclaration(getTokenText(vd.name), vd.name.sourceStart, vd.name.sourceEnd);
-    fieldDecls[0].type = type;
-    fieldDecls[0].initialization = vd.initialization;
-    fieldDecls[0].modifiers = modifier.modifiers;
-    fieldDecls[0].annotations = modifier.annotations;  } ( <COMMA> vd = VariableDeclarator()  {
-    length = fieldDecls.length;
-    
-    System.arraycopy(fieldDecls, 0, fieldDecls = new FieldDeclaration[length + 1], 0, length);
-    fieldDecls[length] = new FieldDeclaration(getTokenText(vd.name), vd.name.sourceStart, vd.name.sourceEnd);
-    fieldDecls[length].type = type;
-    fieldDecls[length].initialization = vd.initialization;
-    fieldDecls[length].modifiers = modifier.modifiers;
-    fieldDecls[length].annotations = modifier.annotations;  } )* <SEMICOLON>)
-  {
-    return fieldDecls;  }
-}
-
-VariableDeclarator VariableDeclarator():
-{
-  Expression initialization = null;
-  Token name = null;
- }
-{
-  name = VariableDeclaratorId() [ <EQUAL> initialization = VariableInitializer() ]  {
-    return new VariableDeclarator(name, initialization);  }
-}
-
-Token VariableDeclaratorId():
-{
-	Token id = null;
- }
-{
-  id = <IDENTIFIER>  {
-    return id;  }
-//  ( <LBRACKET> id = <RBRACKET>//  {//    variable.dims ++;//  } )*  }
-
-Expression VariableInitializer():
-{
-  Expression result = null;
-  }
-{
-  result = ArrayInitializer()
-|
-  result = Expression()
-
-  {
-    return result;  }
-}
-
-ArrayInitializer ArrayInitializer():
-{
-  Expression expression = null;
-  Expression[] expressions = null; int length = 0;
-}
-{
-  <LBRACE> [ expression = VariableInitializer()  {
-    expressions = new Expression[1];
-    expressions[0] = expression;  } ( LOOKAHEAD(2) <COMMA> expression = VariableInitializer()  {
-    length = expressions.length;
-    System.arraycopy(expressions, 0, expressions = new Expression[length + 1], 0, length);
-    expressions[length] = expression;  } )* ] [ <COMMA> ] <RBRACE>  {
-    ArrayInitializer result = new ArrayInitializer();
-    result.expressions = expressions;
-    return result;  }
-}
-
-MethodDeclaration MethodDeclaration():
-{
-  TypeParameter[] typeParameters = null;  TypeReference type = null;  Block block = null;  NameReference[] nameReferences = null;
-  MethodDeclaration result = new MethodDeclaration(this.compilationResult);
-}
-{
-  // Modifiers already matched in the caller!
-  [ typeParameters = TypeParameters()]
-  type = ResultType()
-  MethodDeclarator(result) [ <THROWS> nameReferences = NameList()]
-  ( block = Block() | <SEMICOLON> )
-  {
-    result.returnType = type;
-    result.typeParameters = typeParameters;
-    result.statements = block.statements;
-    return result;  }
-}
-
-void MethodDeclarator(MethodDeclaration result):
-{
-  Token id = null;
-  Argument[] arguments = null;
-}
-{
-  id = <IDENTIFIER> arguments = FormalParameters()  {
-    result.arguments = arguments;
-    result.sourceStart = id.sourceStart;
-    result.sourceEnd = id.sourceEnd;  } //( <LBRACKET> <RBRACKET> )*
-}
-
-Argument[] FormalParameters():
-{
-  Argument argument = null;
-  Argument[] result = null; 
-  int length = 0;
-}
-{
-  <LPAREN> [ argument = FormalParameter()  {
-    result = new Argument[1];
-    result[0] = argument;  } ( <COMMA> argument = FormalParameter()  {
-    length = result.length;
-    System.arraycopy(result, 0, result = new Argument[length + 1], 0, length);
-    result[length] = argument;  } )* ] <RPAREN>  {
-    return result;  }
-}
-
-Argument FormalParameter():
-{
-  Modifier modifier = null;
-  TypeReference type = null;
-  Token id = null;
-  boolean isVarArgs = false;
-}
-{
-  // danson, added
-  //          [ "final" | Annotation() ]
-  // See Java Language Specification, 3rd Edition, section 8.4.1
-  modifier = Modifiers() [ <FINAL> | Annotation() ] type = Type() [ <ELLIPSIS>  {
-    isVarArgs = true;  } ] id = VariableDeclaratorId()  {
-    Argument result = new Argument(getTokenText(id), getTokenRange(id), type, modifier.modifiers);
-    result.annotations = modifier.annotations;
-    result.type.bits |= ASTNode.IsVarArgs; // set isVarArgs
-	
-    return result;  }
-}
-
-ConstructorDeclaration ConstructorDeclaration():
-{
-  TypeParameter[] typeParameters = null;
-  Argument[] arguments = null;
-  Token token = null;
-  Statement[] statements = null; Statement statement = null; int length = 0;
-  ExplicitConstructorCall constructorCall = null;
-  ConstructorDeclaration result = new ConstructorDeclaration(this.compilationResult);
-}
-{
-  [ typeParameters = TypeParameters() ]
-  // Modifiers matched in the caller
-  token = <IDENTIFIER> arguments = FormalParameters() [ <THROWS> NameList() ]
-  <LBRACE>
-    [ LOOKAHEAD(ExplicitConstructorInvocation())      constructorCall = ExplicitConstructorInvocation()
-    ]
-    ( statements = BlockStatement()    {
-      if(result.statements==null)      {		result.statements = statements;
-      } else {
-        length = result.statements.length;
-        System.arraycopy(result.statements, 0, result.statements = new Statement[length + statements.length], 0, length);
-        System.arraycopy(statements, 0, result.statements, length, statements.length);      }    })*
-  <RBRACE>  {
-    result.selector = getTokenText(token);
-    result.arguments = arguments;
-	result.typeParameters = typeParameters;
-	result.sourceStart = token.sourceStart;
-	result.sourceEnd = token.sourceEnd;
-	if(constructorCall !=null) {
-	  result.constructorCall = constructorCall;	} else {
-	  result.constructorCall = new ExplicitConstructorCall(ExplicitConstructorCall.ImplicitSuper);	}
-    return result;  }
-}
-//	public final static int ImplicitSuper = 1;//	public final static int Super = 2;//	public final static int This = 3;
-
-ExplicitConstructorCall ExplicitConstructorInvocation():
-{
-  int accessMode = 1;
-  Expression[] arguments = null;
-  TypeReference[] typeArguments = null;
-}
-{
-//  ( <IDENTIFIER> <DOT> )* [ LOOKAHEAD(2) <THIS> <DOT> ]
-  [ typeArguments = TypeArguments() ] (<THIS>  {    accessMode = ExplicitConstructorCall.This;  }  |<SUPER>  {
-    accessMode = ExplicitConstructorCall.Super;  }) arguments = Arguments() <SEMICOLON>  {
-    ExplicitConstructorCall explicitCall = new ExplicitConstructorCall(accessMode);
-    explicitCall.typeArguments = typeArguments;
-    explicitCall.arguments = arguments;
-    return explicitCall;  }
-}
-
-Initializer Initializer():
-{
-  boolean isStatic = false;
-  Block block = null;
-}
-{
-  [ <STATIC>  {
-    isStatic = true;  } ] block = Block()  {
-    return new Initializer(block, isStatic ? ClassFileConstants.AccStatic : 0);
-  }
-}
-
-
-/*
- * Type, name and expression syntax follows.
- */
-
-TypeReference Type():
-{
-  TypeReference type = null;
-}
-{
-   LOOKAHEAD(2) type = ReferenceType()   {
-     return type;   }
- |
-   type = PrimitiveType()   {
-     return type;   }
-}
-
-TypeReference ReferenceType():
-{
-  TypeReference type = null;
-  int dims = 0;
-}
-{
-  (    
-   type = PrimitiveType() ( LOOKAHEAD(2) <LBRACKET> <RBRACKET>   {
-     dims++;   } )+   {
-     return new ArrayTypeReference(type.getTypeName()[0], dims, type.sourceStart << 32 + type.sourceEnd);   }
-  |
-   ( type = ClassOrInterfaceType() ) ( LOOKAHEAD(2) <LBRACKET> <RBRACKET>   {
-     dims++;   } )*  | type = FunctionType() ( LOOKAHEAD(2) <LBRACKET> <RBRACKET>  {
-    dims++;  } )*)  {
-    if(dims > 0) {
-      return new ArrayTypeReference(type.getTypeName()[0], dims, type.sourceStart << 32 + type.sourceEnd);    } else  {
-      return type;    }
-  }
-}
-
-TypeReference ClassOrInterfaceType():
-{
-  char[][]  qualifiedNames = new char[1][];
-  Token id = null;
-  TypeReference[] typeRef = null;
-  TypeReference[][] typeRefs = new TypeReference[1][];
-  boolean generic = false;
-  long[] sourcePositions = new long[1];
-  int length = 0;
-}
-{
-  id = <IDENTIFIER>  {
-    qualifiedNames[0] = getTokenText(id);
-    sourcePositions[0] = getTokenRange(id);
-  } [ LOOKAHEAD(2) typeRef = TypeArguments()  {
-    generic = true;
-    typeRefs[0] = typeRef;  } ]
-  ( LOOKAHEAD(2) <DOT> id = <IDENTIFIER>  {
-    length = qualifiedNames.length;
-    System.arraycopy(qualifiedNames, 0, qualifiedNames = new char[length + 1][], 0, length);
-    System.arraycopy(typeRefs, 0, typeRefs = new TypeReference[length + 1][], 0, length);
-    System.arraycopy(sourcePositions, 0, sourcePositions = new long[length + 1], 0, length);
-    qualifiedNames[length] = getTokenText(id);
-    sourcePositions[length] = getTokenRange(id);
-  } [ LOOKAHEAD(2) typeRef = TypeArguments()  {
-    generic = true;
-    typeRefs[length] = typeRef;  } ] )*
-  {
-    if(generic) {
-      if(length == 0) {
-        return new ParameterizedSingleTypeReference(qualifiedNames[0], typeRef, 0, sourcePositions[0]);
-      } else {
-        return new ParameterizedQualifiedTypeReference(qualifiedNames, typeRefs, 0, sourcePositions);      }	} else {	  if(length == 0){
-	    return new SingleTypeReference(qualifiedNames[0], sourcePositions[0]);	  } else {
-	    return new QualifiedTypeReference(qualifiedNames, sourcePositions);
-	  }	}
-  }
-}
-
-TypeReference[] TypeArguments():
-{
-  TypeReference[] result = new TypeReference[1];
-  TypeReference typeRef = null;
-  int length = 0;
-}
-{
-   <LESS> typeRef= TypeArgument()   {
-     result[0] = typeRef;   } ( <COMMA> typeRef = TypeArgument()   {
-     length = result.length;
-     System.arraycopy(result, 0, result = new TypeReference[length + 1], 0, length);
-     result[length] = typeRef;   } )* <GREATER>
-   {
-     return result;   }
-}
-
-TypeReference TypeArgument():
-{
-  TypeReference typeRef = null;
-}
-{
-   typeRef = ReferenceType()   {
-     return typeRef;   }
- |
-   <QUESTION> [ typeRef = WildcardBounds() ]   {
-     if(typeRef != null) {		return typeRef;
-     } else {
-       return new Wildcard(Wildcard.UNBOUND);     }   }
-}
-
-Wildcard WildcardBounds():
-{}
-{
-   <EXTENDS> ReferenceType()   {
-     return new Wildcard(Wildcard.EXTENDS);   }
- |
-   <SUPER> ReferenceType()   {
-     return new Wildcard(Wildcard.SUPER);   }
-}
-
-FunctionType FunctionType():
-{
-  Token lBrace = null, rBrace = null;
-  Argument[] arguments = null; Argument argument = null;
-  TypeReference type = null;
-  int length = 0;
-}
-{
-   lBrace = <LPAREN>   {
-   } [ argument = FormalParameter()   {
-     arguments = new Argument[1]; arguments[0] = argument;   } ( <COMMA> argument = FormalParameter()   {
-      length = arguments.length;
-      System.arraycopy(arguments, 0, arguments = new Argument[length + 1], 0, length);
-      arguments[length] = argument;
-   } )* ] rBrace = <RPAREN> <COLON> type = ResultType()   {
-     return new FunctionType(arguments, type, lBrace.sourceStart, rBrace.sourceEnd);   }
-}
-
-TypeReference PrimitiveType():
-{}
-{
-  <BOOLEAN>  {
-    return TypeReference.baseTypeReference(TypeIds.T_boolean, 0);  }
-|
-  <CHAR>  {
-	return TypeReference.baseTypeReference(TypeIds.T_char, 0);
-  }
-|
-  <BYTE>  {
-	return TypeReference.baseTypeReference(TypeIds.T_byte, 0);
-  }
-|
-  <SHORT>  {
-	return TypeReference.baseTypeReference(TypeIds.T_short, 0);
-  }
-|
-  <INT>  {
-	return TypeReference.baseTypeReference(TypeIds.T_int, 0);
-  }
-|
-  <LONG>  {
-	return TypeReference.baseTypeReference(TypeIds.T_long, 0);
-  }
-|
-  <FLOAT>  {
-	return TypeReference.baseTypeReference(TypeIds.T_double, 0);
-  }
-|
-  <DOUBLE>  {
-	return TypeReference.baseTypeReference(TypeIds.T_boolean, 0);
-  }
-}
-
-TypeReference ResultType():
-{
-  TypeReference type = null;
-}
-{
-  <VOID>  {
-    return TypeReference.baseTypeReference(TypeIds.T_void, 0);  }
-|
-  type = Type()  {
-    return type;  }
-}
-
-NameReference Name():
-/*
- * A lookahead of 2 is required below since "Name" can be followed
- * by a ".*" when used in the context of an "ImportDeclaration".
- */
-{
-	Token token = null;
-	char[][] tokens = new char[1][];
-	long[] positions = new long[1];
-	boolean qualified = false;
-	int length = 0;
-}
-{
-  ( token= <IDENTIFIER> | token = <ADD> | token = <REMOVE> | token = <GET> | token = <SET> | token = <REF> | token = <OUT> | token = <EVENT>)  {
-    tokens[0] = getTokenText(token);
-    positions[0] = getTokenRange(token);  }  ( LOOKAHEAD(2) <DOT>
-  (token= <IDENTIFIER> | token = <ADD> | token = <REMOVE> | token = <GET> | token = <SET> | token = <REF> | token = <OUT> | token = <EVENT>)  {
-	qualified = true;
-    length = tokens.length;    System.arraycopy(tokens, 0 , tokens = new char[length + 1][], 0, length);
-    tokens[length] = getTokenText(token);
-    System.arraycopy(positions, 0 , positions = new long[length + 1], 0, length);
-    positions[length] = getTokenRange(token);
-  }
-  )*
-  {
-    if(qualified) {
-      return new QualifiedNameReference(tokens, positions, (int)(positions[0] >>> 32), (int)(positions[0] & 0x00000000FFFFFFFF));    } else {
-      return new SingleNameReference(tokens[0], positions[0]);     }  }
-}
-
-NameReference[] NameList():
-{
-  NameReference[] result = new NameReference[1];
-  NameReference nr = null;
-  int length = 0;
-}
-{
-  nr = Name()  {
-    result[0] = nr;  } ( <COMMA> nr = Name()  {
-    length = result.length;
-    System.arraycopy(result, 0, result = new NameReference[length + 1], 0, length);
-    result[length] = nr;  } )*  {
-    return result;  }
-}
-
-///*// * Expression syntax follows.// *///Expression Expression():///*// * This expansion has been written this way instead of:// *   Assignment() | ConditionalExpression()// * for performance reasons.// * However, it is a weakening of the grammar for it allows the LHS of// * assignments to be any conditional expression whereas it can only be// * a primary expression.  Consider adding a semantic predicate to work// * around this.// *///{//	Expression lhs = null, expression = null;//	int op = 0;//}//{//  	(//   LOOKAHEAD(3)//  lhs = ConditionalExpression()//  [//    LOOKAHEAD(2)//    op = AssignmentOperator() expression = Expression()//    {//      lhs = new CompoundAssignment(lhs, expression, op, expression.sourceEnd);//    }//  ]//|//	lhs = LambdaExpression()//	)//	{//	  return lhs;//	}//}
-
-Expression Expression():
-/*
- * This expansion has been written this way instead of:
- *   Assignment() | ConditionalExpression()
- * for performance reasons.
- * However, it is a weakening of the grammar for it allows the LHS of
- * assignments to be any conditional expression whereas it can only be
- * a primary expression.  Consider adding a semantic predicate to work
- * around this.
- */
-{
-	Expression lhs = null, expression = null;
-	int op = 0;
-}
-{
-  (  LOOKAHEAD(LambdaParameters() "->")
-  lhs = LambdaExpression()
-| 
-  lhs = ConditionalExpression()
-  [
-    LOOKAHEAD(2)
-	op = AssignmentOperator() expression = Expression()
-    {
-      lhs = new CompoundAssignment(lhs, expression, op, expression.sourceEnd);
-    }
-  ])
-  {
-    return lhs;
-  }
-}
-
-LambdaExpression LambdaExpression():
-{
-  Statement body = null;
-  Argument[] arguments = null;
-}
-{
-  (  arguments = LambdaParameters() <ARROW> body = LambdaBody())
-  {	LambdaExpression lambda = new LambdaExpression(this.compilationResult, false);
-	lambda.body = body;
-    lambda.arguments = arguments;
-	return lambda;
-  }
-}
-Argument[] LambdaParameters():
-{
-  Argument[] arguments = null; Argument argument = null;
-  Token id = null; int length = 0;
-}
-{
-  (  id = <IDENTIFIER>  {
-    arguments = new Argument[1];
-    arguments[0] = new Argument(getTokenText(id), getTokenRange(id), null, 0);  }
-|
-  LOOKAHEAD(<LPAREN> <IDENTIFIER> (<COMMA> <IDENTIFIER>)* <RPAREN>)
-  <LPAREN> arguments = InferredFormalParameterList() <RPAREN>
-|
-  LOOKAHEAD(<LPAREN> [ FormalParameter() ( <COMMA> FormalParameter() )* ]  <RPAREN>)
-  <LPAREN> [ argument = FormalParameter()  {
-    arguments = new Argument[1];
-    arguments[0] = argument;
-  } ( <COMMA> argument = FormalParameter() )*
-  {
-    length = arguments.length;
-    System.arraycopy(arguments, 0, arguments = new Argument[length + 1] , 0, length);
-    arguments[length] = argument;
-  } ]  <RPAREN>
-  )  {
-	return arguments;
-  }
-}
-Argument[] InferredFormalParameterList():
-{
-  Argument[] arguments = new Argument[1];
-  Token id = null; int length = 0;
-}
-{
-  (    id = <IDENTIFIER>  {
-    arguments[0] = new Argument(getTokenText(id), getTokenRange(id), null, 0);  } (<COMMA> id = <IDENTIFIER>  {
-    length = arguments.length;
-    System.arraycopy(arguments, 0, arguments = new Argument[length + 1] , 0, length);
-    arguments[length] = new Argument(getTokenText(id), getTokenRange(id), null, 0);  })*)  {
-    return arguments;  }
-}
-Statement LambdaBody():
-{
-  Statement statement = null;
-}
-{
-  (  statement = Expression()
- | 
-  statement = Block()
- )
- {
-   return statement; }
-}
-
-//Expression LambdaExpression()://{//  Expression result = null;//}//{//  (//  LOOKAHEAD(2)//	<IDENTIFIER> <ARROW> ( Expression() | Block() )//| //	LOOKAHEAD(<LPAREN> <RPAREN> <ARROW>)//	<LPAREN> <RPAREN> <ARROW> ( Expression() | Block() )//| //  	LOOKAHEAD( <LPAREN> FormalParameter() ( <COMMA> FormalParameter() )*  <RPAREN>  <COLON> ResultType() <ARROW>  )//    <LPAREN> FormalParameter() ( <COMMA> FormalParameter() )*  <RPAREN>  <COLON> ResultType() <ARROW>//	 ( Expression() | Block() )//|//	LOOKAHEAD(<LPAREN>  <IDENTIFIER> ( <COMMA> <IDENTIFIER> )*  <RPAREN> <ARROW>  )//	<LPAREN> <IDENTIFIER> ( <COMMA><IDENTIFIER> )*  <RPAREN> <ARROW>//	( Expression() | Block() ))//	{//	  return new LambdaExpression(this.compilationResult, false);//	}//}
-  
-
-int AssignmentOperator():
-{}
-{
-  <EQUAL> { return OperatorIds.EQUAL; }
-  | <MULTIPLY_EQUAL> { return OperatorIds.MULTIPLY; }
-  | <DIVIDE_EQUAL> { return OperatorIds.DIVIDE; }
-  | <REMAINDER_EQUAL>{ return OperatorIds.REMAINDER; }
-  | <PLUS_EQUAL> { return OperatorIds.PLUS; }
-  | <MINUS_EQUAL> { return OperatorIds.MINUS; }
-  | <LEFT_SHIFT_EQUAL>{ return OperatorIds.LEFT_SHIFT; }
-  | <RIGHT_SHIFT_EQUAL>{ return OperatorIds.RIGHT_SHIFT; }
-  | <UNSIGNED_RIGHT_SHIFT_EQUAL>{ return OperatorIds.UNSIGNED_RIGHT_SHIFT; }
-  | <AND_EQUAL>{ return OperatorIds.AND; }
-  | <XOR_EQUAL>{ return OperatorIds.XOR; }
-  | <OR_EQUAL>{ return OperatorIds.OR; }  {
-    return 0;  }
-}
-
-Expression ConditionalExpression():
-{
-  Expression condition = null, valueIfTrue= null, valueIfFalse = null;
-}
-{
-  condition = ConditionalOrExpression() [ <QUESTION> valueIfTrue = Expression() <COLON> valueIfFalse = Expression()  {
-    return new ConditionalExpression(condition, valueIfTrue, valueIfFalse);  } ]  {	return condition;
-  }
-}
-
-Expression ConditionalOrExpression():
-{
-  Expression lhs = null, expression = null;
-}
-{
-  lhs = ConditionalAndExpression() ( <OR_OR> expression = ConditionalAndExpression()  {
-    lhs = new OR_OR_Expression(lhs, expression, OperatorIds.OR_OR);
-      } )*  {
-    return lhs;  }
-}
-
-Expression ConditionalAndExpression():
-{
-  Expression lhs = null, expression = null;
-}
-{
-  lhs = InclusiveOrExpression() ( <AND_AND> expression = InclusiveOrExpression()  {
-    lhs = new AND_AND_Expression(lhs, expression, OperatorIds.AND_AND);  })*
-  {
-    return lhs;
-  }
-}
-
-Expression InclusiveOrExpression():
-{
-Expression lhs = null, expression = null;
-}
-{
-  lhs = ExclusiveOrExpression() ( <OR> expression = ExclusiveOrExpression()
-  {
-    lhs = new BinaryExpression(lhs, expression, OperatorIds.OR);
-  } )*
-  {
-    return lhs;
-  }
-}
-
-Expression ExclusiveOrExpression():
-{
-  Expression lhs = null, expression = null;
-}
-{
-  lhs = AndExpression() ( <XOR> expression = AndExpression()
-  {
-    lhs = new BinaryExpression(lhs, expression, OperatorIds.XOR);
-  } )*
-  {
-    return lhs;
-  }
-}
-
-Expression AndExpression():
-{
-  Expression lhs = null, expression = null;
-}
-{
-  lhs = EqualityExpression() ( <AND> expression = EqualityExpression()
-  {
-    lhs = new BinaryExpression(lhs, expression, OperatorIds.AND);
-  } )*
-  {
-    return lhs;
-  }
-}
-
-Expression EqualityExpression():
-{
-  Expression lhs = null, expression = null;
-  int op = 0;
-}
-{
-  lhs = InstanceOfExpression() ( ( <EQUAL_EQUAL>  {    op = OperatorIds.EQUAL;  } | <NOT_EQUAL>  {    op = OperatorIds.NOT_EQUAL;  }) expression = InstanceOfExpression()  {
-    lhs = new EqualExpression(lhs, expression, op);  } )*
-  {
-    return lhs;  }
-}
-
-Expression InstanceOfExpression():
-{
-  Expression expression = null;
-  TypeReference typeRef = null;
-}
-{
-  expression = RelationalExpression() [ <INSTANCEOF> typeRef = Type()  {
-    return new InstanceOfExpression(expression, typeRef);  } ]  {
-    return expression;  }
-}
-
-Expression RelationalExpression():
-{
-  Expression lhs = null, expression = null;
-  int op = 0;
-}
-{
-  lhs = ShiftExpression() ( LOOKAHEAD(2) ( <LESS>  {
-    op = OperatorIds.GREATER;  } | <GREATER>  {
-    op = OperatorIds.LESS_EQUAL;  }| <LESS_EQUAL>  {
-    op = OperatorIds.LESS_EQUAL;  } | <GREATER_EQUAL>  {
-    op = OperatorIds.GREATER_EQUAL;  } ) expression = ShiftExpression()
-  {
-    lhs = new BinaryExpression(lhs, expression, op);
-  } )*  {	return lhs;
-  }
-}
-
-Expression ShiftExpression():
-{
-  Expression lhs = null, expression = null;
-  int op = 0;
-}
-{
-  (    lhs = AdditiveExpression() ( ( <LEFT_SHIFT>  {
-    op = OperatorIds.LEFT_SHIFT;  }| RSIGNEDSHIFT()  {
-    op = OperatorIds.RIGHT_SHIFT;  } | RUNSIGNEDSHIFT()  {
-    op = OperatorIds.UNSIGNED_RIGHT_SHIFT;  }) expression = AdditiveExpression()
-  {
-    lhs = new BinaryExpression(lhs, expression, op);
-  } )*)
-  {
-	return lhs;
-  }
-}
-
-Expression AdditiveExpression():
-{
-  Expression lhs = null, expression = null;
-  int op = 0;
-}
-{
-  lhs = MultiplicativeExpression() (  ( <PLUS>  {
-    op = OperatorIds.PLUS;  } | <MINUS>  {
-    op = OperatorIds.MINUS;  } ) expression = MultiplicativeExpression()
-  {
-    lhs = new BinaryExpression(lhs, expression, op);
-  } )*
-  {
-	return lhs;
-  }}
-
-Expression MultiplicativeExpression():
-{
-  Expression lhs = null, expression = null;
-  int op = 0;
-}
-{
-  lhs = UnaryExpression() (  ( <MULTIPLY>  {
-    op = OperatorIds.MULTIPLY;  } | <DIVIDE>  {
-    op = OperatorIds.DIVIDE;  } | <REMAINDER>  {
-    op = OperatorIds.REMAINDER;  } ) expression = UnaryExpression()
-  {
-    lhs = new BinaryExpression(lhs, expression, op);
-  } )*
-  {
-	return lhs;
-  }
-}
-
-//Expression UnaryExpression()://{}//{//  ( <PLUS> | <MINUS> ) UnaryExpression()//|//  PreIncrementExpression()//|//  PreDecrementExpression()//|//  UnaryExpressionNotPlusMinus()//}////Expression PreIncrementExpression()://{}//{//  <PLUS_PLUS> PrimaryExpression()//}////Expression PreDecrementExpression()://{}//{//  <MINUS_MINUS> PrimaryExpression()//}
-
-Expression UnaryExpression():
-{
-  Expression expression = null; int op = 0;
-}
-{
-  ( <PLUS>  {
-    op = OperatorIds.PLUS;  } | <MINUS>  {
-    op = OperatorIds.MINUS;  } ) expression = UnaryExpression()  {
-    return new UnaryExpression(expression, op);  }
-|
-  expression = PrefixExpression()  {
-    return expression;  }
-|
-  expression = UnaryExpressionNotPlusMinus()  {
-    return expression;  }
-}
-
-Expression PrefixExpression():
-{
-  Expression expression = null; int op = 0; Token token = null;
-}
-{
-  ( token = <PLUS_PLUS>  {
-     op = OperatorIds.PLUS_PLUS;  } | token = <MINUS_MINUS>  {
-     op = OperatorIds.MINUS_MINUS;  }) expression = PrimaryExpression()  {
-    return new PrefixExpression(expression, IntLiteral.One, op, token.sourceStart);  }
-}
-
-Expression UnaryExpressionNotPlusMinus():
-{
-  Expression expression = null; int op = 0;
-}
-{
-  ( <TWIDDLE>  {
-    op = OperatorIds.TWIDDLE;  } | <NOT>  {
-    op = OperatorIds.NOT;  } ) expression = UnaryExpression()  {
-    return new UnaryExpression(expression, op);  }
-|
-  LOOKAHEAD( CastLookahead() )
-  expression = CastExpression()  {
-    return expression;  }
-|
-  expression = PostfixExpression()  {
-    return expression;  }
-}
-
-// This production is to determine lookahead only.  The LOOKAHEAD specifications
-// below are not used, but they are there just to indicate that we know about
-// this.
-void CastLookahead():
-{}
-{
-  LOOKAHEAD(2)
-  <LPAREN> PrimitiveType()
-|
-  LOOKAHEAD(<LPAREN> Type() <LBRACKET>)
-  <LPAREN> Type() <LBRACKET> <RBRACKET>
-|
-  <LPAREN> Type() <RPAREN> ( <TWIDDLE> | <NOT> | <LPAREN> | <IDENTIFIER> | <THIS> | <SUPER> | <NEW> | Literal() )
-}
-
-Expression PostfixExpression():
-{
-  Expression expression = null; int op = 0;
-}
-{
-  expression = PrimaryExpression() [ LOOKAHEAD(2)( <PLUS_PLUS>  {
-    op = OperatorIds.PLUS_PLUS;  } | <MINUS_MINUS>  {
-    op = OperatorIds.MINUS_MINUS;  }) ]  {
-    return new PostfixExpression(expression, IntLiteral.One, op, expression.sourceStart);  }
-}
-
-Expression CastExpression():
-{
-  Expression expression;
-  TypeReference type;
-}
-{
-  LOOKAHEAD(<LPAREN> PrimitiveType())
-  <LPAREN> type = Type() <RPAREN> expression = UnaryExpression()  {
-    return new CastExpression(expression, type);  }
-|
-  <LPAREN> type = Type() <RPAREN> expression = UnaryExpressionNotPlusMinus()  {
-    return new CastExpression(expression, type);  }
-}
-
-Expression PrimaryExpression():
-{
-  Object suffix = null;
-  Expression prefix = null;
-}
-{
-  prefix = PrimaryPrefix() ( LOOKAHEAD(2) suffix = PrimarySuffix()  {
-    if(suffix instanceof CallArgument) {
-      CallArgument callArguments = (CallArgument)suffix;
-      prefix = new MethodCall(prefix, callArguments.arguments); //MethodCall
-          } else if(suffix instanceof IndexerPart) {      prefix = new ArrayReference(prefix, ((IndexerPart)suffix).pos); //Indexer    } else if(suffix instanceof MemberSelector) {      prefix = new ReferenceExpression(); //MethodCall with TypeArgument    } else if(suffix instanceof SingleNameReference) {
-//      ((SingleNameReference)suffix).reciever = prefix;      prefix =  (SingleNameReference)suffix;    }  } )*  {
-    return prefix;  }
-}
-
-MemberSelector MemberSelector():
-{
-  Expression[] typeArguments = null;
-  Token id = null;
-}
-{
-  <DOT> typeArguments = TypeArguments() id = <IDENTIFIER>  {
-    return new MemberSelector(typeArguments, id);  }
-}
-
-Expression PrimaryPrefix():
-{
-  Token token = null;
-  Expression expression = null;
-  TypeReference type = null;
-}
-{
-  expression = Literal()  {
-    return expression;  }
-|
-//  LOOKAHEAD( ( <IDENTIFIER> <DOT> )* "this" )//  ( <IDENTIFIER> <DOT> )*
-  token = <THIS>  {
-    return new ThisReference(token.sourceStart, token.sourceEnd);  }
-|
-  token = <SUPER> //<DOT> <IDENTIFIER>  {
-    return new SuperReference(token.sourceStart, token.sourceEnd);  }
-//|
-   // danson, added this part to support a construct like:
-   //   Buffer.super.setDirty(true);
-   // See Java Language Specification, 3rd edition, section 15.11.2.
-//   LOOKAHEAD( ClassOrInterfaceType() <DOT> "super" <DOT> <IDENTIFIER> )//   ClassOrInterfaceType() <DOT> "super" <DOT> <IDENTIFIER>|
-	LOOKAHEAD(3)
-    <LPAREN> expression = Expression() <RPAREN>    {
-      return new ParenthesizedExpression(expression);    }
-//)
-|
-  expression = AllocationExpression()  {
-    return expression;  }
-|
-  LOOKAHEAD( ResultType() <DOT> <CLASS> )
-  type = ResultType() <DOT> token = <CLASS>  {
-    return new ClassLiteralAccess(token.sourceEnd, type);  }
-|
-  expression = Name()  {
-    return expression;  }}
-
-
-
-Object PrimarySuffix():
-{
-	Object result = null;
-	Token token = null;
-	Expression expression = null;
-	Expression[] arguments = null;
-}
-{
-//  LOOKAHEAD(<DOT> "super" <DOT>)//  <DOT> "super"//|//  LOOKAHEAD(<DOT> "this")//  <DOT> "this"//|//  LOOKAHEAD(2)//  <DOT> AllocationExpression()//|
-  LOOKAHEAD(3)
-  result = MemberSelector()  {
-    return result;  }
-|
-  <LBRACKET> expression = Expression() <RBRACKET>  {
-    return new IndexerPart(expression);  }
-|
-  <DOT> token = <IDENTIFIER>  {
-    return new SingleNameReference(getTokenText(token), getTokenRange(token));  }
-|
-  arguments = Arguments()  {
-     return new CallArgument(arguments);
-  }}
-
-Literal Literal():
-{
-  Token token = null;
-  Literal literal = null;
- }
-{
-  token = <INTEGER_LITERAL>  {
-    return IntLiteral.buildIntLiteral(getTokenText(token), token.sourceStart, token.sourceEnd);  }
-|
-  token = <FLOAT_LITERAL>  {
-    return new FloatLiteral(getTokenText(token), token.sourceStart, token.sourceEnd);  }
-|
-  token = <DOUBLE_LITERAL>
-  {
-    return new DoubleLiteral(getTokenText(token), token.sourceStart, token.sourceEnd);
-  }
-|
-  token = <LONG_LITERAL>
-  {
-    return LongLiteral.buildLongLiteral(getTokenText(token), token.sourceStart, token.sourceEnd);
-  }
-|
-  token = <CHARACTER_LITERAL>  {
-    return new CharLiteral(getTokenText(token), token.sourceStart, token.sourceEnd);  }
-|
-  token = <STRING_LITERAL>  {
-    return new StringLiteral(getTokenText(token), token.sourceStart, token.sourceEnd, 1);  }
-|
-  literal = BooleanLiteral()  {
-    return literal;  }
-|
-  literal = NullLiteral()  {
-    return literal;  }
-}
-
-MagicLiteral BooleanLiteral():
-{
-  Token token = null;
-}
-{
-  token = <TRUE>  {
-    return new TrueLiteral(token.sourceStart, token.sourceEnd);  }
-|
-  token = <FALSE>  {
-    return new TrueLiteral(token.sourceStart, token.sourceEnd);  }
-}
-
-NullLiteral NullLiteral():
-{
-  Token token = null;
-}
-{
-  token = <NULL>  {
-    return new NullLiteral(token.sourceStart, token.sourceEnd);  }
-}
-
-Expression[] Arguments():
-{
-  Expression[] result = null;
-}
-{
-  <LPAREN> [ result = ArgumentList() ] <RPAREN>  {
-    return result;  }
-}
-
-Expression[] ArgumentList():
-{
-  Expression argument = null;
-  Expression[] result = new Expression[1];
-  int length = 0;
-}
-{
-  argument = Expression()  {
-    result[0] = argument;  } ( <COMMA> argument = Expression()  {
-    length = result.length;
-    System.arraycopy(result, 0, result = new Expression[length + 1], 0, length);
-    result[length] = argument;  } )*  {
-    return result;  }}
-
-Expression AllocationExpression():
-{
-  TypeReference type = null;
-  TypeReference[] typeArguments = null;
-  Expression[] arguments = null;
-  TypeDeclaration typeDecl;
-}
-{
-  LOOKAHEAD(2)
-  <NEW> type = PrimitiveType() ArrayDimsAndInits()  {
-    return new AllocationExpression();  }
-|
-  <NEW> type = ClassOrInterfaceType() [ typeArguments = TypeArguments() ]
-    (
-      ArrayDimsAndInits()
-    |
-      arguments = Arguments() [ LOOKAHEAD(2)      {
-        typeDecl = new TypeDeclaration(this.compilationResult);      } ClassOrInterfaceBody(false, typeDecl)      {
-              }]
-    )
-    {
-      return new AllocationExpression();    }
-}
-
-/*
- * The third LOOKAHEAD specification below is to parse to PrimarySuffix
- * if there is an expression between the "[...]".
- */
-void ArrayDimsAndInits():
-{}
-{
-  LOOKAHEAD(2)
-  ( LOOKAHEAD(2) <LBRACKET> Expression() <RBRACKET> )+ ( LOOKAHEAD(2) <LBRACKET> <RBRACKET> )*
-|
-  ( <LBRACKET> <RBRACKET> )+ ArrayInitializer()
-}
-
-
-/*
- * Statement syntax follows.
- */
-
-Statement Statement():
-{
-  Statement result = null;
-}
-{
- (    LOOKAHEAD(2)
-  result = LabeledStatement()
-|
-  result = AssertStatement()
-|
-  result = Block()
-|
-  result = EmptyStatement()
-|
-  result = StatementExpression() <SEMICOLON> 
-|
-  result = SwitchStatement()
-|
-  result = IfStatement()
-|
-  result = WhileStatement()
-|
-  result = DoStatement()
-|
-  result = ForStatement()
-|
-  result = BreakStatement() 
-|
-  result = ContinueStatement() 
-|
-  result = ReturnStatement()
-|
-  result = ThrowStatement()
-|
-  result = SynchronizedStatement()
-|
-  result = TryStatement())  {	return result;
-  }
-}
-
-AssertStatement AssertStatement():
-{
-  Expression exceptionArgument = null, assertExpression = null;
-  Token token = null;
-}
-{
-  (    token = <ASSERT> exceptionArgument = Expression() [ <COLON> assertExpression = Expression() ] <SEMICOLON>)  {
-    return new AssertStatement(	exceptionArgument, assertExpression, token.sourceStart);  }
-}
-
-LabeledStatement LabeledStatement():
-{
-  Statement statement = null;
-  Token label = null;
-}
-{
-  (    label = <IDENTIFIER> <COLON> statement = Statement())
-  {
-    return new LabeledStatement(getTokenText(label), statement, getTokenRange(label), statement.sourceEnd);  }
-}
-
-Block Block():
-{
-  Statement[] statements = null;
-}
-{
-  (    <LBRACE> ( statements = BlockStatement() )* <RBRACE>)
-  {
-    if(statements == null) {
-      return new Block(0);    } else {
-      Block block = new Block(statements.length);
-      block.statements = statements;
-      return block;    }  }
-}
-
-Statement[] BlockStatement():
-{
-  Statement[] statments = null;
-  Statement statement = null;
-  TypeDeclaration typeDecl = null;
-}
-{
-  LOOKAHEAD( Modifiers() Type() <IDENTIFIER> )
-  statments = LocalVariableDeclaration()  {
-    return statments;  } <SEMICOLON>
-|
-  statement = Statement()  {
-    return new Statement[]{statement };  }
-|
-  typeDecl = ClassOrInterfaceDeclaration()  {
-    return new Statement[]{typeDecl };  }
-}
-
-LocalDeclaration[] LocalVariableDeclaration():
-{
-  LocalDeclaration[] result = new LocalDeclaration[1];
-  Modifier modifier = null; int length = 0;
-  TypeReference type = null;
-  VariableDeclarator vd = null;
-}
-{
-  modifier = Modifiers() type = Type() vd = VariableDeclarator()  {
-    result[0] = new LocalDeclaration(getTokenText(vd.name), vd.name.sourceStart, vd.name.sourceEnd);
-    result[0].modifiers |= modifier.modifiers;
-    result[0].annotations = modifier.annotations;
-    result[0].type = type;
-    result[0].initialization = vd.initialization;  } ( <COMMA> vd = VariableDeclarator()  {
-    length = result.length;
-    System.arraycopy(result, 0, result = new LocalDeclaration[length + 1], 0, length);
-    result[length] = new LocalDeclaration(getTokenText(vd.name), vd.name.sourceStart, vd.name.sourceEnd);
-    result[length].modifiers |= modifier.modifiers;
-    result[0].annotations = modifier.annotations;
-    result[length].type = type;
-    result[length].initialization = vd.initialization;  } )*  {
-    return result;  }
-}
-
-EmptyStatement EmptyStatement():
-{
-  Token token = null;
-}
-{
-  token = <SEMICOLON>
-  {
-    return new EmptyStatement(token.sourceStart, token.sourceEnd);  }
-}
-
-Expression StatementExpression():
-/*
- * The last expansion of this production accepts more than the legal
- * Java expansions for StatementExpression.  This expansion does not
- * use PostfixExpression for performance reasons.
- */
-{
-  Expression expression = null;
-}
-{
-//  PreIncrementExpression()//|//  PreDecrementExpression()
-  (    expression = PrefixExpression()  {
-    return expression;
-    Token token = null;
-    int op = 0;  }
-|
-  expression = PrimaryExpression()
-  [
-    token = <PLUS_PLUS>    {
-      return new PostfixExpression(expression, IntLiteral.One, OperatorIds.PLUS, token.sourceEnd);    }
-  |
-    token = <MINUS_MINUS>    {
-      return new PostfixExpression(expression, IntLiteral.One, OperatorIds.MINUS, token.sourceEnd);    }
-  |
-    op = AssignmentOperator() expression = Expression()    {
-      return new CompoundAssignment(expression, expression,op, expression.sourceEnd);    }
-  ])  {
-    return expression;  }
-}
-
-SwitchStatement SwitchStatement():
-{
-   SwitchStatement result = new SwitchStatement();
-   Expression expression = null;
-}
-{
- (    <SWITCH> <LPAREN> expression = Expression() <RPAREN> <LBRACE>
-    ( SwitchLabel(result) ( BlockStatement() )* )*
-  <RBRACE>)
-  {	return result;
-  }
-}
-
-CaseStatement SwitchLabel(SwitchStatement result):
-{
-  Expression constant = null;
-  Token token = null;
-}
-{
-  <CASE> constant = Expression() <COLON>  {
-    return new CaseStatement(constant, constant.sourceStart, constant.sourceEnd);  }
-|
-  token = <DEFAULT_ > <COLON>  {
-    return new CaseStatement(null, token.sourceStart, token.sourceEnd);  }
-}
-
-Statement IfStatement():
-/*
- * The disambiguating algorithm of JavaCC automatically binds dangling
- * else's to the innermost if statement.  The LOOKAHEAD specification
- * is to tell JavaCC that we know what we are doing.
- */
-{
-  Expression condition = null;
-  Statement thenStatement = null, elseStatement = null;
-  Token token = null;
-}
-{
-  (    token = <IF> <LPAREN> condition= Expression() <RPAREN> thenStatement = Statement() [ LOOKAHEAD(1) "else" elseStatement = Statement() ])
-  {
-	if(elseStatement == null) {
-	  return new IfStatement(condition, thenStatement, token.sourceStart, thenStatement.sourceEnd);	} else {
-	   return new IfStatement(condition, thenStatement, elseStatement, token.sourceStart, elseStatement.sourceEnd);	}  }
-}
-
-Statement WhileStatement():
-{
-  Statement action = null;
-  Expression condition = null;
-  Token token = null;
-}
-{
-  (    token = <WHILE> <LPAREN> condition = Expression() <RPAREN> action = Statement())
-  {
-    return new WhileStatement(condition, action, token.sourceStart, action.sourceEnd);  }
-}
-
-Statement DoStatement():
-{
-  Statement action = null;
-  Expression condition = null;
-  Token token = null;
-}
-{
-(  token = <DO> action = Statement()  <WHILE> <LPAREN> condition = Expression() <RPAREN> <SEMICOLON>)
-  {	return new DoStatement(condition, action, token.sourceStart, condition.sourceEnd);
-  }
-}
-
-Statement ForStatement():
-{
-	Statement action = null;
-	Expression expression = null;
-	Modifier modifier = null; TypeReference type = null; Token id = null, forLabel = null;
-	boolean foreach = true;
-	Statement[] initializations = null, increments = null;
-}
-{
- (    forLabel = <FOR> <LPAREN>
-  (
-      LOOKAHEAD(Modifiers() Type() <IDENTIFIER> <COLON>)
-      modifier = Modifiers() type = Type() id = <IDENTIFIER> <COLON> expression = Expression()    |
-     [ initializations = ForInit() ] <SEMICOLON> [ expression = Expression()] <SEMICOLON> [ increments = ForUpdate() ]     {
-       foreach = false;
-     }  )
-  <RPAREN> action = Statement())
-
-  {
-    if(foreach) {
-        LocalDeclaration localDeclaration = new LocalDeclaration(getTokenText(id), id.sourceStart, action.sourceEnd);
-        localDeclaration.modifiers |= modifier.modifiers;
-        localDeclaration.type = type;
-        ForeachStatement foreachStatement = new ForeachStatement(localDeclaration, forLabel.sourceStart);
-        foreachStatement.collection = expression;
-        return foreachStatement;
-    } else {	  return new ForStatement(initializations, expression, increments, action,
-		false, forLabel.sourceStart, action.sourceEnd);	}  }
-}
-
-Statement[] ForInit():
-{
-  Statement[] result = null;
-}
-{
-  (    
-  LOOKAHEAD( Modifiers() Type() <IDENTIFIER> )
-  result = LocalVariableDeclaration()
-  |
-  result = StatementExpressionList()  )
-  {
-    return result;
-  }
-}
-
-Statement[] StatementExpressionList():
-{
-  Statement[] result = new Statement[1];
-  Statement statement = null;
-  int length = 0;
-}
-{
-  statement = StatementExpression()  {
-    result[0] = statement;  } ( <COMMA> statement = StatementExpression()  {
-    length = result.length;
-    System.arraycopy(result, 0, result = new Statement[length + 1], 0, length);
-    result[length] = statement;  } )*
-{
-  return result;}
-}
-
-Statement[] ForUpdate():
-{
-  Statement[] result = null;
-}
-{
-  result = StatementExpressionList()  {
-    return result;  }
-}
-
-BreakStatement BreakStatement():
-{
-  Token label = null, breakId = null;
-}
-{
-  (    breakId = <BREAK> [ label = <IDENTIFIER> ] <SEMICOLON>)
-  {
-    return new BreakStatement(label !=null ? getTokenText(label) : null, breakId.sourceStart, label != null ? label.sourceEnd : breakId.sourceEnd);
-  }
-}
-
-ContinueStatement ContinueStatement():
-{
-  Token continueId = null, label = null;
-}
-{
-  (    continueId = <CONTINUE> [ label = <IDENTIFIER> ] <SEMICOLON>)
-  {
-	return new ContinueStatement(label != null ? getTokenText(label) : null, continueId.sourceStart, label != null ? label.sourceEnd : continueId.sourceEnd);
-  }
-}
-
-ReturnStatement ReturnStatement():
-{
-  Expression expression = null;
-  Token token = null;
-}
-{
-  (    token = <RETURN> [ expression = Expression() ] <SEMICOLON>)
-  {
-	return new ReturnStatement(expression, token.sourceStart, expression != null ? expression.sourceEnd : token.sourceEnd);
-  }
-}
-
-ThrowStatement ThrowStatement():
-{
-  Token token = null;
-  Expression exception = null;
-}
-{
-  (    token = <THROW> exception = Expression() <SEMICOLON>)
-  {
-    return new ThrowStatement(exception, token.sourceStart, exception.sourceEnd);  }
-}
-
-SynchronizedStatement SynchronizedStatement():
-{
-  Token token = null;
-  Block block = null;
-  Expression expression = null;
-}
-{
-  (    token = <SYNCHRONIZED> <LPAREN> expression = Expression() <RPAREN> block = Block())  {
-    return new SynchronizedStatement(expression, block, token.sourceStart, token.sourceEnd);  }
-}
-
-TryStatement TryStatement():
-/*
- * Semantic check required here to make sure that at least one
- * finally/catch is present.
- */
-{
-  Block catchBlock = null, tryBlock = null, finallyBlock = null;
-  Block[] catchBlocks = null;
-  Argument[] arguments = null; Argument argument = null;
-  int length = 0;
-  Token token = null;
-}
-{
-  (    
-  token = <TRY> tryBlock = Block()
-  ( "catch" <LPAREN> argument = FormalParameter()<RPAREN> catchBlock = Block()  {
-    if(length == 0) {
-      arguments = new Argument[1];
-      arguments[0] = argument;
-      catchBlocks = new Block[1];
-      catchBlocks[0] = catchBlock;
-    } else {
-      length = arguments.length;      System.arraycopy(arguments, 0, arguments = new Argument[length + 1], 0, length);
-      arguments[length] = argument;
-      System.arraycopy(catchBlocks, 0, catchBlocks = new Block[length + 1], 0, length);
-      catchBlocks[length] = catchBlock;
-    }
-  })*
-  [ <FINALLY> finallyBlock = Block()])
-  {
-    TryStatement tryStatement = new TryStatement();
-    tryStatement.tryBlock = tryBlock;
-    tryStatement.catchArguments = arguments;
-    tryStatement.catchBlocks = catchBlocks;
-    tryStatement.finallyBlock = finallyBlock;
-    tryStatement.sourceStart = token.sourceStart;
-	tryStatement.sourceEnd = finallyBlock != null ? finallyBlock.sourceEnd : catchBlocks != null ? catchBlocks[catchBlocks.length - 1].sourceEnd : tryBlock.sourceEnd;
-    
-    return tryStatement;  }
-}
-
-/* We use productions to match >>>, >> and > so that we can keep the
- * type declaration syntax with generics clean
- */
-
-void RUNSIGNEDSHIFT():
-{}
-{
-  ( LOOKAHEAD({ getToken(1).kind == GREATER &&
-                ((MyToken)getToken(1)).realKind == UNSIGNED_RIGHT_SHIFT} )
-   <GREATER> <GREATER> <GREATER>
-  )
-}
-
-void RSIGNEDSHIFT():
-{}
-{
-  ( LOOKAHEAD({ getToken(1).kind == GREATER &&
-                ((MyToken)getToken(1)).realKind == RIGHT_SHIFT} )
-  <GREATER> <GREATER>
-  )
-}
-
-/* Annotation syntax follows. */
-
-Annotation Annotation():
-{
-	Annotation result = null;
-}
-{
-  (   LOOKAHEAD( <AT> Name() <LPAREN> ( <IDENTIFIER> <EQUAL> | <RPAREN> ))
-   result = NormalAnnotation()
- |
-   LOOKAHEAD( <AT> Name() <LPAREN> )
-   result = SingleMemberAnnotation()
- |
-   result = MarkerAnnotation())
-   {	return result;
-   }
-}
-
-NormalAnnotation NormalAnnotation():
-{
-  NormalAnnotation result = null;
-  MemberValuePair[] memberValuePairs = null;
-  TypeReference type = null;
-  Token id = null;
-}
-{
-   (id = <AT> Name() <LPAREN> [ memberValuePairs = MemberValuePairs() ] <RPAREN>)
-   {	return new NormalAnnotation(type, id.sourceStart);
-   }
-}
-
-MarkerAnnotation MarkerAnnotation():
-{
-  TypeReference type = null;
-  Token id = null;
-  NameReference nameReference;
-}
-{
-  (id = <AT> nameReference = Name())  {
-    if(nameReference instanceof SingleNameReference)    {
-        SingleNameReference sNameRef = (SingleNameReference)nameReference;		type = new SingleTypeReference(sNameRef.token, ((long)sNameRef.sourceStart) << 32 + sNameRef.sourceEnd);
-		
-    } else    {
-      QualifiedNameReference qNameRef = (QualifiedNameReference) nameReference;;
-      type = new QualifiedTypeReference(qNameRef.tokens, qNameRef.sourcePositions);    }
-    return new MarkerAnnotation(type, id.sourceStart);  }
-}
-
-SingleMemberAnnotation SingleMemberAnnotation():
-{
-   Expression memberValue = null;
-   TypeReference type = null;
-   Token id = null;
-}
-{
-  (id = <AT> Name() <LPAREN> memberValue = MemberValue() <RPAREN>)
-  {
-    return new SingleMemberAnnotation(type, id.sourceStart);  }
-}
-
-MemberValuePair[] MemberValuePairs():
-{
- MemberValuePair[] memberValuePairs = new MemberValuePair[1]; int length = 0;
- MemberValuePair memberValuePair = null;
-}
-{
-   memberValuePair= MemberValuePair()   {
-     memberValuePairs[0] = memberValuePair;   } ( <COMMA> memberValuePair = MemberValuePair()   {
-     length = memberValuePairs.length;
-     System.arraycopy(memberValuePairs, 0, memberValuePairs = new MemberValuePair[length + 1], 0, length);
-      memberValuePairs[length] = memberValuePair;   } )*   {
-     return memberValuePairs;   }
-}
-
-MemberValuePair MemberValuePair():
-{
-  Token id = null; Expression value = null;
-}
-{
-    id = <IDENTIFIER> <EQUAL> value = MemberValue()    {
-      return new MemberValuePair(getTokenText(id), id.sourceStart, id.sourceEnd, value);    }
-}
-
-Expression MemberValue():
-{
-  Expression result = null;
-}
-{
-  (   result = Annotation()
- |
-   result = MemberValueArrayInitializer()
- |
-   result = ConditionalExpression())
-  {
-    return result;
-  }}
-
-ArrayInitializer  MemberValueArrayInitializer():
-{
-  Expression[] expressions = null;
-  Expression expression = null;
-  int length = 0;
-}
-{
-  (    <LBRACE> (expression = MemberValue()  {
-    if(expressions == null)    {
-      expressions = new Expression[1];
-      expressions[0] = expression;    }else    {
-      length = expressions.length;
-      System.arraycopy(expressions, 0, expressions = new Expression[length + 1], 0, length);
-      expressions[length] = expression;    }  } ( LOOKAHEAD(2) <COMMA> expression = MemberValue() )* [ "," ])? <RBRACE>)  {
-    ArrayInitializer result = new ArrayInitializer();
-    result.expressions = expressions;
-    return result;  }
-}
-
-
-/* Annotation Types. */
-
-TypeDeclaration AnnotationTypeDeclaration():
-{
-  TypeDeclaration result = null;
-}
-{
-  <AT> <INTERFACE> <IDENTIFIER> AnnotationTypeBody(result)  {
-    return result;  }
-}
-
-void AnnotationTypeBody(TypeDeclaration typeDeclaration):
-{}
-{
-  <LBRACE> ( AnnotationTypeMemberDeclaration(typeDeclaration) )* <RBRACE>
-}
-
-void AnnotationTypeMemberDeclaration(TypeDeclaration typeDeclaration):
-{
-   Modifier modifier= null;
-   TypeReference type = null; Token id = null; FieldDeclaration[] fields = null;
-   TypeDeclaration subTypeDecl = null;
-}
-{
- modifier = Modifiers()
- (
-   LOOKAHEAD(Type() <IDENTIFIER> <LPAREN>)
-   type = Type() id = <IDENTIFIER> <LPAREN> <RPAREN> [ DefaultValue() ] <SEMICOLON>
-  |
-   subTypeDecl = ClassOrInterfaceDeclaration()
-  |
-   subTypeDecl = EnumDeclaration()
-  |
-   subTypeDecl = AnnotationTypeDeclaration()
-  |
-   fields = FieldDeclaration(modifier)
- )
- |
-   ( <SEMICOLON> )
-   {
-        }
-}
-
-void DefaultValue():
-{}
-{
-  <DEFAULT_> MemberValue()
-}
-
