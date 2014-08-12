@@ -36,7 +36,7 @@ options {
 }
 
 PARSER_BEGIN(Parser)
-package org.summer.sdt.internal.compiler.parser;
+//package org.summer.sdt.internal.compiler.parser;
 import java.io.*;
 import java.util.*;
 import org.summer.sdt.internal.compiler.xaml.*;
@@ -76,6 +76,11 @@ public class Parser
 
 	public Scanner scanner;
 
+	public boolean reportOnlyOneSyntaxError = false;
+	public boolean reportSyntaxErrorIsRequired = true;
+	protected boolean restartRecovery;
+	protected boolean annotationRecoveryActivated = true;
+
 	// javadoc
 	public Javadoc javadoc;
 	public JavadocParser javadocParser;
@@ -93,6 +98,20 @@ public class Parser
 		// javadoc support
 		this.javadocParser = createJavadocParser();
 	}
+
+	  /** Constructor with InputStream and supplied encoding */
+  public Parser(java.io.InputStream stream, String encoding) {
+    try { jj_input_stream = new JavaCharStream(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
+    token_source = new Scanner();
+    try {
+		token_source.setSource(Util.getInputStreamAsCharArray(stream, stream.available(), encoding));
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    token = new Token();
+    jj_ntk = -1;
+  }
 
 //	public void initializeScanner(){//		this.scanner = new Scanner(//			false /*comment*/,//			false /*whitespace*/,//			false, /* will be set in initialize(boolean) *///			this.options.sourceLevel /*sourceLevel*/,//			this.options.complianceLevel /*complianceLevel*/,//			this.options.taskTags/*taskTags*/,//			this.options.taskPriorities/*taskPriorities*/,//			this.options.isTaskCaseSensitive/*taskCaseSensitive*/);//	}
 
@@ -413,7 +432,7 @@ MORE :
 
 SPECIAL_TOKEN :
 {
-  <SINGLE_LINE_COMMENT: "//" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?>
+  <TokenNameCOMMENT_LINE: "//" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?>
 }
 
 <IN_FORMAL_COMMENT>
@@ -425,7 +444,7 @@ SPECIAL_TOKEN :
 <IN_MULTI_LINE_COMMENT>
 SPECIAL_TOKEN :
 {
-  <MULTI_LINE_COMMENT: "*/" > : DEFAULT
+  <TokenNameCOMMENT_BLOCK: "*/" > : DEFAULT
 }
 
 <IN_FORMAL_COMMENT,IN_MULTI_LINE_COMMENT>
@@ -438,88 +457,82 @@ MORE :
 
 TOKEN :
 {
-  < ABSTRACT: "abstract" >
-| < ASSERT: "assert" >
-| < BOOLEAN: "boolean" >
-| < BREAK: "break" >
-| < BYTE: "byte" >
-| < CASE: "case" >
-| < CATCH: "catch" >
-| < CHAR: "char" >
-| < CLASS: "class" >
-| < CONST: "const" >
-| < CONTINUE: "continue" >
-| < DEFAULT_: "default" >
-| < DO: "do" >
-| < DOUBLE: "double" >
-| < ELSE: "else" >
-| < ENUM: "enum" >
-| < EXTENDS: "extends" >
-| < FALSE: "false" >
-| < FINAL: "final" >
-| < FINALLY: "finally" >
-| < FLOAT: "float" >
-| < FOR: "for" >
-| < GOTO: "goto" >
-| < IF: "if" >
-| < IMPLEMENTS: "implements" >
-| < IMPORT: "import" >
-| < INSTANCEOF: "instanceof" >
-| < INT: "int" >
-| < INTERFACE: "interface" >
-| < LONG: "long" >
-| < NATIVE: "native" >
-| < NEW: "new" >
-| < NULL: "null" >
-| < PACKAGE: "package">
-| < PRIVATE: "private" >
-| < PROTECTED: "protected" >
-| < PUBLIC: "public" >
-| < RETURN: "return" >
-| < SHORT: "short" >
-| < STATIC: "static" >
-| < STRICTFP: "strictfp" >
-| < SUPER: "super" >
-| < SWITCH: "switch" >
-| < SYNCHRONIZED: "synchronized" >
-| < THIS: "this" >
-| < THROW: "throw" >
-| < THROWS: "throws" >
-| < TRANSIENT: "transient" >
-| < TRUE: "true" >
-| < TRY: "try" >
-| < VOID: "void" >
-| < VOLATILE: "volatile" >
-| < WHILE: "while" >
-| < MODULE: "module" >
-| < EXPORT: "export" >
-| < REF: "ref" >
-| < OUT: "out" >
-| < GET: "get" >
-| < SET: "set" >
-| < ADD: "add" >
-| < REMOVE: "remove" >
-| < EVENT: "event" >
-| < FUNCTION: "function" >
+  < TokenNameabstract: "abstract" >
+| < TokenNameassert: "assert" >
+| < TokenNameboolean: "boolean" >
+| < TokenNamebreak: "break" >
+| < TokenNamebyte: "byte" >
+| < TokenNamecase: "case" >
+| < TokenNamecatch: "catch" >
+| < TokenNamechar: "char" >
+| < TokenNameclass: "class" >
+| < TokenNameconst: "const" >
+| < TokenNamecontinue: "continue" >
+| < TokenNamedefault: "default" >
+| < TokenNamedo: "do" >
+| < TokenNamedouble: "double" >
+| < TokenNameelse: "else" >
+| < TokenNameenum: "enum" >
+| < TokenNameextends: "extends" >
+| < TokenNamefalse: "false" >
+| < TokenNamefinal: "final" >
+| < TokenNamefinally: "finally" >
+| < TokenNamefloat: "float" >
+| < TokenNamefor: "for" >
+| < TokenNamegoto: "goto" >
+| < TokenNameif: "if" >
+| < TokenNameimplements: "implements" >
+| < TokenNameimport: "import" >
+| < TokenNameinstanceof: "instanceof" >
+| < TokenNameint: "int" >
+| < TokenNameinterface: "interface" >
+| < TokenNamelong: "long" >
+| < TokenNamenative: "native" >
+| < TokenNamenew: "new" >
+| < TokenNamenull: "null" >
+| < TokenNamepackage: "package">
+| < TokenNameprivate: "private" >
+| < TokenNameprotected: "protected" >
+| < TokenNamepublic: "public" >
+| < TokenNamereturn: "return" >
+| < TokenNameshort: "short" >
+| < TokenNamestatic: "static" >
+| < TokenNamestrictfp: "strictfp" >
+| < TokenNamesuper: "super" >
+| < TokenNameswitch: "switch" >
+| < TokenNamesynchronized: "synchronized" >
+| < TokenNamethis: "this" >
+| < TokenNamethrow: "throw" >
+| < TokenNamethrows: "throws" >
+| < TokenNametransient: "transient" >
+| < TokenNametrue: "true" >
+| < TokenNametry: "try" >
+| < TokenNamevoid: "void" >
+| < TokenNamevolatile: "volatile" >
+| < TokenNamewhile: "while" >
+| < TokenNamemodule: "module" >
+| < TokenNameexport: "export" >
+| < TokenNameref: "ref" >
+| < TokenNameout: "out" >
+| < TokenNameget: "get" >
+| < TokenNameset: "set" >
+| < TokenNameadd: "add" >
+| < TokenNameremove: "remove" >
+| < TokenNameevent: "event" >
+| < TokenNamefunction: "function" >
 }
 
 /* LITERALS */
 
 TOKEN :
 {
-  < INTEGER_LITERAL:
+  < TokenNameIntegerLiteral:
         <DECIMAL_LITERAL> (["l","L"])?
       | <HEX_LITERAL> (["l","L"])?
       | <BINARY_LITERAL> (["l", "L"])?
       | <OCTAL_LITERAL> (["l","L"])?
   >
-| 
- < LONG_LITERAL:
-        <DECIMAL_LITERAL> (["l","L"])?
-      | <HEX_LITERAL> (["l","L"])?
-      | <BINARY_LITERAL> (["l", "L"])?
-      | <OCTAL_LITERAL> (["l","L"])?
-  >
+|  < TokenNameLongLiteral:        <DECIMAL_LITERAL> (["l","L"])?      | <HEX_LITERAL> (["l","L"])?      | <BINARY_LITERAL> (["l", "L"])?      | <OCTAL_LITERAL> (["l","L"])?  >
 |
   < #DECIMAL_LITERAL: ["1"-"9"] (["0"-"9", "_"])* >
 |
@@ -529,15 +542,11 @@ TOKEN :
 |
   < #OCTAL_LITERAL: "0" (["0"-"7", "_"])* >
 |
-  < FLOAT_LITERAL:
+  < TokenNameFloatingPointLiteral:
         <DECIMAL_FLOATING_POINT_LITERAL>
       | <HEXADECIMAL_FLOATING_POINT_LITERAL>
   >
-|
-  < DOUBLE_LITERAL:
-        <DECIMAL_FLOATING_POINT_LITERAL>
-      | <HEXADECIMAL_FLOATING_POINT_LITERAL>
-  >
+|  < TokenNameDoubleLiteral:        <DECIMAL_FLOATING_POINT_LITERAL>      | <HEXADECIMAL_FLOATING_POINT_LITERAL>  >
 |
   < #DECIMAL_FLOATING_POINT_LITERAL:
         (["0"-"9"])+ "." (["0"-"9"])* (<DECIMAL_EXPONENT>)? (["f","F","d","D"])?
@@ -555,7 +564,7 @@ TOKEN :
 |
   < #HEXADECIMAL_EXPONENT: ["p","P"] (["+","-"])? (["0"-"9"])+ >
 |
-  < CHARACTER_LITERAL:
+  < TokenNameCharacterLiteral:
       "'"
       (   (~["'","\\","\n","\r"])
         | ("\\"
@@ -568,7 +577,7 @@ TOKEN :
       "'"
   >
 |
-  < STRING_LITERAL:
+  < TokenNameStringLiteral:
       "\""
       (   (~["\"","\\","\n","\r"])
         | ("\\"
@@ -586,7 +595,7 @@ TOKEN :
 
 TOKEN :
 {
-  < IDENTIFIER: <LETTER> (<PART_LETTER>)* >
+  < TokenNameIdentifier: <LETTER> (<PART_LETTER>)* >
 |
   < #LETTER:
       [  // all chars for which Character.isIdentifierStart is true
@@ -1236,81 +1245,81 @@ TOKEN :
 
 TOKEN :
 {
-  < LPAREN: "(" >
-| < RPAREN: ")" >
-| < LBRACE: "{" >
-| < RBRACE: "}" >
-| < LBRACKET: "[" >
-| < RBRACKET: "]" >
-| < SEMICOLON: ";" >
-| < COMMA: "," >
-| < DOT: "." >
-| < AT: "@" >
+  < TokenNameLPAREN: "(" >
+| < TokenNameRPAREN: ")" >
+| < TokenNameLBRACE: "{" >
+| < TokenNameRBRACE: "}" >
+| < TokenNameLBRACKET: "[" >
+| < TokenNameRBRACKET: "]" >
+| < TokenNameSEMICOLON: ";" >
+| < TokenNameCOMMA: "," >
+| < TokenNameDOT: "." >
+| < TokenNameAT: "@" >
 }
 
 /* OPERATORS */
 
 TOKEN :
 {
-  < EQUAL: "=" >
-| < LESS: "<" >
-| < NOT: "!" >
-| < TWIDDLE: "~" >
-| < QUESTION: "?" >
-| < COLON: ":" >
-| < EQUAL_EQUAL: "==" >
-| < LESS_EQUAL: "<=" >
-| < GREATER_EQUAL: ">=" >
-| < NOT_EQUAL: "!=" >
-| < OR_OR: "||" >
-| < AND_AND: "&&" >
-| < PLUS_PLUS: "++" >
-| < MINUS_MINUS: "--" >
-| < PLUS: "+" >
-| < MINUS: "-" >
-| < MULTIPLY: "*" >
-| < DIVIDE: "/" >
-| < AND: "&" >
-| < OR: "|" >
-| < XOR: "^" >
-| < REMAINDER: "%" >
-| < LEFT_SHIFT: "<<" >
-| < PLUS_EQUAL: "+=" >
-| < MINUS_EQUAL: "-=" >
-| < MULTIPLY_EQUAL: "*=" >
-| < DIVIDE_EQUAL: "/=" >
-| < AND_EQUAL: "&=" >
-| < OR_EQUAL: "|=" >
-| < XOR_EQUAL: "^=" >
-| < REMAINDER_EQUAL: "%=" >
-| < LEFT_SHIFT_EQUAL: "<<=" >
-| < RIGHT_SHIFT_EQUAL: ">>=" >
-| < UNSIGNED_RIGHT_SHIFT_EQUAL: ">>>=" >
-| < ELLIPSIS: "..." >
-| < COLON_COLON: "::" >
-| < ARROW: "->" >
-| < SIMPLE_CLOSE_TAG: "/>" >
-| < CLOSE_TAG: "</" >
+  < TokenNameEQUAL: "=" >
+| < TokenNameLESS: "<" >
+| < TokenNameNOT: "!" >
+| < TokenNameTWIDDLE: "~" >
+| < TokenNameQUESTION: "?" >
+| < TokenNameCOLON: ":" >
+| < TokenNameEQUAL_EQUAL: "==" >
+| < TokenNameLESS_EQUAL: "<=" >
+| < TokenNameGREATER_EQUAL: ">=" >
+| < TokenNameNOT_EQUAL: "!=" >
+| < TokenNameOR_OR: "||" >
+| < TokenNameAND_AND: "&&" >
+| < TokenNamePLUS_PLUS: "++" >
+| < TokenNameMINUS_MINUS: "--" >
+| < TokenNamePLUS: "+" >
+| < TokenNameMINUS: "-" >
+| < TokenNameMULTIPLY: "*" >
+| < TokenNameDIVIDE: "/" >
+| < TokenNameAND: "&" >
+| < TokenNameOR: "|" >
+| < TokenNameXOR: "^" >
+| < TokenNameREMAINDER: "%" >
+| < TokenNameLEFT_SHIFT: "<<" >
+| < TokenNamePLUS_EQUAL: "+=" >
+| < TokenNameMINUS_EQUAL: "-=" >
+| < TokenNameMULTIPLY_EQUAL: "*=" >
+| < TokenNameDIVIDE_EQUAL: "/=" >
+| < TokenNameAND_EQUAL: "&=" >
+| < TokenNameOR_EQUAL: "|=" >
+| < TokenNameXOR_EQUAL: "^=" >
+| < TokenNameREMAINDER_EQUAL: "%=" >
+| < TokenNameLEFT_SHIFT_EQUAL: "<<=" >
+| < TokenNameRIGHT_SHIFT_EQUAL: ">>=" >
+| < TokenNameUNSIGNED_RIGHT_SHIFT_EQUAL: ">>>=" >
+| < TokenNameELLIPSIS: "..." >
+| < TokenNameCOLON_COLON: "::" >
+| < TokenNameARROW: "->" >
+| < TokenNameSIMPLE_CLOSE_TAG: "/>" >
+| < TokenNameCLOSE_TAG: "</" >
 }
 
 /* >'s need special attention due to generics syntax. */
 TOKEN :
 {
-  < UNSIGNED_RIGHT_SHIFT: ">>>" >
+  < TokenNameUNSIGNED_RIGHT_SHIFT: ">>>" >
   {
-     matchedToken.kind = GT;
-     ((MyToken)matchedToken).realKind = UNSIGNED_RIGHT_SHIFT;
+     matchedToken.kind = TokenNameGREATER;
+     ((MyToken)matchedToken).realKind = TokenNameUNSIGNED_RIGHT_SHIFT;
      input_stream.backup(2);
      matchedToken.image = ">";
   }
-| < RIGHT_SHIFT: ">>" >
+| < TokenNameRIGHT_SHIFT: ">>" >
   {
-     matchedToken.kind = GREATER;
-     ((MyToken)matchedToken).realKind = RIGHT_SHIFT;
+     matchedToken.kind = TokenNameGREATER;
+     ((MyToken)matchedToken).realKind = TokenNameRIGHT_SHIFT;
      input_stream.backup(1);
      matchedToken.image = ">";
   }
-| < GREATER: ">" >
+| < TokenNameGREATER: ">" >
 }
 
 /*****************************************
@@ -1320,7 +1329,7 @@ TOKEN :
  * Program structuring syntax follows.
  */
 // starting point for parsing a java file
-//CompilationUnitDeclaration CompilationUnit()://{//  CompilationUnitDeclaration unit= new CompilationUnitDeclaration();//  String name = null;//  ModuleDeclaration module = null;//  Element element = null;//}//{//  [ LOOKAHEAD( ( Annotation() )* <PACKAGE> ) PackageDeclaration(unit) ]//  ( ImportDeclaration(unit) )*//  <MODULE> <IDENTIFIER> <LBRACE>//  {//	module = new ModuleDeclaration(unit);//  }//	  (LOOKAHEAD(2) element = ObjectElement()//	  {//	    module.element = element;//	  })? //	  ( ModuleBlock(module) )*//  <RBRACE>//  ( < "\u001a" > )?//  ( <STUFF_TO_IGNORE: ~[]> )?//  <EOF>//  {//	return unit;//  }//}////void ModuleBlock(ModuleDeclaration module)://{//  Statement statement = null;//  List<LocalDeclaration > declarations = null;//  boolean export = false;//}//{//  LOOKAHEAD(3)//  declarations = LocalVariableDeclaration()//  {//    module.contents.addAll(declarations);//  }//  | LOOKAHEAD(3) statement = Statement()//  {//    module.contents.add(statement);//  }//  | statement = TypeDeclaration()//  {//    module.contents.add(statement);//  }//  | (<EXPOR>{ export = true; })? statement = MethodDeclaration() //  	{//  	  if(export)//  	  {//        statement.bits |= ModifierSet.EXPORT;//  	  }//      module.contents.add(statement);//    }//}////Element Element()://{//   Element result = null, child = null;//}//{//	 LOOKAHEAD(2)//	 child = ObjectElement()//	 {//	   result.addElement(child);//	 }//   	|//     child = AttributeElement()//     {//       result.addElement(child);//     }//  {//      return result;//  }//}////Element ObjectElement()://{//  ObjectElement result = null;//}//{//    <LESS> Type() ( AbstractAttribute())* ((<GREATER> //       // (element | ~<LESS>)*//        (Element())*// //    <CLOSE_TAG>  Type() <GREATER>) | <SIMPLE_CLOSE_TAG>)//  {//      return result;//  }//}//////////fragment PCDATA : (~<LESS>)* ;////Element AttributeElement()://{//  Element result = null;//}//{ //    <LESS> <LPAREN> Type()<RPAREN> <DOT> Name() ((<GREATER>//        ( Element())*//    <CLOSE_TAG> <LPAREN> Type() <RPAREN> <DOT> Name() <GREATER>) |  <SIMPLE_CLOSE_TAG>)//  {//      return result;//  }//}////AbstractAttribute AbstractAttribute()://{//	AbstractAttribute result = null;//}//{//  //    result = GeneralAttribute()//    |result = AttachAttribute()//  {//      return result;//  }//}////AbstractAttribute AttachAttribute()://{//	AbstractAttribute result = null;//}//{//    <LPAREN>Type()<RPAREN> <DOT> Name()<EQUAL> PropertyExpression()//  {//      return result;//  }//}////AbstractAttribute GeneralAttribute()://{//}//{//	Name() <EQUAL> PropertyExpression()//  {//      return result;//  }//}////Expression MarkupExtenson()://{//  Expression result = null;//}//{//   <LBRACE>//        Type()//        ( AbstractAttribute())* //    <RBRACE>//  {//      return result;//  }//}////Expression PropertyExpression()://{//	Expression result = null;//}//   {//      <STRING_LITERAL> //    |MarkupExtenson()//  {//      return result;//  }//}
+//CompilationUnitDeclaration CompilationUnit()://{//  CompilationUnitDeclaration unit= new CompilationUnitDeclaration();//  String name = null;//  ModuleDeclaration module = null;//  Element element = null;//}//{//  [ LOOKAHEAD( ( Annotation() )* <TokenNamepackage> ) PackageDeclaration(unit) ]//  ( ImportDeclaration(unit) )*//  <MODULE> <TokenNameIdentifier> <TokenNameLBRACE>//  {//	module = new ModuleDeclaration(unit);//  }//	  (LOOKAHEAD(2) element = ObjectElement()//	  {//	    module.element = element;//	  })? //	  ( ModuleBlock(module) )*//  <TokenNameRBRACE>//  ( < "\u001a" > )?//  ( <STUFF_TO_IGNORE: ~[]> )?//  <EOF>//  {//	return unit;//  }//}////void ModuleBlock(ModuleDeclaration module)://{//  Statement statement = null;//  List<LocalDeclaration > declarations = null;//  boolean export = false;//}//{//  LOOKAHEAD(3)//  declarations = LocalVariableDeclaration()//  {//    module.contents.addAll(declarations);//  }//  | LOOKAHEAD(3) statement = Statement()//  {//    module.contents.add(statement);//  }//  | statement = TypeDeclaration()//  {//    module.contents.add(statement);//  }//  | (<EXPOR>{ export = true; })? statement = MethodDeclaration() //  	{//  	  if(export)//  	  {//        statement.bits |= ModifierSet.TokenNameexport;//  	  }//      module.contents.add(statement);//    }//}////Element Element()://{//   Element result = null, child = null;//}//{//	 LOOKAHEAD(2)//	 child = ObjectElement()//	 {//	   result.addElement(child);//	 }//   	|//     child = AttributeElement()//     {//       result.addElement(child);//     }//  {//      return result;//  }//}////Element ObjectElement()://{//  ObjectElement result = null;//}//{//    <TokenNameLESS> Type() ( AbstractAttribute())* ((<TokenNameGREATER> //       // (element | ~<TokenNameLESS>)*//        (Element())*// //    <TokenNameCLOSE_TAG>  Type() <TokenNameGREATER>) | <TokenNameSIMPLE_CLOSE_TAG>)//  {//      return result;//  }//}//////////fragment PCDATA : (~<TokenNameLESS>)* ;////Element AttributeElement()://{//  Element result = null;//}//{ //    <TokenNameLESS> <TokenNameLPAREN> Type()<TokenNameRPAREN> <TokenNameDOT> Name() ((<TokenNameGREATER>//        ( Element())*//    <TokenNameCLOSE_TAG> <TokenNameLPAREN> Type() <TokenNameRPAREN> <TokenNameDOT> Name() <TokenNameGREATER>) |  <SIMPLE_CLOSE_TAG>)//  {//      return result;//  }//}////AbstractAttribute AbstractAttribute()://{//	AbstractAttribute result = null;//}//{//  //    result = GeneralAttribute()//    |result = AttachAttribute()//  {//      return result;//  }//}////AbstractAttribute AttachAttribute()://{//	AbstractAttribute result = null;//}//{//    <TokenNameLPAREN>Type()<TokenNameRPAREN> <TokenNameDOT> Name()<TokenNameEQUAL> PropertyExpression()//  {//      return result;//  }//}////AbstractAttribute GeneralAttribute()://{//}//{//	Name() <TokenNameEQUAL> PropertyExpression()//  {//      return result;//  }//}////Expression MarkupExtenson()://{//  Expression result = null;//}//{//   <TokenNameLBRACE>//        Type()//        ( AbstractAttribute())* //    <TokenNameRBRACE>//  {//      return result;//  }//}////Expression PropertyExpression()://{//	Expression result = null;//}//   {//      <TokenNameStringLiteral> //    |MarkupExtenson()//  {//      return result;//  }//}
 
 CompilationUnitDeclaration CompilationUnit():{
   ImportReference currentPkg = null;
@@ -1329,7 +1338,7 @@ TOKEN :
   TypeDeclaration[] types = null; //new TypeDeclaration[0];
   TypeDeclaration type = null;
   int length = 0;
-}{  [ LOOKAHEAD( ( Annotation() )* <PACKAGE> ) currentPkg = PackageDeclaration() ]  ( importRef = ImportDeclaration()  {
+}{  [ LOOKAHEAD( ( Annotation() )* <TokenNamepackage> ) currentPkg = PackageDeclaration() ]  ( importRef = ImportDeclaration()  {
     if(imports == null) {
       imports = new ImportReference[1];
       imports[0] = importRef;    } else    {
@@ -1350,9 +1359,9 @@ TOKEN :
 	unit.types = types;
     return unit;  }}
 
-//ImportReference PackageDeclaration(CompilationUnitDeclaration unit)://{//  Modifier modifier = null;//}//{//  modifier = Modifiers() <PACKAGE> Name() <SEMICOLON>//  {//    //  }//}
+//ImportReference PackageDeclaration(CompilationUnitDeclaration unit)://{//  Modifier modifier = null;//}//{//  modifier = Modifiers() <TokenNamepackage> Name() <TokenNameSEMICOLON>//  {//    //  }//}
 
-//ImportReference PackageDeclaration(CompilationUnitDeclaration unit)://{//  Annotation[] annotations = null;//  Annotation annotation = null;//}//{//  ( Annotation() )* <PACKAGE> Name() <SEMICOLON>//  {//    //  }//}////ImportReference ImportDeclaration(CompilationUnitDeclaration unit)://{}//{//  <IMPORT> [ "static" ] Name() [ "." <MULTIPLY> ] <SEMICOLON>//}
+//ImportReference PackageDeclaration(CompilationUnitDeclaration unit)://{//  Annotation[] annotations = null;//  Annotation annotation = null;//}//{//  ( Annotation() )* <TokenNamepackage> Name() <TokenNameSEMICOLON>//  {//    //  }//}////ImportReference ImportDeclaration(CompilationUnitDeclaration unit)://{}//{//  <TokenNameimport> [ "static" ] Name() [ "." <TokenNameMULTIPLY> ] <TokenNameSEMICOLON>//}
 
 ImportReference PackageDeclaration():
 {
@@ -1369,16 +1378,16 @@ ImportReference PackageDeclaration():
       annotations[0] = annotation;    } else {
       length = annotations.length;
       System.arraycopy(annotations, 0, annotations = new Annotation[length + 1], 0, length);
-      annotations[length] = annotation;    }  } )* <PACKAGE>   token = <IDENTIFIER>  {
+      annotations[length] = annotation;    }  } )* <TokenNamepackage>   token = <TokenNameIdentifier>  {
     tokens[0] = getTokenText(token);
     positions[0] = getTokenRange(token);  }
-  ( LOOKAHEAD(2) <DOT> token = <IDENTIFIER>  {
+  ( LOOKAHEAD(2) <TokenNameDOT> token = <TokenNameIdentifier>  {
     length = tokens.length;
     System.arraycopy(tokens, 0 , tokens = new char[length + 1][], 0, length);
     tokens[length] = getTokenText(token);
     System.arraycopy(positions, 0 , positions = new long[length + 1], 0, length);
     positions[length] = getTokenRange(token);  }
-  )* <SEMICOLON>
+  )* <TokenNameSEMICOLON>
   {
     ImportReference result =  new ImportReference(tokens, positions, false, ClassFileConstants.AccDefault);
     result.annotations = annotations;
@@ -1395,17 +1404,17 @@ ImportReference ImportDeclaration():
   boolean isStatic = false;
 }
 {
-  <IMPORT> [ <STATIC>  {
-    isStatic = true;  } ]   token = <IDENTIFIER>  {
+  <TokenNameimport> [ <TokenNamestatic>  {
+    isStatic = true;  } ]   token = <TokenNameIdentifier>  {
     tokens[0] = getTokenText(token);
     positions[0] = getTokenRange(token);    }
-  ( LOOKAHEAD(2) <DOT> token = <IDENTIFIER>  {
+  ( LOOKAHEAD(2) <TokenNameDOT> token = <TokenNameIdentifier>  {
     length = tokens.length;
     System.arraycopy(tokens, 0 , tokens = new char[length + 1][], 0, length);
     tokens[length] = getTokenText(token);
     System.arraycopy(positions, 0 , positions = new long[length + 1], 0, length);
     positions[length] = getTokenRange(token);  }
-  )* [ <DOT> <MULTIPLY> ] <SEMICOLON>  {
+  )* [ <TokenNameDOT> <TokenNameMULTIPLY> ] <TokenNameSEMICOLON>  {
     return new ImportReference(tokens, positions, true, ClassFileConstants.AccDefault);  }
 }
 
@@ -1414,7 +1423,7 @@ ImportReference ImportDeclaration():
  * syntax errors for simple modifier mistakes. It will also enable us to give
  * better error messages.
  */
-//int Modifiers()://{//   int modifiers = 0; Annotation[] annotations = null;//}//{// (//  LOOKAHEAD(2)//  (//   <PUBLIC> { modifiers |= ModifierSet.PUBLIC; }//  |//   "static" { modifiers |= ModifierSet.STATIC; }//  |//   "protected" { modifiers |= ModifierSet.PROTECTED; }//  |//   "private" { modifiers |= ModifierSet.PRIVATE; }//  |//   "final" { modifiers |= ModifierSet.FINAL; }//  |//   "abstract" { modifiers |= ModifierSet.ABSTRACT; }//  |//   "synchronized" { modifiers |= ModifierSet.SYNCHRONIZED; }//  |//   "native" { modifiers |= ModifierSet.NATIVE; }//  |//   "transient" { modifiers |= ModifierSet.TRANSIENT; }//  |//   "volatile" { modifiers |= ModifierSet.VOLATILE; }//  |//   "strictfp" { modifiers |= ModifierSet.STRICTFP; }//  |//   annotation = Annotation()//   {//     annotations.add(annotation);//   }//  )// )*//// {//    return modifiers;// }//}
+//int Modifiers()://{//   int modifiers = 0; Annotation[] annotations = null;//}//{// (//  LOOKAHEAD(2)//  (//   <TokenNamepublic> { modifiers |= ModifierSet.TokenNamepublic; }//  |//   "static" { modifiers |= ModifierSet.TokenNamestatic; }//  |//   "protected" { modifiers |= ModifierSet.TokenNameprotected; }//  |//   "private" { modifiers |= ModifierSet.TokenNameprivate; }//  |//   "final" { modifiers |= ModifierSet.TokenNamefinal; }//  |//   "abstract" { modifiers |= ModifierSet.TokenNameabstract; }//  |//   "synchronized" { modifiers |= ModifierSet.TokenNamesynchronized; }//  |//   "native" { modifiers |= ModifierSet.TokenNamenative; }//  |//   "transient" { modifiers |= ModifierSet.TokenNametransient; }//  |//   "volatile" { modifiers |= ModifierSet.TokenNamevolatile; }//  |//   "strictfp" { modifiers |= ModifierSet.TokenNamestrictfp; }//  |//   annotation = Annotation()//   {//     annotations.add(annotation);//   }//  )// )*//// {//    return modifiers;// }//}
 
 Modifier Modifiers():
 {
@@ -1424,27 +1433,27 @@ Modifier Modifiers():
  (
   LOOKAHEAD(2)
   (
-   <PUBLIC> { modifiers |= ModifierSet.AccPublic; }
+   <TokenNamepublic> { modifiers |= ModifierSet.AccPublic; }
   |
-   <STATIC> { modifiers |= ModifierSet.AccStatic; }
+   <TokenNamestatic> { modifiers |= ModifierSet.AccStatic; }
   |
-   <PROTECTED> { modifiers |= ModifierSet.AccProtected; }
+   <TokenNameprotected> { modifiers |= ModifierSet.AccProtected; }
   |
-   <PRIVATE> { modifiers |= ModifierSet.AccPrivate; }
+   <TokenNameprivate> { modifiers |= ModifierSet.AccPrivate; }
   |
-   <FINAL> { modifiers |= ModifierSet.AccFinal; }
+   <TokenNamefinal> { modifiers |= ModifierSet.AccFinal; }
   |
-   <ABSTRACT> { modifiers |= ModifierSet.AccAbstract; }
+   <TokenNameabstract> { modifiers |= ModifierSet.AccAbstract; }
   |
-   <SYNCHRONIZED> { modifiers |= ModifierSet.AccSynchronized; }
+   <TokenNamesynchronized> { modifiers |= ModifierSet.AccSynchronized; }
   |
-   <NATIVE> { modifiers |= ModifierSet.AccNative; }
+   <TokenNamenative> { modifiers |= ModifierSet.AccNative; }
   |
-   <TRANSIENT> { modifiers |= ModifierSet.AccTransient; }
+   <TokenNametransient> { modifiers |= ModifierSet.AccTransient; }
   |
-   <VOLATILE> { modifiers |= ModifierSet.AccVolatile; }
+   <TokenNamevolatile> { modifiers |= ModifierSet.AccVolatile; }
   |
-   <STRICTFP> { modifiers |= ModifierSet.AccStrictfp; }
+   <TokenNamestrictfp> { modifiers |= ModifierSet.AccStrictfp; }
   |
    annotation = Annotation()
    {
@@ -1470,7 +1479,7 @@ TypeDeclaration TypeDeclaration():
    TypeDeclaration typeDecl = null;
 }
 {
-  <SEMICOLON>
+  <TokenNameSEMICOLON>
 |
   modifier = Modifiers()
   (
@@ -1496,8 +1505,8 @@ TypeDeclaration ClassOrInterfaceDeclaration():
    Token id = null;
 }
 {
-  ( <CLASS>{ typeDecl.modifiers |= TypeDeclaration.CLASS_DECL; } | <INTERFACE> { isInterface = true; typeDecl.modifiers |= TypeDeclaration.INTERFACE_DECL;} )
-  id = <IDENTIFIER>  {
+  ( <TokenNameclass>{ typeDecl.modifiers |= TypeDeclaration.CLASS_DECL; } | <TokenNameinterface> { isInterface = true; typeDecl.modifiers |= TypeDeclaration.INTERFACE_DECL;} )
+  id = <TokenNameIdentifier>  {
     typeDecl.name = getTokenText(id);
     typeDecl.sourceStart = id.sourceStart;
     typeDecl.sourceEnd = id.sourceEnd;  }
@@ -1523,9 +1532,9 @@ TypeReference[] ExtendsList(boolean isInterface):
    int length = 0;
 }
 {
-   <EXTENDS> type = ClassOrInterfaceType()   {
+   <TokenNameextends> type = ClassOrInterfaceType()   {
      baseTypes[0] = type;   }
-   ( <COMMA> type = ClassOrInterfaceType()
+   ( <TokenNameCOMMA> type = ClassOrInterfaceType()
    {
      extendsMoreThanOne = true;
      length = baseTypes.length;
@@ -1547,9 +1556,9 @@ TypeReference[] ImplementsList(boolean isInterface):
    int length = 0;
 }
 {
-   <IMPLEMENTS> type = ClassOrInterfaceType()   {
+   <TokenNameimplements> type = ClassOrInterfaceType()   {
      baseTypes[0] = type;   }
-   ( <COMMA> type = ClassOrInterfaceType()   {
+   ( <TokenNameCOMMA> type = ClassOrInterfaceType()   {
      length = baseTypes.length;
      System.arraycopy(baseTypes, 0, baseTypes = new TypeReference[length + 1], 0, length);
      baseTypes[length] = type;   } )*
@@ -1564,10 +1573,12 @@ TypeReference[] ImplementsList(boolean isInterface):
 TypeDeclaration EnumDeclaration():
 {
   TypeDeclaration typeDecl = null;
+  TypeReference[] baseTypes = null;
+  Token id = null;
 }
 {
-  <ENUM> <IDENTIFIER>
-  [ ImplementsList(false) ]
+  <TokenNameenum> id = <TokenNameIdentifier>
+  [ baseTypes = ImplementsList(false) ]
   EnumBody(typeDecl)  {
     return typeDecl;  }
 }
@@ -1577,17 +1588,17 @@ void EnumBody(TypeDeclaration typeDecl):
   FieldDeclaration[] fields = null; FieldDeclaration field = null; int length = 0;
 }
 {
-   <LBRACE>
-   [ field = EnumConstant(typeDecl) ( LOOKAHEAD(2) <COMMA> field = EnumConstant(typeDecl)   {
+   <TokenNameLBRACE>
+   [ field = EnumConstant(typeDecl) ( LOOKAHEAD(2) <TokenNameCOMMA> field = EnumConstant(typeDecl)   {
      if(fields == null)     {
        fields = new FieldDeclaration[1];
        fields[0] = field;     }else     {
        length = fields.length;
        System.arraycopy(fields, 0, fields = new FieldDeclaration[length + 1], 0, length);
        fields[length] = field;     }   } )* ]
-    [ <COMMA> ]
-   [ <SEMICOLON> ( ClassOrInterfaceBodyDeclaration(false, typeDecl) )* ]
-   <RBRACE>
+    [ <TokenNameCOMMA> ]
+   [ <TokenNameSEMICOLON> ( ClassOrInterfaceBodyDeclaration(false, typeDecl) )* ]
+   <TokenNameRBRACE>
 }
 
 FieldDeclaration EnumConstant(TypeDeclaration typeDecl):
@@ -1596,7 +1607,7 @@ FieldDeclaration EnumConstant(TypeDeclaration typeDecl):
 	Expression[] arguments = null;
 }
 {
-  modifier = Modifiers() id = <IDENTIFIER> [ arguments = Arguments() ] [ ClassOrInterfaceBody(false, typeDecl) ]  {
+  modifier = Modifiers() id = <TokenNameIdentifier> [ arguments = Arguments() ] [ ClassOrInterfaceBody(false, typeDecl) ]  {
     return new FieldDeclaration(getTokenText(id), id.sourceStart, id.sourceEnd);
   }
 }
@@ -1608,11 +1619,11 @@ TypeParameter[] TypeParameters():
   int length = 0;
 }
 {
-   <LESS> typeParameter = TypeParameter()   {
-     result[0] = typeParameter;   } ( <COMMA> typeParameter = TypeParameter()   {
+   <TokenNameLESS> typeParameter = TypeParameter()   {
+     result[0] = typeParameter;   } ( <TokenNameCOMMA> typeParameter = TypeParameter()   {
      length = result.length;
      System.arraycopy(result, 0, result = new TypeParameter[length + 1], 0, length);
-     result[length] = typeParameter;   } )* <GREATER>   {
+     result[length] = typeParameter;   } )* <TokenNameGREATER>   {
      return result;   }
 }
 
@@ -1622,7 +1633,7 @@ TypeParameter TypeParameter():
   TypeReference[] bounds = null;
 }
 {
-   (id= <IDENTIFIER> | id = <QUESTION>) [ bounds = TypeBound() ]   {
+   (id= <TokenNameIdentifier> | id = <TokenNameQUESTION>) [ bounds = TypeBound() ]   {
      TypeParameter result = new TypeParameter();
      result.name = getTokenText(id);
      result.sourceStart = id.sourceStart;
@@ -1638,8 +1649,8 @@ TypeReference[] TypeBound():
  int length = 0;
 }
 {
-   <EXTENDS> type = ClassOrInterfaceType()   {
-     result[0] = type;   } ( <AND> type = ClassOrInterfaceType()   {
+   <TokenNameextends> type = ClassOrInterfaceType()   {
+     result[0] = type;   } ( <TokenNameAND> type = ClassOrInterfaceType()   {
      length = result.length;
      System.arraycopy(result, 0, result = new TypeReference[length + 1], 0, length);
      result[length] = type;   } )*   {
@@ -1651,7 +1662,7 @@ void ClassOrInterfaceBody(boolean isInterface, TypeDeclaration typeDecl):
   Token rBrace= null, lBrace = null;
 }
 {
-  lBrace = <LBRACE> ( ClassOrInterfaceBodyDeclaration(isInterface, typeDecl) )* rBrace= <RBRACE>  {
+  lBrace = <TokenNameLBRACE> ( ClassOrInterfaceBodyDeclaration(isInterface, typeDecl) )* rBrace= <TokenNameRBRACE>  {
     typeDecl.bodyStart = lBrace.sourceStart;
     typeDecl.bodyEnd = rBrace.sourceEnd;  }
 }
@@ -1682,7 +1693,7 @@ void ClassOrInterfaceBodyDeclaration(boolean isInterface, TypeDeclaration typeDe
     |
       EnumDeclaration()
     |
-      LOOKAHEAD( [ TypeParameters() ] <IDENTIFIER> <LPAREN> )
+      LOOKAHEAD( [ TypeParameters() ] <TokenNameIdentifier> <TokenNameLPAREN> )
       methodDecl = ConstructorDeclaration()      {
         if(typeDecl.methods == null)        {
           typeDecl.methods = new AbstractMethodDeclaration[1];
@@ -1691,7 +1702,7 @@ void ClassOrInterfaceBodyDeclaration(boolean isInterface, TypeDeclaration typeDe
           typeDecl.methods[length] = methodDecl;        }
       }
     |
-      LOOKAHEAD(Type() <THIS> <LBRACKET>)
+      LOOKAHEAD(Type() <TokenNamethis> <TokenNameLBRACKET>)
       indexerDecl = IndexerDeclaration()      {
         if(typeDecl.indexers == null)
         {
@@ -1703,7 +1714,7 @@ void ClassOrInterfaceBodyDeclaration(boolean isInterface, TypeDeclaration typeDe
           typeDecl.indexers[length] = indexerDecl;
         }      }
     | 
-      LOOKAHEAD( Type() <IDENTIFIER> /*( <LBRACKET> <RBRACKET> )* */ ( <COMMA> | <EQUAL> | <SEMICOLON> ) )
+      LOOKAHEAD( Type() <TokenNameIdentifier> /*( <TokenNameLBRACKET> <TokenNameRBRACKET> )* */ ( <TokenNameCOMMA> | <TokenNameEQUAL> | <TokenNameSEMICOLON> ) )
       fields = FieldDeclaration(modifier)      {
         if(typeDecl.fields == null)
         {
@@ -1714,7 +1725,7 @@ void ClassOrInterfaceBodyDeclaration(boolean isInterface, TypeDeclaration typeDe
           System.arraycopy(fields, 0, typeDecl.fields, length, fields.length);
         }      }
     |
-      LOOKAHEAD(Type() <IDENTIFIER> <LBRACE>)
+      LOOKAHEAD(Type() <TokenNameIdentifier> <TokenNameLBRACE>)
       propDecl = PropertyDeclaration()      {
         propDecl.modifiers = modifier.modifiers;
         propDecl.annotations = modifier.annotations;
@@ -1758,7 +1769,7 @@ void ClassOrInterfaceBodyDeclaration(boolean isInterface, TypeDeclaration typeDe
       AnnotationTypeDeclaration()
   )
 |
-  <SEMICOLON>
+  <TokenNameSEMICOLON>
 }
 
 IndexerDeclaration IndexerDeclaration():
@@ -1768,13 +1779,13 @@ IndexerDeclaration IndexerDeclaration():
   Block setter = null, getter = null;
   Token lBracket = null, rBracket = null;}
 {      type = Type()     {
-    } <THIS> lBracket = <LBRACKET>  argument = FormalParameter()    {
-      arguments[0] = argument;    } ( <COMMA> argument = FormalParameter()    {
+    } <TokenNamethis> lBracket = <TokenNameLBRACKET>  argument = FormalParameter()    {
+      arguments[0] = argument;    } ( <TokenNameCOMMA> argument = FormalParameter()    {
       length = arguments.length;
       System.arraycopy(arguments, 0, arguments = new Argument[length + 1], 0 ,length);
-      arguments[length] = argument;    } )*  rBracket = <RBRACKET> <LBRACE>
-       <GET> getter = Block()       <SET> setter = Block()
-    <RBRACE>
+      arguments[length] = argument;    } )*  rBracket = <TokenNameRBRACKET> <TokenNameLBRACE>
+       <TokenNameget> getter = Block()       <TokenNameset> setter = Block()
+    <TokenNameRBRACE>
 	{	  return new IndexerDeclaration(type, arguments, getter, setter, lBracket.sourceStart, rBracket.sourceEnd);	}	
 }
 
@@ -1784,11 +1795,11 @@ PropertyDeclaration PropertyDeclaration():
   Token id = null;
   Block setter = null, getter = null;
 }
-{  type = Type() id = <IDENTIFIER>
-  <LBRACE>
-     <GET> getter = Block()
-     <SET> setter = Block()
-  <RBRACE>
+{  type = Type() id = <TokenNameIdentifier>
+  <TokenNameLBRACE>
+     <TokenNameget> getter = Block()
+     <TokenNameset> setter = Block()
+  <TokenNameRBRACE>
   {
     return new PropertyDeclaration(type, getTokenText(id), getter, setter, id.sourceStart, id.sourceEnd);  }
 }
@@ -1798,10 +1809,10 @@ EventDeclaration EventDeclaration():
   Token id = null;
   Block add = null, remove = null;
 }
-{   <EVENT> type = Type() id = <IDENTIFIER> <LBRACE>
-   	  <ADD> add = Block()
-      <REMOVE> remove = Block()
-    <RBRACE>    {
+{   <TokenNameevent> type = Type() id = <TokenNameIdentifier> <TokenNameLBRACE>
+   	  <TokenNameadd> add = Block()
+      <TokenNameremove> remove = Block()
+    <TokenNameRBRACE>    {
       return new EventDeclaration(type, getTokenText(id), add, remove, id.sourceStart, id.sourceEnd);    }
 }
 
@@ -1819,7 +1830,7 @@ FieldDeclaration[] FieldDeclaration(Modifier modifier):
     fieldDecls[0].type = type;
     fieldDecls[0].initialization = vd.initialization;
     fieldDecls[0].modifiers = modifier.modifiers;
-    fieldDecls[0].annotations = modifier.annotations;  } ( <COMMA> vd = VariableDeclarator()  {
+    fieldDecls[0].annotations = modifier.annotations;  } ( <TokenNameCOMMA> vd = VariableDeclarator()  {
     length = fieldDecls.length;
     
     System.arraycopy(fieldDecls, 0, fieldDecls = new FieldDeclaration[length + 1], 0, length);
@@ -1827,7 +1838,7 @@ FieldDeclaration[] FieldDeclaration(Modifier modifier):
     fieldDecls[length].type = type;
     fieldDecls[length].initialization = vd.initialization;
     fieldDecls[length].modifiers = modifier.modifiers;
-    fieldDecls[length].annotations = modifier.annotations;  } )* <SEMICOLON>)
+    fieldDecls[length].annotations = modifier.annotations;  } )* <TokenNameSEMICOLON>)
   {
     return fieldDecls;  }
 }
@@ -1838,7 +1849,7 @@ VariableDeclarator VariableDeclarator():
   Token name = null;
  }
 {
-  name = VariableDeclaratorId() [ <EQUAL> initialization = VariableInitializer() ]  {
+  name = VariableDeclaratorId() [ <TokenNameEQUAL> initialization = VariableInitializer() ]  {
     return new VariableDeclarator(name, initialization);  }
 }
 
@@ -1847,9 +1858,9 @@ Token VariableDeclaratorId():
 	Token id = null;
  }
 {
-  id = <IDENTIFIER>  {
+  id = <TokenNameIdentifier>  {
     return id;  }
-//  ( <LBRACKET> id = <RBRACKET>//  {//    variable.dims ++;//  } )*  }
+//  ( <TokenNameLBRACKET> id = <TokenNameRBRACKET>//  {//    variable.dims ++;//  } )*  }
 
 Expression VariableInitializer():
 {
@@ -1870,12 +1881,12 @@ ArrayInitializer ArrayInitializer():
   Expression[] expressions = null; int length = 0;
 }
 {
-  <LBRACE> [ expression = VariableInitializer()  {
+  <TokenNameLBRACE> [ expression = VariableInitializer()  {
     expressions = new Expression[1];
-    expressions[0] = expression;  } ( LOOKAHEAD(2) <COMMA> expression = VariableInitializer()  {
+    expressions[0] = expression;  } ( LOOKAHEAD(2) <TokenNameCOMMA> expression = VariableInitializer()  {
     length = expressions.length;
     System.arraycopy(expressions, 0, expressions = new Expression[length + 1], 0, length);
-    expressions[length] = expression;  } )* ] [ <COMMA> ] <RBRACE>  {
+    expressions[length] = expression;  } )* ] [ <TokenNameCOMMA> ] <TokenNameRBRACE>  {
     ArrayInitializer result = new ArrayInitializer();
     result.expressions = expressions;
     return result;  }
@@ -1890,8 +1901,8 @@ MethodDeclaration MethodDeclaration():
   // Modifiers already matched in the caller!
   [ typeParameters = TypeParameters()]
   type = ResultType()
-  MethodDeclarator(result) [ <THROWS> nameReferences = NameList()]
-  ( block = Block() | <SEMICOLON> )
+  MethodDeclarator(result) [ <TokenNamethrows> nameReferences = NameList()]
+  ( block = Block() | <TokenNameSEMICOLON> )
   {
     result.returnType = type;
     result.typeParameters = typeParameters;
@@ -1905,10 +1916,11 @@ void MethodDeclarator(MethodDeclaration result):
   Argument[] arguments = null;
 }
 {
-  id = <IDENTIFIER> arguments = FormalParameters()  {
+  id = <TokenNameIdentifier> arguments = FormalParameters()  {
     result.arguments = arguments;
+    result.selector = getTokenText(id);
     result.sourceStart = id.sourceStart;
-    result.sourceEnd = id.sourceEnd;  } //( <LBRACKET> <RBRACKET> )*
+    result.sourceEnd = id.sourceEnd;  } //( <TokenNameLBRACKET> <TokenNameRBRACKET> )*
 }
 
 Argument[] FormalParameters():
@@ -1918,12 +1930,12 @@ Argument[] FormalParameters():
   int length = 0;
 }
 {
-  <LPAREN> [ argument = FormalParameter()  {
+  <TokenNameLPAREN> [ argument = FormalParameter()  {
     result = new Argument[1];
-    result[0] = argument;  } ( <COMMA> argument = FormalParameter()  {
+    result[0] = argument;  } ( <TokenNameCOMMA> argument = FormalParameter()  {
     length = result.length;
     System.arraycopy(result, 0, result = new Argument[length + 1], 0, length);
-    result[length] = argument;  } )* ] <RPAREN>  {
+    result[length] = argument;  } )* ] <TokenNameRPAREN>  {
     return result;  }
 }
 
@@ -1938,7 +1950,7 @@ Argument FormalParameter():
   // danson, added
   //          [ "final" | Annotation() ]
   // See Java Language Specification, 3rd Edition, section 8.4.1
-  modifier = Modifiers() [ <FINAL> | Annotation() ] type = Type() [ <ELLIPSIS>  {
+  modifier = Modifiers() [ <TokenNamefinal> | Annotation() ] type = Type() [ <TokenNameELLIPSIS>  {
     isVarArgs = true;  } ] id = VariableDeclaratorId()  {
     Argument result = new Argument(getTokenText(id), getTokenRange(id), type, modifier.modifiers);
     result.annotations = modifier.annotations;
@@ -1959,8 +1971,8 @@ ConstructorDeclaration ConstructorDeclaration():
 {
   [ typeParameters = TypeParameters() ]
   // Modifiers matched in the caller
-  token = <IDENTIFIER> arguments = FormalParameters() [ <THROWS> NameList() ]
-  <LBRACE>
+  token = <TokenNameIdentifier> arguments = FormalParameters() [ <TokenNamethrows> NameList() ]
+  <TokenNameLBRACE>
     [ LOOKAHEAD(ExplicitConstructorInvocation())      constructorCall = ExplicitConstructorInvocation()
     ]
     ( statements = BlockStatement()    {
@@ -1969,7 +1981,7 @@ ConstructorDeclaration ConstructorDeclaration():
         length = result.statements.length;
         System.arraycopy(result.statements, 0, result.statements = new Statement[length + statements.length], 0, length);
         System.arraycopy(statements, 0, result.statements, length, statements.length);      }    })*
-  <RBRACE>  {
+  <TokenNameRBRACE>  {
     result.selector = getTokenText(token);
     result.arguments = arguments;
 	result.typeParameters = typeParameters;
@@ -1989,9 +2001,9 @@ ExplicitConstructorCall ExplicitConstructorInvocation():
   TypeReference[] typeArguments = null;
 }
 {
-//  ( <IDENTIFIER> <DOT> )* [ LOOKAHEAD(2) <THIS> <DOT> ]
-  [ typeArguments = TypeArguments() ] (<THIS>  {    accessMode = ExplicitConstructorCall.This;  }  |<SUPER>  {
-    accessMode = ExplicitConstructorCall.Super;  }) arguments = Arguments() <SEMICOLON>  {
+//  ( <TokenNameIdentifier> <TokenNameDOT> )* [ LOOKAHEAD(2) <TokenNamethis> <TokenNameDOT> ]
+  [ typeArguments = TypeArguments() ] (<TokenNamethis>  {    accessMode = ExplicitConstructorCall.This;  }  |<TokenNamesuper>  {
+    accessMode = ExplicitConstructorCall.Super;  }) arguments = Arguments() <TokenNameSEMICOLON>  {
     ExplicitConstructorCall explicitCall = new ExplicitConstructorCall(accessMode);
     explicitCall.typeArguments = typeArguments;
     explicitCall.arguments = arguments;
@@ -2004,7 +2016,7 @@ Initializer Initializer():
   Block block = null;
 }
 {
-  [ <STATIC>  {
+  [ <TokenNamestatic>  {
     isStatic = true;  } ] block = Block()  {
     return new Initializer(block, isStatic ? ClassFileConstants.AccStatic : 0);
   }
@@ -2034,12 +2046,12 @@ TypeReference ReferenceType():
 }
 {
   (    
-   type = PrimitiveType() ( LOOKAHEAD(2) <LBRACKET> <RBRACKET>   {
+   type = PrimitiveType() ( LOOKAHEAD(2) <TokenNameLBRACKET> <TokenNameRBRACKET>   {
      dims++;   } )+   {
      return new ArrayTypeReference(type.getTypeName()[0], dims, type.sourceStart << 32 + type.sourceEnd);   }
   |
-   ( type = ClassOrInterfaceType() ) ( LOOKAHEAD(2) <LBRACKET> <RBRACKET>   {
-     dims++;   } )*  | type = FunctionType() ( LOOKAHEAD(2) <LBRACKET> <RBRACKET>  {
+   ( type = ClassOrInterfaceType() ) ( LOOKAHEAD(2) <TokenNameLBRACKET> <TokenNameRBRACKET>   {
+     dims++;   } )*  | type = FunctionType() ( LOOKAHEAD(2) <TokenNameLBRACKET> <TokenNameRBRACKET>  {
     dims++;  } )*)  {
     if(dims > 0) {
       return new ArrayTypeReference(type.getTypeName()[0], dims, type.sourceStart << 32 + type.sourceEnd);    } else  {
@@ -2058,13 +2070,13 @@ TypeReference ClassOrInterfaceType():
   int length = 0;
 }
 {
-  id = <IDENTIFIER>  {
+  id = <TokenNameIdentifier>  {
     qualifiedNames[0] = getTokenText(id);
     sourcePositions[0] = getTokenRange(id);
   } [ LOOKAHEAD(2) typeRef = TypeArguments()  {
     generic = true;
     typeRefs[0] = typeRef;  } ]
-  ( LOOKAHEAD(2) <DOT> id = <IDENTIFIER>  {
+  ( LOOKAHEAD(2) <TokenNameDOT> id = <TokenNameIdentifier>  {
     length = qualifiedNames.length;
     System.arraycopy(qualifiedNames, 0, qualifiedNames = new char[length + 1][], 0, length);
     System.arraycopy(typeRefs, 0, typeRefs = new TypeReference[length + 1][], 0, length);
@@ -2093,11 +2105,11 @@ TypeReference[] TypeArguments():
   int length = 0;
 }
 {
-   <LESS> typeRef= TypeArgument()   {
-     result[0] = typeRef;   } ( <COMMA> typeRef = TypeArgument()   {
+   <TokenNameLESS> typeRef= TypeArgument()   {
+     result[0] = typeRef;   } ( <TokenNameCOMMA> typeRef = TypeArgument()   {
      length = result.length;
      System.arraycopy(result, 0, result = new TypeReference[length + 1], 0, length);
-     result[length] = typeRef;   } )* <GREATER>
+     result[length] = typeRef;   } )* <TokenNameGREATER>
    {
      return result;   }
 }
@@ -2110,7 +2122,7 @@ TypeReference TypeArgument():
    typeRef = ReferenceType()   {
      return typeRef;   }
  |
-   <QUESTION> [ typeRef = WildcardBounds() ]   {
+   <TokenNameQUESTION> [ typeRef = WildcardBounds() ]   {
      if(typeRef != null) {		return typeRef;
      } else {
        return new Wildcard(Wildcard.UNBOUND);     }   }
@@ -2119,10 +2131,10 @@ TypeReference TypeArgument():
 Wildcard WildcardBounds():
 {}
 {
-   <EXTENDS> ReferenceType()   {
+   <TokenNameextends> ReferenceType()   {
      return new Wildcard(Wildcard.EXTENDS);   }
  |
-   <SUPER> ReferenceType()   {
+   <TokenNamesuper> ReferenceType()   {
      return new Wildcard(Wildcard.SUPER);   }
 }
 
@@ -2134,47 +2146,47 @@ FunctionType FunctionType():
   int length = 0;
 }
 {
-   lBrace = <LPAREN>   {
+   lBrace = <TokenNameLPAREN>   {
    } [ argument = FormalParameter()   {
-     arguments = new Argument[1]; arguments[0] = argument;   } ( <COMMA> argument = FormalParameter()   {
+     arguments = new Argument[1]; arguments[0] = argument;   } ( <TokenNameCOMMA> argument = FormalParameter()   {
       length = arguments.length;
       System.arraycopy(arguments, 0, arguments = new Argument[length + 1], 0, length);
       arguments[length] = argument;
-   } )* ] rBrace = <RPAREN> <COLON> type = ResultType()   {
+   } )* ] rBrace = <TokenNameRPAREN> <TokenNameCOLON> type = ResultType()   {
      return new FunctionType(arguments, type, lBrace.sourceStart, rBrace.sourceEnd);   }
 }
 
 TypeReference PrimitiveType():
 {}
 {
-  <BOOLEAN>  {
+  <TokenNameboolean>  {
     return TypeReference.baseTypeReference(TypeIds.T_boolean, 0);  }
 |
-  <CHAR>  {
+  <TokenNamechar>  {
 	return TypeReference.baseTypeReference(TypeIds.T_char, 0);
   }
 |
-  <BYTE>  {
+  <TokenNamebyte>  {
 	return TypeReference.baseTypeReference(TypeIds.T_byte, 0);
   }
 |
-  <SHORT>  {
+  <TokenNameshort>  {
 	return TypeReference.baseTypeReference(TypeIds.T_short, 0);
   }
 |
-  <INT>  {
+  <TokenNameint>  {
 	return TypeReference.baseTypeReference(TypeIds.T_int, 0);
   }
 |
-  <LONG>  {
+  <TokenNamelong>  {
 	return TypeReference.baseTypeReference(TypeIds.T_long, 0);
   }
 |
-  <FLOAT>  {
+  <TokenNamefloat>  {
 	return TypeReference.baseTypeReference(TypeIds.T_double, 0);
   }
 |
-  <DOUBLE>  {
+  <TokenNamedouble>  {
 	return TypeReference.baseTypeReference(TypeIds.T_boolean, 0);
   }
 }
@@ -2184,7 +2196,7 @@ TypeReference ResultType():
   TypeReference type = null;
 }
 {
-  <VOID>  {
+  <TokenNamevoid>  {
     return TypeReference.baseTypeReference(TypeIds.T_void, 0);  }
 |
   type = Type()  {
@@ -2204,10 +2216,10 @@ NameReference Name():
 	int length = 0;
 }
 {
-  ( token= <IDENTIFIER> | token = <ADD> | token = <REMOVE> | token = <GET> | token = <SET> | token = <REF> | token = <OUT> | token = <EVENT>)  {
+  ( token= <TokenNameIdentifier> | token = <TokenNameadd> | token = <TokenNameremove> | token = <TokenNameget> | token = <TokenNameset> | token = <TokenNameref> | token = <TokenNameout> | token = <TokenNameevent>)  {
     tokens[0] = getTokenText(token);
-    positions[0] = getTokenRange(token);  }  ( LOOKAHEAD(2) <DOT>
-  (token= <IDENTIFIER> | token = <ADD> | token = <REMOVE> | token = <GET> | token = <SET> | token = <REF> | token = <OUT> | token = <EVENT>)  {
+    positions[0] = getTokenRange(token);  }  ( LOOKAHEAD(2) <TokenNameDOT>
+  (token= <TokenNameIdentifier> | token = <TokenNameadd> | token = <TokenNameremove> | token = <TokenNameget> | token = <TokenNameset> | token = <TokenNameref> | token = <TokenNameout> | token = <TokenNameevent>)  {
 	qualified = true;
     length = tokens.length;    System.arraycopy(tokens, 0 , tokens = new char[length + 1][], 0, length);
     tokens[length] = getTokenText(token);
@@ -2229,7 +2241,7 @@ NameReference[] NameList():
 }
 {
   nr = Name()  {
-    result[0] = nr;  } ( <COMMA> nr = Name()  {
+    result[0] = nr;  } ( <TokenNameCOMMA> nr = Name()  {
     length = result.length;
     System.arraycopy(result, 0, result = new NameReference[length + 1], 0, length);
     result[length] = nr;  } )*  {
@@ -2275,7 +2287,7 @@ LambdaExpression LambdaExpression():
   Argument[] arguments = null;
 }
 {
-  (  arguments = LambdaParameters() <ARROW> body = LambdaBody())
+  (  arguments = LambdaParameters() <TokenNameARROW> body = LambdaBody())
   {	LambdaExpression lambda = new LambdaExpression(this.compilationResult, false);
 	lambda.body = body;
     lambda.arguments = arguments;
@@ -2288,23 +2300,23 @@ Argument[] LambdaParameters():
   Token id = null; int length = 0;
 }
 {
-  (  id = <IDENTIFIER>  {
+  (  id = <TokenNameIdentifier>  {
     arguments = new Argument[1];
     arguments[0] = new Argument(getTokenText(id), getTokenRange(id), null, 0);  }
 |
-  LOOKAHEAD(<LPAREN> <IDENTIFIER> (<COMMA> <IDENTIFIER>)* <RPAREN>)
-  <LPAREN> arguments = InferredFormalParameterList() <RPAREN>
+  LOOKAHEAD(<TokenNameLPAREN> <TokenNameIdentifier> (<TokenNameCOMMA> <TokenNameIdentifier>)* <TokenNameRPAREN>)
+  <TokenNameLPAREN> arguments = InferredFormalParameterList() <TokenNameRPAREN>
 |
-  LOOKAHEAD(<LPAREN> [ FormalParameter() ( <COMMA> FormalParameter() )* ]  <RPAREN>)
-  <LPAREN> [ argument = FormalParameter()  {
+  LOOKAHEAD(<TokenNameLPAREN> [ FormalParameter() ( <TokenNameCOMMA> FormalParameter() )* ]  <TokenNameRPAREN>)
+  <TokenNameLPAREN> [ argument = FormalParameter()  {
     arguments = new Argument[1];
     arguments[0] = argument;
-  } ( <COMMA> argument = FormalParameter() )*
+  } ( <TokenNameCOMMA> argument = FormalParameter() )*
   {
     length = arguments.length;
     System.arraycopy(arguments, 0, arguments = new Argument[length + 1] , 0, length);
     arguments[length] = argument;
-  } ]  <RPAREN>
+  } ]  <TokenNameRPAREN>
   )  {
 	return arguments;
   }
@@ -2315,8 +2327,8 @@ Argument[] InferredFormalParameterList():
   Token id = null; int length = 0;
 }
 {
-  (    id = <IDENTIFIER>  {
-    arguments[0] = new Argument(getTokenText(id), getTokenRange(id), null, 0);  } (<COMMA> id = <IDENTIFIER>  {
+  (    id = <TokenNameIdentifier>  {
+    arguments[0] = new Argument(getTokenText(id), getTokenRange(id), null, 0);  } (<TokenNameCOMMA> id = <TokenNameIdentifier>  {
     length = arguments.length;
     System.arraycopy(arguments, 0, arguments = new Argument[length + 1] , 0, length);
     arguments[length] = new Argument(getTokenText(id), getTokenRange(id), null, 0);  })*)  {
@@ -2335,24 +2347,24 @@ Statement LambdaBody():
    return statement; }
 }
 
-//Expression LambdaExpression()://{//  Expression result = null;//}//{//  (//  LOOKAHEAD(2)//	<IDENTIFIER> <ARROW> ( Expression() | Block() )//| //	LOOKAHEAD(<LPAREN> <RPAREN> <ARROW>)//	<LPAREN> <RPAREN> <ARROW> ( Expression() | Block() )//| //  	LOOKAHEAD( <LPAREN> FormalParameter() ( <COMMA> FormalParameter() )*  <RPAREN>  <COLON> ResultType() <ARROW>  )//    <LPAREN> FormalParameter() ( <COMMA> FormalParameter() )*  <RPAREN>  <COLON> ResultType() <ARROW>//	 ( Expression() | Block() )//|//	LOOKAHEAD(<LPAREN>  <IDENTIFIER> ( <COMMA> <IDENTIFIER> )*  <RPAREN> <ARROW>  )//	<LPAREN> <IDENTIFIER> ( <COMMA><IDENTIFIER> )*  <RPAREN> <ARROW>//	( Expression() | Block() ))//	{//	  return new LambdaExpression(this.compilationResult, false);//	}//}
+//Expression LambdaExpression()://{//  Expression result = null;//}//{//  (//  LOOKAHEAD(2)//	<TokenNameIdentifier> <TokenNameARROW> ( Expression() | Block() )//| //	LOOKAHEAD(<TokenNameLPAREN> <TokenNameRPAREN> <TokenNameARROW>)//	<TokenNameLPAREN> <TokenNameRPAREN> <TokenNameARROW> ( Expression() | Block() )//| //  	LOOKAHEAD( <TokenNameLPAREN> FormalParameter() ( <TokenNameCOMMA> FormalParameter() )*  <TokenNameRPAREN>  <TokenNameCOLON> ResultType() <TokenNameARROW>  )//    <TokenNameLPAREN> FormalParameter() ( <TokenNameCOMMA> FormalParameter() )*  <TokenNameRPAREN>  <TokenNameCOLON> ResultType() <TokenNameARROW>//	 ( Expression() | Block() )//|//	LOOKAHEAD(<TokenNameLPAREN>  <TokenNameIdentifier> ( <TokenNameCOMMA> <TokenNameIdentifier> )*  <TokenNameRPAREN> <TokenNameARROW>  )//	<TokenNameLPAREN> <TokenNameIdentifier> ( <TokenNameCOMMA><TokenNameIdentifier> )*  <TokenNameRPAREN> <TokenNameARROW>//	( Expression() | Block() ))//	{//	  return new LambdaExpression(this.compilationResult, false);//	}//}
   
 
 int AssignmentOperator():
 {}
 {
-  <EQUAL> { return OperatorIds.EQUAL; }
-  | <MULTIPLY_EQUAL> { return OperatorIds.MULTIPLY; }
-  | <DIVIDE_EQUAL> { return OperatorIds.DIVIDE; }
-  | <REMAINDER_EQUAL>{ return OperatorIds.REMAINDER; }
-  | <PLUS_EQUAL> { return OperatorIds.PLUS; }
-  | <MINUS_EQUAL> { return OperatorIds.MINUS; }
-  | <LEFT_SHIFT_EQUAL>{ return OperatorIds.LEFT_SHIFT; }
-  | <RIGHT_SHIFT_EQUAL>{ return OperatorIds.RIGHT_SHIFT; }
-  | <UNSIGNED_RIGHT_SHIFT_EQUAL>{ return OperatorIds.UNSIGNED_RIGHT_SHIFT; }
-  | <AND_EQUAL>{ return OperatorIds.AND; }
-  | <XOR_EQUAL>{ return OperatorIds.XOR; }
-  | <OR_EQUAL>{ return OperatorIds.OR; }  {
+  <TokenNameEQUAL> { return OperatorIds.EQUAL; }
+  | <TokenNameMULTIPLY_EQUAL> { return OperatorIds.MULTIPLY; }
+  | <TokenNameDIVIDE_EQUAL> { return OperatorIds.DIVIDE; }
+  | <TokenNameREMAINDER_EQUAL>{ return OperatorIds.REMAINDER; }
+  | <TokenNamePLUS_EQUAL> { return OperatorIds.PLUS; }
+  | <TokenNameMINUS_EQUAL> { return OperatorIds.MINUS; }
+  | <TokenNameLEFT_SHIFT_EQUAL>{ return OperatorIds.LEFT_SHIFT; }
+  | <TokenNameRIGHT_SHIFT_EQUAL>{ return OperatorIds.RIGHT_SHIFT; }
+  | <TokenNameUNSIGNED_RIGHT_SHIFT_EQUAL>{ return OperatorIds.UNSIGNED_RIGHT_SHIFT; }
+  | <TokenNameAND_EQUAL>{ return OperatorIds.AND; }
+  | <TokenNameXOR_EQUAL>{ return OperatorIds.XOR; }
+  | <TokenNameOR_EQUAL>{ return OperatorIds.OR; }  {
     return 0;  }
 }
 
@@ -2361,7 +2373,7 @@ Expression ConditionalExpression():
   Expression condition = null, valueIfTrue= null, valueIfFalse = null;
 }
 {
-  condition = ConditionalOrExpression() [ <QUESTION> valueIfTrue = Expression() <COLON> valueIfFalse = Expression()  {
+  condition = ConditionalOrExpression() [ <TokenNameQUESTION> valueIfTrue = Expression() <TokenNameCOLON> valueIfFalse = Expression()  {
     return new ConditionalExpression(condition, valueIfTrue, valueIfFalse);  } ]  {	return condition;
   }
 }
@@ -2371,7 +2383,7 @@ Expression ConditionalOrExpression():
   Expression lhs = null, expression = null;
 }
 {
-  lhs = ConditionalAndExpression() ( <OR_OR> expression = ConditionalAndExpression()  {
+  lhs = ConditionalAndExpression() ( <TokenNameOR_OR> expression = ConditionalAndExpression()  {
     lhs = new OR_OR_Expression(lhs, expression, OperatorIds.OR_OR);
       } )*  {
     return lhs;  }
@@ -2382,7 +2394,7 @@ Expression ConditionalAndExpression():
   Expression lhs = null, expression = null;
 }
 {
-  lhs = InclusiveOrExpression() ( <AND_AND> expression = InclusiveOrExpression()  {
+  lhs = InclusiveOrExpression() ( <TokenNameAND_AND> expression = InclusiveOrExpression()  {
     lhs = new AND_AND_Expression(lhs, expression, OperatorIds.AND_AND);  })*
   {
     return lhs;
@@ -2394,7 +2406,7 @@ Expression InclusiveOrExpression():
 Expression lhs = null, expression = null;
 }
 {
-  lhs = ExclusiveOrExpression() ( <OR> expression = ExclusiveOrExpression()
+  lhs = ExclusiveOrExpression() ( <TokenNameOR> expression = ExclusiveOrExpression()
   {
     lhs = new BinaryExpression(lhs, expression, OperatorIds.OR);
   } )*
@@ -2408,7 +2420,7 @@ Expression ExclusiveOrExpression():
   Expression lhs = null, expression = null;
 }
 {
-  lhs = AndExpression() ( <XOR> expression = AndExpression()
+  lhs = AndExpression() ( <TokenNameXOR> expression = AndExpression()
   {
     lhs = new BinaryExpression(lhs, expression, OperatorIds.XOR);
   } )*
@@ -2422,7 +2434,7 @@ Expression AndExpression():
   Expression lhs = null, expression = null;
 }
 {
-  lhs = EqualityExpression() ( <AND> expression = EqualityExpression()
+  lhs = EqualityExpression() ( <TokenNameAND> expression = EqualityExpression()
   {
     lhs = new BinaryExpression(lhs, expression, OperatorIds.AND);
   } )*
@@ -2437,7 +2449,7 @@ Expression EqualityExpression():
   int op = 0;
 }
 {
-  lhs = InstanceOfExpression() ( ( <EQUAL_EQUAL>  {    op = OperatorIds.EQUAL;  } | <NOT_EQUAL>  {    op = OperatorIds.NOT_EQUAL;  }) expression = InstanceOfExpression()  {
+  lhs = InstanceOfExpression() ( ( <TokenNameEQUAL_EQUAL>  {    op = OperatorIds.EQUAL;  } | <TokenNameNOT_EQUAL>  {    op = OperatorIds.NOT_EQUAL;  }) expression = InstanceOfExpression()  {
     lhs = new EqualExpression(lhs, expression, op);  } )*
   {
     return lhs;  }
@@ -2449,7 +2461,7 @@ Expression InstanceOfExpression():
   TypeReference typeRef = null;
 }
 {
-  expression = RelationalExpression() [ <INSTANCEOF> typeRef = Type()  {
+  expression = RelationalExpression() [ <TokenNameinstanceof> typeRef = Type()  {
     return new InstanceOfExpression(expression, typeRef);  } ]  {
     return expression;  }
 }
@@ -2460,10 +2472,10 @@ Expression RelationalExpression():
   int op = 0;
 }
 {
-  lhs = ShiftExpression() ( LOOKAHEAD(2) ( <LESS>  {
-    op = OperatorIds.GREATER;  } | <GREATER>  {
-    op = OperatorIds.LESS_EQUAL;  }| <LESS_EQUAL>  {
-    op = OperatorIds.LESS_EQUAL;  } | <GREATER_EQUAL>  {
+  lhs = ShiftExpression() ( LOOKAHEAD(2) ( <TokenNameLESS>  {
+    op = OperatorIds.GREATER;  } | <TokenNameGREATER>  {
+    op = OperatorIds.LESS_EQUAL;  }| <TokenNameLESS_EQUAL>  {
+    op = OperatorIds.LESS_EQUAL;  } | <TokenNameGREATER_EQUAL>  {
     op = OperatorIds.GREATER_EQUAL;  } ) expression = ShiftExpression()
   {
     lhs = new BinaryExpression(lhs, expression, op);
@@ -2477,7 +2489,7 @@ Expression ShiftExpression():
   int op = 0;
 }
 {
-  (    lhs = AdditiveExpression() ( ( <LEFT_SHIFT>  {
+  (    lhs = AdditiveExpression() ( ( <TokenNameLEFT_SHIFT>  {
     op = OperatorIds.LEFT_SHIFT;  }| RSIGNEDSHIFT()  {
     op = OperatorIds.RIGHT_SHIFT;  } | RUNSIGNEDSHIFT()  {
     op = OperatorIds.UNSIGNED_RIGHT_SHIFT;  }) expression = AdditiveExpression()
@@ -2495,8 +2507,8 @@ Expression AdditiveExpression():
   int op = 0;
 }
 {
-  lhs = MultiplicativeExpression() (  ( <PLUS>  {
-    op = OperatorIds.PLUS;  } | <MINUS>  {
+  lhs = MultiplicativeExpression() (  ( <TokenNamePLUS>  {
+    op = OperatorIds.PLUS;  } | <TokenNameMINUS>  {
     op = OperatorIds.MINUS;  } ) expression = MultiplicativeExpression()
   {
     lhs = new BinaryExpression(lhs, expression, op);
@@ -2511,9 +2523,9 @@ Expression MultiplicativeExpression():
   int op = 0;
 }
 {
-  lhs = UnaryExpression() (  ( <MULTIPLY>  {
-    op = OperatorIds.MULTIPLY;  } | <DIVIDE>  {
-    op = OperatorIds.DIVIDE;  } | <REMAINDER>  {
+  lhs = UnaryExpression() (  ( <TokenNameMULTIPLY>  {
+    op = OperatorIds.MULTIPLY;  } | <TokenNameDIVIDE>  {
+    op = OperatorIds.DIVIDE;  } | <TokenNameREMAINDER>  {
     op = OperatorIds.REMAINDER;  } ) expression = UnaryExpression()
   {
     lhs = new BinaryExpression(lhs, expression, op);
@@ -2523,15 +2535,15 @@ Expression MultiplicativeExpression():
   }
 }
 
-//Expression UnaryExpression()://{}//{//  ( <PLUS> | <MINUS> ) UnaryExpression()//|//  PreIncrementExpression()//|//  PreDecrementExpression()//|//  UnaryExpressionNotPlusMinus()//}////Expression PreIncrementExpression()://{}//{//  <PLUS_PLUS> PrimaryExpression()//}////Expression PreDecrementExpression()://{}//{//  <MINUS_MINUS> PrimaryExpression()//}
+//Expression UnaryExpression()://{}//{//  ( <TokenNamePLUS> | <TokenNameMINUS> ) UnaryExpression()//|//  PreIncrementExpression()//|//  PreDecrementExpression()//|//  UnaryExpressionNotPlusMinus()//}////Expression PreIncrementExpression()://{}//{//  <TokenNamePLUS_PLUS> PrimaryExpression()//}////Expression PreDecrementExpression()://{}//{//  <TokenNameMINUS_MINUS> PrimaryExpression()//}
 
 Expression UnaryExpression():
 {
   Expression expression = null; int op = 0;
 }
 {
-  ( <PLUS>  {
-    op = OperatorIds.PLUS;  } | <MINUS>  {
+  ( <TokenNamePLUS>  {
+    op = OperatorIds.PLUS;  } | <TokenNameMINUS>  {
     op = OperatorIds.MINUS;  } ) expression = UnaryExpression()  {
     return new UnaryExpression(expression, op);  }
 |
@@ -2547,8 +2559,8 @@ Expression PrefixExpression():
   Expression expression = null; int op = 0; Token token = null;
 }
 {
-  ( token = <PLUS_PLUS>  {
-     op = OperatorIds.PLUS_PLUS;  } | token = <MINUS_MINUS>  {
+  ( token = <TokenNamePLUS_PLUS>  {
+     op = OperatorIds.PLUS_PLUS;  } | token = <TokenNameMINUS_MINUS>  {
      op = OperatorIds.MINUS_MINUS;  }) expression = PrimaryExpression()  {
     return new PrefixExpression(expression, IntLiteral.One, op, token.sourceStart);  }
 }
@@ -2558,8 +2570,8 @@ Expression UnaryExpressionNotPlusMinus():
   Expression expression = null; int op = 0;
 }
 {
-  ( <TWIDDLE>  {
-    op = OperatorIds.TWIDDLE;  } | <NOT>  {
+  ( <TokenNameTWIDDLE>  {
+    op = OperatorIds.TWIDDLE;  } | <TokenNameNOT>  {
     op = OperatorIds.NOT;  } ) expression = UnaryExpression()  {
     return new UnaryExpression(expression, op);  }
 |
@@ -2578,12 +2590,12 @@ void CastLookahead():
 {}
 {
   LOOKAHEAD(2)
-  <LPAREN> PrimitiveType()
+  <TokenNameLPAREN> PrimitiveType()
 |
-  LOOKAHEAD(<LPAREN> Type() <LBRACKET>)
-  <LPAREN> Type() <LBRACKET> <RBRACKET>
+  LOOKAHEAD(<TokenNameLPAREN> Type() <TokenNameLBRACKET>)
+  <TokenNameLPAREN> Type() <TokenNameLBRACKET> <TokenNameRBRACKET>
 |
-  <LPAREN> Type() <RPAREN> ( <TWIDDLE> | <NOT> | <LPAREN> | <IDENTIFIER> | <THIS> | <SUPER> | <NEW> | Literal() )
+  <TokenNameLPAREN> Type() <TokenNameRPAREN> ( <TokenNameTWIDDLE> | <TokenNameNOT> | <TokenNameLPAREN> | <TokenNameIdentifier> | <TokenNamethis> | <TokenNamesuper> | <TokenNamenew> | Literal() )
 }
 
 Expression PostfixExpression():
@@ -2591,8 +2603,8 @@ Expression PostfixExpression():
   Expression expression = null; int op = 0;
 }
 {
-  expression = PrimaryExpression() [ LOOKAHEAD(2)( <PLUS_PLUS>  {
-    op = OperatorIds.PLUS_PLUS;  } | <MINUS_MINUS>  {
+  expression = PrimaryExpression() [ LOOKAHEAD(2)( <TokenNamePLUS_PLUS>  {
+    op = OperatorIds.PLUS_PLUS;  } | <TokenNameMINUS_MINUS>  {
     op = OperatorIds.MINUS_MINUS;  }) ]  {
     return new PostfixExpression(expression, IntLiteral.One, op, expression.sourceStart);  }
 }
@@ -2603,11 +2615,11 @@ Expression CastExpression():
   TypeReference type;
 }
 {
-  LOOKAHEAD(<LPAREN> PrimitiveType())
-  <LPAREN> type = Type() <RPAREN> expression = UnaryExpression()  {
+  LOOKAHEAD(<TokenNameLPAREN> PrimitiveType())
+  <TokenNameLPAREN> type = Type() <TokenNameRPAREN> expression = UnaryExpression()  {
     return new CastExpression(expression, type);  }
 |
-  <LPAREN> type = Type() <RPAREN> expression = UnaryExpressionNotPlusMinus()  {
+  <TokenNameLPAREN> type = Type() <TokenNameRPAREN> expression = UnaryExpressionNotPlusMinus()  {
     return new CastExpression(expression, type);  }
 }
 
@@ -2632,7 +2644,7 @@ MemberSelector MemberSelector():
   Token id = null;
 }
 {
-  <DOT> typeArguments = TypeArguments() id = <IDENTIFIER>  {
+  <TokenNameDOT> typeArguments = TypeArguments() id = <TokenNameIdentifier>  {
     return new MemberSelector(typeArguments, id);  }
 }
 
@@ -2646,27 +2658,27 @@ Expression PrimaryPrefix():
   expression = Literal()  {
     return expression;  }
 |
-//  LOOKAHEAD( ( <IDENTIFIER> <DOT> )* "this" )//  ( <IDENTIFIER> <DOT> )*
-  token = <THIS>  {
+//  LOOKAHEAD( ( <TokenNameIdentifier> <TokenNameDOT> )* "this" )//  ( <TokenNameIdentifier> <TokenNameDOT> )*
+  token = <TokenNamethis>  {
     return new ThisReference(token.sourceStart, token.sourceEnd);  }
 |
-  token = <SUPER> //<DOT> <IDENTIFIER>  {
+  token = <TokenNamesuper> //<TokenNameDOT> <TokenNameIdentifier>  {
     return new SuperReference(token.sourceStart, token.sourceEnd);  }
 //|
    // danson, added this part to support a construct like:
    //   Buffer.super.setDirty(true);
    // See Java Language Specification, 3rd edition, section 15.11.2.
-//   LOOKAHEAD( ClassOrInterfaceType() <DOT> "super" <DOT> <IDENTIFIER> )//   ClassOrInterfaceType() <DOT> "super" <DOT> <IDENTIFIER>|
+//   LOOKAHEAD( ClassOrInterfaceType() <TokenNameDOT> "super" <TokenNameDOT> <TokenNameIdentifier> )//   ClassOrInterfaceType() <TokenNameDOT> "super" <TokenNameDOT> <TokenNameIdentifier>|
 	LOOKAHEAD(3)
-    <LPAREN> expression = Expression() <RPAREN>    {
+    <TokenNameLPAREN> expression = Expression() <TokenNameRPAREN>    {
       return new ParenthesizedExpression(expression);    }
 //)
 |
   expression = AllocationExpression()  {
     return expression;  }
 |
-  LOOKAHEAD( ResultType() <DOT> <CLASS> )
-  type = ResultType() <DOT> token = <CLASS>  {
+  LOOKAHEAD( ResultType() <TokenNameDOT> <TokenNameclass> )
+  type = ResultType() <TokenNameDOT> token = <TokenNameclass>  {
     return new ClassLiteralAccess(token.sourceEnd, type);  }
 |
   expression = Name()  {
@@ -2682,15 +2694,15 @@ Object PrimarySuffix():
 	Expression[] arguments = null;
 }
 {
-//  LOOKAHEAD(<DOT> "super" <DOT>)//  <DOT> "super"//|//  LOOKAHEAD(<DOT> "this")//  <DOT> "this"//|//  LOOKAHEAD(2)//  <DOT> AllocationExpression()//|
+//  LOOKAHEAD(<TokenNameDOT> "super" <TokenNameDOT>)//  <TokenNameDOT> "super"//|//  LOOKAHEAD(<TokenNameDOT> "this")//  <TokenNameDOT> "this"//|//  LOOKAHEAD(2)//  <TokenNameDOT> AllocationExpression()//|
   LOOKAHEAD(3)
   result = MemberSelector()  {
     return result;  }
 |
-  <LBRACKET> expression = Expression() <RBRACKET>  {
+  <TokenNameLBRACKET> expression = Expression() <TokenNameRBRACKET>  {
     return new IndexerPart(expression);  }
 |
-  <DOT> token = <IDENTIFIER>  {
+  <TokenNameDOT> token = <TokenNameIdentifier>  {
     return new SingleNameReference(getTokenText(token), getTokenRange(token));  }
 |
   arguments = Arguments()  {
@@ -2703,26 +2715,17 @@ Literal Literal():
   Literal literal = null;
  }
 {
-  token = <INTEGER_LITERAL>  {
+  token = <TokenNameIntegerLiteral>  {
     return IntLiteral.buildIntLiteral(getTokenText(token), token.sourceStart, token.sourceEnd);  }
 |
-  token = <FLOAT_LITERAL>  {
+  token = <TokenNameFloatingPointLiteral>  {
     return new FloatLiteral(getTokenText(token), token.sourceStart, token.sourceEnd);  }
+|  token = <TokenNameDoubleLiteral>  {    return new DoubleLiteral(getTokenText(token), token.sourceStart, token.sourceEnd);  }|  token = <TokenNameLongLiteral>  {    return LongLiteral.buildLongLiteral(getTokenText(token), token.sourceStart, token.sourceEnd);  }
 |
-  token = <DOUBLE_LITERAL>
-  {
-    return new DoubleLiteral(getTokenText(token), token.sourceStart, token.sourceEnd);
-  }
-|
-  token = <LONG_LITERAL>
-  {
-    return LongLiteral.buildLongLiteral(getTokenText(token), token.sourceStart, token.sourceEnd);
-  }
-|
-  token = <CHARACTER_LITERAL>  {
+  token = <TokenNameCharacterLiteral>  {
     return new CharLiteral(getTokenText(token), token.sourceStart, token.sourceEnd);  }
 |
-  token = <STRING_LITERAL>  {
+  token = <TokenNameStringLiteral>  {
     return new StringLiteral(getTokenText(token), token.sourceStart, token.sourceEnd, 1);  }
 |
   literal = BooleanLiteral()  {
@@ -2737,10 +2740,10 @@ MagicLiteral BooleanLiteral():
   Token token = null;
 }
 {
-  token = <TRUE>  {
+  token = <TokenNametrue>  {
     return new TrueLiteral(token.sourceStart, token.sourceEnd);  }
 |
-  token = <FALSE>  {
+  token = <TokenNamefalse>  {
     return new TrueLiteral(token.sourceStart, token.sourceEnd);  }
 }
 
@@ -2749,7 +2752,7 @@ NullLiteral NullLiteral():
   Token token = null;
 }
 {
-  token = <NULL>  {
+  token = <TokenNamenull>  {
     return new NullLiteral(token.sourceStart, token.sourceEnd);  }
 }
 
@@ -2758,7 +2761,7 @@ Expression[] Arguments():
   Expression[] result = null;
 }
 {
-  <LPAREN> [ result = ArgumentList() ] <RPAREN>  {
+  <TokenNameLPAREN> [ result = ArgumentList() ] <TokenNameRPAREN>  {
     return result;  }
 }
 
@@ -2770,7 +2773,7 @@ Expression[] ArgumentList():
 }
 {
   argument = Expression()  {
-    result[0] = argument;  } ( <COMMA> argument = Expression()  {
+    result[0] = argument;  } ( <TokenNameCOMMA> argument = Expression()  {
     length = result.length;
     System.arraycopy(result, 0, result = new Expression[length + 1], 0, length);
     result[length] = argument;  } )*  {
@@ -2785,10 +2788,10 @@ Expression AllocationExpression():
 }
 {
   LOOKAHEAD(2)
-  <NEW> type = PrimitiveType() ArrayDimsAndInits()  {
+  <TokenNamenew> type = PrimitiveType() ArrayDimsAndInits()  {
     return new AllocationExpression();  }
 |
-  <NEW> type = ClassOrInterfaceType() [ typeArguments = TypeArguments() ]
+  <TokenNamenew> type = ClassOrInterfaceType() [ typeArguments = TypeArguments() ]
     (
       ArrayDimsAndInits()
     |
@@ -2808,9 +2811,9 @@ void ArrayDimsAndInits():
 {}
 {
   LOOKAHEAD(2)
-  ( LOOKAHEAD(2) <LBRACKET> Expression() <RBRACKET> )+ ( LOOKAHEAD(2) <LBRACKET> <RBRACKET> )*
+  ( LOOKAHEAD(2) <TokenNameLBRACKET> Expression() <TokenNameRBRACKET> )+ ( LOOKAHEAD(2) <TokenNameLBRACKET> <TokenNameRBRACKET> )*
 |
-  ( <LBRACKET> <RBRACKET> )+ ArrayInitializer()
+  ( <TokenNameLBRACKET> <TokenNameRBRACKET> )+ ArrayInitializer()
 }
 
 
@@ -2832,7 +2835,7 @@ Statement Statement():
 |
   result = EmptyStatement()
 |
-  result = StatementExpression() <SEMICOLON> 
+  result = StatementExpression() <TokenNameSEMICOLON> 
 |
   result = SwitchStatement()
 |
@@ -2864,7 +2867,7 @@ AssertStatement AssertStatement():
   Token token = null;
 }
 {
-  (    token = <ASSERT> exceptionArgument = Expression() [ <COLON> assertExpression = Expression() ] <SEMICOLON>)  {
+  (    token = <TokenNameassert> exceptionArgument = Expression() [ <TokenNameCOLON> assertExpression = Expression() ] <TokenNameSEMICOLON>)  {
     return new AssertStatement(	exceptionArgument, assertExpression, token.sourceStart);  }
 }
 
@@ -2874,7 +2877,7 @@ LabeledStatement LabeledStatement():
   Token label = null;
 }
 {
-  (    label = <IDENTIFIER> <COLON> statement = Statement())
+  (    label = <TokenNameIdentifier> <TokenNameCOLON> statement = Statement())
   {
     return new LabeledStatement(getTokenText(label), statement, getTokenRange(label), statement.sourceEnd);  }
 }
@@ -2884,7 +2887,7 @@ Block Block():
   Statement[] statements = null;
 }
 {
-  (    <LBRACE> ( statements = BlockStatement() )* <RBRACE>)
+  (    <TokenNameLBRACE> ( statements = BlockStatement() )* <TokenNameRBRACE>)
   {
     if(statements == null) {
       return new Block(0);    } else {
@@ -2900,9 +2903,9 @@ Statement[] BlockStatement():
   TypeDeclaration typeDecl = null;
 }
 {
-  LOOKAHEAD( Modifiers() Type() <IDENTIFIER> )
+  LOOKAHEAD( Modifiers() Type() <TokenNameIdentifier> )
   statments = LocalVariableDeclaration()  {
-    return statments;  } <SEMICOLON>
+    return statments;  } <TokenNameSEMICOLON>
 |
   statement = Statement()  {
     return new Statement[]{statement };  }
@@ -2924,7 +2927,7 @@ LocalDeclaration[] LocalVariableDeclaration():
     result[0].modifiers |= modifier.modifiers;
     result[0].annotations = modifier.annotations;
     result[0].type = type;
-    result[0].initialization = vd.initialization;  } ( <COMMA> vd = VariableDeclarator()  {
+    result[0].initialization = vd.initialization;  } ( <TokenNameCOMMA> vd = VariableDeclarator()  {
     length = result.length;
     System.arraycopy(result, 0, result = new LocalDeclaration[length + 1], 0, length);
     result[length] = new LocalDeclaration(getTokenText(vd.name), vd.name.sourceStart, vd.name.sourceEnd);
@@ -2940,7 +2943,7 @@ EmptyStatement EmptyStatement():
   Token token = null;
 }
 {
-  token = <SEMICOLON>
+  token = <TokenNameSEMICOLON>
   {
     return new EmptyStatement(token.sourceStart, token.sourceEnd);  }
 }
@@ -2963,10 +2966,10 @@ Expression StatementExpression():
 |
   expression = PrimaryExpression()
   [
-    token = <PLUS_PLUS>    {
+    token = <TokenNamePLUS_PLUS>    {
       return new PostfixExpression(expression, IntLiteral.One, OperatorIds.PLUS, token.sourceEnd);    }
   |
-    token = <MINUS_MINUS>    {
+    token = <TokenNameMINUS_MINUS>    {
       return new PostfixExpression(expression, IntLiteral.One, OperatorIds.MINUS, token.sourceEnd);    }
   |
     op = AssignmentOperator() expression = Expression()    {
@@ -2981,9 +2984,9 @@ SwitchStatement SwitchStatement():
    Expression expression = null;
 }
 {
- (    <SWITCH> <LPAREN> expression = Expression() <RPAREN> <LBRACE>
-    ( SwitchLabel(result) ( BlockStatement() )* )*
-  <RBRACE>)
+ (  <TokenNameswitch> <TokenNameLPAREN> expression = Expression() <TokenNameRPAREN> <TokenNameLBRACE>
+  ( SwitchLabel(result) ( BlockStatement() )* )*
+  <TokenNameRBRACE>)
   {	return result;
   }
 }
@@ -2994,10 +2997,10 @@ CaseStatement SwitchLabel(SwitchStatement result):
   Token token = null;
 }
 {
-  <CASE> constant = Expression() <COLON>  {
+  <TokenNamecase> constant = Expression() <TokenNameCOLON>  {
     return new CaseStatement(constant, constant.sourceStart, constant.sourceEnd);  }
 |
-  token = <DEFAULT_ > <COLON>  {
+  token = <TokenNamedefault > <TokenNameCOLON>  {
     return new CaseStatement(null, token.sourceStart, token.sourceEnd);  }
 }
 
@@ -3013,7 +3016,7 @@ Statement IfStatement():
   Token token = null;
 }
 {
-  (    token = <IF> <LPAREN> condition= Expression() <RPAREN> thenStatement = Statement() [ LOOKAHEAD(1) "else" elseStatement = Statement() ])
+  (    token = <TokenNameif> <TokenNameLPAREN> condition= Expression() <TokenNameRPAREN> thenStatement = Statement() [ LOOKAHEAD(1) <TokenNameelse> elseStatement = Statement() ])
   {
 	if(elseStatement == null) {
 	  return new IfStatement(condition, thenStatement, token.sourceStart, thenStatement.sourceEnd);	} else {
@@ -3027,7 +3030,7 @@ Statement WhileStatement():
   Token token = null;
 }
 {
-  (    token = <WHILE> <LPAREN> condition = Expression() <RPAREN> action = Statement())
+  (    token = <TokenNamewhile> <TokenNameLPAREN> condition = Expression() <TokenNameRPAREN> action = Statement())
   {
     return new WhileStatement(condition, action, token.sourceStart, action.sourceEnd);  }
 }
@@ -3039,7 +3042,7 @@ Statement DoStatement():
   Token token = null;
 }
 {
-(  token = <DO> action = Statement()  <WHILE> <LPAREN> condition = Expression() <RPAREN> <SEMICOLON>)
+(  token = <TokenNamedo> action = Statement()  <TokenNamewhile> <TokenNameLPAREN> condition = Expression() <TokenNameRPAREN> <TokenNameSEMICOLON>)
   {	return new DoStatement(condition, action, token.sourceStart, condition.sourceEnd);
   }
 }
@@ -3053,14 +3056,14 @@ Statement ForStatement():
 	Statement[] initializations = null, increments = null;
 }
 {
- (    forLabel = <FOR> <LPAREN>
+ (    forLabel = <TokenNamefor> <TokenNameLPAREN>
   (
-      LOOKAHEAD(Modifiers() Type() <IDENTIFIER> <COLON>)
-      modifier = Modifiers() type = Type() id = <IDENTIFIER> <COLON> expression = Expression()    |
-     [ initializations = ForInit() ] <SEMICOLON> [ expression = Expression()] <SEMICOLON> [ increments = ForUpdate() ]     {
+      LOOKAHEAD(Modifiers() Type() <TokenNameIdentifier> <TokenNameCOLON>)
+      modifier = Modifiers() type = Type() id = <TokenNameIdentifier> <TokenNameCOLON> expression = Expression()    |
+     [ initializations = ForInit() ] <TokenNameSEMICOLON> [ expression = Expression()] <TokenNameSEMICOLON> [ increments = ForUpdate() ]     {
        foreach = false;
      }  )
-  <RPAREN> action = Statement())
+  <TokenNameRPAREN> action = Statement())
 
   {
     if(foreach) {
@@ -3080,7 +3083,7 @@ Statement[] ForInit():
 }
 {
   (    
-  LOOKAHEAD( Modifiers() Type() <IDENTIFIER> )
+  LOOKAHEAD( Modifiers() Type() <TokenNameIdentifier> )
   result = LocalVariableDeclaration()
   |
   result = StatementExpressionList()  )
@@ -3097,7 +3100,7 @@ Statement[] StatementExpressionList():
 }
 {
   statement = StatementExpression()  {
-    result[0] = statement;  } ( <COMMA> statement = StatementExpression()  {
+    result[0] = statement;  } ( <TokenNameCOMMA> statement = StatementExpression()  {
     length = result.length;
     System.arraycopy(result, 0, result = new Statement[length + 1], 0, length);
     result[length] = statement;  } )*
@@ -3119,7 +3122,7 @@ BreakStatement BreakStatement():
   Token label = null, breakId = null;
 }
 {
-  (    breakId = <BREAK> [ label = <IDENTIFIER> ] <SEMICOLON>)
+  (    breakId = <TokenNamebreak> [ label = <TokenNameIdentifier> ] <TokenNameSEMICOLON>)
   {
     return new BreakStatement(label !=null ? getTokenText(label) : null, breakId.sourceStart, label != null ? label.sourceEnd : breakId.sourceEnd);
   }
@@ -3130,7 +3133,7 @@ ContinueStatement ContinueStatement():
   Token continueId = null, label = null;
 }
 {
-  (    continueId = <CONTINUE> [ label = <IDENTIFIER> ] <SEMICOLON>)
+  (    continueId = <TokenNamecontinue> [ label = <TokenNameIdentifier> ] <TokenNameSEMICOLON>)
   {
 	return new ContinueStatement(label != null ? getTokenText(label) : null, continueId.sourceStart, label != null ? label.sourceEnd : continueId.sourceEnd);
   }
@@ -3142,7 +3145,7 @@ ReturnStatement ReturnStatement():
   Token token = null;
 }
 {
-  (    token = <RETURN> [ expression = Expression() ] <SEMICOLON>)
+  (    token = <TokenNamereturn> [ expression = Expression() ] <TokenNameSEMICOLON>)
   {
 	return new ReturnStatement(expression, token.sourceStart, expression != null ? expression.sourceEnd : token.sourceEnd);
   }
@@ -3154,7 +3157,7 @@ ThrowStatement ThrowStatement():
   Expression exception = null;
 }
 {
-  (    token = <THROW> exception = Expression() <SEMICOLON>)
+  (    token = <TokenNamethrow> exception = Expression() <TokenNameSEMICOLON>)
   {
     return new ThrowStatement(exception, token.sourceStart, exception.sourceEnd);  }
 }
@@ -3166,7 +3169,7 @@ SynchronizedStatement SynchronizedStatement():
   Expression expression = null;
 }
 {
-  (    token = <SYNCHRONIZED> <LPAREN> expression = Expression() <RPAREN> block = Block())  {
+  (    token = <TokenNamesynchronized> <TokenNameLPAREN> expression = Expression() <TokenNameRPAREN> block = Block())  {
     return new SynchronizedStatement(expression, block, token.sourceStart, token.sourceEnd);  }
 }
 
@@ -3184,8 +3187,8 @@ TryStatement TryStatement():
 }
 {
   (    
-  token = <TRY> tryBlock = Block()
-  ( "catch" <LPAREN> argument = FormalParameter()<RPAREN> catchBlock = Block()  {
+  token = <TokenNametry> tryBlock = Block()
+  ( <TokenNamecatch> <TokenNameLPAREN> argument = FormalParameter()<TokenNameRPAREN> catchBlock = Block()  {
     if(length == 0) {
       arguments = new Argument[1];
       arguments[0] = argument;
@@ -3198,7 +3201,7 @@ TryStatement TryStatement():
       catchBlocks[length] = catchBlock;
     }
   })*
-  [ <FINALLY> finallyBlock = Block()])
+  [ <TokenNamefinally> finallyBlock = Block()])
   {
     TryStatement tryStatement = new TryStatement();
     tryStatement.tryBlock = tryBlock;
@@ -3218,18 +3221,18 @@ TryStatement TryStatement():
 void RUNSIGNEDSHIFT():
 {}
 {
-  ( LOOKAHEAD({ getToken(1).kind == GREATER &&
-                ((MyToken)getToken(1)).realKind == UNSIGNED_RIGHT_SHIFT} )
-   <GREATER> <GREATER> <GREATER>
+  ( LOOKAHEAD({ getToken(1).kind == TokenNameGREATER &&
+                ((MyToken)getToken(1)).realKind == TokenNameUNSIGNED_RIGHT_SHIFT} )
+   <TokenNameGREATER> <TokenNameGREATER> <TokenNameGREATER>
   )
 }
 
 void RSIGNEDSHIFT():
 {}
 {
-  ( LOOKAHEAD({ getToken(1).kind == GREATER &&
-                ((MyToken)getToken(1)).realKind == RIGHT_SHIFT} )
-  <GREATER> <GREATER>
+  ( LOOKAHEAD({ getToken(1).kind == TokenNameGREATER &&
+                ((MyToken)getToken(1)).realKind == TokenNameRIGHT_SHIFT} )
+  <TokenNameGREATER> <TokenNameGREATER>
   )
 }
 
@@ -3240,10 +3243,10 @@ Annotation Annotation():
 	Annotation result = null;
 }
 {
-  (   LOOKAHEAD( <AT> Name() <LPAREN> ( <IDENTIFIER> <EQUAL> | <RPAREN> ))
+  (   LOOKAHEAD( <TokenNameAT> Name() <TokenNameLPAREN> ( <TokenNameIdentifier> <TokenNameEQUAL> | <TokenNameRPAREN> ))
    result = NormalAnnotation()
  |
-   LOOKAHEAD( <AT> Name() <LPAREN> )
+   LOOKAHEAD( <TokenNameAT> Name() <TokenNameLPAREN> )
    result = SingleMemberAnnotation()
  |
    result = MarkerAnnotation())
@@ -3259,7 +3262,7 @@ NormalAnnotation NormalAnnotation():
   Token id = null;
 }
 {
-   (id = <AT> Name() <LPAREN> [ memberValuePairs = MemberValuePairs() ] <RPAREN>)
+   (id = <TokenNameAT> Name() <TokenNameLPAREN> [ memberValuePairs = MemberValuePairs() ] <TokenNameRPAREN>)
    {	return new NormalAnnotation(type, id.sourceStart);
    }
 }
@@ -3271,7 +3274,7 @@ MarkerAnnotation MarkerAnnotation():
   NameReference nameReference;
 }
 {
-  (id = <AT> nameReference = Name())  {
+  (id = <TokenNameAT> nameReference = Name())  {
     if(nameReference instanceof SingleNameReference)    {
         SingleNameReference sNameRef = (SingleNameReference)nameReference;		type = new SingleTypeReference(sNameRef.token, ((long)sNameRef.sourceStart) << 32 + sNameRef.sourceEnd);
 		
@@ -3288,7 +3291,7 @@ SingleMemberAnnotation SingleMemberAnnotation():
    Token id = null;
 }
 {
-  (id = <AT> Name() <LPAREN> memberValue = MemberValue() <RPAREN>)
+  (id = <TokenNameAT> Name() <TokenNameLPAREN> memberValue = MemberValue() <TokenNameRPAREN>)
   {
     return new SingleMemberAnnotation(type, id.sourceStart);  }
 }
@@ -3300,7 +3303,7 @@ MemberValuePair[] MemberValuePairs():
 }
 {
    memberValuePair= MemberValuePair()   {
-     memberValuePairs[0] = memberValuePair;   } ( <COMMA> memberValuePair = MemberValuePair()   {
+     memberValuePairs[0] = memberValuePair;   } ( <TokenNameCOMMA> memberValuePair = MemberValuePair()   {
      length = memberValuePairs.length;
      System.arraycopy(memberValuePairs, 0, memberValuePairs = new MemberValuePair[length + 1], 0, length);
       memberValuePairs[length] = memberValuePair;   } )*   {
@@ -3312,7 +3315,7 @@ MemberValuePair MemberValuePair():
   Token id = null; Expression value = null;
 }
 {
-    id = <IDENTIFIER> <EQUAL> value = MemberValue()    {
+    id = <TokenNameIdentifier> <TokenNameEQUAL> value = MemberValue()    {
       return new MemberValuePair(getTokenText(id), id.sourceStart, id.sourceEnd, value);    }
 }
 
@@ -3337,13 +3340,13 @@ ArrayInitializer  MemberValueArrayInitializer():
   int length = 0;
 }
 {
-  (    <LBRACE> (expression = MemberValue()  {
+  (    <TokenNameLBRACE> (expression = MemberValue()  {
     if(expressions == null)    {
       expressions = new Expression[1];
       expressions[0] = expression;    }else    {
       length = expressions.length;
       System.arraycopy(expressions, 0, expressions = new Expression[length + 1], 0, length);
-      expressions[length] = expression;    }  } ( LOOKAHEAD(2) <COMMA> expression = MemberValue() )* [ "," ])? <RBRACE>)  {
+      expressions[length] = expression;    }  } ( LOOKAHEAD(2) <TokenNameCOMMA> expression = MemberValue() )* [ "," ])? <TokenNameRBRACE>)  {
     ArrayInitializer result = new ArrayInitializer();
     result.expressions = expressions;
     return result;  }
@@ -3357,14 +3360,14 @@ TypeDeclaration AnnotationTypeDeclaration():
   TypeDeclaration result = null;
 }
 {
-  <AT> <INTERFACE> <IDENTIFIER> AnnotationTypeBody(result)  {
+  <TokenNameAT> <TokenNameinterface> <TokenNameIdentifier> AnnotationTypeBody(result)  {
     return result;  }
 }
 
 void AnnotationTypeBody(TypeDeclaration typeDeclaration):
 {}
 {
-  <LBRACE> ( AnnotationTypeMemberDeclaration(typeDeclaration) )* <RBRACE>
+  <TokenNameLBRACE> ( AnnotationTypeMemberDeclaration(typeDeclaration) )* <TokenNameRBRACE>
 }
 
 void AnnotationTypeMemberDeclaration(TypeDeclaration typeDeclaration):
@@ -3376,8 +3379,8 @@ void AnnotationTypeMemberDeclaration(TypeDeclaration typeDeclaration):
 {
  modifier = Modifiers()
  (
-   LOOKAHEAD(Type() <IDENTIFIER> <LPAREN>)
-   type = Type() id = <IDENTIFIER> <LPAREN> <RPAREN> [ DefaultValue() ] <SEMICOLON>
+   LOOKAHEAD(Type() <TokenNameIdentifier> <TokenNameLPAREN>)
+   type = Type() id = <TokenNameIdentifier> <TokenNameLPAREN> <TokenNameRPAREN> [ DefaultValue() ] <TokenNameSEMICOLON>
   |
    subTypeDecl = ClassOrInterfaceDeclaration()
   |
@@ -3388,7 +3391,7 @@ void AnnotationTypeMemberDeclaration(TypeDeclaration typeDeclaration):
    fields = FieldDeclaration(modifier)
  )
  |
-   ( <SEMICOLON> )
+   ( <TokenNameSEMICOLON> )
    {
         }
 }
@@ -3396,6 +3399,6 @@ void AnnotationTypeMemberDeclaration(TypeDeclaration typeDeclaration):
 void DefaultValue():
 {}
 {
-  <DEFAULT_> MemberValue()
+  <TokenNamedefault> MemberValue()
 }
 

@@ -112,7 +112,7 @@ public char[] getCurrentTokenSourceString() {
 	}
 	return super.getCurrentTokenSourceString();
 }
-protected int getNextToken0() throws InvalidInputException {
+public int getNextToken0() throws InvalidInputException {
 
 	this.wasAcr = false;
 	this.unicodeCharSize = 0;

@@ -38,88 +38,88 @@ public class CommentRecorderParser extends Parser {
 	public CommentRecorderParser(ProblemReporter problemReporter, boolean optimizeStringLiterals) {
 		super(problemReporter, optimizeStringLiterals);
 	}
+//
+//	// old javadoc style check which doesn't include all leading comments into declaration
+//	// for backward compatibility with 2.1 DOM
+//	public void checkComment() {
+//
+//		// discard obsolete comments while inside methods or fields initializer (see bug 74369)
+//		if (!(this.diet && this.dietInt==0) && this.scanner.commentPtr >= 0) {
+//			flushCommentsDefinedPriorTo(this.endStatementPosition);
+//		}
+//		boolean deprecated = false;
+//		boolean checkDeprecated = false;
+//		int lastCommentIndex = -1;
+//
+//		//since jdk1.2 look only in the last java doc comment...
+//		nextComment : for (lastCommentIndex = this.scanner.commentPtr; lastCommentIndex >= 0; lastCommentIndex--){
+//			//look for @deprecated into the first javadoc comment preceeding the declaration
+//			int commentSourceStart = this.scanner.commentStarts[lastCommentIndex];
+//			// javadoc only (non javadoc comment have negative start and/or end positions.)
+//			if ((commentSourceStart < 0) ||
+//				(this.modifiersSourceStart != -1 && this.modifiersSourceStart < commentSourceStart) ||
+//				(this.scanner.commentStops[lastCommentIndex] < 0))
+//			{
+//				continue nextComment;
+//			}
+//			checkDeprecated = true;
+//			int commentSourceEnd = this.scanner.commentStops[lastCommentIndex] - 1; //stop is one over
+//			// do not report problem before last parsed comment while recovering code...
+//			if (this.javadocParser.shouldReportProblems) {
+//				this.javadocParser.reportProblems = this.currentElement == null || commentSourceEnd > this.lastJavadocEnd;
+//			} else {
+//				this.javadocParser.reportProblems = false;
+//			}
+//			deprecated = this.javadocParser.checkDeprecation(lastCommentIndex);
+//			this.javadoc = this.javadocParser.docComment;
+//			if (this.currentElement == null) this.lastJavadocEnd = commentSourceEnd;
+//			break nextComment;
+//		}
+//		if (deprecated) {
+//			checkAndSetModifiers(ClassFileConstants.AccDeprecated);
+//		}
+//		// modify the modifier source start to point at the first comment
+//		if (lastCommentIndex >= 0 && checkDeprecated) {
+//			this.modifiersSourceStart = this.scanner.commentStarts[lastCommentIndex];
+//			if (this.modifiersSourceStart < 0) {
+//				this.modifiersSourceStart = -this.modifiersSourceStart;
+//			}
+//		}
+//	}
 
-	// old javadoc style check which doesn't include all leading comments into declaration
-	// for backward compatibility with 2.1 DOM
-	public void checkComment() {
-
-		// discard obsolete comments while inside methods or fields initializer (see bug 74369)
-		if (!(this.diet && this.dietInt==0) && this.scanner.commentPtr >= 0) {
-			flushCommentsDefinedPriorTo(this.endStatementPosition);
-		}
-		boolean deprecated = false;
-		boolean checkDeprecated = false;
-		int lastCommentIndex = -1;
-
-		//since jdk1.2 look only in the last java doc comment...
-		nextComment : for (lastCommentIndex = this.scanner.commentPtr; lastCommentIndex >= 0; lastCommentIndex--){
-			//look for @deprecated into the first javadoc comment preceeding the declaration
-			int commentSourceStart = this.scanner.commentStarts[lastCommentIndex];
-			// javadoc only (non javadoc comment have negative start and/or end positions.)
-			if ((commentSourceStart < 0) ||
-				(this.modifiersSourceStart != -1 && this.modifiersSourceStart < commentSourceStart) ||
-				(this.scanner.commentStops[lastCommentIndex] < 0))
-			{
-				continue nextComment;
-			}
-			checkDeprecated = true;
-			int commentSourceEnd = this.scanner.commentStops[lastCommentIndex] - 1; //stop is one over
-			// do not report problem before last parsed comment while recovering code...
-			if (this.javadocParser.shouldReportProblems) {
-				this.javadocParser.reportProblems = this.currentElement == null || commentSourceEnd > this.lastJavadocEnd;
-			} else {
-				this.javadocParser.reportProblems = false;
-			}
-			deprecated = this.javadocParser.checkDeprecation(lastCommentIndex);
-			this.javadoc = this.javadocParser.docComment;
-			if (this.currentElement == null) this.lastJavadocEnd = commentSourceEnd;
-			break nextComment;
-		}
-		if (deprecated) {
-			checkAndSetModifiers(ClassFileConstants.AccDeprecated);
-		}
-		// modify the modifier source start to point at the first comment
-		if (lastCommentIndex >= 0 && checkDeprecated) {
-			this.modifiersSourceStart = this.scanner.commentStarts[lastCommentIndex];
-			if (this.modifiersSourceStart < 0) {
-				this.modifiersSourceStart = -this.modifiersSourceStart;
-			}
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.summer.sdt.internal.compiler.parser.Parser#consumeClassHeader()
-	 */
-	protected void consumeClassHeader() {
-		pushOnCommentsStack(0, this.scanner.commentPtr);
-		super.consumeClassHeader();
-	}
-	/* (non-Javadoc)
-	 * @see org.summer.sdt.internal.compiler.parser.Parser#consumeEmptyTypeDeclaration()
-	 */
-	protected void consumeEmptyTypeDeclaration() {
-		pushOnCommentsStack(0, this.scanner.commentPtr);
-		super.consumeEmptyTypeDeclaration();
-	}
-	/* (non-Javadoc)
-	 * @see org.summer.sdt.internal.compiler.parser.Parser#consumeInterfaceHeader()
-	 */
-	protected void consumeInterfaceHeader() {
-		pushOnCommentsStack(0, this.scanner.commentPtr);
-		super.consumeInterfaceHeader();
-	}
-
-	/* (non-Javadoc)
-	 * @see org.summer.sdt.internal.compiler.parser.Parser#endParse(int)
-	 */
-	protected CompilationUnitDeclaration endParse(int act) {
-		CompilationUnitDeclaration unit = super.endParse(act);
-		if (unit.comments == null) {
-			pushOnCommentsStack(0, this.scanner.commentPtr);
-			unit.comments = getCommentsPositions();
-		}
-		return unit;
-	}
+//	/* (non-Javadoc)
+//	 * @see org.summer.sdt.internal.compiler.parser.Parser#consumeClassHeader()
+//	 */
+//	protected void consumeClassHeader() {
+//		pushOnCommentsStack(0, this.scanner.commentPtr);
+//		super.consumeClassHeader();
+//	}
+//	/* (non-Javadoc)
+//	 * @see org.summer.sdt.internal.compiler.parser.Parser#consumeEmptyTypeDeclaration()
+//	 */
+//	protected void consumeEmptyTypeDeclaration() {
+//		pushOnCommentsStack(0, this.scanner.commentPtr);
+//		super.consumeEmptyTypeDeclaration();
+//	}
+//	/* (non-Javadoc)
+//	 * @see org.summer.sdt.internal.compiler.parser.Parser#consumeInterfaceHeader()
+//	 */
+//	protected void consumeInterfaceHeader() {
+//		pushOnCommentsStack(0, this.scanner.commentPtr);
+//		super.consumeInterfaceHeader();
+//	}
+//
+//	/* (non-Javadoc)
+//	 * @see org.summer.sdt.internal.compiler.parser.Parser#endParse(int)
+//	 */
+//	protected CompilationUnitDeclaration endParse(int act) {
+//		CompilationUnitDeclaration unit = super.endParse(act);
+//		if (unit.comments == null) {
+//			pushOnCommentsStack(0, this.scanner.commentPtr);
+//			unit.comments = getCommentsPositions();
+//		}
+//		return unit;
+//	}
 
 	/* (non-Javadoc)
 	 * Save all source comments currently stored before flushing them.
@@ -256,13 +256,13 @@ public class CommentRecorderParser extends Parser {
 			}
 		}
 	}
-	/* (non-Javadoc)
-	 * Save all source comments currently stored before flushing them.
-	 * this.scanner.commentPtr is expected *not* yet being reset before calling this method.
-	 * @see org.summer.sdt.internal.compiler.parser.Parser#resetModifiers()
-	 */
-	protected void resetModifiers() {
-		pushOnCommentsStack(0, this.scanner.commentPtr);
-		super.resetModifiers();
-	}
+//	/* (non-Javadoc)
+//	 * Save all source comments currently stored before flushing them.
+//	 * this.scanner.commentPtr is expected *not* yet being reset before calling this method.
+//	 * @see org.summer.sdt.internal.compiler.parser.Parser#resetModifiers()
+//	 */
+//	protected void resetModifiers() {
+//		pushOnCommentsStack(0, this.scanner.commentPtr);
+//		super.resetModifiers();
+//	}
 }
